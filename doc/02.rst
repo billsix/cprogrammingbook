@@ -11,7 +11,12 @@ The reason for C's approach is historical and rather interesting. It is supposed
 
 All, the same, it's true that the more work put on to the loader, the slower it becomes, in fact sometimes it can be the slowest and most resource consuming part of the whole procedure. It is possible that, for some systems, it would be quicker to recompile everything in one go than to have to use the loader: Ada has sometimes been quoted as an example of this effect occurring. For C, the work that has to be done by the loader is not large and the approach is a sensible one. Figure 1.1 shows the way that this works.
 
+.. figure:: _static/1.1.png
+    :align: center
+    :alt: Seperate Compilation
+    :figclass: align-center
 
+    Seperate Compilation
 
 Functions
 ^^^^^^^^^
