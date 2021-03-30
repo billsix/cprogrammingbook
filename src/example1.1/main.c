@@ -13,7 +13,7 @@ void show_message(void);
 * Another function, but this includes the body of
 * the function. This is a "definition".
 */
-main(){
+int main(){
      int count;
 
      count = 0;
