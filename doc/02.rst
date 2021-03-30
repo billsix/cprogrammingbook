@@ -1,8 +1,32 @@
 Introduction
 ============
 
-Purpose
+The form of a C program
+^^^^^^^^^^^^^^^^^^^^^^^
+If you're used to the block-structured form of, say, Pascal, then at the outer level the layout of a C program may surprise you. If your experience lies in the FORTRAN camp you will find it closer to what you already know, but the inner level will look quite different. C has borrowed shamelessly from both kinds of language, and from a lot of other places too. The input from so many varied sources has spawned a language a bit like a cross-bred terrier: inelegant in places, but a tenacious brute that the family is fond of. Biologists refer to this phenomenon as ‘hybrid vigour’. They might also draw your attention to the ‘chimera’, an artificial crossbreed of creatures such as a sheep and a goat. If it gives wool and milk, fine, but it might equally well just bleat and stink!
+
+At the coarsest level, an obvious feature is the multi-file structure of a program. The language permits separate compilation, where the parts of a complete program can be kept in one or more source files and compiled independently of each other. The idea is that the compilation process will produce files which can then be linked together using whatever link editor or loader that your system provides. The block structure of the Algol-like languages makes this harder by insisting that the whole program comes in one chunk, although there are usually ways of getting around it.
+
+The reason for C's approach is historical and rather interesting. It is supposed to speed things up: the idea is that compiling a program into relocatable object code is slow and expensive in terms of resources; compiling is hard work. Using the loader to bind together a number of object code modules should simply be a matter of sorting out the absolute addresses of each item in the modules when combined into a complete program. This should be relatively inexpensive. The expansion of the idea to arrange for the loader to scan libraries of object modules, and select the ones that are needed, is an obvious one. The benefit is that if you change one small part of a program then the expense of recompiling all of it may be avoided; only the module that was affected has to be recompiled.
+
+All, the same, it's true that the more work put on to the loader, the slower it becomes, in fact sometimes it can be the slowest and most resource consuming part of the whole procedure. It is possible that, for some systems, it would be quicker to recompile everything in one go than to have to use the loader: Ada has sometimes been quoted as an example of this effect occurring. For C, the work that has to be done by the loader is not large and the approach is a sensible one. Figure 1.1 shows the way that this works.
+
+
+
+Functions
+^^^^^^^^^
+
+A description of Example 1.1
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some more programs
+^^^^^^^^^^^^^^^^^^
+
+Terminology
+^^^^^^^^^^^
+
+Summary
 ^^^^^^^
 
-Learn how to open a window, make a black screen, and close
-the window.
+Exercises
+^^^^^^^^^
