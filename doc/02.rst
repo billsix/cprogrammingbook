@@ -307,173 +307,106 @@ although of course none of this has been covered rigorously.
 
 Some more programs
 ^^^^^^^^^^^^^^^^^^
+
 While we're still in the informal phase, let's look at two more examples. You will have to work out for yourself what some of the code does, but as new or interesting features appear, they will be explained.
 1.4.1. A program to find prime numbers
 
-/*
-*
-* Dumb program that generates prime numbers.
-*/
-#include <stdio.h>
-#include <stdlib.h>
+.. literalinclude:: ../src/example1.2/main.c
+   :language: c
+   :linenos:
+   :lines: 1-100
 
-main(){
-    int this_number, divisor, not_prime;
-
-    this_number = 3;
-
-    while(this_number < 10000){
-            divisor = this_number / 2;
-            not_prime = 0;
-            while(divisor > 1){
-                    if(this_number % divisor == 0){
-                            not_prime = 1;
-                            divisor = 0;
-                    }
-                    else
-                            divisor = divisor-1;
-            }
-
-            if(not_prime == 0)
-                    printf("%d is a prime number\n", this_number);
-            this_number = this_number + 1;
-    }
-    exit(EXIT_SUCCESS);
-}
-
-Example 1.2
 
 What was interesting in there? A few new points, perhaps. The program works in a really stupid way: to see if a number is prime, it divides that number by all the numbers between half its value and two—if any divide without remainder, then the number isn't prime. The two operators that you haven't seen before are the remainder operator %, and the equality operator, which is a double equal sign ==. That last one is without doubt the cause of more bugs in C programs than any other single factor.
 
 The problem with the equality test is that wherever it can appear it is also legal to put the single = sign. The first, ==, compares two things to see if they are equal, and is generally what you need in fragments like these:
 
-if(a == b)
-while (c == d)
+.. code-block:: C
+
+   if(a == b)
+   while (c == d)
 
 The assignment operator = is, perhaps surprisingly, also legal in places like those, but of course it assigns the value of the right-hand expression to whatever is on the left. The problem is particularly bad if you are used to the languages where comparison for equality is done with what C uses for assignment. There's nothing that you can do to help, so start getting used to it now. (Modern compilers do tend to produce warnings when they think they have detected ‘questionable’ uses of assignment operators, but that is a mixed blessing when your choice was deliberate.)
 
 There is also the introduction for the first time of the if statement. Like the while statement, it tests an expression to see if the expression is true. You might have noticed that also like the while statement, the expression that controls the if statement is in parentheses. That is always the case: all of the conditional control of flow statements require a parenthesized expression after the keyword that introduces them. The formal description of the if statement goes like this:
 
-if(expression)
-        statement
+.. code-block:: C
 
-if(expression)
-        statement
-else
-        statement
+   if(expression)
+       statement
+
+   if(expression)
+       statement
+   else
+       statement
 
 showing that it comes in two forms. Of course, the effect is that if the expression part is evaluated to be true, then the following statement is executed. If the evaluation is false, then the following statement is not executed. When there is an else part, the statement associated with it is executed only if the evaluation gives a false result.
 
 If statements have a famous problem. In the following piece of code, is the statement-2 executed or not?
 
-if(1 > 0)
-        if(1 < 0)
-                statement-1
-else
-        statement-2
+.. code-block:: C
+
+    if(1 > 0)
+            if(1 < 0)
+                    statement-1
+    else
+            statement-2
 
 The answer is that it is. Ignore the indentation (which is misleading). The else could belong to either the first or second if, according to the description of the if statement that has just been given, so an extra rule is needed to make it unambiguous. The rule is simply that an else is associated with the nearest else-less if above it. To make the example work the way that the indentation implied, we have to invoke a compound statement:
 
-if(1 > 0){
-        if(1 < 0)
-                statement-1
-}
-else
-        statement-2
+.. code-block:: C
+
+    if(1 > 0){
+            if(1 < 0)
+                    statement-1
+    }
+    else
+            statement-2
 
 Here, at least, C adheres to the practice used by most other languages. In fact a lot of programmers who are used to languages where the problem exists have never even realized that it is there—they just thought that the disambiguating rule was ‘obvious’. Let's hope that everyone feels that way.
-1.4.2. The division operators
+
+The division operators
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The division operators are the division operator /, and the remainder operator %. Division does what you would expect, except that when it is applied to integer operands it gives a result that is truncated towards zero. For example, 5/2 gives 2, 5/3 gives 1. The remainder operator is the way to get the truncated remainder. 5%2 gives 1, 5%3 gives 2. The signs of the remainder and quotient depend on the divisor and dividend in a way that is defined in the Standard and shown in Chapter 2.
 1.4.3. An example performing input
 
 It's useful to be able to perform input as well as to write programs that print out more or less interesting lists and tables. The simplest of the library routines (and the only one that we'll look at just now) is called getchar. It reads single characters from the program's input and returns an integer value. The value returned is a coded representation for that character and can be used to print the same character on the program output. It can also be compared against character constants or other characters that have been read, although the only test that makes sense is to see if both characters are the same. Comparing for greater or less than each other is not portable in general; there is no guarantee that 'a' is less than 'b', although on most common systems that would be the case. The only guarantee that the Standard makes is that the codes for '0' through to '9' will always be consecutive. Here is one example.
 
-#include <stdio.h>
-#include <stdlib.h>
-main(){
-        int ch;
 
-        ch = getchar();
-        while(ch != 'a'){
-                if(ch != '\n')
-                        printf("ch was %c, value %d\n", ch, ch);
-                ch = getchar();
-        }
-        exit(EXIT_SUCCESS);
-}
-
-Example 1.3
+.. literalinclude:: ../src/example1.3/main.c
+   :language: c
+   :linenos:
+   :lines: 1-100
 
 There are two interesting points in there. The first is to notice that at the end of each line of input read, the character represented by
 
-'\n'
+.. code-block:: C
+
+    '\n'
 
 (a character constant) will be seen. This just like the way that the same symbol results in a new line when printf prints it. The model of I/O used by C is not based on a line by line view of the world, but character by character instead; if you choose to think in a line-oriented way, then '\n' allows you to mark the end of each ‘line’. Second is the way that %c is used to output a character by printf, when it appears on the output as a character. Printing it with %d prints the same variable, but displays the integer value used by your program to represent the character.
 
 If you try that program out, you may find that some systems do not pass characters one by one to a program, but make you type a whole line of input first. Then the whole line is made available as input, one character at a time. Beginners have been known to be confused: the program is started, they type some input, and nothing comes back. This behaviour is nothing to do with C; it depends on the computer and operating system in use.
-1.4.4. Simple arrays
+
+Simple arrays
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The use of arrays in C is often a problem for the beginner. The declaration of arrays isn't too difficult, especially the one-dimensional ones, but a constant source of confusion is the fact that their indices always count from 0. To declare an array of 5 ints, the declaration would look like this:
 
-int something[5];
+.. code-block:: C
+
+     int something[5];
 
 In array declarations C uses square brackets, as you can see. There is no support for arrays with indices whose ranges do not start at 0 and go up; in the example, the valid array elements are something[0] to something[4]. Notice very carefully that something[5] is not a valid array element.
 
 This program reads some characters from its input, sorts them into the order suggested by their representation, then writes them back out. Work out what it does for yourself; the algorithm won't be given much attention in the explanation which follows.
 
-#include <stdio.h>
-#include <stdlib.h>
-#define ARSIZE  10
-main(){
-        int ch_arr[ARSIZE],count1;
-        int count2, stop, lastchar;
+.. literalinclude:: ../src/example1.4/main.c
+   :language: c
+   :linenos:
+   :lines: 1-100
 
-        lastchar = 0;
-        stop = 0;
-        /*
-         * Read characters into array.
-         * Stop if end of line, or array full.
-         */
-        while(stop != 1){
-                ch_arr[lastchar] = getchar();
-                if(ch_arr[lastchar] == '\n')
-                        stop = 1;
-                else
-                        lastchar = lastchar + 1;
-                if(lastchar == ARSIZE)
-                        stop = 1;
-        }
-        lastchar = lastchar-1;
-
-        /*
-         * Now the traditional bubble sort.
-         */
-        count1 = 0;
-        while(count1 < lastchar){
-                count2 = count1 + 1;
-                while(count2 <= lastchar){
-                        if(ch_arr[count1] > ch_arr[count2]){
-                                /* swap */
-                                int temp;
-                                temp = ch_arr[count1];
-                                ch_arr[count1] = ch_arr[count2];
-                                ch_arr[count2] = temp;
-                        }
-                        count2 = count2 + 1;
-                }
-                count1 = count1 + 1;
-        }
-
-        count1 = 0;
-        while(count1 <= lastchar){
-                printf("%c\n", ch_arr[count1]);
-                count1 = count1 + 1;
-        }
-        exit(EXIT_SUCCESS);
-}
-
-Example 1.4
 
 You might note that the defined constant ARSIZE is used everywhere instead of the actual array size. Because of that, to change the maximum number of characters that can be sorted by this program simply involves a change to one line and then re-compiling. Not so obvious but critical to the safety of the program is the detection of the array becoming full. Look carefully; you'll find that the program stops when element ARSIZE-1 has been filled. That is because in an N element array, only elements 0 through to N-1 are available (giving N in total).
 
@@ -486,9 +419,28 @@ A n-element array has members which number from 0 to n-1 only. Element n does no
 
 Terminology
 ^^^^^^^^^^^
+In C programs there are two distinct types of things: things used to hold values and things that are functions. Instead of having to refer to them jointly with a clumsy phrase that maintains the distinction, we think that it's useful to call them both loosely ‘objects’. We do quite a lot of that later, because it's often the case that they follow more or less the same rules. Beware though, that this isn't quite what the Standard uses the term to mean. In the Standard, an ‘object’ is explicitly a region of allocated storage that is used to represent a value and a function is something different; this leads to the Standard often having to say ‘… functions and objects …’. Because we don't think that it leads to too much confusion and does improve the readability of the text in most cases, we will continue to use our looser interpretation of object to include functions and we will explicitly use the terms ‘data objects’ and ‘functions’ when the distinction is appropriate.
+
+Be prepared to find this slight difference in meaning if you do read the Standard
 
 Summary
 ^^^^^^^
+This chapter has introduced many of the basics of the language although informally. Functions, in particular, form the basic building block for C. Chapter 4 provides a full description of these fundamental objects, but you should by now understand enough about them to follow their informal use in the intervening material.
+
+Although the idea of library functions has been introduced, it has not been possible to illustrate the extent of their importance to the C application programmer. The Standard Library, described in Chapter 9, is extremely important, both in the way that it helps to improve the portability of programs intended for general use and also in the aid to productivity that these useful functions can provide.
+
+The use of variables, expressions and arithmetic are soon to be described in great detail. As this chapter has shown, at a simple level, C differs little from most other modern programming languages.
+
+Only the use of structured data types still remains to be introduced, although arrays have had a very brief airing.
 
 Exercises
 ^^^^^^^^^
+Exercise 1.1. Type in and test Example 1.1 on your system.
+
+Exercise 1.2. Using Example 1.2 as a pattern, write a program that prints prime pairs — a pair of prime numbers that differ by 2, for example 11 and 13, 29 and 31. (If you can detect a pattern between such pairs, congratulations! You are either a genius or just wrong.)
+
+Exercise 1.3. Write a function that returns an integer: the decimal value of a string of digits that it reads using getchar. For example, if it reads 1 followed by 4 followed by 6, it will return the number 146. You may make the assumption that the digits 0–9 are consecutive in the computer's representation (the Standard says so) and that the function will only have to deal with valid digits and newline, so error checking is not needed.
+
+Exercise 1.4. Use the function that you just wrote to read a sequence of numbers. Put them into an array declared in main, by repeatedly calling the function. Sort them into ascending numerical order, then print the sorted list.
+
+Exercise 1.5. Again using the function from Exercise 1.3, write a program that will read numbers from its input, then print them out in binary, decimal and hexadecimal form. You should not use any features of printf apart from those mentioned in this chapter (especially the hexadecimal output format!). You are expected to work out what digits to print by calculating each one in turn and making sure that they are printed in the right order. This is not particularly difficult, but it is not trivial either.
