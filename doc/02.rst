@@ -18,8 +18,18 @@ All, the same, it's true that the more work put on to the loader, the slower it 
 
     Seperate Compilation
 
+This technique is important in C, where it is common to find all but the smallest of programs constructed from a number of separate source files. Furthermore, the extensive use that C makes of libraries means that even trivial programs pass through the loader, although that might not be obvious at the first glance or to the newcomer.
+
 Functions
 ^^^^^^^^^
+A C program is built up from a collection of items such as functions and what we could loosely call global variables. All of these things are given names at the point where they are defined in the program; the way that the names are used to access those items from a given place in the program is governed by rules. The rules are described in the Standard using the term linkage. For the moment we only need to concern ourselves with external linkage and no linkage. Items with external linkage are those that are accessible throughout the program (library functions are a good example); items with no linkage are also widely used but their accessibility is much more restricted. Variables used inside functions are usually ‘local’ to the function; they have no linkage. Although this book avoids the use of complicated terms like those where it can, sometimes there isn't a plainer way of saying things. Linkage is a term that you are going to become familiar with later. The only external linkage that we will see for a while will be when we are using functions.
+
+Functions are C's equivalents of the functions and subroutines in FORTRAN, functions and procedures in Pascal and ALGOL. Neither BASIC in most of its simple mutations, nor COBOL has much like C's functions.
+
+The idea of a function is, of course, to allow you to encapsulate one idea or operation, give it a name, then to call that operation from various parts of the rest of your program simply by using the name. The detail of what is going on is not immediately visible at the point of use, nor should it be. In well designed, properly structured programs, it should be possible to change the way that a function does its job (as long as the job itself doesn't change) with no effect on the rest of the program.
+
+In a hosted environment there is one function whose name is special; it's the one called main. This function is the first one entered when your program starts running. In a freestanding environment the way that a program starts up is implementation defined; a term which means that although the Standard doesn't specify what must happen, the actual behaviour must be consistent and documented. When the program leaves the main function, the whole program comes to an end. Here's a simple program containing two functions:
+
 
 A description of Example 1.1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
