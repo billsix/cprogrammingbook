@@ -307,6 +307,182 @@ although of course none of this has been covered rigorously.
 
 Some more programs
 ^^^^^^^^^^^^^^^^^^
+While we're still in the informal phase, let's look at two more examples. You will have to work out for yourself what some of the code does, but as new or interesting features appear, they will be explained.
+1.4.1. A program to find prime numbers
+
+/*
+*
+* Dumb program that generates prime numbers.
+*/
+#include <stdio.h>
+#include <stdlib.h>
+
+main(){
+    int this_number, divisor, not_prime;
+
+    this_number = 3;
+
+    while(this_number < 10000){
+            divisor = this_number / 2;
+            not_prime = 0;
+            while(divisor > 1){
+                    if(this_number % divisor == 0){
+                            not_prime = 1;
+                            divisor = 0;
+                    }
+                    else
+                            divisor = divisor-1;
+            }
+
+            if(not_prime == 0)
+                    printf("%d is a prime number\n", this_number);
+            this_number = this_number + 1;
+    }
+    exit(EXIT_SUCCESS);
+}
+
+Example 1.2
+
+What was interesting in there? A few new points, perhaps. The program works in a really stupid way: to see if a number is prime, it divides that number by all the numbers between half its value and two—if any divide without remainder, then the number isn't prime. The two operators that you haven't seen before are the remainder operator %, and the equality operator, which is a double equal sign ==. That last one is without doubt the cause of more bugs in C programs than any other single factor.
+
+The problem with the equality test is that wherever it can appear it is also legal to put the single = sign. The first, ==, compares two things to see if they are equal, and is generally what you need in fragments like these:
+
+if(a == b)
+while (c == d)
+
+The assignment operator = is, perhaps surprisingly, also legal in places like those, but of course it assigns the value of the right-hand expression to whatever is on the left. The problem is particularly bad if you are used to the languages where comparison for equality is done with what C uses for assignment. There's nothing that you can do to help, so start getting used to it now. (Modern compilers do tend to produce warnings when they think they have detected ‘questionable’ uses of assignment operators, but that is a mixed blessing when your choice was deliberate.)
+
+There is also the introduction for the first time of the if statement. Like the while statement, it tests an expression to see if the expression is true. You might have noticed that also like the while statement, the expression that controls the if statement is in parentheses. That is always the case: all of the conditional control of flow statements require a parenthesized expression after the keyword that introduces them. The formal description of the if statement goes like this:
+
+if(expression)
+        statement
+
+if(expression)
+        statement
+else
+        statement
+
+showing that it comes in two forms. Of course, the effect is that if the expression part is evaluated to be true, then the following statement is executed. If the evaluation is false, then the following statement is not executed. When there is an else part, the statement associated with it is executed only if the evaluation gives a false result.
+
+If statements have a famous problem. In the following piece of code, is the statement-2 executed or not?
+
+if(1 > 0)
+        if(1 < 0)
+                statement-1
+else
+        statement-2
+
+The answer is that it is. Ignore the indentation (which is misleading). The else could belong to either the first or second if, according to the description of the if statement that has just been given, so an extra rule is needed to make it unambiguous. The rule is simply that an else is associated with the nearest else-less if above it. To make the example work the way that the indentation implied, we have to invoke a compound statement:
+
+if(1 > 0){
+        if(1 < 0)
+                statement-1
+}
+else
+        statement-2
+
+Here, at least, C adheres to the practice used by most other languages. In fact a lot of programmers who are used to languages where the problem exists have never even realized that it is there—they just thought that the disambiguating rule was ‘obvious’. Let's hope that everyone feels that way.
+1.4.2. The division operators
+
+The division operators are the division operator /, and the remainder operator %. Division does what you would expect, except that when it is applied to integer operands it gives a result that is truncated towards zero. For example, 5/2 gives 2, 5/3 gives 1. The remainder operator is the way to get the truncated remainder. 5%2 gives 1, 5%3 gives 2. The signs of the remainder and quotient depend on the divisor and dividend in a way that is defined in the Standard and shown in Chapter 2.
+1.4.3. An example performing input
+
+It's useful to be able to perform input as well as to write programs that print out more or less interesting lists and tables. The simplest of the library routines (and the only one that we'll look at just now) is called getchar. It reads single characters from the program's input and returns an integer value. The value returned is a coded representation for that character and can be used to print the same character on the program output. It can also be compared against character constants or other characters that have been read, although the only test that makes sense is to see if both characters are the same. Comparing for greater or less than each other is not portable in general; there is no guarantee that 'a' is less than 'b', although on most common systems that would be the case. The only guarantee that the Standard makes is that the codes for '0' through to '9' will always be consecutive. Here is one example.
+
+#include <stdio.h>
+#include <stdlib.h>
+main(){
+        int ch;
+
+        ch = getchar();
+        while(ch != 'a'){
+                if(ch != '\n')
+                        printf("ch was %c, value %d\n", ch, ch);
+                ch = getchar();
+        }
+        exit(EXIT_SUCCESS);
+}
+
+Example 1.3
+
+There are two interesting points in there. The first is to notice that at the end of each line of input read, the character represented by
+
+'\n'
+
+(a character constant) will be seen. This just like the way that the same symbol results in a new line when printf prints it. The model of I/O used by C is not based on a line by line view of the world, but character by character instead; if you choose to think in a line-oriented way, then '\n' allows you to mark the end of each ‘line’. Second is the way that %c is used to output a character by printf, when it appears on the output as a character. Printing it with %d prints the same variable, but displays the integer value used by your program to represent the character.
+
+If you try that program out, you may find that some systems do not pass characters one by one to a program, but make you type a whole line of input first. Then the whole line is made available as input, one character at a time. Beginners have been known to be confused: the program is started, they type some input, and nothing comes back. This behaviour is nothing to do with C; it depends on the computer and operating system in use.
+1.4.4. Simple arrays
+
+The use of arrays in C is often a problem for the beginner. The declaration of arrays isn't too difficult, especially the one-dimensional ones, but a constant source of confusion is the fact that their indices always count from 0. To declare an array of 5 ints, the declaration would look like this:
+
+int something[5];
+
+In array declarations C uses square brackets, as you can see. There is no support for arrays with indices whose ranges do not start at 0 and go up; in the example, the valid array elements are something[0] to something[4]. Notice very carefully that something[5] is not a valid array element.
+
+This program reads some characters from its input, sorts them into the order suggested by their representation, then writes them back out. Work out what it does for yourself; the algorithm won't be given much attention in the explanation which follows.
+
+#include <stdio.h>
+#include <stdlib.h>
+#define ARSIZE  10
+main(){
+        int ch_arr[ARSIZE],count1;
+        int count2, stop, lastchar;
+
+        lastchar = 0;
+        stop = 0;
+        /*
+         * Read characters into array.
+         * Stop if end of line, or array full.
+         */
+        while(stop != 1){
+                ch_arr[lastchar] = getchar();
+                if(ch_arr[lastchar] == '\n')
+                        stop = 1;
+                else
+                        lastchar = lastchar + 1;
+                if(lastchar == ARSIZE)
+                        stop = 1;
+        }
+        lastchar = lastchar-1;
+
+        /*
+         * Now the traditional bubble sort.
+         */
+        count1 = 0;
+        while(count1 < lastchar){
+                count2 = count1 + 1;
+                while(count2 <= lastchar){
+                        if(ch_arr[count1] > ch_arr[count2]){
+                                /* swap */
+                                int temp;
+                                temp = ch_arr[count1];
+                                ch_arr[count1] = ch_arr[count2];
+                                ch_arr[count2] = temp;
+                        }
+                        count2 = count2 + 1;
+                }
+                count1 = count1 + 1;
+        }
+
+        count1 = 0;
+        while(count1 <= lastchar){
+                printf("%c\n", ch_arr[count1]);
+                count1 = count1 + 1;
+        }
+        exit(EXIT_SUCCESS);
+}
+
+Example 1.4
+
+You might note that the defined constant ARSIZE is used everywhere instead of the actual array size. Because of that, to change the maximum number of characters that can be sorted by this program simply involves a change to one line and then re-compiling. Not so obvious but critical to the safety of the program is the detection of the array becoming full. Look carefully; you'll find that the program stops when element ARSIZE-1 has been filled. That is because in an N element array, only elements 0 through to N-1 are available (giving N in total).
+
+Unlike some other languages it is unlikely that you will be told if you ‘run off’ the end of an array in C. It results in what is known as undefined behaviour on the part of your program, this generally being to produce obscure errors in the future. Most skilled programmers avoid this happening by rigorous testing to make sure either that it can't happen given the particular algorithm in use, or by putting in an explicit test before accessing a particular member of an array. This is a common source of run-time errors in C; you have been warned.
+Summary
+
+Arrays always number from 0; you have no choice.
+
+A n-element array has members which number from 0 to n-1 only. Element n does not exist and to access it is a big mistake.
 
 Terminology
 ^^^^^^^^^^^
