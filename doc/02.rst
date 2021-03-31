@@ -97,10 +97,9 @@ documented. When the program leaves the main function, the whole program comes t
 an end. Here's a simple program containing two functions:
 
 
-.. literalinclude:: ../src/example1.1/main.c
+.. literalinclude:: ../src/example1.1/src/example1.1.c
    :language: c
    :linenos:
-   :lines: 1-100
 
 A description of Example 1.1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -595,10 +594,9 @@ explained.
 
 1.4.1. A program to find prime numbers
 
-.. literalinclude:: ../src/example1.2/main.c
+.. literalinclude:: ../src/example1.2/src/example1.2.c
    :language: c
    :linenos:
-   :lines: 1-100
 
 
 What was interesting in there? A few new points, perhaps. The program works
@@ -711,10 +709,9 @@ be the case. The only guarantee that the Standard makes is that the
 codes for '0' through to '9' will always be consecutive. Here is one example.
 
 
-.. literalinclude:: ../src/example1.3/main.c
+.. literalinclude:: ../src/example1.3/src/example1.3.c
    :language: c
    :linenos:
-   :lines: 1-100
 
 There are two interesting points in there. The first is to notice that
 at the end of each line of input read, the character represented by
@@ -764,10 +761,9 @@ suggested by their representation, then writes them back out. Work out what it
 does for yourself; the algorithm won't be given much attention in the
 explanation which follows.
 
-.. literalinclude:: ../src/example1.4/main.c
+.. literalinclude:: ../src/example1.4/src/example1.4.c
    :language: c
    :linenos:
-   :lines: 1-100
 
 
 You might note that the defined constant ARSIZE is used everywhere instead of

@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.0)
+
+project (example3.6 LANGUAGES C)
+
+add_executable(example3.6 src/example3.6.c)
+
+# build using the C11 standard
+set_property(TARGET example3.6 PROPERTY C_STANDARD 11)
+
+install(TARGETS example3.6 DESTINATION bin)
