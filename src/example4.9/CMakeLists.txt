@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.6)
 
 project (example4.9 LANGUAGES C)
 
@@ -7,6 +7,8 @@ SET(SOURCE_FILES
   src/secondfile.c)
 
 add_executable(example4.9 ${SOURCE_FILES})
+# To make visual studio open with the correct project
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT example4.9)
 
 # build using the C11 standard
 set_property(TARGET example4.9 PROPERTY C_STANDARD 11)
