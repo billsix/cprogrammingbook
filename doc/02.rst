@@ -132,21 +132,21 @@ the two words, whereas show_message( could have space in front of the
 ( or not, it would be purely a matter of taste.
 
 Comment is introduced
-to a C program by the pair of characters /*, which must not have
+to a C program by the pair of characters /\*, which must not have
 a space between them. From then on, everything found up to and including
-the pair of characters */ is gobbled up and the whole lot is replaced
+the pair of characters \*/ is gobbled up and the whole lot is replaced
 by a single space. In Old C, this was not the case. The
 rule used to be that comment could occur anywhere that space could occur
 : the rule is now that comment is space. The significance of the change
 is minor and eventually becomes apparent in Chapter 7 where we discuss the
 preprocessor. A consequence of the rule for the end of comment is that
 you can't put a piece of comment inside another piece, because the
-first */ pair will finish all of it. This is a minor nuisance, but
+first \*/ pair will finish all of it. This is a minor nuisance, but
 you learn to live with it.
 
 It is common practice to make a
 comment stand out by making each line of multi-line comment always start
-with a *, as the example illustrates.
+with a \*, as the example illustrates.
 
 Preprocessor statements
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -336,7 +336,7 @@ A function definition is a declaration with the body of the function given
 too.
 
 A function returning no value should have its type declared as void. For
-example, void func(/* list of arguments */);
+example, void func(/\* list of arguments \*/);
 
 A function taking no arguments should be declared with void as its argument
 list. For example, void func(void);

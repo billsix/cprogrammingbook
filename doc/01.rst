@@ -23,7 +23,7 @@ readers have already done battle with the notions of statements
 , variables, conditional execution, arrays, procedures (or subroutines) and so on
 . Instead of wasting your time by ploughing through tedious descriptions
 of how to add two numbers together and explaining that
-the symbol for multiplication is *, the book concentrates on the
+the symbol for multiplication is \*, the book concentrates on the
 things that are special to C. In particular, it's
 the way that C is used which is emphasized.
 
