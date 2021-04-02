@@ -3,9 +3,8 @@
 
 int main() {
   void pmax(int first, int second); /*declaration*/
-  int i, j;
-  for (i = -10; i <= 10; i++) {
-    for (j = -10; j <= 10; j++) {
+  for (int i = -10; i <= 10; i++) {
+    for (int j = -10; j <= 10; j++) {
       pmax(i, j);
     }
   }

@@ -6,13 +6,11 @@
 #include <stdlib.h>
 
 int main() {
-  int this_number, divisor, not_prime;
-
-  this_number = 3;
+  int this_number = 3;
 
   while (this_number < 10000) {
-    divisor = this_number / 2;
-    not_prime = 0;
+    int divisor = this_number / 2;
+    int not_prime = 0;
     while (divisor > 1) {
       if (this_number % divisor == 0) {
         not_prime = 1;

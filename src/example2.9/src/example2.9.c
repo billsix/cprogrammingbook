@@ -2,9 +2,8 @@
 #include <stdlib.h>
 
 int main() {
-  int x, y;
-  x = 0;
-  y = ~0;
+  int x = 0;
+  int y = ~0;
 
   while (x != y) {
     printf("%x & %x = %x\n", x, 0xff, x & 0xff);

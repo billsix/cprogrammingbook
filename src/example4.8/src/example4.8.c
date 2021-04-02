@@ -12,11 +12,9 @@ int unary_exp(void);
 int primary(void);
 
 int main() {
-  int val;
-
   for (;;) {
     printf("expression: ");
-    val = expr();
+    int val = expr();
     if (getchar() != '\n') {
       printf("error\n");
       while (getchar() != '\n')
@@ -29,11 +27,10 @@ int main() {
 }
 
 int expr(void) {
-  int val, ch_in;
-
-  val = mul_exp();
+  int val = mul_exp();
   for (;;) {
-    switch (ch_in = getchar()) {
+    const int ch_in = getchar();
+    switch (ch_in) {
     default:
       ungetc(ch_in, stdin);
       return (val);
@@ -48,11 +45,10 @@ int expr(void) {
 }
 
 int mul_exp(void) {
-  int val, ch_in;
-
-  val = unary_exp();
+  int val = unary_exp();
   for (;;) {
-    switch (ch_in = getchar()) {
+    const int ch_in = getchar();
+    switch (ch_in) {
     default:
       ungetc(ch_in, stdin);
       return (val);
@@ -70,9 +66,10 @@ int mul_exp(void) {
 }
 
 int unary_exp(void) {
-  int val, ch_in;
+  int val;
 
-  switch (ch_in = getchar()) {
+  const int ch_in = getchar();
+  switch (ch_in) {
   default:
     ungetc(ch_in, stdin);
     val = primary();
@@ -88,9 +85,9 @@ int unary_exp(void) {
 }
 
 int primary(void) {
-  int val, ch_in;
+  int val;
 
-  ch_in = getchar();
+  const int ch_in = getchar();
   if (ch_in >= '0' && ch_in <= '9') {
     val = ch_in - '0';
     goto out;

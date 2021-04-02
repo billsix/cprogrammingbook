@@ -2,17 +2,15 @@
 #include <stdlib.h>
 
 int main() {
-  int i;
-
-  i = 0;
+  int i = 0;
   while (i <= 10) {
     printf("%d\n", i);
     i++;
   }
 
   /* the same done using ``for'' */
-  for (i = 0; i <= 10; i++) {
-    printf("%d\n", i);
+  for (int j = 0; j <= 10; j++) {
+    printf("%d\n", j);
   }
   exit(EXIT_SUCCESS);
 }

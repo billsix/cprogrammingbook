@@ -1,5 +1,5 @@
 void r_func(void) {
-  static int depth;
+  static int depth = 0;
   depth++;
   if (depth > 200) {
     printf("excessive recursion\n");

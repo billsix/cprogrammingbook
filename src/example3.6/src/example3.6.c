@@ -2,8 +2,7 @@
 #include <stdlib.h>
 
 int main() {
-  int i;
-  for (i = 0; i <= 10; i++) {
+  for (int i = 0; i <= 10; i++) {
     switch (i) {
     case 1:
     case 2:

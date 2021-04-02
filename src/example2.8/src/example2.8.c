@@ -8,17 +8,14 @@
  * before
  */
 int main() {
-  int curr_val;
-  float temp, pcnt_diff;
-
-  curr_val = 2;
+  int curr_val = 2;
   while (curr_val <= 20) {
     /*
      * % difference is
      * 1/(curr_val)*100
      */
-    temp = curr_val;
-    pcnt_diff = 100 / temp;
+    const float temp = curr_val;
+    float pcnt_diff = 100 / temp;
     printf("Percent difference at %d is %f\n", curr_val, pcnt_diff);
     /*
      * Or, using a cast:

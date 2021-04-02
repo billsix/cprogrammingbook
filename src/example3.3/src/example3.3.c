@@ -2,10 +2,8 @@
 #include <stdlib.h>
 
 int main() {
-  int i;
-
   /* initialise */
-  i = 0;
+  int i = 0;
   /* check */
   while (i <= 10) {
     printf("%d\n", i);

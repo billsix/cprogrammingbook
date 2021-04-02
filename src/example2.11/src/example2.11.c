@@ -2,12 +2,9 @@
 #include <stdlib.h>
 
 int main() {
-  int i, j;
-  float f;
-
-  i = 5;
-  j = 2;
-  f = 3.0;
+  const int i = 5;
+  const int j = 2;
+  float f = 3.0;
 
   f = f + j / i;
   printf("value of f is %f\n", f);

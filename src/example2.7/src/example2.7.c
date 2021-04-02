@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 int main() {
-  int i;
-  unsigned int stop_val;
-
-  stop_val = 0;
-  i = -10;
+  unsigned int stop_val = 0;
+  int i = -10;
 
   while (i <= stop_val) {
     printf("%d\n", i);

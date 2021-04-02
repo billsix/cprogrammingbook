@@ -14,9 +14,7 @@ void show_message(void);
  * the function. This is a "definition".
  */
 int main() {
-  int count;
-
-  count = 0;
+  int count = 0;
   while (count < 10) {
     show_message();
     count = count + 1;

@@ -2,10 +2,8 @@
 #include <stdlib.h>
 
 int main() {
-  int i, j;
-
   /* comma used - this loop has two counters */
-  for (i = 0, j = 0; i <= 10; i++, j = i * i) {
+  for (int i = 0, j = 0; i <= 10; i++, j = i * i) {
     printf("i %d j %d\n", i, j);
   }
 

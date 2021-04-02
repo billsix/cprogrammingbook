@@ -3,9 +3,8 @@
 
 int main() {
   void changer(int);
-  int i;
 
-  i = 5;
+  int i = 5;
   printf("before i=%d\n", i);
   changer(i);
   printf("after i=%d\n", i);

@@ -3,11 +3,10 @@
 #define ARSIZE 10
 
 int main() {
-  int ch_arr[ARSIZE], count1;
-  int count2, stop, lastchar;
+  int ch_arr[ARSIZE];
 
-  lastchar = 0;
-  stop = 0;
+  int lastchar = 0;
+  int stop = 0;
   /*
    * Read characters into array.
    * Stop if end of line, or array full.
@@ -26,9 +25,9 @@ int main() {
   /*
    * Now the traditional bubble sort.
    */
-  count1 = 0;
+  int count1 = 0;
   while (count1 < lastchar) {
-    count2 = count1 + 1;
+    int count2 = count1 + 1;
     while (count2 <= lastchar) {
       if (ch_arr[count1] > ch_arr[count2]) {
         /* swap */
