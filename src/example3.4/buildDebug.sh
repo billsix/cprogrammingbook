@@ -6,4 +6,4 @@ cmake -DCMAKE_INSTALL_PREFIX=../buildInstall -DCMAKE_BUILD_TYPE=Debug ../
 cmake --build  . --target all
 cmake --build  . --target install
 cd ../buildInstall
-./bin/example3.4
+gdb --tui ./bin/example3.4
