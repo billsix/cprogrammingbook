@@ -8,7 +8,7 @@
  *
  */
 
-void show_message(void);
+void show_message();
 /*
  * Another function, but this includes the body of
  * the function. This is a "definition".
@@ -27,4 +27,4 @@ int main() {
  * The body of the simple function.
  * This is now a "definition".
  */
-void show_message(void) { printf("hello\n"); }
+void show_message() { printf("hello\n"); }

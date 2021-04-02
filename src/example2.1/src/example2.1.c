@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int f(void) {
+int f() {
   const float f_var = 1;
   double d_var = 1;
   long double l_d_var = 1;

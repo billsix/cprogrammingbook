@@ -1,4 +1,4 @@
-void r_func(void) {
+void r_func() {
   static int depth = 0;
   depth++;
   if (depth > 200) {

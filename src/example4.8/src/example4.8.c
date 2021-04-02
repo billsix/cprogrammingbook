@@ -6,10 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int expr(void);
-int mul_exp(void);
-int unary_exp(void);
-int primary(void);
+int expr();
+int mul_exp();
+int unary_exp();
+int primary();
 
 int main() {
   for (;;) {
@@ -26,7 +26,7 @@ int main() {
   exit(EXIT_SUCCESS);
 }
 
-int expr(void) {
+int expr() {
   int val = mul_exp();
   for (;;) {
     const int ch_in = getchar();
@@ -44,7 +44,7 @@ int expr(void) {
   }
 }
 
-int mul_exp(void) {
+int mul_exp() {
   int val = unary_exp();
   for (;;) {
     const int ch_in = getchar();
@@ -65,7 +65,7 @@ int mul_exp(void) {
   }
 }
 
-int unary_exp(void) {
+int unary_exp() {
   int val;
 
   const int ch_in = getchar();
@@ -84,7 +84,7 @@ int unary_exp(void) {
   return val;
 }
 
-int primary(void) {
+int primary() {
   int val;
 
   const int ch_in = getchar();

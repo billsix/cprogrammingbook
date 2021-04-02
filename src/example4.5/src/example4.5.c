@@ -3,7 +3,7 @@
 
 int a; /* visible from here onwards */
 
-void func(void) {
+void func() {
   float a; /* a different 'a' */
   { char a; /* yet another 'a' */ }
   /* the float 'a' reappears */
