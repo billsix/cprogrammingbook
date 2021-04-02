@@ -23,5 +23,5 @@ double sq_root(double x) { /* definition */
       diff = -diff;
     last_appx = curr_appx;
   }
-  return (curr_appx);
+  return curr_appx;
 }

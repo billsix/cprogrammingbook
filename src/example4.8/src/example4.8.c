@@ -33,7 +33,7 @@ int expr(void) {
     switch (ch_in) {
     default:
       ungetc(ch_in, stdin);
-      return (val);
+      return val;
     case '+':
       val = val + mul_exp();
       break;
@@ -51,7 +51,7 @@ int mul_exp(void) {
     switch (ch_in) {
     default:
       ungetc(ch_in, stdin);
-      return (val);
+      return val;
     case '*':
       val = val * unary_exp();
       break;
@@ -81,7 +81,7 @@ int unary_exp(void) {
     val = -unary_exp();
     break;
   }
-  return (val);
+  return val;
 }
 
 int primary(void) {
@@ -100,5 +100,5 @@ int primary(void) {
   printf("error: primary read %d\n", ch_in);
   exit(EXIT_FAILURE);
 out:
-  return (val);
+  return val;
 }

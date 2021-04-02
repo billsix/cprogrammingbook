@@ -7,7 +7,7 @@ int f(void) {
   long double l_d_var = 1;
   d_var = d_var + f_var;
   l_d_var = d_var + f_var;
-  return (l_d_var);
+  return l_d_var;
 }
 
 int main() {

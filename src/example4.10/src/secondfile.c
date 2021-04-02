@@ -8,7 +8,7 @@ int callable() {
   if (length == 0) {
     fillup();
   }
-  return (buf[length--]);
+  return buf[length--];
 }
 
 static void fillup(void) {

@@ -11,5 +11,5 @@ int main() {
 
 double aax1(void) {
   /* code for function body */
-  return (1.0);
+  return 1.0;
 }
