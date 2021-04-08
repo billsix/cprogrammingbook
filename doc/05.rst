@@ -1195,7 +1195,7 @@ term is less than 0.000001 of the current value of the function.
 
 Note the fact that the sign in front of each term
 alternates (--+--+--+...). pow(x,n) returns x to the nth power, fact(n)
-factorial of n (1 × 2 × 3 × ⋯ × n). You will have to
+factorial of n (1 × 2 × 3 × ... × n). You will have to
 write such functions. Check the results against published tables.
 
 Footnotes
