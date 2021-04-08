@@ -512,7 +512,7 @@ will do for a while to come.
     * so this is a declaration but not a definition
     */
 
-    int func_dec(void);
+    int func_dec();
 
     /*
     * Because this function has a body, it is also
@@ -522,10 +522,10 @@ will do for a while to come.
     * Don't use 'extern' until you understand it!
     */
 
-    int def_func(void){
+    int def_func(){
          float f_var;            /* a definition */
          int counter;            /* another definition */
-         int rand_num(void);     /* declare (but not define) another function */
+         int rand_num();     /* declare (but not define) another function */
 
          return(0);
     }

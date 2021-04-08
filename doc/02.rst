@@ -257,7 +257,7 @@ the function: its name, its type, and the number and type of its
 arguments. The void show_message( part indicates that it is a function and
 that it returns a value of type void, which is discussed in a
 moment. The second use of void is in the declaration of the function
-'s argument list, (void), which indicates that there are no arguments to this function.
+'s argument list, (), which indicates that there are no arguments to this function.
 
 Definition
 """"""""""
@@ -314,7 +314,7 @@ function of all is therefore the empty function, which does nothing at all:
 
 .. code-block:: C
 
-   void do_nothing(void){}
+   void do_nothing(){}
 
 The statement inside show_message is a call of the library function printf
 . printf is used to format and print things, this example being one of
@@ -338,8 +338,8 @@ too.
 A function returning no value should have its type declared as void. For
 example, void func(/\* list of arguments \*/);
 
-A function taking no arguments should be declared with void as its argument
-list. For example, void func(void);
+A function taking no arguments should be declared without an argument
+list. For example, void func();
 
 Strings
 ~~~~~~~

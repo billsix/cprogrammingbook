@@ -195,7 +195,7 @@ for space, tab or newline, which it throws away.
     #include <stdio.h>
 
     int
-    non_space(void){
+    non_space(){
           int c;
           while ( (c=getchar ())=='\t' || c== '\n' || c==' ')
                   ; /* empty statement */
@@ -363,7 +363,7 @@ For a function that has no arguments the declaration is
 
 .. code-block:: C
 
-       void f_name (void);
+       void f_name ();
 
 and a function that has one int, one double and
 an unspecified number of other arguments is declared this way:
@@ -539,7 +539,7 @@ Summary ::
 
     Assuming that you are using prototypes, the values of the arguments to a function call are converted to the types of the formal parameters exactly as if they had been assigned using the = operator.
 
-    Functions taking no arguments should have a prototype with (void) as the argument specification.
+    Functions taking no arguments should have a prototype with () as the argument specification.
 
     Functions taking a variable number of arguments must take at least one named argument; the variable arguments are indicated by ... as shown:
 
@@ -987,9 +987,9 @@ ways of declaring some_function are equivalent and are always declarations:
 
 .. code-block:: C
 
-     void some_function(void);
+     void some_function();
 
-     extern void some_function(void);
+     extern void some_function();
 
 The thing that mysteriously turns those declarations into definitions is that
 when you also provide the body of the function, that is
@@ -1001,12 +1001,12 @@ Now, what is going on here?
 
 .. code-block:: C
 
-     void some_function(void){
+     void some_function(){
            int i_var;
            extern float e_f_var;
      }
 
-     void another_func(void){
+     void another_func(){
            int i;
            i = e_f_var;    /* scope problem */
      }
