@@ -6,4 +6,4 @@ cmake -DCMAKE_INSTALL_PREFIX=../buildInstall -DCMAKE_BUILD_TYPE=Debug ../
 cmake --build  . --target all
 cmake --build  . --target install
 cd ../buildInstall
-gdb --tui ./bin/example4.12
+emacs --eval '(gdb "gdb -i=mi ./bin/example4.12")'
