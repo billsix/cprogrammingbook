@@ -15,13 +15,13 @@ instructive and at times entertaining too.
 
 This is not a
 tutorial introduction to programming. The book is designed for programmers
-who already have some experience of using a modern high
--level procedural programming language. As we explain later, C isn
-'t really appropriate for complete beginners—though many have managed
+who already have some experience of using a modern high-level
+procedural programming language. As we explain later, C isn't
+really appropriate for complete beginners—though many have managed
 to use it—so the book will assume that its
-readers have already done battle with the notions of statements
-, variables, conditional execution, arrays, procedures (or subroutines) and so on
-. Instead of wasting your time by ploughing through tedious descriptions
+readers have already done battle with the notions of statements,
+variables, conditional execution, arrays, procedures (or subroutines) and so on.
+Instead of wasting your time by ploughing through tedious descriptions
 of how to add two numbers together and explaining that
 the symbol for multiplication is \*, the book concentrates on the
 things that are special to C. In particular, it's
@@ -33,8 +33,8 @@ Standard and how it affects existing C programs. The effect
 on existing programs might not at first seem to be
 important to newcomers, but in fact the ‘old’ and new
 versions of the language are an issue for the beginner
-too. For some years after the approval of the Standard
-, programmers will have to live in a world where they
+too. For some years after the approval of the Standard,
+programmers will have to live in a world where they
 can easily encounter a mixture of both the new and
 the old language, depending on the age of the programs
 that they are working with. For that reason, the book
@@ -48,20 +48,20 @@ to understand what they mean. Anybody who intends to write
 programs using these old-style features should be reading a
 different book.
 
-This is the second edition of the book
-, which has been revised to refer to the final, approved
+This is the second edition of the book,
+which has been revised to refer to the final, approved
 version of the Standard. The first edition of the book
 was based on a draft of the Standard which did
-contain some differences from the draft that was eventually approved
-. During the revision we have taken the opportunity to include
+contain some differences from the draft that was eventually approved.
+During the revision we have taken the opportunity to include
 more summary material and an extra chapter illustrating the use
 of C and the Standard Library to solve a number
 of small problems.
 
 The Success of C
 ^^^^^^^^^^^^^^^^
-C is a remarkable language. Designed originally by one man
-, Dennis Ritchie, working at AT&T Bell Laboratories in New
+C is a remarkable language. Designed originally by one man, Dennis Ritchie,
+working at AT&T Bell Laboratories in New
 Jersey, it has increased in use until now it may
 well be one of the most widely-written computer languages
 in the world. The success of C is due to
@@ -70,8 +70,8 @@ of them important. Perhaps the most significant of all is
 that C was developed by real practioners of programming and
 was designed for practical day-to-day use, not for
 show or for demonstration. Like any well-designed tool, it
-falls easily to the hand and feels good to use
-. Instead of providing constraints, checks and rigorous boundaries, it concentrates
+falls easily to the hand and feels good to use.
+Instead of providing constraints, checks and rigorous boundaries, it concentrates
 on providing you with power and on not getting in
 your way.
 
@@ -82,8 +82,8 @@ and helps you to get results quickly—programs that run,
 even if they don't do what you meant. C
 is not like that! A professional forester would use a
 chain-saw to cut down trees quickly, aware of the
-dangers of touching the blade when the machine is running
-; C programmers work in a similar way. Although modern C
+dangers of touching the blade when the machine is running;
+C programmers work in a similar way. Although modern C
 compilers do provide a limited amount of feedback when they
 notice something that is out of the ordinary, you almost
 always have the option of forcing the compiler to do
@@ -121,10 +121,10 @@ language, but also the power to get the most out
 of the PC architecture without having to resort to the
 use of assembly code. C is practically unique in its
 ability to span two levels of programming; as well as
-providing high-level control of flow, data structures and procedures
-—all of the stuff expected in a modern high-level
-language—it also allows systems programmers to address machine words
-, manipulate bits and get close to the underlying hardware if
+providing high-level control of flow, data structures and procedures—all
+of the stuff expected in a modern high-level
+language—it also allows systems programmers to address machine words,
+manipulate bits and get close to the underlying hardware if
 they want to. That combination of features is very desirable
 in the competitive PC software markeplace and an increasing number
 of software developers have made C their primary language as
@@ -143,8 +143,8 @@ solution to a generic requirement, instead of providing half a
 solution (which invariably pleases nobody), you should allow the users
 to build their own. Software designers the world over have
 something to learn from this! It's the approach that
-has been taken by C, and not only for I
-/O. Through the use of library functions you can extend
+has been taken by C, and not only for I/O.
+Through the use of library functions you can extend
 the language in many ways to provide features that the
 designers didn't think of. There's proof of this
 in the so-called Standard I/O Library (stdio), which
@@ -184,8 +184,8 @@ and Dennis Ritchie, usually referred to as simply “K&R”. ::
 
 Further acting as a rigorous check on the expansion into
 numerous dialects, on UNIX systems there was only ever really
-one compiler for C; the so-called “Portable C Compiler
-”, originally written by Steve Johnson. This acted as a reference
+one compiler for C; the so-called “Portable C Compiler”,
+originally written by Steve Johnson. This acted as a reference
 implementation for C—if the K&R reference was a
 bit obscure then the behaviour of the UNIX compiler was
 taken as the definition of the language.
@@ -198,8 +198,8 @@ be found in the PC world did begin to threaten
 the stability of the language.
 
 The X3J11 committee of the
-American National Standards Institute started work in the early 1980
-'s to produce a formal standard for C. The committee
+American National Standards Institute started work in the early 1980's
+to produce a formal standard for C. The committee
 took as its reference the K&R definition and began
 its lengthy and painstaking work. The job was to try
 to eliminate ambiguities, to define the undefined, to fix the
@@ -213,8 +213,8 @@ a strong force for convergence right from the beginning.
 Development
 of the Standard took a long time, as standards often
 do. Much of the work is not just technical, although
-that is a very time-consuming part of the job
-, but also procedural. It's easy to underrate the procedural
+that is a very time-consuming part of the job,
+but also procedural. It's easy to underrate the procedural
 aspects of standards work, as if it somehow dilutes the
 purity of the technical work, but in fact it is
 equally important. A standard that has no agreement or consensus
@@ -228,8 +228,8 @@ aberrations just as much as can excessive indulgence by technical
 purists, and unfortunately the delivery date of the Standard was
 affected at the last moment by procedural, rather than technical
 issues. The technical work was completed by December 1988, but
-it took a further year to resolve procedural objections. Finally
-, approval to release the document as a formal American National
+it took a further year to resolve procedural objections. Finally,
+approval to release the document as a formal American National
 Standard was given on December 7th, 1989.
 
 
@@ -266,8 +266,7 @@ applications. The Standard Library is useful for ‘data processing’ types
 of applications, where file I/O and numeric and string
 oriented data are widely used. There is an equally important
 application area for C—the ‘embedded system’ area—which includes
-such things as process control, real-time and similar applications
-.
+such things as process control, real-time and similar applications.
 
 The Standard knows this and provides for it. A large
 part of the Standard is the definition of the library
@@ -275,17 +274,17 @@ functions that must be supplied for hosted environments. A hosted
 environment is one that provides the standard libraries. The standard
 permits both hosted and freestanding environments. and goes to some
 length to differentiate between them. Who would want to go
-without libraries? Well, anybody writing ‘stand alone’ programs. Operating systems
-, embedded systems like machine controllers and firmware for instrumentation are
+without libraries? Well, anybody writing ‘stand alone’ programs. Operating systems,
+embedded systems like machine controllers and firmware for instrumentation are
 all examples of the case where a hosted environment might
 be inappropriate. Programs written for a hosted environment have to
 be aware of the fact that the names of all
-the library functions are reserved for use by the implementation
-. There is no such restriction on the programmer working in
+the library functions are reserved for use by the implementation.
+There is no such restriction on the programmer working in
 a freestanding environment, although it isn't a good idea
 to go using names that are used in the standard
-library, simply because it will mislead readers of the program
-. Chapter 9 describes the names and uses of the library
+library, simply because it will mislead readers of the program.
+Chapter 9 describes the names and uses of the library
 functions.
 
 Typographical conventions
@@ -297,10 +296,10 @@ of library functions, are printed in a different typeface. Examples
 are int and printf. Terms used by the book that
 have a meaning not to C but in the Standard
 or the text of the book, are bold if they
-have not been introduced recently. They are not bold everywhere
-, because that rapidly annoys the reader. As you have noticed
-, italics are also used for emphasis from time to time
-, and to introduce loosely defined terms. Whether or not the
+have not been introduced recently. They are not bold everywhere,
+because that rapidly annoys the reader. As you have noticed,
+italics are also used for emphasis from time to time,
+and to introduce loosely defined terms. Whether or not the
 name of a function, keyword or so on starts with
 a capital letter, it is nonetheless capitalized when it appears
 at the start of a sentence; this is one problem
@@ -313,8 +312,8 @@ of the authors, or simply by accident.
 Order of topics
 ^^^^^^^^^^^^^^^
 The order of presentation of topics in this book loosely
-follows the order that is taught in The Instruction Set
-'s introductory course. It starts with an overview of the
+follows the order that is taught in The Instruction Set's
+introductory course. It starts with an overview of the
 essential parts of the language that will let you start
 to write useful programs quite quickly. The introduction is followed
 by a detailed coverage of the material that was ignored
@@ -342,8 +341,8 @@ Deference to Higher Authority
 This book is an attempt to produce a readable and
 enlightening description of the language defined by the Standard. It
 sets out to to make interpretations of what the Standard
-actually means but to express them in ‘simpler’ English. We
-'ve done our best to get it right, but you
+actually means but to express them in ‘simpler’ English. We've
+done our best to get it right, but you
 must never forget that the only place that the language
 is fully defined is in the Standard itself. It is
 entirely possible that what we interpret the Standard to mean

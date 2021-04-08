@@ -52,8 +52,8 @@ difficulty.
 The Standard talks about two different character sets: the one
 that programs are written in and the one that programs execute
 with. This is basically to allow for different systems for compiling
-and execution, which might use different ways of encoding their characters
-. It doesn't actually matter a lot except when you are
+and execution, which might use different ways of encoding their characters.
+It doesn't actually matter a lot except when you are
 using character constants in the preprocessor, where they may not have
 the same value as they do at execution time. This behaviour
 is implementation-defined, so it must be documented. Don't worry about it yet.
@@ -92,8 +92,8 @@ is the use of trigraphs.
 Trigraphs
 ~~~~~~~~~~~~~~
 Trigraphs are a sequence of three ISO 646 characters that get
-treated as if they were one character in the C alphabet
-; all of the trigraphs start with two question marks ?? which helps
+treated as if they were one character in the C alphabet;
+all of the trigraphs start with two question marks ?? which helps
 to indicate that ‘something funny’ is going on. Table 2.1
 below shows the trigraphs defined in the Standard.::
 
@@ -185,16 +185,16 @@ fits in 8 bits per character, but Asian and other languages simply cannot.
 There are two general ways of extending character sets. One is
 to use a fixed number of bytes (often two) for every
 character. This is what the wide character support in C is
-designed to do. The other method is to use a shift
--in shift-out coding scheme; this is popular over 8-bit
+designed to do. The other method is to use a shift-in
+shift-out coding scheme; this is popular over 8-bit
 communication links. Imagine a stream of characters that looks like:::
 
     a b c <SI> a b g <SO> x y
 
 where <SI> and <SO> mean ‘switch to Greek’ and ‘switch back
 to English’ respectively. A display device that agreed to use that
-method might well then display a, b, c, alpha, beta, gamma
-, x and y. This is roughly the scheme used by the
+method might well then display a, b, c, alpha, beta, gamma,
+x and y. This is roughly the scheme used by the
 shift-JIS Japanese standard, except that once the shift-in has
 been seen, pairs of characters together are used as the code
 for a single Japanese character. Alternative schemes exist which use more
@@ -216,17 +216,17 @@ must start and end in the initial shift state.
 
 The char
 type is specified by the Standard as suitable to hold the
-value of all of the characters in the ‘execution character set
-’, which will be defined in your system's documentation. This means
+value of all of the characters in the ‘execution character set’,
+which will be defined in your system's documentation. This means
 that (in the example above) it could hold the value of
-‘a’ or ‘b’ or even the "switch to Greek" character itself
-. Because of the shift-in shift-out mechanism, there would be
+‘a’ or ‘b’ or even the "switch to Greek" character itself.
+Because of the shift-in shift-out mechanism, there would be
 no difference between the value stored in a char that was
 intended to represent ‘a’ or the Greek ‘alpha’ character. To do
 that would mean using a different representation - probably needing more than
 8 bits, which on many systems would be too big for
-a char. That is why the Standard introduces the wchar_ttype
-. To use this, you must include the <stddef.h> header, because
+a char. That is why the Standard introduces the wchar_ttype.
+To use this, you must include the <stddef.h> header, because
 wchar_t is simply defined as an alternative name for one
 of C's other types. We discuss it further in Section 2.8.
 
@@ -251,8 +251,8 @@ The examples so far have used the sort of indentation and
 line layout that is common in languages belonging to the same
 family as C. They are ‘free format’ languages and you are
 expected to use that freedom to lay the program out in
-a way that enhances its readability and highlights its logical structure
-. Space (including horizontal tab) characters can be used for indentation anywhere
+a way that enhances its readability and highlights its logical structure.
+Space (including horizontal tab) characters can be used for indentation anywhere
 except in identifiers or keywords without any effect on the meaning
 of the program. New lines work in the same way as
 space and tab except on preprocessor command lines, which have a
@@ -273,12 +273,12 @@ two lines instead, as this example shows.
             sqrt(3.14159));
 
 If you're unlucky it may not be possible to break
-the lines like that. The preprocessor suffers most from the problem
-, because of its reliance on single-line ‘statements’. To help, it
-'s useful to know that the sequence ‘backslash newline’ becomes invisible
+the lines like that. The preprocessor suffers most from the problem,
+because of its reliance on single-line ‘statements’. To help, it's
+useful to know that the sequence ‘backslash newline’ becomes invisible
 to the C translation system. As a result, the sequence is
-valid even in unusual places such as the middle of identifiers
-, keywords, strings and so on. Only trigraphs are processed before this step.
+valid even in unusual places such as the middle of identifiers,
+keywords, strings and so on. Only trigraphs are processed before this step.
 
 .. code-block:: C
 
@@ -316,8 +316,8 @@ the string without changing its meaning; adding indentation in the first
 example would have put the indentation into the string.
 
 Incidentally, both examples contain what is probably a mistake. There is
-no space in front of the ‘long’ in the continuation string
-, which will contain the sequence ‘verylong’ as a result. Did you notice?
+no space in front of the ‘long’ in the continuation string,
+which will contain the sequence ‘verylong’ as a result. Did you notice?
 
 Comment
 ~~~~~~~
@@ -325,9 +325,9 @@ Comment
 Comment, as has been said already, is introduced by the character
 pair /\* and terminated by \*/. It is translated into a single space
 wherever it occurs and so it follows exactly the same rules
-that spaces do. It's important to realize that it doesn
-'t simply disappear, which it used to do in Old C
-, and that it is not possible to put comment into strings
+that spaces do. It's important to realize that it doesn't
+simply disappear, which it used to do in Old C,
+and that it is not possible to put comment into strings
 or character constants. Comment in such a place becomes part of
 the string or constant:
 
@@ -360,8 +360,8 @@ Translation phases
 The various character translation, line joining, comment recognition and other early
 phases of translation must be specified to occur in a certain
 order. The Standard says that the translation is to proceed as
-if the phases occurred in this order (there are more phases
-, but these are the important ones):
+if the phases occurred in this order (there are more phases,
+but these are the important ones):
 
     Trigraph translation.
     Line joining.
@@ -381,8 +381,8 @@ different).
 Keywords
 ~~~~~~~~
 
-C keeps a small set of keywords for its own use
-. These keywords cannot be used as identifiers in the program — a
+C keeps a small set of keywords for its own use.
+These keywords cannot be used as identifiers in the program — a
 common restriction with modern languages. Where users of Old C may
 be surprised is in the introduction of some new keywords; if
 those names were used as identifiers in previous programs, then the
@@ -422,11 +422,11 @@ These are not part of the Standard, and few will mourn them.
 Identifiers
 ~~~~~~~~~~~
 
-Identifier is the fancy term used to mean ‘name’. In C
-, identifiers are used to refer to a number of things: we
-'ve already seen them used to name variables and functions. They
-are also used to give names to some things we haven
-'t seen yet, amongst which are labels and the ‘tags’ of
+Identifier is the fancy term used to mean ‘name’. In C,
+identifiers are used to refer to a number of things: we've
+already seen them used to name variables and functions. They
+are also used to give names to some things we haven't
+seen yet, amongst which are labels and the ‘tags’ of
 structures, unions, and enums.
 
 The rules for the construction of identifiers
@@ -462,19 +462,19 @@ source files.
 
 The Standard chose to stay with the old restrictions
 on these external names: they are not guaranteed to be different
-unless they differ from each other in the first six characters
-. Worse than that, upper and lower case letters may be treated
+unless they differ from each other in the first six characters.
+Worse than that, upper and lower case letters may be treated
 the same!
 
 The reason for this is a pragmatic one: the
 way that most C compilation systems work is to use operating
-system specific tools to bind library functions into a C program
-. These tools are outside the control of the C compiler writer
-, so the Standard has to impose realistic limits that are likely
+system specific tools to bind library functions into a C program.
+These tools are outside the control of the C compiler writer,
+so the Standard has to impose realistic limits that are likely
 to be possible to meet. There is nothing to prevent any
 specific implementation from giving better limits than these, but for maximum
-portability the six monocase characters must be all that you expect
-. The Standard warns that it views both the use of only
+portability the six monocase characters must be all that you expect.
+The Standard warns that it views both the use of only
 one case and any restriction on the length of external names
 to less than 31 characters as obsolescent features. A later standard
 may insist that the restrictions are lifted; let's hope that it is soon.
@@ -499,9 +499,9 @@ for their formal meaning, so if you are in doubt about
 the differences between them, refer back to this point.
 
 The rules
-about what makes a declaration into a definition are rather complicated
-, so they will be deferred for a while. In the meantime
-, here are some examples and rule-of-thumb guidelines which will
+about what makes a declaration into a definition are rather complicated,
+so they will be deferred for a while. In the meantime,
+here are some examples and rule-of-thumb guidelines which will
 work for the examples that we have seen so far, and
 will do for a while to come.
 
@@ -558,8 +558,8 @@ there's less to say about them and they don't
 get as complicated as the integer types. The Standard breaks new
 ground by laying down some basic guarantees on the precision and
 range of the real numbers; these are found in the header
-file float.h which is discussed in detail in Chapter 9
-. For some users this is extremely important information, but it is
+file float.h which is discussed in detail in Chapter 9.
+For some users this is extremely important information, but it is
 of a highly technical nature and is likely only to be
 fully understood by numerical analysts.
 
@@ -575,8 +575,8 @@ one way of doing things, they might all turn out to
 be the same; if it has more than three, then C
 has no way of specifying the extra ones. The type float
 is intended to be the small, fast representation corresponding to what
-FORTRAN would call REAL. You would use double for extra precision
-, and long double for even more.
+FORTRAN would call REAL. You would use double for extra precision,
+and long double for even more.
 
 The main points of interest
 are that in the increasing ‘lengths’ of float, double and long
@@ -588,14 +588,14 @@ in the same value.
 There is no requirement for the three
 types of ‘real’ variables to differ in their properties, so if
 a machine only has one type of real arithmetic, all of
-C's three types could be implemented in the same way
-. None the less, the three types would be considered to be
+C's three types could be implemented in the same way.
+None the less, the three types would be considered to be
 different from the point of view of type checking; it would
 be ‘as if’ they really were different. That helps when you
 move the program to a system where the three types really
 are different—there won't suddenly be a set of warnings
-coming out of your compiler about type mismatches that you didn
-'t get on the first system.
+coming out of your compiler about type mismatches that you didn't
+get on the first system.
 
 In contrast to more ‘strongly
 typed’ languages, C permits expressions to mix all of the scalar
@@ -622,9 +622,9 @@ Example 2.1
 There are a lot of forced conversions in that example. Getting
 the easiest of them out of the way first, let's
 look at the assignments of the constant value 1 to each
-of the variables. As the section on constants will point out
-, that 1 has type int, i.e. it is an integer
-, not a real constant. The assignment converts the integer value to
+of the variables. As the section on constants will point out,
+that 1 has type int, i.e. it is an integer,
+not a real constant. The assignment converts the integer value to
 the appropriate real type, which is easy to cope with.
 
 The interesting conversions come next. The first of them is on the line
@@ -661,17 +661,17 @@ those cases it may be necessary to lose precision, in a
 way specified by the implementation. Basically, the implementation must specify whether
 and in what way it rounds or truncates. Even worse, the
 destination may be unable to hold the value at all. The
-Standard says that in these cases loss of precision may occur
-; if the destination is unable to hold the necessary value—say
+Standard says that in these cases loss of precision may occur;
+if the destination is unable to hold the necessary value—say
 by attempting to add the largest representable number to itself—then
 the behaviour is undefined, your program is faulty and you can
 make no predictions whatsoever about any subsequent behaviour.
 
 It is no
 mistake to re-emphasize that last statement. What the Standard means
-by undefined behaviour is exactly what it says. Once a program
-'s behaviour has entered the undefined region, absolutely anything can happen
-. The program might be stopped by the operating system with an
+by undefined behaviour is exactly what it says. Once a program's
+behaviour has entered the undefined region, absolutely anything can happen.
+The program might be stopped by the operating system with an
 appropriate message, or just as likely nothing observable would happen and
 the program be allowed to continue with an erroneous value stored
 in the variable in question. It is your responsibility to prevent
@@ -734,8 +734,8 @@ integral types are more complicated, but still tolerable, and these rules
 really should be learnt. Fortunately, the only types used in C
 for routine data storage are the real and integer types, or
 structures and arrays built up from them. C doesn't have
-special types for character manipulation or the handling of logical (boolean
-) quantities, but uses the integral types instead. Once you know the
+special types for character manipulation or the handling of logical (boolean)
+quantities, but uses the integral types instead. Once you know the
 rules for the reals and the integers you know them all.
 
 We will start by looking at the various types and then the conversion rules.
@@ -776,8 +776,8 @@ negative. More about these shortly.
 If you aren't used to
 thinking about the number of bits in a given variable, and
 are beginning to get worried about the portability implications of this
-apparently machine-dependent concern for the number of bits, then you
-'re doing the right thing. C takes portability seriously and actually
+apparently machine-dependent concern for the number of bits, then you're
+doing the right thing. C takes portability seriously and actually
 bothers to tell you what values and ranges are guaranteed to
 be safe. The bitwise operators encourage you to think about the
 number of bits in a variable too, because they give direct
@@ -805,8 +805,8 @@ not char variables behave as signed or unsigned types is implementation
 defined.
 
 In short, a character variable will probably take less storage than
-an int and will most likely be used for character manipulation
-. It's still an integer type though, and can be used
+an int and will most likely be used for character manipulation.
+It's still an integer type though, and can be used
 for arithmetic, as this example shows.
 
 .. literalinclude:: ../src/example2.3/src/example2.3.c
@@ -816,8 +816,8 @@ for arithmetic, as this example shows.
 Example 2.3
 
 Running that program is left as an exercise for the easily
-amused. If you are bothered about where CHAR_MIN and CHAR
-_MAX come from, find limits.h and read it.
+amused. If you are bothered about where CHAR_MIN and CHAR_MAX
+come from, find limits.h and read it.
 
 Here's a more enlightening example. It uses character constants, which
 are formed by placing a character in single quotes:
@@ -838,8 +838,8 @@ used to represent the character. Why %d? Because a char is
 just another integral type.
 
 It's also useful to be able to read characters into
-a program. The library function getchar is used for the job
-. It reads characters from the program's standard input and returns
+a program. The library function getchar is used for the job.
+It reads characters from the program's standard input and returns
 an int value suitable for storing into a char. The int
 value is for one reason only: not only does getchar return
 all possible character values, but it also returns an extra value
@@ -848,8 +848,8 @@ of a char might not be enough to hold this extra
 value, so the int has to be used.
 
 The following program reads its input and counts the number of
-commas and full stops that it sees. On end-of-input
-, it prints the totals.
+commas and full stops that it sees. On end-of-input,
+it prints the totals.
 
 .. literalinclude:: ../src/example2.4/src/example2.4.c
    :language: c
@@ -867,8 +867,8 @@ of C programs.
 Another example, perhaps. This will either print out the whole lower
 case alphabet, if your implementation has its characters stored consecutively, or
 something even more interesting if they aren't. C doesn't
-make many guarantees about the ordering of characters in internal form
-, so this program produces non-portable results!
+make many guarantees about the ordering of characters in internal form,
+so this program produces non-portable results!
 
 
 .. literalinclude:: ../src/example2.5/src/example2.5.c
@@ -890,8 +890,8 @@ of them. That's when the saving can become noticeable: imagine
 an array of 1024 ints. On a lot of common machines
 that would eat up 4096 8-bit bytes of storage, assuming
 the common length of 4 bytes per int. If the computer
-architecture allows it to be done in a reasonably efficient way
-, the C implementor will probably have arranged for char variables to
+architecture allows it to be done in a reasonably efficient way,
+the C implementor will probably have arranged for char variables to
 be packed one per byte, so the array would only use
 1024 bytes and the space saving would be 3072 bytes.
 
@@ -919,8 +919,8 @@ them.
 
 Unsigned types also have the special property of never overflowing in
 arithmetic. Adding 1 to a signed variable that already contains the
-maximum possible positive number for its type will result in overflow
-, and the program's behaviour becomes undefined. That can never happen
+maximum possible positive number for its type will result in overflow,
+and the program's behaviour becomes undefined. That can never happen
 with unsigned types, because they are defined to work ‘modulo one
 greater than the maximum number that they can hold’. What this
 means is best illustrated by example:
@@ -944,8 +944,8 @@ must always be true for an unsigned variable.
 
 For both the signed and unsigned integral types there are three
 subtypes: short, ordinary and long. Taking those into account, here is
-a list of all of the possible integral types in C
-, except for the character types:::
+a list of all of the possible integral types in C,
+except for the character types:::
 
     unsigned short int
 
@@ -961,26 +961,26 @@ a list of all of the possible integral types in C
 
 In the last three, the signed keyword is unnecessary because the
 int types are signed types anyway: you have to say unsigned
-to get anything different. It's also permissible, but not recommended
-, to drop the int keyword from any of those declarations provided
+to get anything different. It's also permissible, but not recommended,
+to drop the int keyword from any of those declarations provided
 that there is at least one other keyword present—the int
 will be ‘understood’ to be present. For example long is equivalent
 to signed long int. The long and short kinds give you
-more control over the amount of space used to store variables
-. Each has its own minimum range specified in <limits.h> which
+more control over the amount of space used to store variables.
+Each has its own minimum range specified in <limits.h> which
 in practice means at least 16 bits in a short and
 an int, and at least 32 bits in a long, whether
 signed or unsigned. As always, an implementation can choose to give
 you more bits than the minimum if it wants to. The
-only restriction is that the limits must be equalled or bettered
-, and that you don't get more bits in a shorter
+only restriction is that the limits must be equalled or bettered,
+and that you don't get more bits in a shorter
 type than a longer one (not an unreasonable rule).
 
 The only character types are the signed char and the unsigned
 char. The difference between char and int variables is that, unless
 otherwise stated, all ints are signed. The same is not true
-for chars, which are signed or unsigned depending on the implementor
-'s choice; the choice is presumably taken on efficiency grounds. You
+for chars, which are signed or unsigned depending on the implementor's
+choice; the choice is presumably taken on efficiency grounds. You
 can of course explicitly force signed or unsignedness with the right
 keyword. The only time that it is likely to matter is
 if you are using character variables as extra short shorts to
@@ -995,18 +995,18 @@ Summary of integral types::
 Printing the integral types
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once again you can use printf to print these various types
-. Character variables work exactly the same way that the other integral
+Once again you can use printf to print these various types.
+Character variables work exactly the same way that the other integral
 variables do, so you can use the standard format letters to
 print their contents—although the actual numbers stored in them are
 not likely to be very interesting. To see their contents interpreted
 as characters, use %c as was done earlier. All of the
 integral types can be printed as if they were signed decimal
-numbers by using the %d format, or %ld for long types
-. Other useful formats are shown in Table 2.5; notice that
+numbers by using the %d format, or %ld for long types.
+Other useful formats are shown in Table 2.5; notice that
 in every case a letter ‘l’ is put in front of
-the normal format letter if a long is to be printed
-. That's not just there to get the right result printed:
+the normal format letter if a long is to be printed.
+That's not just there to get the right result printed:
 the behaviour of printf is undefined if the wrong format is given.
 
 
@@ -1079,8 +1079,8 @@ could have been written as
 
 and still have been a valid expression. Because of the number
 of operators that C has, and because of the strange way
-that assignment works, the precedence of the operators (and their associativity
-) is of much greater importance to the C programmer than in
+that assignment works, the precedence of the operators (and their associativity)
+is of much greater importance to the C programmer than in
 most other languages. It will be discussed fully after the introduction
 of the important arithmetic operators.
 
@@ -1116,10 +1116,10 @@ in arithmetic expressions:::
 
     Conversions between floating and integral types
 
-Conversions between floating (real) types were discussed in Section 2.8
-; what we do next is to specify how the other conversions
-are to be performed, then look at when they are required
-. You will need to learn them by heart if you ever
+Conversions between floating (real) types were discussed in Section 2.8;
+what we do next is to specify how the other conversions
+are to be performed, then look at when they are required.
+You will need to learn them by heart if you ever
 intend to program seriously in C.
 
 The Standard has, among some
@@ -1169,16 +1169,15 @@ happen, the integral promotions will already have been done. For all
 of them, if the new type can hold all of the
 values of the old type, then the value remains unchanged.
 
-When
-converting from a signed integer to an unsigned integer whose length
+When converting from a signed integer to an unsigned integer whose length
 is equal to or longer than the original type, then if
 the signed value was nonnegative, its value is unchanged. If the
 value was negative, then it is converted to the signed form
 of the longer type and then made unsigned by conceptually adding
 it to one greater than the maximum that can be held
 in the unsigned type. In a twos complement system, this preserves
-the original bit-pattern for positive numbers and guarantees ‘sign-extension
-’ of negative numbers.
+the original bit-pattern for positive numbers and guarantees ‘sign-extension’
+of negative numbers.
 
 Whenever an integer is converted into a shorter
 unsigned type, there can be no ‘overflow’, so the result is
@@ -1195,8 +1194,8 @@ result is implementation defined (although most old-timers would expect that
 simply the low-order bit pattern is copied).
 
 That last item
-could be a bit worrying if you remember the integral promotions
-, because you might interpret it as follows—if I assign a
+could be a bit worrying if you remember the integral promotions,
+because you might interpret it as follows—if I assign a
 char to another char, then the one on the right is
 first promoted to one of the kinds of int; could doing
 the assignment result in converting (say) an int to a char
@@ -1213,8 +1212,8 @@ that is left, then the behaviour is undefined—this is a
 sort of overflow.
 
 As has already been said, going up the scale from float
-to double to long double, there is no problem with conversions
-—each higher one in the list can hold all the values
+to double to long double, there is no problem with conversions — each
+higher one in the list can hold all the values
 of the lower ones, so the conversion occurs with no loss
 of information.
 
@@ -1255,8 +1254,8 @@ of the result must appear to be float. The only effect
 is likely to be on performance and is not particularly important
 to most users.
 
-Whether or not conversions need to be applied
-, and if so which ones, is discussed at the point where
+Whether or not conversions need to be applied,
+and if so which ones, is discussed at the point where
 each operator is introduced.
 
 In general, the type conversions and type
@@ -1266,8 +1265,8 @@ quantities is fine until the signed number is negative; then its
 value can't be represented in an unsigned variable and something
 has to happen. The standard says that to convert a negative
 number to unsigned, the largest possible number that can be held
-in the unsigned plus one is added to the negative number
-; that is the result. Because there can be no overflow in
+in the unsigned plus one is added to the negative number;
+that is the result. Because there can be no overflow in
 an unsigned type, the result always has a defined value. Taking
 a 16-bit int for an example, the unsigned version has
 a range of 0–65535. Converting a signed value of -7
@@ -1300,8 +1299,8 @@ Example 2.7
 
 You might expect that to print out the list of values
 from -10 to 0, but it won't. The problem is
-in the comparison. The variable i, with a value of -10
-, is being compared against an unsigned 0. By the rules of
+in the comparison. The variable i, with a value of -10,
+is being compared against an unsigned 0. By the rules of
 arithmetic (check them) we must convert both types to unsigned int
 first, then make the comparison. The -10 becomes at least 65526
 (see <limits.h>) when it's converted, and is plainly somewhat
@@ -1314,12 +1313,12 @@ Wide characters
 ~~~~~~~~~~~~~~~
 
 The Standard, as we've already said, now makes allowances for
-extended character sets. You can either use the shift-in shift
--out encoding method which allows the multibyte charactes to be stored
+extended character sets. You can either use the shift-in shift-out
+encoding method which allows the multibyte charactes to be stored
 in ordinary C strings (which are really arrays of chars, as
 we explore later), or you can use a representation that uses
-more than one byte of storage per character for every character
-. The use of shift sequences only works if you process the
+more than one byte of storage per character for every character.
+The use of shift sequences only works if you process the
 characters in strict order; it is next to useless if you
 want to create an array of characters and access them in
 non-sequential order, since the actual index of each char in
@@ -1331,19 +1330,19 @@ before, annotated with the actual and the logical array indexes: ::
     0 1 2      3 4 5      6 7 (logical index)
 
 We're still in trouble even if we do manage to
-use the index of 5 to access the ‘correct’ array entry
-, since the value retrieved is indistinguishable from the value that encodes
+use the index of 5 to access the ‘correct’ array entry,
+since the value retrieved is indistinguishable from the value that encodes
 the letter ‘g’ anyhow. Clearly, a better approach for this sort
 of thing is to come up with a distinct value for
-all of the characters in the character set we are using
-, which may involve more bits than will fit into a char
-, and to be able to store each one as a separate
-item without the use of shifts or other position-dependent techniques
-. That is what the wchar_t type is for.
+all of the characters in the character set we are using,
+which may involve more bits than will fit into a char,
+and to be able to store each one as a separate
+item without the use of shifts or other position-dependent techniques.
+That is what the wchar_t type is for.
 
 Although it
-is always a synonym for one of the other integral types
-, wchar_t (whose definition is found in <stddef.h>) is defined
+is always a synonym for one of the other integral types,
+wchar_t (whose definition is found in <stddef.h>) is defined
 to be the implementation-dependent type that should be used to
 hold extended characters when you need an array of them. The
 Standard makes the following guarantees about the values in a wide
@@ -1353,9 +1352,9 @@ character: ::
     The null character has the value of zero.
     Each member of the basic character set (see Section 2.2.1) is encoded in a wchar_t with the same value as it has in a char.
 
-There is further support for this method of encoding characters. Strings
-, which we have already seen, are implemented as arrays of char
-, even though they look like this:
+There is further support for this method of encoding characters. Strings,
+which we have already seen, are implemented as arrays of char,
+even though they look like this:
 
 .. code-block:: C
 
@@ -1393,8 +1392,8 @@ some form of shift technique, then these examples show the problems.
     "abc<a><b>"[3]
     L"abc<a><b>"[3]
 
-The second one is easiest: it has a type of wchar
-_t and the appropriate internal encoding for whatever <a> is supposed
+The second one is easiest: it has a type of wchar_t
+and the appropriate internal encoding for whatever <a> is supposed
 to be—say the Greek letter alpha. The first one is
 unpredictable. Its type is unquestionably char, but its value is probably
 the value of the ‘shift-in’ marker.
@@ -1472,8 +1471,8 @@ type name in parentheses, for example
 
 you create a unary operator known as a cast. A cast
 turns the value of the expression on its right into the
-indicated type. If, for example, you were dividing two integers a
-/b then the expression would use integer division and discard any
+indicated type. If, for example, you were dividing two integers a/b
+then the expression would use integer division and discard any
 remainder. To force the fractional part to be retained, you could
 either use some intermediate float variables, or a cast. This example
 does it both ways.
@@ -1555,15 +1554,15 @@ Additive operators
 ~~~~~~~~~~~~~~~~~~
 
 Addition + and subtraction - also follow the rules that you expect. The
-binary operators and the unary operators both have the same symbols
-, but rather different meanings. For example, the expressions a+b and
+binary operators and the unary operators both have the same symbols,
+but rather different meanings. For example, the expressions a+b and
 a-b both use a binary operator (the + or - operators), and
 result in addition or subtraction. The unary operators with the same
 symbols would be written +b or -b.
 
 The unary minus has
-an obvious function—it takes the negative value of its operand
-; what does the unary plus do? In fact the answer is
+an obvious function—it takes the negative value of its operand;
+what does the unary plus do? In fact the answer is
 almost nothing. The unary plus is a new addition to the
 language, which balances the presence of the unary minus, but doesn
 't have any effect on the value of the expression. Very
@@ -1610,17 +1609,17 @@ also shows the arithmetic conversions that are applied.
 
 Table 2.7. Bitwise operators
 
-Only the last, the one's complement, is a unary operator
-. It inverts the state of every bit in its operand and
-has the same effect as the unary minus on a one
-'s complement computer. Most modern computers work with two's complement
-, so it isn't a waste of time having it there.
+Only the last, the one's complement, is a unary operator.
+It inverts the state of every bit in its operand and
+has the same effect as the unary minus on a one's
+complement computer. Most modern computers work with two's complement,
+so it isn't a waste of time having it there.
 
 Illustrating the use of these operators is easier if we can
 use hexadecimal notation rather than decimal, so now is the time
 to see hexadecimal constants. Any number written with 0x at its
-beginning is interpreted as hexadecimal; both 15 and 0xf (or 0XF
-) mean the same thing. Try running this or, better still, try
+beginning is interpreted as hexadecimal; both 15 and 0xf (or 0XF)
+mean the same thing. Try running this or, better still, try
 to predict what it does first and then try running it.
 
 .. literalinclude:: ../src/example2.9/src/example2.9.c
@@ -1673,18 +1672,18 @@ unsigned, or cast to unsigned for the shift, as in the example:
     i = (unsigned)j >> 4;
 
 The second (right-hand) operand of a shift operator does not
-have to be a constant; any integral expression is legal. Importantly
-, the rules involving mixed types of operands do not apply to
+have to be a constant; any integral expression is legal. Importantly,
+the rules involving mixed types of operands do not apply to
 the shift operators. The result of the shift has the same
-type as the thing that got shifted (after the integral promotions
-), and depends on nothing else.
+type as the thing that got shifted (after the integral promotions),
+and depends on nothing else.
 
 Now something different; one of those
-little tricks that C programmers find helps to write better programs
-. If for any reason you want to form a value that
-has 1s in all but its least significant so-many bits
-, which are to have some other pattern in them, you don
-'t have to know the word length of the machine. For
+little tricks that C programmers find helps to write better programs.
+If for any reason you want to form a value that
+has 1s in all but its least significant so-many bits,
+which are to have some other pattern in them, you don't
+have to know the word length of the machine. For
 example, to set the low order bits of an int to
 0x0f0 and all the other bits to 1, this is the way to do it:
 
@@ -1698,8 +1697,8 @@ has been one's complemented. That gives exactly the required result
 and is completely independent of word length; it is a very
 common sight in C code.
 
-There isn't a lot more to say about the bit
--twiddling operators, and our experience of teaching C has been that
+There isn't a lot more to say about the bit-twiddling
+operators, and our experience of teaching C has been that
 most people find them easy to learn. Let's move on.
 
 The assignment operators
@@ -1724,8 +1723,8 @@ be used like this
 
     a = (x = 4);
 
-where a will now have the value 4 assigned to it
-, after x has been assigned to. All of the simpler assignments
+where a will now have the value 4 assigned to it,
+after x has been assigned to. All of the simpler assignments
 that we have seen until now (except for one example) have
 simply discarded the resulting value of the assignment, even though it
 is produced.
@@ -1773,8 +1772,8 @@ expression, not just a variable; such things occur when you start
 to use arrays and pointers. Most experienced C programmers tend to
 use the form given in the second example because somehow it
 ‘feels better’, a sentiment that no beginner has ever been known
-to agree with. Table 2.8 lists the compound assignment operators
-; you will see them used a lot from now on.
+to agree with. Table 2.8 lists the compound assignment operators;
+you will see them used a lot from now on.
 
 +------------------------+-------------+-----------------------------------+
 |   *=                   | /=          |  %=                               |
@@ -1790,8 +1789,8 @@ to agree with. Table 2.8 lists the compound assignment operators
 Table 2.8. Compound assignment operators
 
 In each case, arithmetic conversions are applied as if the expression
-had been written out in full, for example as if a
-+=b had been written a=a+b.
+had been written out in full, for example as if a+=b
+had been written a=a+b.
 
 Reiterating: the result of an assignment operator has both the value
 and the type of the object that was assigned to.
@@ -1811,8 +1810,8 @@ the job. The increment operator ++ adds 1, the decrement -- subtracts 1
     x--;
     --x;
 
-where the operator can come either before or after its operand
-. In the cases shown it doesn't matter where the operator
+where the operator can come either before or after its operand.
+In the cases shown it doesn't matter where the operator
 comes, but in more complicated cases the difference has a definite
 meaning and must be used properly.
 
@@ -1832,9 +1831,9 @@ The results printed were
 10
 6
 
-The difference is caused by the different positions of the operators
-. If the inc/decrement operator appears in front of the variable
-, then its value is changed by one and the new value
+The difference is caused by the different positions of the operators.
+If the inc/decrement operator appears in front of the variable,
+then its value is changed by one and the new value
 is used in the expression. If the operator comes after the
 variable, then the old value is used in the expression and
 the variable's value is changed afterwards.
@@ -1851,11 +1850,11 @@ they invariably use one of
 
     x++; /* or */ ++x;
 
-as a matter of course. A warning is in order though
-: it is not safe to use a variable more than once
+as a matter of course. A warning is in order though:
+it is not safe to use a variable more than once
 in an expression if it has one of these operators attached
-to it. There is no guarantee of when, within an expression
-, the affected variable will actually change value. The compiler might choose
+to it. There is no guarantee of when, within an expression,
+the affected variable will actually change value. The compiler might choose
 to ‘save up’ all of the changes and apply them at
 once, so an expression like this
 
@@ -1875,8 +1874,8 @@ because the compiler notices that the overall effect on the value
 of x is zero.
 
 The arithmetic is done exactly as if
-the full addition expression had been used, for example x=x
-+1, and the usual arithmetic conversions apply.
+the full addition expression had been used, for example x=x+1,
+and the usual arithmetic conversions apply.
 
 Exercise 2.16. Given the following variable definitions
 
@@ -1923,8 +1922,8 @@ or
     a + (b + c)
 
 does it? Well, yes in fact it does. If a+b
-would overflow and c held a value very close to -b
-, then the second grouping might give the correct answer where the
+would overflow and c held a value very close to -b,
+then the second grouping might give the correct answer where the
 first would cause undefined behaviour. The problem is much more obvious
 with integer division:
 
@@ -1944,11 +1943,11 @@ or
 
     (a/b)/c
 
-If you don't believe that, try it with a=10
-, b=2, c=3. The first gives 10/(2/3); 2
-/3 in integer division gives 0, so we get 10/0
-which immediately overflows. The second grouping gives (10/2), obviously 5
-, which divided by 3 gives 1.
+If you don't believe that, try it with a=10,
+b=2, c=3. The first gives 10/(2/3); 2/3
+in integer division gives 0, so we get 10/0
+which immediately overflows. The second grouping gives (10/2), obviously 5,
+which divided by 3 gives 1.
 
 The grouping of operators like that is known as associativity. The
 other question is one of precedence, where some operators have a
@@ -1969,11 +1968,11 @@ groups as
 indicating that multiplication has higher precedence than addition.
 
 The large set
-of operators in C gives rise to 15 levels of precedence
-! Only very boring people bother to remember them all. The complete
+of operators in C gives rise to 15 levels of precedence!
+Only very boring people bother to remember them all. The complete
 list is given in Table 2.9, which indicates both precedence
-and associativity. Not all of the operators have been mentioned yet
-. Beware of the use of the same symbol for both unary
+and associativity. Not all of the operators have been mentioned yet.
+Beware of the use of the same symbol for both unary
 and binary operators: the table indicates which are which.
 
 +---------------------------------+---------------+-----------------------------------+
@@ -2018,8 +2017,8 @@ Table 2.9. Operator precedence and associativity
 The question is, what can you do with that information, now
 that it's there? Obviously it's important to be able
 to work out both how to write expressions that evaluate in
-the proper order, and also how to read other people's
-. The technique is this: first, identify the unary operators and the
+the proper order, and also how to read other people's.
+The technique is this: first, identify the unary operators and the
 operands that they refer to. This isn't such a difficult
 task but it takes some practice, especially when you discover that
 operators such as unary \* can be applied an arbitrary number of
@@ -2057,8 +2056,8 @@ read the expression, it really parenthesizes (for clarity) like this:
     a + -(b++) + c
 
 The case is a little clearer if the prefix, rather than
-the postfix, form of the increment/decrement operators is being used
-. Again the order is right to left, but at least the
+the postfix, form of the increment/decrement operators is being used.
+Again the order is right to left, but at least the
 operators come all in a row.
 
 After sorting out what to
@@ -2067,8 +2066,8 @@ expression from left to right. Every time you see a binary
 operator, remember it. Look to the right: if the next binary
 operator is of a lower precedence, then the operator you just
 remembered is part of a subexpression to evaluate before anything else
-is seen. If the next operator is of the same precedence
-, keep repeating the procedure as long as equal precedence operators are
+is seen. If the next operator is of the same precedence,
+keep repeating the procedure as long as equal precedence operators are
 seen. When you eventually find a lower precedence operator, evaluate the
 subexpression on the left according to the associativity rules. If a
 higher precedence operator is found on the right, forget the previous
@@ -2082,11 +2081,11 @@ programmers have trouble with this area and eventually learn to parenthesize
 these expressions ‘by eye’, without ever using formal rules.
 
 What does
-matter is what happens when you have fully parenthesized these expressions
-. Remember the ‘usual arithmetic conversions’? They explained how you could predict
+matter is what happens when you have fully parenthesized these expressions.
+Remember the ‘usual arithmetic conversions’? They explained how you could predict
 the type of an expression from the operands involved. Now, even
-if you mix all sorts of types in a complicated expression
-, the types of the subexpressions are determined only from the the
+if you mix all sorts of types in a complicated expression,
+the types of the subexpressions are determined only from the the
 types of the operands in the subexpression. Look at this.
 
 .. literalinclude:: ../src/example2.11/src/example2.11.c
@@ -2130,8 +2129,8 @@ Parentheses
 ~~~~~~~~~~~
 
 C allows you to override the normal effects of precedence and
-associativity by the use of parentheses as the examples have illustrated
-. In Old C, the parentheses had no further meaning, and in
+associativity by the use of parentheses as the examples have illustrated.
+In Old C, the parentheses had no further meaning, and in
 particular did not guarantee anything about the order of evaluation in
 expressions like these:
 
@@ -2156,8 +2155,8 @@ be affected by any regrouping it might do for optimization reasons.
 So, the expression a = 10+a+b+5; cannot be rewritten
 by the compiler as a = 15+a+b; unless it can
 be guaranteed that the resulting value of a will be the
-same for all combinations of initial values of a and b
-. That would be true if the variables were both unsigned integral
+same for all combinations of initial values of a and b.
+That would be true if the variables were both unsigned integral
 types, or if they were signed integral types but in that
 particular implementation overflow did not cause a run-time exception and
 overflow was reversible.
@@ -2165,13 +2164,13 @@ overflow was reversible.
 Side Effects
 ~~~~~~~~~~~~
 
-To repeat and expand the warning given for the increment operators
-: it is unsafe to use the same variable more than once
+To repeat and expand the warning given for the increment operators:
+it is unsafe to use the same variable more than once
 in an expression if evaluating the expression changes the variable and
 the new value could affect the result of the expression. This
 is because the change(s) may be ‘saved up’ and only
-applied at the end of the statement. So f = f+1
-; is safe even though f appears twice in a value-changing
+applied at the end of the statement. So f = f+1;
+is safe even though f appears twice in a value-changing
 expression, f++; is also safe, but f = f++; is unsafe.
 
 The
@@ -2252,8 +2251,8 @@ A nasty bug hides here:
 On a 16-bit two's complement machine, 32768 will
 be a long by the rules given above. But printf
 is only expecting an int as an argument (the %d
-indicates that). The type of the argument is just wrong
-. For the ultimate in safety-conscious programming, you should cast
+indicates that). The type of the argument is just wrong.
+For the ultimate in safety-conscious programming, you should cast
 such cases to the right type:
 
 .. code-block:: C
@@ -2317,8 +2316,8 @@ Table 2.10. C escape sequences
 
 It is also possible to use numeric escape sequences to
 specify a character in terms of the internal value used
-to represent it. A sequence of either \ooo or \xhhhh
-, where the ooo is up to three octal digits and
+to represent it. A sequence of either \ooo or \xhhhh,
+where the ooo is up to three octal digits and
 hhhh is any number of hexadecimal digits respectively. A common
 version of it is '\033', which is used by those
 who know that on an ASCII based machine, octal 33
@@ -2350,10 +2349,10 @@ there you can't use '??', because the sequence ??' is a
 trigraph! You would have to use '\?\?'. The escape \" is only
 necessary in strings, which will come later.
 
-There are two distinct purposes behind the escape sequences. It
-'s obviously necessary to be able to represent characters such
-as single quote and backslash unambiguously: that is one purpose
-. The second purpose applies to the following sequences which control
+There are two distinct purposes behind the escape sequences. It's
+obviously necessary to be able to represent characters such
+as single quote and backslash unambiguously: that is one purpose.
+The second purpose applies to the following sequences which control
 the motions of a printing device when they are sent to it, as follows: ::
 
     \a
@@ -2371,8 +2370,8 @@ the motions of a printing device when they are sent to it, as follows: ::
     \v
         Go to the start of the line at the next vertical tab position.
 
-For \b, \t, \v, if there is no such position
-, the behaviour is unspecified. The Standard carefully avoids mentioning the
+For \b, \t, \v, if there is no such position,
+the behaviour is unspecified. The Standard carefully avoids mentioning the
 physical directions of movement of the output device which are
 not necessarily the top to bottom, left to right movements
 common in Western cultural environments.
@@ -2411,8 +2410,8 @@ is equivalent in value to the integer constant ::
 
     3000
 
-As you can see, the e can also be E
-. These constants all have type double unless they are suffixed
+As you can see, the e can also be E.
+These constants all have type double unless they are suffixed
 with f or F to mean float or l or
 L to mean long double.
 
@@ -2446,8 +2445,7 @@ been discussed but can now be largely ignored.
 
 Much the
 same can be said regarding keywords and identifiers, since the
-topic is not complicated and simply becomes committed to memory
-.
+topic is not complicated and simply becomes committed to memory.
 
 The declaration of variables is rarely a problem, although it
 is worth re-emphasizing the distinction between a declaration and
@@ -2456,8 +2454,8 @@ it of benefit to go back and re-read the
 description.
 
 Beyond any question, the real complexity lies in what
-happens when the integral promotions and the arithmetic conversions occur
-. For beginners, it is often worthwhile to remember that here
+happens when the integral promotions and the arithmetic conversions occur.
+For beginners, it is often worthwhile to remember that here
 is a difficult and arduous piece of terrain. Nothing else
 in the language requires so much attention or is so
 important to the production of correct, reliable programs. Beginners should
@@ -2475,8 +2473,8 @@ reference, is a valuable tool.
 The Standard has substantially affected parts of the language described
 in this chapter. In particular, the changes to the conversions
 and the change from ‘unsignedness preserving’ to ‘value preserving’ rules
-of arithmetic may cause some surprises to experienced C programmers
-. Even they have some real re-learning to do.
+of arithmetic may cause some surprises to experienced C programmers.
+Even they have some real re-learning to do.
 
 Exercises
 ^^^^^^^^^

@@ -33,8 +33,8 @@ a way, it does, but in a way that differs
 from what is often expected.
 
 All of the relational operators shown in Table 3.1
-are used to compare two operands in the way indicated
-. When the operands are arithmetic types, the usual arithmetic conversions
+are used to compare two operands in the way indicated.
+When the operands are arithmetic types, the usual arithmetic conversions
 are applied to them. ::
     Operator 	Operation
     < 	less than
@@ -54,9 +54,9 @@ and it takes a long time for beginners to get
 used to using == and =.
 
 Now, that usefully introduces the question ‘why?’. Why are both
-valid? The answer is simple. C's concept of ‘true
-’ and ‘false’ boils down to simply ‘non-zero’ and ‘zero
-’, respectively. Where we have seen expressions involving relational operators used
+valid? The answer is simple. C's concept of ‘true’
+and ‘false’ boils down to simply ‘non-zero’ and ‘zero’,
+respectively. Where we have seen expressions involving relational operators used
 to control do and if statements, we have just been
 using expressions with numeric results. If the expression evaluates to
 non-zero, then the result is effectively true. If the
@@ -157,8 +157,8 @@ first if can be considered to read
 and is therefore itself properly formed. The argument can be
 extended as far as you like, but it's a
 bad habit to get into. It is better style to
-make the statement compound even if it isn't necessary
-. That makes it a lot easier to add extra statements
+make the statement compound even if it isn't necessary.
+That makes it a lot easier to add extra statements
 if they are needed and generally improves readability.
 
 The form involving else works the same way, so we
@@ -172,9 +172,9 @@ can also write this.
       else
         statement
 
-As Chapter 1 has said already, this is now ambiguous
-. It is not clear, except as indicated by the indentation
-, which of the ifs is responsible for the else. If
+As Chapter 1 has said already, this is now ambiguous.
+It is not clear, except as indicated by the indentation,
+which of the ifs is responsible for the else. If
 we follow the rules that the previous example suggests, then
 the second if is followed by a statement, and is
 therefore itself a statement, so the else belongs to the
@@ -213,8 +213,8 @@ Putting in all the compound statement brackets, it becomes this:
 
 If you happen not to like the placing of the
 brackets, it is up to you to put them where
-you think they look better; just be consistent about it
-. You probably need to know that this a subject on
+you think they look better; just be consistent about it.
+You probably need to know that this a subject on
 which feelings run deep.
 
 The while and do statements
@@ -227,10 +227,10 @@ The while is simple:
     while(expression)
         statement
 
-The statement is only executed if the expression is non
--zero. After every execution of the statement, the expression is
-evaluated again and the process repeats if it is non
--zero. What could be plainer than that? The only point
+The statement is only executed if the expression is non-zero.
+After every execution of the statement, the expression is
+evaluated again and the process repeats if it is non-zero.
+What could be plainer than that? The only point
 to watch out for is that the statement may never
 be executed, and that if nothing in the statement affects
 the value of the expression then the while will either
@@ -261,8 +261,8 @@ has shown that the use of do statements is often
 associated with poorly constructed code. Not every time, obviously, but
 as a general rule you should stop and ask yourself
 if you have made the right choice. Their use often
-indicates a hangover of thinking methods learnt with other languages
-, or just sloppy design. When you do convince yourself that
+indicates a hangover of thinking methods learnt with other languages,
+or just sloppy design. When you do convince yourself that
 nothing else will give you just what is wanted, then
 go ahead - be daring—use it.
 
@@ -284,19 +284,19 @@ common example of all:
 
 Example 3.2
 
-The clever bit is the expression assigning to input_c
-. It is assigned to, compared with EOF (End Of File
-), and used to control the loop all in one go
-. Embedding the assignment like that is a handy embellishment. Admittedly
+The clever bit is the expression assigning to input_c.
+It is assigned to, compared with EOF (End Of File),
+and used to control the loop all in one go.
+Embedding the assignment like that is a handy embellishment. Admittedly
 it only saves one line of code, but the benefit
 in terms of readability (once you have got used to
-seeing it) is quite large. Learn where the parentheses are
-, too. They're necessary for precedence reasons—work out why!
+seeing it) is quite large. Learn where the parentheses are,
+too. They're necessary for precedence reasons—work out why!
 
 Note that input_c is an int. This is because
 getchar has to be able to return not only every
-possible value of a char, but also an extra value
-, EOF. To do that, a type longer than a char is necessary.
+possible value of a char, but also an extra value,
+EOF. To do that, a type longer than a char is necessary.
 
 Both the while and the do statements are themselves syntactically
 a single statement, just like an if statement. They occur
@@ -308,13 +308,13 @@ The for statement
 ~~~~~~~~~~~~~~~~~
 
 A very common feature in programs is loops that are
-controlled by variables used as a counter. The counter doesn
-'t always have to count consecutive values, but the usual
-arrangement is for it to be initialized outside the loop
-, checked every time around the loop to see when to
+controlled by variables used as a counter. The counter doesn't
+always have to count consecutive values, but the usual
+arrangement is for it to be initialized outside the loop,
+checked every time around the loop to see when to
 finish and updated each time around the loop. There are
-three important places, then, where the loop control is concentrated
-: initialize, check and update. This example shows them.
+three important places, then, where the loop control is concentrated:
+initialize, check and update. This example shows them.
 
 .. literalinclude:: ../src/example3.3/src/example3.3.c
    :language: c
@@ -356,11 +356,11 @@ for statement between the parentheses are just expressions; two, that
 the description has carefully explained what they are intended to
 be used for without proscribing alternative uses—that was done
 deliberately. You can use the expressions to do whatever you
-like, but at the expense of readability if they aren
-'t used for their intended purpose.
+like, but at the expense of readability if they aren't
+used for their intended purpose.
 
-Here is a program that does the same thing twice
-, the first time using a while loop, the second time
+Here is a program that does the same thing twice,
+the first time using a while loop, the second time
 with a for. The use of the increment operator is
 exactly the sort of use that you will see in everyday practice.
 
@@ -386,8 +386,8 @@ able.
 
 Any of the initialize, check and update expressions in
 the for statement can be omitted, although the semicolons must
-stay. This can happen if the counter is already initialized
-, or gets updated in the body of the loop. If
+stay. This can happen if the counter is already initialized,
+or gets updated in the body of the loop. If
 the check expression is omitted, it is assumed to result
 in a ‘true’ value and the loop never terminates. A
 common way of writing never-ending loops is either
@@ -416,9 +416,9 @@ the structure that they emphasize. The remaining statements are used
 to give programmers finer control or to make it easier
 to deal with exceptional conditions. Only the switch statement is
 enough of a heavyweight to need no justification for its
-use; yes, it can be replaced with lots of ifs
-, but it adds a lot of readability. The others, break
-, continue and goto, should be treated like the spices in
+use; yes, it can be replaced with lots of ifs,
+but it adds a lot of readability. The others, break,
+continue and goto, should be treated like the spices in
 a delicate sauce. Used carefully they can turn something commonplace
 into a treat, but a heavy hand will drown the
 flavour of everything else.
@@ -432,8 +432,8 @@ less expressive and pleasant to use.
 
 It is used to select one of a number of
 alternative actions depending on the value of an expression, and
-nearly always makes use of another of the lesser statements
-: the break. It looks like this.
+nearly always makes use of another of the lesser statements:
+the break. It looks like this.
 
 .. code-block:: C
 
@@ -445,8 +445,8 @@ nearly always makes use of another of the lesser statements
 
 The expression is evaluated and its value is compared with
 all of the const1 etc. expressions, which must all evaluate
-to different constant values (strictly they are integral constant expressions
-, see Chapter 6 and below). If any of them has
+to different constant values (strictly they are integral constant expressions,
+see Chapter 6 and below). If any of them has
 the same value as the expression then the statement following
 the case label is selected for execution. If the default
 is present, it will be selected when there is no
@@ -485,8 +485,8 @@ one label.
 
 The expression controlling the switch can be of any of
 the integral types. Old C used to insist on only
-int here, and some compilers would forcibly truncate longer types
-, giving rise on rare occasions to some very obscure bugs.
+int here, and some compilers would forcibly truncate longer types,
+giving rise on rare occasions to some very obscure bugs.
 
 The major restriction
 ~~~~~~~~~~~~~~~~~~~~~
@@ -494,8 +494,8 @@ The major restriction
 The biggest problem with the switch statement is that it
 doesn't allow you to select mutually exclusive courses of
 action; once the body of the statement has been entered
-any subsequent statements within the body will all be executed
-. What is needed is the break statement. Here is the
+any subsequent statements within the body will all be executed.
+What is needed is the break statement. Here is the
 previous example, but amended to make sure that the messages
 printed come out in a more sensible order. The break
 statements cause execution to leave the switch statement immediately and
@@ -517,8 +517,8 @@ Although Chapter 6 deals with constant expressions, it is worth
 looking briefly at what an integral constant expression is, since
 that is what must follow the case labels in a
 switch statement. Loosely speaking, it is any expression that does
-not involve any value-changing operation (like increment or assignment
-), function calls or comma operators. The operands in the expression
+not involve any value-changing operation (like increment or assignment),
+function calls or comma operators. The operands in the expression
 must all be integer constants, character constants, enumeration constants, sizeof
 expressions and floating-point constants that are the immediate operands
 of casts. Any cast operators must result in integral types.
@@ -554,8 +554,8 @@ before printing the next in a sequence of numbers. If
 an ‘s’ is typed, the break causes an exit from the loop.
 
 If you want to exit from more than one level
-of loop, the break is the wrong thing to use
-. The goto is the only easy way, but since it
+of loop, the break is the wrong thing to use.
+The goto is the only easy way, but since it
 can't be mentioned in polite company, we'll leave
 it till last.
 
@@ -563,14 +563,14 @@ The continue statement
 ~~~~~~~~~~~~~~~~~~~~~~
 
 This statement has only a limited number of uses. The
-rules for its use are the same as for break
-, with the exception that it doesn't apply to switch
+rules for its use are the same as for break,
+with the exception that it doesn't apply to switch
 statements. Executing a continue starts the next iteration of the
 smallest enclosing do, while or for statement immediately. The use
-of continue is largely restricted to the top of loops
-, where a decision has to be made whether or not
-to execute the rest of the body of the loop
-. In this example it ensures that division by zero (which
+of continue is largely restricted to the top of loops,
+where a decision has to be made whether or not
+to execute the rest of the body of the loop.
+In this example it ensures that division by zero (which
 gives undefined behaviour) doesn't happen.
 
 .. literalinclude:: ../src/example3.8/src/example3.8.c
@@ -606,8 +606,8 @@ expression is evaluated, then the controlling expresion is evaluated.
 goto and labels
 ~~~~~~~~~~~~~~~
 
-Everybody knows that the goto statement is a ‘bad thing
-’. Used without care it is a great way of making
+Everybody knows that the goto statement is a ‘bad thing’.
+Used without care it is a great way of making
 programs hard to follow and of obscuring any structure in
 their flow. Dijkstra wrote a famous paper in 1968 called
 ‘Goto Statement Considered Harmful’, which everybody refers to and almost
@@ -651,10 +651,10 @@ one function to another one.
 
 It's hard to give rigid rules about the use
 of gotos but, as with the do, continue and the
-break (except in switch statements), over-use should be avoided
-. Think carefully every time you feel like using one, and
-convince yourself that the structure of the program demands it
-. More than one goto every 3–5 functions is a
+break (except in switch statements), over-use should be avoided.
+Think carefully every time you feel like using one, and
+convince yourself that the structure of the program demands it.
+More than one goto every 3–5 functions is a
 symptom that should be viewed with deep suspicion.
 
 Summary
@@ -679,11 +679,11 @@ More logical expressions
 
 This chapter has already shown how C makes no distinction
 between ‘logical’ and other values. The relational operators all give
-a result of 0 or 1 for false and true
-, respectively. Whenever the control of flow statements demand it, an
+a result of 0 or 1 for false and true,
+respectively. Whenever the control of flow statements demand it, an
 expression is evaluated to determine what to do next. A
-0 means ‘don't do it’; anything else means ‘do
-’. It means that the fragments below are all quite reasonable.
+0 means ‘don't do it’; anything else means ‘do’.
+It means that the fragments below are all quite reasonable.
 
 .. code-block:: C
 
@@ -711,8 +711,8 @@ It will not be a source of great amazement to
 find that there is a way of expressing such a
 statement.
 
-There are three operators involved in this sort of operation
-: the logical AND &&, the logical OR || and the NOT !. The
+There are three operators involved in this sort of operation:
+the logical AND &&, the logical OR || and the NOT !. The
 last is unary, the other two are binary. All of
 them take expressions as their operands and give as results
 either 1 or 0. The && gives 1 only when both
@@ -729,8 +729,8 @@ the logical operators, found in very few of the other
 operators, is their effect on the sequence of evaluation of
 an expression. They evaluate left to right (after precedence is
 taken into account) and every logical expression ceases evaluation as
-soon as the overall result can be determined. For example
-, a sequence of ||s can stop as soon as one
+soon as the overall result can be determined. For example,
+a sequence of ||s can stop as soon as one
 operand is found to be non-zero. This next fragment
 guarantees never to divide by zero.
 
@@ -770,22 +770,22 @@ show how.
     if (a<=b || c>=d)...
 
 Each of the examples and the alternatives serve to show
-ways of avoiding (or at least doing without) the ! operator
-. In fact, it's most useful as an aid to
+ways of avoiding (or at least doing without) the ! operator.
+In fact, it's most useful as an aid to
 readability. If the problem that you are solving has a
-natural logical relationship inherent in it—say the (b*b
--4*a*c) > 0 found in quadratic equation solving—then
-it probably reads better if you write if( !((b*b
--4*a*c) > 0)) than if( (b*b-4*a
-*c) <= 0)—but it's up to you. Pick the
+natural logical relationship inherent in it—say the (b*b-4*a*c) > 0
+found in quadratic equation solving—then
+it probably reads better if you write if( !((b*b-4*a*c) > 0))
+than if( (b*b-4*a*c) <= 0) —
+but it's up to you. Pick the
 one that feels right.
 
 Most expressions using these logical operators work out just about
 right in terms of the precedence rules, but you can
 get a few nasty surprises. If you look back to
 the precedence tables, you will find that there are some
-operators with lower precedence than the logical ones. In particular
-, this is a very common mistake:
+operators with lower precedence than the logical ones. In particular,
+this is a very common mistake:
 
 .. code-block:: C
 
@@ -823,8 +823,8 @@ when the result is calculated.
 
 The various combinations of types
 that are permitted for expression2 and expression3 and, based on
-those, the resulting type of the whole expression, are complicated
-. A lot of the complexity is due to types and
+those, the resulting type of the whole expression, are complicated.
+A lot of the complexity is due to types and
 notions that we haven't seen so far. For completeness
 they are described in detail below, but you'll have
 to put up with a number of forward references.
@@ -838,8 +838,8 @@ then that is the type of the result. For example
 
     a>b?1:3.5
 
-contains a constant (1) of type int and another (3
-.5) of type double. Applying the arithmetic conversions gives a
+contains a constant (1) of type int and another (3.5)
+of type double. Applying the arithmetic conversions gives a
 result of type double.
 
 Other combinations are also permitted. ::
@@ -874,8 +874,7 @@ Example 3.9
 
 It's cute when you need it, but the first
 time that they see it most people look very uncomfortable
-for a while, then recollect an urgent appointment somewhere else
-.
+for a while, then recollect an urgent appointment somewhere else.
 
 After evaluating the first operand there is one of the
 sequence points described in Chapter 8.
@@ -925,14 +924,14 @@ and it has never been known to cause problems either
 to beginners or programmers experienced in other languages.
 
 The logical
-expressions all give integral results. This is perhaps slightly unusual
-, but once again takes very little time to learn.
+expressions all give integral results. This is perhaps slightly unusual,
+but once again takes very little time to learn.
 
 Probably the most surprising part about the whole chapter will have
 been to learn of the conditional and comma operators. A
 strong case could be made for the abolition of the
-conditional operator, were it not for compatibility with existing code
-, but the comma operator does have important uses, especially for
+conditional operator, were it not for compatibility with existing code,
+but the comma operator does have important uses, especially for
 automatic generators of C programs.
 
 The Standard has not had

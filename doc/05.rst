@@ -16,8 +16,8 @@ now declare functions in a way that allows their use
 to be checked, and which is also largely compatible with
 the old style (so old programs still work, provided they
 had no errors before). Another useful feature is a portable
-way of using functions with a variable number of arguments
-, like printf, which used to be non-portable; the only
+way of using functions with a variable number of arguments,
+like printf, which used to be non-portable; the only
 way to implement it relied upon intimate knowledge of the
 hardware involved.
 
@@ -52,8 +52,8 @@ of an assignment
       a = 1;
 
 That's a perfectly valid assignment, but don't forget
-that it has a value too. The value is discarded
-. If you want a bigger surprise, try this one:
+that it has a value too. The value is discarded.
+If you want a bigger surprise, try this one:
 
 .. code-block:: C
 
@@ -83,8 +83,8 @@ should be declared to be void.
 
 Functions can return any type supported by C (except for
 arrays and functions), including the pointers, structures and unions which
-are described in later chapters. For the types that can
-'t be returned from functions, the restrictions can often be
+are described in later chapters. For the types that can't
+be returned from functions, the restrictions can often be
 sidestepped by using pointers instead.
 
 All functions can be called recursively.
@@ -118,13 +118,13 @@ in the text below.
 If you use a function before
 you declare it, it is implicitly declared to be ‘function
 returning int’. Although this will work, and was widely used
-in Old C, in Standard C it is bad practice
-—the use of undeclared functions leads to nasty problems to
+in Old C, in Standard C it is bad practice —
+the use of undeclared functions leads to nasty problems to
 do with the number and type of arguments that are
 expected for them. All functions should be fully declared before
 they are used. For example, you might be intending to
-use a function in a private library called, say, aax1
-. You know that it takes no arguments and returns a
+use a function in a private library called, say, aax1.
+You know that it takes no arguments and returns a
 double. Here is how it should be declared:
 
 .. literalinclude:: ../src/example4.1/src/example4.1.c
@@ -140,8 +140,8 @@ and here is how it might be used:
 
 Example 4.1
 
-The declaration was an interesting one. It defined return_v
-, actually causing a variable to come into existence. It also
+The declaration was an interesting one. It defined return_v,
+actually causing a variable to come into existence. It also
 declared aax1 without defining it; as we know, functions only
 become defined when a body is provided for them. Without
 a declaration in force, the default rules mean that aax1
@@ -180,8 +180,8 @@ The return statement
 
 The return statement is very important. Every function except those
 returning void should have at least one, each return showing
-what value is supposed to be returned at that point
-. Although it is possible to return from a function by
+what value is supposed to be returned at that point.
+Although it is possible to return from a function by
 falling through the last }, unless the function returns void an
 unknown value will be returned, resulting in undefined behaviour.
 
@@ -213,8 +213,8 @@ company and readability. Please, please, never write it like this:
 
        while (something);
 
-with the semicolon hidden away at the end like that
-. It's too easy to miss it when you read
+with the semicolon hidden away at the end like that.
+It's too easy to miss it when you read
 the code, and to assume that the following statement is
 under the control of the while.
 
@@ -229,8 +229,8 @@ return double could contain
        return (1);
 
 and the integral value will be converted to double. It
-is also possible to have just return without any expression
-—but this is probably a programming error unless the function
+is also possible to have just return without any expression —
+but this is probably a programming error unless the function
 returns void. Following the return with an expression is not
 permitted if the function returns void.
 
@@ -243,9 +243,9 @@ of the function itself. The information was only used in
 the body of the function and was forgotten at the
 end. In those bad old days, it was quite possible
 to define a function that had three double arguments and
-only to pass it one int, when it was called
-. The program would compile normally, but simply not work properly
-. It was considered to be the programmer's job to
+only to pass it one int, when it was called.
+The program would compile normally, but simply not work properly.
+It was considered to be the programmer's job to
 check that the number and the type of arguments to
 a function matched correctly. As you would expect, this turned
 out to be a first-rate source of bugs and
@@ -273,8 +273,8 @@ of the function a couple of lines later involved two
 arguments. That is permitted by both the old and Standard
 versions of C, but must nowadays be considered to be
 bad practice. It is much better to include information about
-the arguments in the declaration too, as we will see
-. The old style is now an ‘obsolescent feature’ and may
+the arguments in the declaration too, as we will see.
+The old style is now an ‘obsolescent feature’ and may
 disappear in a later version of the Standard.
 
 Now on
@@ -316,8 +316,8 @@ declaration or definition which includes information about the number and
 types of the arguments that the function takes.
 
 Although you
-are allowed not to specify any information about a function
-'s arguments in a declaration, it is purely because of
+are allowed not to specify any information about a function's
+arguments in a declaration, it is purely because of
 backwards compatibility with Old C and should be avoided.
 
 A
@@ -332,8 +332,8 @@ Here's the previous example ‘done right’.
 
 Example 4.3
 
-This time, the declaration provides information about the function arguments
-, so it's a prototype. The names first and second
+This time, the declaration provides information about the function arguments,
+so it's a prototype. The names first and second
 are not an essential part of the declaration, but they
 are allowed to be there because it makes it easier
 to refer to named arguments when you're documenting the
@@ -414,8 +414,8 @@ serious error and has led to many, many problems in Old C programs.
 
 The conversion of int to double could be done because
 the compiler had seen a protoytpe for the function and
-knew what to do about it. As you would expect
-, there are various rules used to decide which conversions are
+knew what to do about it. As you would expect,
+there are various rules used to decide which conversions are
 appropriate, so we need to look at them next.
 
 Argument Conversions
@@ -431,12 +431,12 @@ pain and misery in the long run. It's so
 easy to use prototypes that there really is no excuse
 for not having them, so the only time you will
 need to use these rules is if you are being
-adventurous and using functions with a variable number of arguments
-, using the ellipsis notation in the prototype that is explained
+adventurous and using functions with a variable number of arguments,
+using the ellipsis notation in the prototype that is explained
 in Chapter 9.
 
-The rules mention the default argument promotions and compatible type
-. Where they are used, the default argument promotions are: ::
+The rules mention the default argument promotions and compatible type.
+Where they are used, the default argument promotions are: ::
 
     Apply the integral promotions (see Chapter 2) to the value of each argument
     If the type of the argument is float it is converted to double
@@ -494,11 +494,11 @@ into a definition, we provide a body for the function:
 by replacing the semicolon at the end of the declaration
 with a compound statement.
 
-In either a definition or a declaration of a function
-, it serves as a prototype if the parameter types are specified; both of the examples above are prototypes.
+In either a definition or a declaration of a function,
+it serves as a prototype if the parameter types are specified; both of the examples above are prototypes.
 
-The Old C syntax for the declaration of a function
-'s formal arguments is still supported by the Standard, although
+The Old C syntax for the declaration of a function's
+formal arguments is still supported by the Standard, although
 it should not be used by new programs. It looks
 like this, for the example above:
 
@@ -594,18 +594,18 @@ like this one:
      f () {}
      f2 () {}
 
-Now f and f2 can use i, but main can't
-, because the declaration of the variable comes later than that of
-main. This is not an aspect that is used very much
-, but it is implicit in the way that C processes declarations
-. It is a source of confusion for anyone reading the file
+Now f and f2 can use i, but main can't,
+because the declaration of the variable comes later than that of
+main. This is not an aspect that is used very much,
+but it is implicit in the way that C processes declarations.
+It is a source of confusion for anyone reading the file
 (external declarations are generally expected to precede any function definitions in
 a file) and should be avoided.
 
 The Standard has changed things slightly with respect to a function
 's formal parameters. They are now considered to have been declared
-inside the first compound statement, even though textually they aren't
-: this goes for both the new and old ways of function
+inside the first compound statement, even though textually they aren't:
+this goes for both the new and old ways of function
 definition. So, if a function has a formal parameter with the
 same name as something declared in the outermost compound statement, this
 causes an error which will be detected by the compiler.
@@ -670,8 +670,8 @@ any communication occurs between the caller and the called function, except
 for the return value.
 
 For those who are used to FORTRAN and var arguments in
-Pascal, where a function can change the values of its arguments
-: forget it. You cannot affect the values of a function's
+Pascal, where a function can change the values of its arguments:
+forget it. You cannot affect the values of a function's
 actual arguments by anything that you try. Here is an example
 to show what we mean.
 
@@ -761,9 +761,9 @@ C does. (Stroustrup1, in his book about C++, uses almost an
 identical example to illustrate recursion. This happened purely by chance.) The
 whole expression is evaluated and its value printed when a character
 not in the ‘language’ is read. For simplicity no error checking
-is performed. Extensive use is made of the ungetc library function
-, which allows the last character read by getchar to be ‘unread
-’ and become once again the next character to be read. Its
+is performed. Extensive use is made of the ungetc library function,
+which allows the last character read by getchar to be ‘unread’
+and become once again the next character to be read. Its
 second argument is one of the things declared in stdio.h.
 
 Those of you who understand BNF notation might like to know
@@ -777,12 +777,12 @@ that the expressions it will understand are described as follows:
                    <mult> / <unary> | <mult> % <unary>
      <exp>     ::= <exp> + <mult> | <exp> - <mult> | <mult>
 
-The main places where recursion occurs are in the function unary
-_exp, which calls itself, and at the bottom level where primary
+The main places where recursion occurs are in the function unary_exp,
+which calls itself, and at the bottom level where primary
 calls the top level all over again to evaluate parenthesized expressions.
 
-If you don't understand what it does, try running it
-. Trace its actions by hand on inputs such as
+If you don't understand what it does, try running it.
+Trace its actions by hand on inputs such as
 
 .. code-block:: C
 
@@ -821,8 +821,8 @@ If you are relatively new to C, there are
 more important subjects to cover first. Come back to this stuff
 later instead.
 
-There are essentially two types of object in C
-: the internal and external objects. The distinction between external and internal
+There are essentially two types of object in C:
+the internal and external objects. The distinction between external and internal
 is to do with functions: anything declared outside a function is
 external, anything inside one, including its formal parameters, is internal. Since
 no function can be defined inside another, functions themselves are always
@@ -860,8 +860,8 @@ whose declaration in <stdio.h> is
 From that we can tell that it's a function returning
 int and with a particular prototype—so we know everything about
 its type. We also know that it has external linkage, because
-that is the default for every external object. As a result
-, everywhere that the name printf is used with external linkage, we
+that is the default for every external object. As a result,
+everywhere that the name printf is used with external linkage, we
 are referring to this function.
 
 Quite often, you want to be
@@ -877,9 +877,9 @@ the use of internal linkage.
 Names with internal linkage only refer
 to the same object within a single source file. You do
 this by prefixing their declarations with the keyword static, which changes
-the linkage of external objects from external linkage to internal linkage
-. It is also possible to declare internal objects to be static
-, but that has an entirely different meaning which we can defer
+the linkage of external objects from external linkage to internal linkage.
+It is also possible to declare internal objects to be static,
+but that has an entirely different meaning which we can defer
 for the moment.
 
 It's confusing that the types of linkage
@@ -914,8 +914,8 @@ you like. Here's the example.
 
 Example 4.9
 
-Although the full set of rules is a bit more complex
-, the basic way of working out what constitutes a definition and
+Although the full set of rules is a bit more complex,
+the basic way of working out what constitutes a definition and
 a declaration is not hard: ::
 
     A function declaration without a body for the function is just a declaration.
@@ -949,8 +949,8 @@ declared here, length, buf, and fillup, without any danger of surprising
 effects. Only the name callable is accessible outside this module.
 
 A very useful thing to know is that any external object
-that has no other initalizer (and except for functions we haven
-'t seen any initializers yet) is always set to the value
+that has no other initalizer (and except for functions we haven't
+seen any initializers yet) is always set to the value
 of zero before the program starts. This is widely used and
 relied on—the previous example relies on it for the initial
 value of length.
@@ -960,8 +960,8 @@ Effect of scope
 
 There's one additional complicating factor beyond simply linkage. Linkage allows
 you to couple names together on a per-program or a
-per-file basis, but scope determines the visibility of the names
-. Fortunately, the rules of scope are completely independent of anything to
+per-file basis, but scope determines the visibility of the names.
+Fortunately, the rules of scope are completely independent of anything to
 do with linkage, so you don't have to remember funny
 combinations of both.
 
@@ -994,8 +994,8 @@ ways of declaring some_function are equivalent and are always declarations:
 The thing that mysteriously turns those declarations into definitions is that
 when you also provide the body of the function, that is
 effectively the initializer for the function, so the comment about initializers
-comes into effect and the declaration becomes a definition. So far
-, no problem.
+comes into effect and the declaration becomes a definition. So far,
+no problem.
 
 Now, what is going on here?
 
@@ -1095,11 +1095,11 @@ types of declarations and the resulting linkage: ::
      internal 	extern 	external 	entire program 	1
      internal 	static 	none 	a single function 	2
 
-Although the accessibility of internal declarations prefixed with extern is program
--wide, watch out for the scope of the name.
+Although the accessibility of internal declarations prefixed with extern is program-wide,
+watch out for the scope of the name.
 External (or
-internal static) objects are initialized once only, at program start-up
-. The absence of explicit initialization is taken to be a default
+internal static) objects are initialized once only, at program start-up.
+The absence of explicit initialization is taken to be a default
 initialization of zero.
 
 Table 4.2. Summary of Linkage
@@ -1149,22 +1149,22 @@ Footnotes
 Exercises
 ^^^^^^^^^
 
-If you skipped the section on Linkage, then Exercise 4.2
-, Exercise 4.3, and Exercise 4.4 will cause you problems
-; it's up to you whether or not you want to
+If you skipped the section on Linkage, then Exercise 4.2,
+Exercise 4.3, and Exercise 4.4 will cause you problems;
+it's up to you whether or not you want to
 read it and then try them.
 
 Write a function and the
 appropriate declaration for the following tasks:
 
 Exercise 4.1. A function
-called abs_val that returns int and takes an int argument
-. It returns the absolute value of its argument, by negating it
+called abs_val that returns int and takes an int argument.
+It returns the absolute value of its argument, by negating it
 if it is negative.
 
 Exercise 4.2. A function called output that takes a single
-character argument and sends it to the program output with putchar
-. It will remember the current line number and column number reached
+character argument and sends it to the program output with putchar.
+It will remember the current line number and column number reached
 on the output device—the only values passed to the function
 are guaranteed to be alphanumeric, punctuation, space and newline characters.
 
@@ -1178,8 +1178,8 @@ counters are made accessible only from the file that contains them.
 Exercise 4.4. Write and test a recursive function that performs
 the admittedly dull task of printing a list of numbers from
 100 down to 1. On entry to the function it increments
-a static variable. If the variable has a value below 100
-, it calls itself again. Then it prints the value of the
+a static variable. If the variable has a value below 100,
+it calls itself again. Then it prints the value of the
 variable, decrements it and returns. Check that it works.
 
 Exercise 4.5. Write functions to calculate the sine and cosine

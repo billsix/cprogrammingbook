@@ -61,8 +61,8 @@ Even so, the introduction of qualified types by the Standard
 does add some complexity to this chapter. The rules about
 exactly how the various arithmetic and relational operators work when
 they are applied to pointers have been clarified, which adds
-bulk to the text but has not changed things substantially
-. In the early examples we do not pay a lot
+bulk to the text but has not changed things substantially.
+In the early examples we do not pay a lot
 of attention to them, but after that they are introduced
 gradually and where appropriate.
 
@@ -103,8 +103,8 @@ surprise to beginners—watch out for it. For simple examples
 of the use of arrays, look back at earlier chapters
 where several problems are solved with their help.
 
-One important point about array declarations is that they don
-'t permit the use of varying subscripts. The numbers given
+One important point about array declarations is that they don't
+permit the use of varying subscripts. The numbers given
 must be constant expressions which can be evaluated at compile
 time, not run time. For example, this function incorrectly tries
 to use its argument in the size of an array declaration:
@@ -183,9 +183,9 @@ quite in order:
     three_dee[1][3][1] = 0;
     three_dee[4][3][1] += 2;
 
-The second of those is interesting for two reasons. First
-, it accesses the very last member of the entire array
-—although the subscripts were declared to be [5][4][2],
+The second of those is interesting for two reasons. First,
+it accesses the very last member of the entire array—although
+the subscripts were declared to be [5][4][2],
 the highest usable subscript is always one less than the
 one used in the declaration. Second, it shows where the
 combined assignment operators are a real blessing. For the experienced
@@ -226,8 +226,8 @@ Pointers
 
 Using pointers is a bit like riding a bicycle. Just
 when you think that you'll never understand them—suddenly
-you do! Once learned the trick is hard to forget
-. There's no real magic to pointers, and a lot
+you do! Once learned the trick is hard to forget.
+There's no real magic to pointers, and a lot
 of readers will already be familiar with their use. The
 only peculiarity of C is how heavily it relies on
 the use of pointers, compared with other languages, and the
@@ -242,8 +242,8 @@ like other declarations: but don't be misled. When pointers
 are declared, the keyword at the beginning (c int, char
 and so on) declares the type of variable that the
 pointer will point to. The pointer itself is not of
-that type, it is of type pointer to that type
-. A given pointer only points to one particular type, not
+that type, it is of type pointer to that type.
+A given pointer only points to one particular type, not
 to all possible types. Here's the declaration of an
 array and a pointer:
 
@@ -303,8 +303,8 @@ the variables that we have now are shown in Figure
 5.4 (?? means uninitialized).
 
 Diagram showing an array with four elements (labelled 'ar[0]'
-to 'ar[4]') each of which has an undefined value
-, and a pointer called 'ip' which contains the address of
+to 'ar[4]') each of which has an undefined value,
+and a pointer called 'ip' which contains the address of
 'ar[3]'.
 
 .. figure:: _static/5.4.png
@@ -333,8 +333,8 @@ on manufacturer Y's washing machine controller which uses 17-bit
 addressing when it's on the spin cycle, and
 reverses the order of odd and even bits when it's
 out of bleach. (Admittedly, it's unlikely that anyone
-could get C to work an an architecture like that
-. But you should see some of the ones it does
+could get C to work an an architecture like that.
+But you should see some of the ones it does
 work on; they aren't much better.)
 
 We will continue to use the term ‘address of’ though,
