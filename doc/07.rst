@@ -49,7 +49,1025 @@ by the Standard.
 
 Structures
 ^^^^^^^^^^
+Arrays allow for a named collection of identical objects. This
+is suitable for a number of tasks, but isn't really
+very flexible. Most real data objects are complicated things with
+an inherent structure that does not fit well on to
+array style storage. Let's use a concrete example.
 
+Imagine that the job is something to do with a
+typesetting package. In this system, the individual characters have not
+only their character values but also some additional attributes like
+font and point size. The font doesn't affect the character
+as such, but only the way that it is displayed:
+this is the normal font, this is in italics and
+this is in bold font. Point size is similar. It
+describes the size of the characters when they are printed.
+For example, the point size of this text increases now.
+It goes back again now. If our characters have three
+independent attributes, how can they be represented in a single
+object?
+
+With C it's easy. First work out how to represent
+the individual attributes in the basic types. Let's assume that
+we can still store the character itself in a char,
+that the font can be encoded into a short (1
+for regular, 2 italic, 3 bold etc.) and that the
+point size will also fit a short. These are all
+quite reasonable assumptions. Most systems only support a few tens
+of fonts even if they are very sophisticated, and point
+sizes are normally in the range 6 to the small
+hundreds. Below 6 is almost invisible, above 50 is bigger
+than the biggest newspaper banner headlines. So we have a
+char and two shorts that are to be treated as
+a single entity. Here's how to declare it in C.
+
+.. code-block:: C
+
+    struct wp_char{
+          char wp_cval;
+          short wp_font;
+          short wp_psize;
+    };
+
+That effectively declares a new type of object which can
+be used in your program. The whole thing is introduced
+by the struct keyword, which is followed by an optional
+identifier known as the tag, wp_char in this case. The
+tag only serves the purpose of giving a name to
+this type of structure and allows us to refer to
+the type later on. After a declaration like the one
+just seen, the tag can be used like this:
+
+.. code-block:: C
+
+    struct wp_char x, y;
+
+That defines two variables called x and y just as
+it would have done if the definition had been
+
+.. code-block:: C
+
+    int x, y;
+
+but of course in the first example the variables are
+of type struct wp_char, and in the second their type
+is int. The tag is a name for the new
+type that we have introduced.
+
+It's worth remembering that structure tags can safely be used
+as ordinary identifiers as well. They only mean something special
+when they are preceded by the keyword struct. It is
+quite common to see a structured object being defined with
+the same name as its structure tag.
+
+
+
+
+
+.. code-block:: C
+
+    struct wp_char wp_char;
+
+
+
+
+
+That defines a variable called wp_char of type struct wp_char.
+This is described by saying that structure tags have their
+own ‘name space’ and cannot collide with other names. We'll
+investigate tags some more in the discussion of ‘incomplete types’.
+
+
+Variables can also be defined immediately following a structure declaration.
+
+
+
+
+.. code-block:: C
+
+    struct wp_char{
+          char wp_cval;
+          short wp_font;
+          short wp_psize;
+    }v1;
+
+    struct wp_char v2;
+
+
+
+
+We now have two variables, v1 and v2. If all
+the necessary objects are defined at the end of the
+structure declaration, the way that v1 was, then the tag
+becomes unneccessary (except if it is needed later for use
+with sizeof and in casts) and is often not present.
+
+The two variables are structured objects, each containing three separate
+members called wp_cval, wp_font and wp_psize. To access the individual
+members of the structures, the ‘dot’ operator is used:
+
+
+.. code-block:: C
+
+    v1.wp_cval = 'x';
+    v1.wp_font = 1;
+    v1.wp_psize = 10;
+
+    v2 = v1;
+
+
+
+
+The individual members of v1 are initialized to suitable values,
+then the whole of v1 is copied into v2 in an assignment.
+
+In fact the only operation permitted on whole structures is
+assignment: they can be assigned to each other, passed as
+arguments to functions and returned by functions. However, it is
+not a very efficient operation to copy structures and most
+programs avoid structure copying by manipulating pointers to structures instead.
+It is generally quicker to copy pointers around than structures.
+A surprising omission from the language is the facility to
+compare structures for equality, but there is a good reason
+for this which will be mentioned shortly.
+
+Here is an example using an array of structures like
+the one before. A function is used to read characters
+from the program's standard input and return an appropriately initialized
+structure. When a newline has been read or the array
+is full, the structures are sorted into order depending on
+the character value, and then printed out.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ARSIZE 10
+
+struct wp_char{
+      char wp_cval;
+      short wp_font;
+      short wp_psize;
+}ar[ARSIZE];
+
+/*
+* type of the input function -
+* could equally have been declared above;
+* it returns a structure and takes no arguments.
+*/
+struct wp_char infun(void);
+
+main(){
+      int icount, lo_indx, hi_indx;
+
+      for(icount = 0; icount < ARSIZE; icount++){
+              ar[icount] = infun();
+              if(ar[icount].wp_cval == '\n'){
+                      /*
+                       * Leave the loop.
+                       * not incrementing icount means that the
+                       * '\n' is ignored in the sort
+                       */
+                      break;
+              }
+      }
+
+      /* now a simple exchange sort */
+
+      for(lo_indx = 0; lo_indx <= icount-2; lo_indx++)
+              for(hi_indx = lo_indx+1; hi_indx <= icount-1; hi_indx++){
+                      if(ar[lo_indx].wp_cval > ar[hi_indx].wp_cval){
+                              /*
+                               * Swap the two structures.
+                               */
+                              struct wp_char wp_tmp = ar[lo_indx];
+                              ar[lo_indx] = ar[hi_indx];
+                              ar[hi_indx] = wp_tmp;
+                      }
+              }
+
+      /* now print */
+      for(lo_indx = 0; lo_indx < icount; lo_indx++){
+              printf("%c %d %d\n", ar[lo_indx].wp_cval,
+                              ar[lo_indx].wp_font,
+                              ar[lo_indx].wp_psize);
+      }
+      exit(EXIT_SUCCESS);
+}
+
+struct wp_char
+infun(void){
+      struct wp_char wp_char;
+
+      wp_char.wp_cval = getchar();
+      wp_char.wp_font = 2;
+      wp_char.wp_psize = 10;
+
+      return(wp_char);
+}
+
+Example 6.1
+
+Once it is possible to declare structures it seems pretty
+natural to declare arrays of them, use them as members
+of other structures and so on. In fact the only
+restriction is that a structure cannot contain an example of
+itself as a member—in which case its size would be
+an interesting concept for philosophers to debate, but hardly useful
+to a C programmer.
+
+
+
+
+
+
+6.2.1. Pointers and structures
+
+If what the last paragraph says is true—that it is
+more common to use pointers to structures than to use
+the structures directly—we need to know how to do it.
+Declaring pointers is easy of course:
+
+
+
+.. code-block:: C
+
+    struct wp_char *wp_p;
+
+
+
+gives us one straight away. But how do we access
+the members of the structure? One way might be to
+look through the pointer to get the whole structure, then
+select the member:
+
+
+
+.. code-block:: C
+
+    /* get the structure, then select a member */
+    (*wp_p).wp_cval
+
+
+
+
+that would certainly work (the parentheses are there because .
+has a higher precedence than *). It's not an easy
+notation to work with though, so C introduces a new
+operator to clean things up; it is usually known as
+the ‘pointing-to’ operator. Here it is being used:
+
+
+
+
+.. code-block:: C
+
+    /* the wp_cval in the structure wp_p points to */
+    wp_p->wp_cval = 'x';
+
+
+
+
+and although it might not look a lot easier than
+its alternative, it pays off when the structure contains pointers,
+as in a linked list. The pointing-to syntax is much
+easier if you want to follow two or three stages
+down the links of a linked list. If you haven't
+come across linked lists before, you're going to learn a
+lot more than just the use of structures before this
+chapter finishes!
+
+If the thing on the left of the . or ->
+operator is qualified (with const or volatile) then the
+result is also has those qualifiers associated with it. Here
+it is, illustrated with pointers; when the pointer points to
+a qualified type the result that you get is also qualified:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct somestruct{
+      int i;
+};
+
+main(){
+      struct somestruct *ssp, s_item;
+      const struct somestruct *cssp;
+
+      s_item.i = 1;   /* fine */
+      ssp = &s_item;
+      ssp->i += 2;    /* fine */
+      cssp = &s_item;
+      cssp->i = 0;    /* not permitted - cssp points to const objects */
+
+      exit(EXIT_SUCCESS);
+}
+
+
+
+Not all compiler writers seem to have noticed that requirement—the
+compiler that we used to test the last example failed
+to warn that the final assignment violated a constraint.
+
+Here
+is the Example 6.1 rewritten using pointers, and with the
+input function infun changed to accept a pointer to a
+structure rather than returning one. This is much more likely
+to be what would be seen in practice.
+
+(It is fair to say that, for a really efficient
+implementation, even the copying of structures would probably be dropped,
+especially if they were large. Instead, an array of pointers
+would be used, and the pointers exchanged until the sorted
+data could be found by traversing the pointer array in
+index order. That would complicate things too much for a
+simple example.)
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ARSIZE 10
+
+struct wp_char{
+      char wp_cval;
+      short wp_font;
+      short wp_psize;
+}ar[ARSIZE];
+
+void infun(struct wp_char *);
+
+main(){
+      struct wp_char wp_tmp, *lo_indx, *hi_indx, *in_p;
+
+      for(in_p = ar; in_p < &ar[ARSIZE]; in_p++){
+              infun(in_p);
+              if(in_p->wp_cval == '\n'){
+                      /*
+                       * Leave the loop.
+                       * not incrementing in_p means that the
+                       * '\n' is ignored in the sort
+                       */
+                      break;
+              }
+      }
+
+      /*
+       * Now a simple exchange sort.
+       * We must be careful to avoid the danger of pointer underflow,
+       * so check that there are at least two entries to sort.
+       */
+
+      if(in_p-ar > 1) for(lo_indx = ar; lo_indx <= in_p-2; lo_indx++){
+              for(hi_indx = lo_indx+1; hi_indx <= in_p-1; hi_indx++){
+                      if(lo_indx->wp_cval > hi_indx->wp_cval){
+                              /*
+                               * Swap the structures.
+                               */
+                              struct wp_char wp_tmp = *lo_indx;
+                              *lo_indx = *hi_indx;
+                              *hi_indx = wp_tmp;
+                      }
+              }
+      }
+
+      /* now print */
+      for(lo_indx = ar; lo_indx < in_p; lo_indx++){
+              printf("%c %d %d\n", lo_indx->wp_cval,
+                              lo_indx->wp_font,
+                              lo_indx->wp_psize);
+      }
+      exit(EXIT_SUCCESS);
+}
+
+void
+infun( struct wp_char *inp){
+
+      inp->wp_cval = getchar();
+      inp->wp_font = 2;
+      inp->wp_psize = 10;
+
+      return;
+}
+
+Example 6.2
+
+The next issue is to consider what a structure looks
+like in terms of storage layout. It's best not to
+worry about this too much, but it is sometimes useful
+if you have to use C to access record-structured data
+written by other programs. The wp_char structure will be allocated
+storage as shown in Figure 6.1.
+Diagram showing the layout
+of the values in 'struct wp_char', with boxes containing 'wp_cval',
+an empty space of padding, 'wp_font' and 'wp_psize'.
+
+
+.. figure:: _static/6.1.png
+    :align: center
+    :alt: Storage Layout of a Structure
+    :figclass: align-center
+
+    Figure 6.1. Storage Layout of a Structure
+
+The diagram assumes a number of things: that a char
+takes 1 byte of storage; that a short needs 2
+bytes; and that shorts must be aligned on even byte
+addresses in this architecture. As a result the structure contains
+an unnamed 1-byte member inserted by the compiler for architectural
+reasons. Such addressing restrictions are quite common and can often
+result in structures containing ‘holes’.
+
+The Standard makes some guarantees about the layout of structures
+and unions:
+
+    Members of a structure are allocated within the structure in
+    the order of their appearance in the declaration and have
+    ascending addresses.
+
+    There must not be any padding in front of the first member.
+
+    The address of a structure is the same as the
+    address of its first member, provided that the appropriate cast
+    is used. Given the previous declaration of struct wp_char, if
+    item is of type struct wp_char, then (char *)item == &item.wp_cval.
+
+    Bit fields (see Section 6.4) don't actually have addresses, but
+    are conceptually packed into units which obey the rules above.
+
+6.2.2. Linked lists and other structures
+
+The combination of structures and pointers opens up a lot
+of interesting possibilities. This is not a textbook on complex
+linked data structures, but it will go on to describe
+two very common examples of the breed: linked lists and
+trees. Both have a feature in common: they consist of
+structures containing pointers to other structures, all the structures typically
+being of the same type. Figure 6.2 shows a picture
+of a linked list.
+Diagram showing a linked list of
+three items, with a pointer labelled 'list head' pointing to
+the first item, and each item containing a 'data' value
+and a 'pointer' value which points to the next item
+(the last pointer is null).
+
+.. figure:: _static/6.2.png
+    :align: center
+    :alt: List linked by pointers
+    :figclass: align-center
+
+
+    Figure 6.2. List linked by pointers
+
+The sort of declaration needed for that is this:
+
+
+
+.. code-block:: C
+
+    struct list_ele{
+          int data;       /* or whatever you like here */
+          struct list_ele *ele_p;
+    };
+
+
+Now, at first glance, it seems to contain itself—which is
+forbidden—but in fact it only contains a pointer to itself.
+How come the pointer declaration is allowed? Well, by the
+time the compiler reaches the pointer declaration it already knows
+that there is such a thing as a struct list_ele
+so the declaration is permitted. In fact, it is possible
+to make a incomplete declaration of a structure by saying
+
+
+
+.. code-block:: C
+
+    struct list_ele;
+
+
+
+
+at some point before the full declaration. A declaration like
+that declares an incomplete type. This will allow the declaration
+of pointers before the full declaration is seen. It is
+also important in the case of cross-referencing structures where each
+must contain a pointer to the other, as shown in the following example.
+
+struct s_1;     /* incomplete type */
+
+struct s_2{
+      int something;
+      struct s_1 *sp;
+};
+
+struct s_1{     /* now the full declaration */
+      float something;
+      struct s_2 *sp;
+};
+
+Example 6.3
+
+This illustrates the need for incomplete types. It also illustrates
+an important thing about the names of structure members: they
+inhabit a name-space per structure, so element names can be
+the same in different structures without causing any problems.
+
+Incomplete types may only be used where the size of
+the structure isn't needed yet. A full declaration must have
+been given by the time that the size is used.
+The later full declaration mustn't be in an inner block
+because then it becomes a new declaration of a different
+structure.
+
+
+
+struct x;       /* incomplete type */
+
+/* valid uses of the tag */
+struct x *p, func(void);
+
+void f1(void){
+      struct x{int i;};       /* redeclaration! */
+}
+
+/* full declaration now */
+struct x{
+      float f;
+}s_x;
+
+void f2(void){
+      /* valid statements */
+      p = &s_x;
+      *p = func();
+      s_x = func();
+}
+
+struct x
+func(void){
+      struct x tmp;
+      tmp.f = 0;
+      return (tmp);
+}
+
+Example 6.4
+
+
+There's one thing to watch out for: you get a
+incomplete type of a structure simply by mentioning its name!
+That means that this works:
+
+
+
+.. code-block:: C
+
+
+    struct abc{ struct xyz *p;};
+          /* the incomplete type 'struct xyz' now declared */
+    struct xyz{ struct abc *p;};
+          /* the incomplete type is now completed */
+
+
+
+
+There's a horrible danger in the last example, though, as
+this shows:
+
+
+
+.. code-block:: C
+
+    struct xyz{float x;} var1;
+
+    main(){
+          struct abc{ struct xyz *p;} var2;
+
+          /* AAAGH - struct xyz REDECLARED */
+          struct xyz{ struct abc *p;} var3;
+    }
+
+
+
+The result is that var2.p can hold the address of
+var1, but emphatically not the address of var3 which is
+of a different type! It can be fixed (assuming that
+it's not what you wanted) like this:
+
+
+.. code-block:: C
+
+
+    struct xyz{float x;} var1;
+
+    main(){
+          struct xyz;     /* new incomplete type 'struct xyz' */
+          struct abc{ struct xyz *p;} var2;
+          struct xyz{ struct abc *p;} var3;
+    }
+
+
+
+The type of a structure or union is completed when
+the closing } of its declaration is seen; it must
+contain at least one member or the behaviour is undefined.
+
+The other principal way to get incomplete types is to
+declare arrays without specifying their size—their type is incomplete until
+a later declaration provides the missing information:
+
+
+.. code-block:: C
+
+
+    int ar[];       /* incomplete type */
+    int ar[5];      /* completes the type */
+
+
+
+If you try that out, it will only work if
+the declarations are outside any blocks (external declarations), but that's
+for other reasons.
+
+Back to the linked list. There were three elements linked
+into the list, which could have been built like this:
+
+
+
+struct list_ele{
+      int data;
+      struct list_ele *pointer;
+}ar[3];
+
+main(){
+
+      ar[0].data = 5;
+      ar[0].pointer = &ar[1];
+      ar[1].data = 99;
+      ar[1].pointer = &ar[2];
+      ar[2].data = -7;
+      ar[2].pointer = 0;      /* mark end of list */
+      return(0);
+}
+
+
+Example 6.5
+
+
+
+and the contents of the list can be printed in
+two ways. The array can be traversed in order of
+index, or the pointers can be used as in the
+following example.
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct list_ele{
+      int data;
+      struct list_ele *pointer;
+}ar[3];
+
+main(){
+
+      struct list_ele *lp;
+
+      ar[0].data = 5;
+      ar[0].pointer = &ar[1];
+      ar[1].data = 99;
+      ar[1].pointer = &ar[2];
+      ar[2].data = -7;
+      ar[2].pointer = 0;      /* mark end of list */
+
+      /* follow pointers */
+      lp = ar;
+      while(lp){
+              printf("contents %d\n", lp->data);
+              lp = lp->pointer;
+      }
+      exit(EXIT_SUCCESS);
+}
+
+Example 6.6
+
+
+
+It's the way that the pointers are followed which makes
+the example interesting. Notice how the pointer in each element
+is used to refer to the next one, until the
+pointer whose value is 0 is found. That value causes
+the while loop to stop. Of course the pointers can
+be arranged in any order at all, which is what
+makes the list such a flexible structure. Here is a
+function which could be included as part of the last
+program to sort the linked list into numeric order of
+its data fields. It rearranges the pointers so that the
+list, when traversed in pointer sequence, is found to be
+in order. It is important to note that the data
+itself is not copied. The function must return a pointer
+to the head of the list, because that is not
+necessarily at ar[0] any more.
+
+
+
+struct list_ele *
+sortfun( struct list_ele *list )
+{
+
+      int exchange;
+      struct list_ele *nextp, *thisp, dummy;
+
+      /*
+       * Algorithm is this:
+       * Repeatedly scan list.
+       * If two list items are out of order,
+       * link them in the other way round.
+       * Stop if a full pass is made and no
+       * exchanges are required.
+       * The whole business is confused by
+       * working one element behind the
+       * first one of interest.
+       * This is because of the simple mechanics of
+       * linking and unlinking elements.
+       */
+
+      dummy.pointer = list;
+      do{
+              exchange = 0;
+              thisp = &dummy;
+              while( (nextp = thisp->pointer)
+                      && nextp->pointer){
+                      if(nextp->data < nextp->pointer->data){
+                              /* exchange */
+                              exchange = 1;
+                              thisp->pointer = nextp->pointer;
+                              nextp->pointer =
+                                      thisp->pointer->pointer;
+                              thisp->pointer->pointer = nextp;
+                      }
+                      thisp = thisp->pointer;
+              }
+      }while(exchange);
+
+      return(dummy.pointer);
+}
+
+Example 6.7
+
+
+
+Expressions such as thisp->pointer->pointer are commonplace in list processing. It's
+worth making sure that you understand it; the notation emphasizes
+the way that links are followed.
+
+6.2.3. Trees
+
+Another very popular data structure is the tree. It's actually
+a linked list with branches; a common type is the
+binary tree which has elements (nodes) looking like this:
+
+.. code-block:: C
+
+
+    struct tree_node{
+          int data;
+          struct tree_node *left_p, *right_p;
+    };
+
+
+For historical and essentially irrelevant reasons, trees in computer science
+work upside down. They have their root node at the
+top and their branches spread out downwards. In Figure 6.3,
+the ‘data’ members of the nodes are replaced by values
+which will be used in the discussion that follows.
+A
+tree structure, made up of 7 items, each of which
+is labelled with a different number. Each item has two
+pointer values, labelled 'left_p' and 'right_p', which point to child
+items. One item is labelled 'root' and isn't a child
+of any of the other items.
+
+
+.. figure:: _static/6.3.png
+    :align: center
+    :alt: A tree
+    :figclass: align-center
+
+    Figure 6.3. A tree
+
+Trees may not seem very exciting if your main interest
+lies in routine character handling and processing, but they are
+extremely important to the designers of databases, compilers and other
+complex tools.
+
+The advantage of a tree is that, if
+it is properly arranged, the layout of the data can
+support binary searching very simply. It is always possible to
+add new nodes to a tree at the appropriate place
+and a tree is basically a flexible and useful data
+structure.
+
+Look at Figure 6.3. The tree is carefully constructed so
+that it can be searched to find whether a given
+value can be found in the data portions of the
+nodes. Let's say we want to find if a value
+x is already present in the tree. The algorithm is this:
+
+
+    Start at the root of the tree:
+
+    if the tree is empty (no nodes)
+
+        then return ‘failure’.
+
+    else if the data in the current node is equal
+
+            to the value being searched for
+
+            then return ‘success’.
+
+    else if the data in the current node is greater than the
+
+            value being searched for
+
+            then search the tree indicated by the left pointer
+
+    else search the tree indicated by the right pointer.
+
+Here it is in C:
+
+#include <stdio.h>
+#include <stdlib.h>
+struct tree_node{
+      int data;
+      struct tree_node *left_p, *right_p;
+}tree[7];
+/*
+* Tree search algorithm.
+* Searches for value 'v' in tree,
+* returns pointer to first node found containing
+* the value otherwise 0.
+*/
+struct tree_node *
+t_search(struct tree_node *root, int v){
+
+      while(root){
+              if(root->data == v)
+                      return(root);
+              if(root->data > v)
+                      root = root->left_p;
+              else
+                      root = root->right_p;
+      }
+      /* value not found, no tree left */
+      return(0);
+}
+
+main(){
+      /* construct tree by hand */
+      struct tree_node *tp, *root_p;
+      int i;
+      for(i = 0; i < 7; i++){
+              int j;
+              j = i+1;
+
+              tree[i].data = j;
+              if(j == 2 || j == 6){
+                      tree[i].left_p = &tree[i-1];
+                      tree[i].right_p = &tree[i+1];
+              }
+      }
+      /* root */
+      root_p = &tree[3];
+      root_p->left_p = &tree[1];
+      root_p->right_p = &tree[5];
+
+      /* try the search */
+      tp = t_search(root_p, 9);
+      if(tp)
+              printf("found at position %d\n", tp-tree);
+      else
+              printf("value not found\n");
+      exit(EXIT_SUCCESS);
+}
+
+Example 6.8
+
+So that works fine. It is also interesting to note that,
+given a value, it can always be inserted at the appropriate
+point in the tree. The same search algorithm is used, but,
+instead of giving up when it finds that the value is
+not already in the tree, a new node is allocated by
+malloc, and is hung on the tree at the very place
+where the first null pointer was found. This is a mite
+more complicated to do because of the problem of handling the
+root pointer itself, and so a pointer to a pointer is
+used. Read the example carefully; it is not likely that you
+ever find anything more complicated than this in practice. If you
+can understand it, there is not much that should worry you
+about the vast majority of C language programs.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct tree_node{
+      int data;
+      struct tree_node *left_p, *right_p;
+};
+
+/*
+* Tree search algorithm.
+* Searches for value 'v' in tree,
+* returns pointer to first node found containing
+* the value otherwise 0.
+*/
+struct tree_node *
+t_search(struct tree_node *root, int v){
+
+      while(root){
+              printf("looking for %d, looking at %d\n",
+                      v, root->data);
+              if(root->data == v)
+                      return(root);
+              if(root->data > v)
+                      root = root->left_p;
+              else
+                      root = root->right_p;
+      }
+      /* value not found, no tree left */
+      return(0);
+}
+/*
+* Insert node into tree.
+* Return 0 for success,
+* 1 for value already in tree,
+* 2 for malloc error
+*/
+int
+t_insert(struct tree_node **root, int v){
+
+      while(*root){
+              if((*root)->data == v)
+                      return(1);
+              if((*root)->data > v)
+                      root = &((*root)->left_p);
+              else
+                      root = &((*root)->right_p);
+      }
+      /* value not found, no tree left */
+      if((*root = (struct tree_node *)
+              malloc(sizeof (struct tree_node)))
+                      == 0)
+              return(2);
+      (*root)->data = v;
+      (*root)->left_p = 0;
+      (*root)->right_p = 0;
+      return(0);
+}
+
+main(){
+      /* construct tree by hand */
+      struct tree_node *tp, *root_p = 0;
+      int i;
+
+      /* we ingore the return value of t_insert */
+      t_insert(&root_p, 4);
+      t_insert(&root_p, 2);
+      t_insert(&root_p, 6);
+      t_insert(&root_p, 1);
+      t_insert(&root_p, 3);
+      t_insert(&root_p, 5);
+      t_insert(&root_p, 7);
+
+      /* try the search */
+      for(i = 1; i < 9; i++){
+              tp = t_search(root_p, i);
+              if(tp)
+                      printf("%d found\n", i);
+              else
+                      printf("%d not found\n", i);
+      }
+      exit(EXIT_SUCCESS);
+}
+
+Example 6.9
+
+Finally, the algorithm that allows you to walk along the tree
+visiting all the nodes in order is beautiful. It is the
+cleanest example of recursion that you are likely to see. Look
+at it and work out what it does.
+
+void
+t_walk(struct tree_node *root_p){
+
+      if(root_p == 0)
+              return;
+      t_walk(root_p->left_p);
+      printf("%d\n", root_p->data);
+      t_walk(root_p->right_p);
+}
+
+Example 6.10
 
 
 Unions
