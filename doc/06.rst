@@ -149,7 +149,7 @@ having two elements labelled 't_d[0]' and 't_d[1]',
 each with three elements within it, labelled 't_d[0][0]', etc.
 
 
-.. figure:: _static/5.1.png
+.. figure:: _static/5.2.png
     :align: center
     :alt: Two-dimensional array, showing layout
     :figclass: align-center
@@ -258,7 +258,7 @@ Diagram showing an array with four elements (labelled 'ar[0]'
 to 'ar[4]') and a pointer called 'ip' which does
 not currently have any connection to the array.
 
-.. figure:: _static/
+.. figure:: _static/5.3.png
     :align: center
     :alt: An array and a pointer
     :figclass: align-center
