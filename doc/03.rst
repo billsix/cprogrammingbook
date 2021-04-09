@@ -233,11 +233,21 @@ of C's other types. We discuss it further in Section 2.8.
 Summary
 ~~~~~~~
 
-    C requires at least 96 characters in the source program character set.
-    Not all character sets in common use can stretch to 96 characters, trigraphs allow the basic ISO 646 character set to be used (at a pinch).
-    Multibyte character support has been added by the Standard, with support for
-        Shift-encoded multibyte characters, which can be squeezed into ‘ordinary’ character arrays, so still have char type.
-        Wide characters, each of which may use more storage than a regular character. These usually have a different type from char.
+    C requires at least 96 characters in the source program
+    character set.
+
+    Not all character sets in common use can stretch
+    to 96 characters, trigraphs allow the basic
+    ISO 646 character set to be used (at a pinch).
+
+    Multibyte character support has been added by the
+    Standard, with support for
+
+        Shift-encoded multibyte characters, which can be squeezed
+        into ‘ordinary’ character arrays, so still have char type.
+
+        Wide characters, each of which may use more storage than
+        a regular character. These usually have a different type from char.
 
 
 
@@ -1324,9 +1334,12 @@ want to create an array of characters and access them in
 non-sequential order, since the actual index of each char in
 the array and the logical index of each of the encoded
 characters are not easily determined. Here's the illustration we used
-before, annotated with the actual and the logical array indexes: ::
+before, annotated with the actual and the logical array indexes:
+
     0 1 2  3   4 5 6  7   8 9 (actual array index)
+
     a b c <SI> a b g <SO> x y
+
     0 1 2      3 4 5      6 7 (logical index)
 
 We're still in trouble even if we do manage to
@@ -1346,11 +1359,15 @@ wchar_t (whose definition is found in <stddef.h>) is defined
 to be the implementation-dependent type that should be used to
 hold extended characters when you need an array of them. The
 Standard makes the following guarantees about the values in a wide
-character: ::
+character:
 
-    A wchar_t can hold distinct values for each member of the largest character set supported by the implementation.
+    A wchar_t can hold distinct values for each member
+    of the largest character set supported by the implementation.
+
     The null character has the value of zero.
-    Each member of the basic character set (see Section 2.2.1) is encoded in a wchar_t with the same value as it has in a char.
+
+    Each member of the basic character set (see Section 2.2.1)
+    is encoded in a wchar_t with the same value as it has in a char.
 
 There is further support for this method of encoding characters. Strings,
 which we have already seen, are implemented as arrays of char,
@@ -1504,7 +1521,7 @@ be able to use the table as a reference later.
 +------------------------+-------------+-----------------------------------+
 | char x[30];            | (char [30]) | array of char                     |
 +------------------------+-------------+-----------------------------------+
-| int *ip;               | (int *)     | pointer to int                    |
+| int \*ip;              | (int \*)     | pointer to int                   |
 +------------------------+-------------+-----------------------------------+
 | int (\*f)();           | (int (\*)())| pointer to function returning int |
 +------------------------+-------------+-----------------------------------+
@@ -1776,11 +1793,11 @@ to agree with. Table 2.8 lists the compound assignment operators;
 you will see them used a lot from now on.
 
 +------------------------+-------------+-----------------------------------+
-|   *=                   | /=          |  %=                               |
+|   \*=                  | /=          |  %=                               |
 +------------------------+-------------+-----------------------------------+
 |   +=                   | -=          |                                   |
 +------------------------+-------------+-----------------------------------+
-|   &=                   | |=          | ^=                                |
+|   &=                   | \|=         | ^=                                |
 +------------------------+-------------+-----------------------------------+
 |   >>=                  | <<=         |                                   |
 +------------------------+-------------+-----------------------------------+
@@ -2298,19 +2315,35 @@ would otherwise be hard to get into a character constant
 (or hard to read; does ' ' contain a space or a
 tab?), there is what is called an escape sequence which
 can be used instead. Table 2.10 shows the escape
-sequences defined in the Standard. ::
-    Sequence 	Represents
-    \a 	audible alarm
-    \b 	backspace
-    \f 	form feed
-    \n 	newline
-    \r 	carriage return
-    \t 	tab
-    \v 	vertical tab
-    \\ 	backslash
-    \' 	quote
-    \" 	double quote
-    \? 	question mark
+sequences defined in the Standard.
+
++--------------------+-------------------+
+| Sequence           | Represents        |
++====================+===================+
+| \\a                | audible alarm     |
++--------------------+-------------------+
+| \\b                | backspace         |
++--------------------+-------------------+
+| \\f                | form feed         |
++--------------------+-------------------+
+| \\n                | newline           |
++--------------------+-------------------+
+| \\r                | carriage return   |
++--------------------+-------------------+
+| \\t                | tab               |
++--------------------+-------------------+
+| \\v                | vertical tab      |
++--------------------+-------------------+
+| ``\\``             | backslash         |
++--------------------+-------------------+
+| \\'                | quote             |
++--------------------+-------------------+
+| \\"                | double quote      |
++--------------------+-------------------+
+| \\?                | question mark     |
++--------------------+-------------------+
+
+
 
 Table 2.10. C escape sequences
 
@@ -2421,15 +2454,23 @@ formal description of a real constant:
 A real constant is one of:
 
     A fractional constant followed by an optional exponent.
+
     A digit sequence followed by an exponent.
 
 In either case followed by an optional one of f, l, F, L, where:
 
     A fractional constant is one of:
-        An optional digit sequence followed by a decimal point followed by a digit sequence.
+
+        An optional digit sequence followed by a decimal
+        point followed by a digit sequence.
+
         A digit sequence followed by a decimal point.
+
     An exponent is one of
-        e or E followed by an optional + or - followed by a digit sequence.
+
+        e or E followed by an optional + or - followed
+        by a digit sequence.
+
     A digit sequence is an arbitrary combination of one or more digits.
 
 
