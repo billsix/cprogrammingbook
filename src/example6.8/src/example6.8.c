@@ -25,10 +25,7 @@ struct tree_node *t_search(struct tree_node *root, int v) {
 }
 
 int main() {
-  /* construct tree by hand */
-  struct tree_node *tp, *root_p;
-  int i;
-  for (i = 0; i < 7; i++) {
+  for (int i = 0; i < 7; i++) {
     int j;
     j = i + 1;
 
@@ -39,12 +36,12 @@ int main() {
     }
   }
   /* root */
-  root_p = &tree[3];
+  struct tree_node *root_p = &tree[3];
   root_p->left_p = &tree[1];
   root_p->right_p = &tree[5];
 
   /* try the search */
-  tp = t_search(root_p, 9);
+  struct tree_node *tp = t_search(root_p, 9);
   if (tp)
     printf("found at position %d\n", tp - tree);
   else

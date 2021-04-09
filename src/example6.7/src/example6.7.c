@@ -1,7 +1,6 @@
 struct list_ele *sortfun(struct list_ele *list) {
 
-  int exchange;
-  struct list_ele *nextp, *thisp, dummy;
+  struct list_ele dummy;
 
   /*
    * Algorithm is this:
@@ -19,8 +18,12 @@ struct list_ele *sortfun(struct list_ele *list) {
 
   dummy.pointer = list;
   do {
-    exchange = 0;
+    int exchange = 0;
+    struct list_ele *thisp;
     thisp = &dummy;
+
+    struct list_ele *nextp;
+
     while ((nextp = thisp->pointer) && nextp->pointer) {
       if (nextp->data < nextp->pointer->data) {
         /* exchange */

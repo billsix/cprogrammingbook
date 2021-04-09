@@ -8,8 +8,6 @@ struct list_ele {
 
 int main() {
 
-  struct list_ele *lp;
-
   ar[0].data = 5;
   ar[0].pointer = &ar[1];
   ar[1].data = 99;
@@ -18,7 +16,7 @@ int main() {
   ar[2].pointer = 0; /* mark end of list */
 
   /* follow pointers */
-  lp = ar;
+  struct list_ele *lp = ar;
   while (lp) {
     printf("contents %d\n", lp->data);
     lp = lp->pointer;

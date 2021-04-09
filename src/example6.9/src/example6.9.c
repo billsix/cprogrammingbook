@@ -53,10 +53,9 @@ int t_insert(struct tree_node **root, int v) {
 
 int main() {
   /* construct tree by hand */
-  struct tree_node *tp, *root_p = 0;
-  int i;
+  struct tree_node *root_p = 0;
 
-  /* we ingore the return value of t_insert */
+  /* we ignore the return value of t_insert */
   t_insert(&root_p, 4);
   t_insert(&root_p, 2);
   t_insert(&root_p, 6);
@@ -66,8 +65,8 @@ int main() {
   t_insert(&root_p, 7);
 
   /* try the search */
-  for (i = 1; i < 9; i++) {
-    tp = t_search(root_p, i);
+  for (int i = 1; i < 9; i++) {
+    struct tree_node *tp = t_search(root_p, i);
     if (tp)
       printf("%d found\n", i);
     else
