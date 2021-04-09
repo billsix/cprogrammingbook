@@ -199,72 +199,9 @@ structure. When a newline has been read or the array
 is full, the structures are sorted into order depending on
 the character value, and then printed out.
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#define ARSIZE 10
-
-struct wp_char{
-      char wp_cval;
-      short wp_font;
-      short wp_psize;
-}ar[ARSIZE];
-
-/*
-* type of the input function -
-* could equally have been declared above;
-* it returns a structure and takes no arguments.
-*/
-struct wp_char infun(void);
-
-main(){
-      int icount, lo_indx, hi_indx;
-
-      for(icount = 0; icount < ARSIZE; icount++){
-              ar[icount] = infun();
-              if(ar[icount].wp_cval == '\n'){
-                      /*
-                       * Leave the loop.
-                       * not incrementing icount means that the
-                       * '\n' is ignored in the sort
-                       */
-                      break;
-              }
-      }
-
-      /* now a simple exchange sort */
-
-      for(lo_indx = 0; lo_indx <= icount-2; lo_indx++)
-              for(hi_indx = lo_indx+1; hi_indx <= icount-1; hi_indx++){
-                      if(ar[lo_indx].wp_cval > ar[hi_indx].wp_cval){
-                              /*
-                               * Swap the two structures.
-                               */
-                              struct wp_char wp_tmp = ar[lo_indx];
-                              ar[lo_indx] = ar[hi_indx];
-                              ar[hi_indx] = wp_tmp;
-                      }
-              }
-
-      /* now print */
-      for(lo_indx = 0; lo_indx < icount; lo_indx++){
-              printf("%c %d %d\n", ar[lo_indx].wp_cval,
-                              ar[lo_indx].wp_font,
-                              ar[lo_indx].wp_psize);
-      }
-      exit(EXIT_SUCCESS);
-}
-
-struct wp_char
-infun(void){
-      struct wp_char wp_char;
-
-      wp_char.wp_cval = getchar();
-      wp_char.wp_font = 2;
-      wp_char.wp_psize = 10;
-
-      return(wp_char);
-}
+.. literalinclude:: ../src/example6.1/src/example6.1.c
+   :language: c
+   :linenos:
 
 Example 6.1
 
@@ -383,73 +320,12 @@ data could be found by traversing the pointer array in
 index order. That would complicate things too much for a
 simple example.)
 
-#include <stdio.h>
-#include <stdlib.h>
 
-#define ARSIZE 10
+.. literalinclude:: ../src/example6.2/src/example6.2.c
+   :language: c
+   :linenos:
 
-struct wp_char{
-      char wp_cval;
-      short wp_font;
-      short wp_psize;
-}ar[ARSIZE];
-
-void infun(struct wp_char *);
-
-main(){
-      struct wp_char wp_tmp, *lo_indx, *hi_indx, *in_p;
-
-      for(in_p = ar; in_p < &ar[ARSIZE]; in_p++){
-              infun(in_p);
-              if(in_p->wp_cval == '\n'){
-                      /*
-                       * Leave the loop.
-                       * not incrementing in_p means that the
-                       * '\n' is ignored in the sort
-                       */
-                      break;
-              }
-      }
-
-      /*
-       * Now a simple exchange sort.
-       * We must be careful to avoid the danger of pointer underflow,
-       * so check that there are at least two entries to sort.
-       */
-
-      if(in_p-ar > 1) for(lo_indx = ar; lo_indx <= in_p-2; lo_indx++){
-              for(hi_indx = lo_indx+1; hi_indx <= in_p-1; hi_indx++){
-                      if(lo_indx->wp_cval > hi_indx->wp_cval){
-                              /*
-                               * Swap the structures.
-                               */
-                              struct wp_char wp_tmp = *lo_indx;
-                              *lo_indx = *hi_indx;
-                              *hi_indx = wp_tmp;
-                      }
-              }
-      }
-
-      /* now print */
-      for(lo_indx = ar; lo_indx < in_p; lo_indx++){
-              printf("%c %d %d\n", lo_indx->wp_cval,
-                              lo_indx->wp_font,
-                              lo_indx->wp_psize);
-      }
-      exit(EXIT_SUCCESS);
-}
-
-void
-infun( struct wp_char *inp){
-
-      inp->wp_cval = getchar();
-      inp->wp_font = 2;
-      inp->wp_psize = 10;
-
-      return;
-}
-
-Example 6.2
+      Example 6.2
 
 The next issue is to consider what a structure looks
 like in terms of storage layout. It's best not to
@@ -553,19 +429,12 @@ of pointers before the full declaration is seen. It is
 also important in the case of cross-referencing structures where each
 must contain a pointer to the other, as shown in the following example.
 
-struct s_1;     /* incomplete type */
 
-struct s_2{
-      int something;
-      struct s_1 *sp;
-};
+.. literalinclude:: ../src/example6.3/src/example6.3.c
+   :language: c
+   :linenos:
 
-struct s_1{     /* now the full declaration */
-      float something;
-      struct s_2 *sp;
-};
-
-Example 6.3
+      Example 6.3
 
 This illustrates the need for incomplete types. It also illustrates
 an important thing about the names of structure members: they
@@ -581,35 +450,11 @@ structure.
 
 
 
-struct x;       /* incomplete type */
+.. literalinclude:: ../src/example6.4/src/example6.4.c
+   :language: c
+   :linenos:
 
-/* valid uses of the tag */
-struct x *p, func(void);
-
-void f1(void){
-      struct x{int i;};       /* redeclaration! */
-}
-
-/* full declaration now */
-struct x{
-      float f;
-}s_x;
-
-void f2(void){
-      /* valid statements */
-      p = &s_x;
-      *p = func();
-      s_x = func();
-}
-
-struct x
-func(void){
-      struct x tmp;
-      tmp.f = 0;
-      return (tmp);
-}
-
-Example 6.4
+      Example 6.4
 
 
 There's one thing to watch out for: you get a
@@ -692,24 +537,11 @@ into the list, which could have been built like this:
 
 
 
-struct list_ele{
-      int data;
-      struct list_ele *pointer;
-}ar[3];
+.. literalinclude:: ../src/example6.5/src/example6.5.c
+   :language: c
+   :linenos:
 
-main(){
-
-      ar[0].data = 5;
-      ar[0].pointer = &ar[1];
-      ar[1].data = 99;
-      ar[1].pointer = &ar[2];
-      ar[2].data = -7;
-      ar[2].pointer = 0;      /* mark end of list */
-      return(0);
-}
-
-
-Example 6.5
+      Example 6.5
 
 
 
@@ -720,35 +552,12 @@ following example.
 
 
 
-#include <stdio.h>
-#include <stdlib.h>
+.. literalinclude:: ../src/example6.6/src/example6.6.c
+   :language: c
+   :linenos:
 
-struct list_ele{
-      int data;
-      struct list_ele *pointer;
-}ar[3];
 
-main(){
-
-      struct list_ele *lp;
-
-      ar[0].data = 5;
-      ar[0].pointer = &ar[1];
-      ar[1].data = 99;
-      ar[1].pointer = &ar[2];
-      ar[2].data = -7;
-      ar[2].pointer = 0;      /* mark end of list */
-
-      /* follow pointers */
-      lp = ar;
-      while(lp){
-              printf("contents %d\n", lp->data);
-              lp = lp->pointer;
-      }
-      exit(EXIT_SUCCESS);
-}
-
-Example 6.6
+      Example 6.6
 
 
 
@@ -770,49 +579,12 @@ necessarily at ar[0] any more.
 
 
 
-struct list_ele *
-sortfun( struct list_ele *list )
-{
 
-      int exchange;
-      struct list_ele *nextp, *thisp, dummy;
+.. literalinclude:: ../src/example6.7/src/example6.7.c
+   :language: c
+   :linenos:
 
-      /*
-       * Algorithm is this:
-       * Repeatedly scan list.
-       * If two list items are out of order,
-       * link them in the other way round.
-       * Stop if a full pass is made and no
-       * exchanges are required.
-       * The whole business is confused by
-       * working one element behind the
-       * first one of interest.
-       * This is because of the simple mechanics of
-       * linking and unlinking elements.
-       */
-
-      dummy.pointer = list;
-      do{
-              exchange = 0;
-              thisp = &dummy;
-              while( (nextp = thisp->pointer)
-                      && nextp->pointer){
-                      if(nextp->data < nextp->pointer->data){
-                              /* exchange */
-                              exchange = 1;
-                              thisp->pointer = nextp->pointer;
-                              nextp->pointer =
-                                      thisp->pointer->pointer;
-                              thisp->pointer->pointer = nextp;
-                      }
-                      thisp = thisp->pointer;
-              }
-      }while(exchange);
-
-      return(dummy.pointer);
-}
-
-Example 6.7
+      Example 6.7
 
 
 
@@ -896,62 +668,12 @@ x is already present in the tree. The algorithm is this:
 
 Here it is in C:
 
-#include <stdio.h>
-#include <stdlib.h>
-struct tree_node{
-      int data;
-      struct tree_node *left_p, *right_p;
-}tree[7];
-/*
-* Tree search algorithm.
-* Searches for value 'v' in tree,
-* returns pointer to first node found containing
-* the value otherwise 0.
-*/
-struct tree_node *
-t_search(struct tree_node *root, int v){
 
-      while(root){
-              if(root->data == v)
-                      return(root);
-              if(root->data > v)
-                      root = root->left_p;
-              else
-                      root = root->right_p;
-      }
-      /* value not found, no tree left */
-      return(0);
-}
+.. literalinclude:: ../src/example6.8/src/example6.8.c
+   :language: c
+   :linenos:
 
-main(){
-      /* construct tree by hand */
-      struct tree_node *tp, *root_p;
-      int i;
-      for(i = 0; i < 7; i++){
-              int j;
-              j = i+1;
-
-              tree[i].data = j;
-              if(j == 2 || j == 6){
-                      tree[i].left_p = &tree[i-1];
-                      tree[i].right_p = &tree[i+1];
-              }
-      }
-      /* root */
-      root_p = &tree[3];
-      root_p->left_p = &tree[1];
-      root_p->right_p = &tree[5];
-
-      /* try the search */
-      tp = t_search(root_p, 9);
-      if(tp)
-              printf("found at position %d\n", tp-tree);
-      else
-              printf("value not found\n");
-      exit(EXIT_SUCCESS);
-}
-
-Example 6.8
+      Example 6.8
 
 So that works fine. It is also interesting to note that,
 given a value, it can always be inserted at the appropriate
@@ -967,107 +689,24 @@ ever find anything more complicated than this in practice. If you
 can understand it, there is not much that should worry you
 about the vast majority of C language programs.
 
-#include <stdio.h>
-#include <stdlib.h>
 
-struct tree_node{
-      int data;
-      struct tree_node *left_p, *right_p;
-};
+.. literalinclude:: ../src/example6.9/src/example6.9.c
+   :language: c
+   :linenos:
 
-/*
-* Tree search algorithm.
-* Searches for value 'v' in tree,
-* returns pointer to first node found containing
-* the value otherwise 0.
-*/
-struct tree_node *
-t_search(struct tree_node *root, int v){
-
-      while(root){
-              printf("looking for %d, looking at %d\n",
-                      v, root->data);
-              if(root->data == v)
-                      return(root);
-              if(root->data > v)
-                      root = root->left_p;
-              else
-                      root = root->right_p;
-      }
-      /* value not found, no tree left */
-      return(0);
-}
-/*
-* Insert node into tree.
-* Return 0 for success,
-* 1 for value already in tree,
-* 2 for malloc error
-*/
-int
-t_insert(struct tree_node **root, int v){
-
-      while(*root){
-              if((*root)->data == v)
-                      return(1);
-              if((*root)->data > v)
-                      root = &((*root)->left_p);
-              else
-                      root = &((*root)->right_p);
-      }
-      /* value not found, no tree left */
-      if((*root = (struct tree_node *)
-              malloc(sizeof (struct tree_node)))
-                      == 0)
-              return(2);
-      (*root)->data = v;
-      (*root)->left_p = 0;
-      (*root)->right_p = 0;
-      return(0);
-}
-
-main(){
-      /* construct tree by hand */
-      struct tree_node *tp, *root_p = 0;
-      int i;
-
-      /* we ingore the return value of t_insert */
-      t_insert(&root_p, 4);
-      t_insert(&root_p, 2);
-      t_insert(&root_p, 6);
-      t_insert(&root_p, 1);
-      t_insert(&root_p, 3);
-      t_insert(&root_p, 5);
-      t_insert(&root_p, 7);
-
-      /* try the search */
-      for(i = 1; i < 9; i++){
-              tp = t_search(root_p, i);
-              if(tp)
-                      printf("%d found\n", i);
-              else
-                      printf("%d not found\n", i);
-      }
-      exit(EXIT_SUCCESS);
-}
-
-Example 6.9
+      Example 6.9
 
 Finally, the algorithm that allows you to walk along the tree
 visiting all the nodes in order is beautiful. It is the
 cleanest example of recursion that you are likely to see. Look
 at it and work out what it does.
 
-void
-t_walk(struct tree_node *root_p){
 
-      if(root_p == 0)
-              return;
-      t_walk(root_p->left_p);
-      printf("%d\n", root_p->data);
-      t_walk(root_p->right_p);
-}
+.. literalinclude:: ../src/example6.10/src/example6.10.c
+   :language: c
+   :linenos:
 
-Example 6.10
+      Example 6.10
 
 
 Unions
