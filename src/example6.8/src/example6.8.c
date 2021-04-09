@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <inttypes.h>
 struct tree_node {
   int data;
   struct tree_node *left_p, *right_p;

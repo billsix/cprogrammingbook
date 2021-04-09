@@ -1,3 +1,5 @@
+#include <inttypes.h>
+
 struct x; /* incomplete type */
 
 /* valid uses of the tag */

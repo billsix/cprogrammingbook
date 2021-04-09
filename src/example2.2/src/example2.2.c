@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <inttypes.h>
 
 #define BOILING 212 /* degrees Fahrenheit */
 

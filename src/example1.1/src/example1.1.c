@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <inttypes.h>
 
 /*
  * Tell the compiler that we intend

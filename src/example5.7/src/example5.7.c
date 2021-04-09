@@ -1,3 +1,5 @@
+#include <inttypes.h>
+
 /*
 * Compare
   two strings for equality.

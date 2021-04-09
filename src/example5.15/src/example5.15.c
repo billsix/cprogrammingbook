@@ -1,6 +1,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <inttypes.h>
 
 int main() {
   const size_t sz = sizeof(sz);

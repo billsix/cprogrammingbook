@@ -1,6 +1,7 @@
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <inttypes.h>
 
 int main() {
   char c = CHAR_MIN;

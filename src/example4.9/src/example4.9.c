@@ -1,3 +1,5 @@
+#include <inttypes.h>
+
 int i; /* definition */
 int main() {
   void f_in_other_place(); /* declaration */
