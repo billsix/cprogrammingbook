@@ -35,14 +35,23 @@ from what is often expected.
 All of the relational operators shown in Table 3.1
 are used to compare two operands in the way indicated.
 When the operands are arithmetic types, the usual arithmetic conversions
-are applied to them. ::
-    Operator 	Operation
-    < 	less than
-    <= 	less than or equal to
-    > 	greater than
-    >= 	greater than or equal to
-    == 	equal to
-    != 	not equal to
+are applied to them.
+
++------------------------+-------------------------------+
+| Operator               | Operation                     |
++========================+===============================+
+| <                      | less than                     |
++------------------------+-------------------------------+
+| <=                     | less than or equal to         |
++------------------------+-------------------------------+
+| >                      | greater than                  |
++------------------------+-------------------------------+
+| >=                     | greater than or equal to      |
++------------------------+-------------------------------+
+| ==                     | equal to                      |
++------------------------+-------------------------------+
+| !=                     | not equal to                  |
++------------------------+-------------------------------+
 
 Table 3.1. Relational operators
 
@@ -71,24 +80,40 @@ result is of type int. This example shows how they work.
 
 Example 3.1
 
-Which produces this on its standard output: ::
+Which produces this on its standard output: 
 
     value of i is -10, i == 0 = 0, i > -5 = 0
+    
     value of i is -9, i == 0 = 0, i > -5 = 0
+    
     value of i is -8, i == 0 = 0, i > -5 = 0
+    
     value of i is -7, i == 0 = 0, i > -5 = 0
+    
     value of i is -6, i == 0 = 0, i > -5 = 0
+    
     value of i is -5, i == 0 = 0, i > -5 = 0
+    
     value of i is -4, i == 0 = 0, i > -5 = 1
+    
     value of i is -3, i == 0 = 0, i > -5 = 1
+    
     value of i is -2, i == 0 = 0, i > -5 = 1
+    
     value of i is -1, i == 0 = 0, i > -5 = 1
+    
     value of i is 0, i == 0 = 1, i > -5 = 1
+    
     value of i is 1, i == 0 = 0, i > -5 = 1
+    
     value of i is 2, i == 0 = 0, i > -5 = 1
+    
     value of i is 3, i == 0 = 0, i > -5 = 1
+    
     value of i is 4, i == 0 = 0, i > -5 = 1
+    
     value of i is 5, i == 0 = 0, i > -5 = 1
+    
 
 In this probably mistaken piece of code, what do you
 think happens?
@@ -842,22 +867,37 @@ contains a constant (1) of type int and another (3.5)
 of type double. Applying the arithmetic conversions gives a
 result of type double.
 
-Other combinations are also permitted. ::
+Other combinations are also permitted. 
 
-    If both operands are of compatible structure or union types, then that is the type of the result.
-    If both operands have void type, then that is the type of the result.
+    If both operands are of compatible structure or union types,
+    then that is the type of the result.
 
-Various pointer types can be mixed. ::
+    If both operands have void type, then that is the
+    type of the result.
+
+Various pointer types can be mixed. 
 
     Both operands may be pointers to (possibly qualified) compatible types.
+    
     One operand may be a pointer and the other a null pointer constant.
-    One operand may be a pointer to an object or incomplete type and the other a pointer to (possibly qualified) void.
+    
+    One operand may be a pointer to an object or
+    incomplete type and the other a pointer to (possibly qualified) void.
 
 The type of the result when pointers are involved is
-derived in two separate steps. ::
+derived in two separate steps. 
 
-    If either of the operands is a pointer to a qualified type, the result is a pointer to a type that is qualified by all the qualifiers of both operands.
-    If one operand is a null pointer constant, then the result has the type of the other operand. If one operand is a pointer to void, the other operand is converted to pointer to void and that is the type of the result. If both operands are pointers to compatible types (ignoring any qualifiers) the the result has the composite type.
+    If either of the operands is a pointer to a
+    qualified type, the result is a pointer to a type
+    that is qualified by all the qualifiers of both operands.
+    
+    If one operand is a null pointer constant, then the
+    result has the type of the other operand. If one
+    operand is a pointer to void, the other operand is
+    converted to pointer to void and that is the type
+    of the result. If both operands are pointers to compatible
+    types (ignoring any qualifiers) the the result has the composite
+    type.
 
 Qualifiers, composite types and compatible types are all subjects discussed
 later.

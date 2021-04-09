@@ -173,7 +173,7 @@ divergence of C into the number of dialects that has
 been the bane of, for example, BASIC. In fact, this
 is not so surprising. There has always been a “language
 reference manual”, the widely-known book written by Brian Kernighan
-and Dennis Ritchie, usually referred to as simply “K&R”. ::
+and Dennis Ritchie, usually referred to as simply “K&R”. 
 
     The C Programming Language,
     B.W. Kernighan and D. M. Ritchie,
@@ -356,7 +356,7 @@ the authoritative last word.
 
 Address for the Standard
 ^^^^^^^^^^^^^^^^^^^^^^^^
-Copies of the Standard can be obtained from: ::
+Copies of the Standard can be obtained from: 
 
     X3 Secretariat,
     CBEMA,

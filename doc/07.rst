@@ -1,8 +1,74 @@
 Structures
 ==========
 
-Purpose
+History
 ^^^^^^^
 
-Learn how to open a window, make a black screen, and close
-the window.
+The development of the early computer languages went either one
+way or the other. COBOL concentrated on the structure of
+data but not on arithmetic or algorithms, FORTRAN and Algol
+leant the other way. Scientific users wanted to do numeric
+work on relatively unstructured data (although arrays were soon found
+to be indispensable) and commercial users needed only basic arithmetic
+but knew that the key issue was the structure of
+the data.
+
+The ideas that have influenced C are a mixture of
+the two schools; it has the structured control of flow
+expected in a language of its age, and has also
+made a start on data structures. So far we have
+concentrated on the algorithmic aspects of the language and haven't
+thought hard about data storage. Whilst it's true that arrays
+fall into the general category of data structuring, they are
+so simple, and so commonly in use, that they don't
+deserve a chapter to themselves. Until now we have been
+looking at a kind of block-structured FORTRAN.
+
+The trend in the late 1980s and early '90s seems
+to be towards integrating both the data and the algorithms;
+it's then called Object-Oriented programming. There is no specific support
+for that in C. C++ is a language based on
+C that does offer support for Object-Oriented techniques, but it
+is out of our scope to discuss it further.
+
+For a large class of problems in computing, it is
+the data and not the algorithms that are the most
+interesting. If the initial design gets its data structures right,
+the rest of the effort in putting a program together
+is often quite small. However, you need help from the
+language. If there is no support for structured data types
+other than arrays, writing programs becomes both less convenient and
+also more prone to errors. It is the job of
+a good language to do more than just allow you
+to do something; it must actively help as well.
+
+C offers arrays, structures and unions as its contribution to
+data structuring. They have proved to be entirely adequate for
+most users' needs over the years and remain essentially unchanged
+by the Standard.
+
+Structures
+^^^^^^^^^^
+
+
+
+Unions
+^^^^^^
+
+Bitfields
+^^^^^^^^^
+
+Enums
+^^^^^
+
+Qualifiers and derived types
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Initialization
+^^^^^^^^^^^^^^
+
+Summary
+^^^^^^^
+
+Exercises
+^^^^^^^^^

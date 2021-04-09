@@ -598,14 +598,29 @@ here is a program that compiles and runs successfully:
 
 Example 5.3
 
-Summary ::
+Summary
 
     Arrays always index from zero—end of story.
+
     There are no multidimensional arrays; you use arrays of arrays instead.
-    Pointers point to things; pointers to different types are themselves different types. They have nothing in common with each other or any other types in C; there are no automatic conversions between pointers and other types.
-    Pointers can be used to simulate ‘call by reference’ to functions, but it takes a little work to do it.
-    Incrementing or adding something to a pointer can be used to step along arrays.
-    To facilitate array access by incrementing pointers, the Standard guarantees that in an n element array, although element n does not exist, use of its address is not an error—the valid range of addresses for an array declared as int ar[N] is &ar[0] through to &ar[N]. You must not try to access this last pseudo-element.
+
+    Pointers point to things; pointers to different types are themselves
+    different types. They have nothing in common with each other
+    or any other types in C; there are no automatic
+    conversions between pointers and other types.
+
+    Pointers can be used to simulate ‘call by reference’ to
+    functions, but it takes a little work to do it.
+
+    Incrementing or adding something to a pointer can be used
+    to step along arrays.
+
+    To facilitate array access by incrementing pointers, the Standard guarantees
+    that in an n element array, although element n does
+    not exist, use of its address is not an error—the
+    valid range of addresses for an array declared as int
+    ar[N] is &ar[0] through to &ar[N]. You must not try
+    to access this last pseudo-element.
 
 Qualified types
 ~~~~~~~~~~~~~~~
@@ -633,10 +648,17 @@ will know that the thing you are trying to modify
 is constant, so it can warn you.
 
 There are two benefits in being able to declare things
-to be const. ::
+to be const.
 
-    It documents the fact that the thing is unmodifiable and the compiler helps to check. This is especially reassuring in the case of functions which take pointers as arguments. If the declaration of a function shows that the arguments are pointers to constant objects, then you know that the function is not allowed to change them through the pointers.
-    If the compiler knows that things are constant, it can often do increased amounts of optimization or generate better code.
+    It documents the fact that the thing is unmodifiable and the
+    compiler helps to check. This is especially reassuring in the case
+    of functions which take pointers as arguments. If the declaration of
+    a function shows that the arguments are pointers to constant objects,
+    then you know that the function is not allowed to change
+    them through the pointers.
+
+    If the compiler knows that things are constant, it can often
+    do increased amounts of optimization or generate better code.
 
 Of course, constants are not much use unless you can
 assign an initial value to them. We won't go
@@ -982,8 +1004,7 @@ char, so the pointer is of type ‘pointer to char’.
 The situation is shown in Figure 5.7.
 Diagram showing an
 unnamed array of 'const char' values, where the last item
-has the value '0', and showing that a 'const char
-*' value that points to the first of them can be used as a string.
+has the value '0', and showing that a 'const char\*' value that points to the first of them can be used as a string.
 
 Figure 5.7. Effect of using a string
 
@@ -1011,10 +1032,10 @@ string would be acceptable as one or both arguments). It
 compares them for equality by checking that the strings are
 character-for-character the same. If they are the same at any
 point, then it checks to make sure it hasn't reached
-the end of them both with if(*s1 == 0): if
+the end of them both with if(\*s1 == 0): if
 it has, then it returns 0 to show that they
 were equal. The test could just as easily have been
-on *s2, it wouldn't have made any difference. Otherwise a
+on \*s2, it wouldn't have made any difference. Otherwise a
 difference has been detected, so it returns 1 to indicate failure.
 
 In the example, strcmp is called with two arguments which
@@ -1065,10 +1086,17 @@ post-increment of either the pointer or the thing it points
 to, depending on where the brackets are put. Table 5.1
 gives a list.
 
-++(*p) 	pre-increment thing pointed to
-(*p)++ 	post-increment thing pointed to
-*(p++) 	access via pointer, post-increment pointer
-*(++p) 	access via pointer which has already been incremented
++--------------------+---------------------------------------------------------+
+| ++(\*p)            | pre-increment thing pointed to                          |
++--------------------+---------------------------------------------------------+
+| (\*p)++            | post-increment thing pointed to                         |
++--------------------+---------------------------------------------------------+
+| \*(p++)            | access via pointer, post-increment pointer              |
++--------------------+---------------------------------------------------------+
+| \*(++p)            | access via pointer which has already been incremented   |
++--------------------+---------------------------------------------------------+
+
+
 
 Table 5.1. Pointer notation
 
@@ -1077,18 +1105,26 @@ Read it carefully; make sure that you understand the combinations.
 
 The expressions in the list above can usually be understood
 after a bit of head-scratching. Now, given that the precedence
-of *, ++ and -- is the same in all
+of \*, ++ and -- is the same in all
 three cases and that they associate right to left, can
 you work out what happens if the brackets are removed?
 Nasty, isn't it? Table 5.2 shows that there's only one
 case where the brackets have to be there.
 
-With parentheses  Without, if possible
 
-++(*p) 	++*p
-(*p)++ 	(*p)++
-*(p++) 	*p++
-*(++p) 	*++p
++--------------------+--------------------+
+|With parentheses    +Without, if possible|
++====================+====================+
+|++(\*p)             |++\*p               |
++--------------------+--------------------+
+|(\*p)++             |(\*p)++             |
++--------------------+--------------------+
+|\*(p++)             |\*p++               |
++--------------------+--------------------+
+|\*(++p)             |\*++p               |
++--------------------+--------------------+
+
+
 
 Table 5.2. More pointer notation
 
@@ -1153,7 +1189,7 @@ must be able to represent every known value of every
 type of pointer; there is no guarantee that any of
 the basic types in C can hold such a value.
 
-The solution is to use the void * type that
+The solution is to use the (void \*) type that
 we've already talked about. Here is the last example with
 a declaration of malloc:
 
@@ -1238,7 +1274,7 @@ request it returns a null pointer to indicate failure. For
 historical reasons, the stdio.h header file contains a defined constant
 called NULL which is traditionally used to check the return
 value from malloc and some other library functions. An explicit
-0 or (void *)0 could equally well be used.
+0 or (void \*)0 could equally well be used.
 
 As
 a first illustration of the use of malloc, here's a
@@ -1332,7 +1368,7 @@ Finally, for the extremely brave, here is the whole thing
 with even p_array allocated using malloc. Further, most of the
 array indexing is rewritten to use pointer notation. If you
 are feeling queasy, skip this example. It is hard. One
-word of explanation: char **p means a pointer to a
+word of explanation: char \*\*p means a pointer to a
 pointer to a character. Many C programmers find this hard to deal with.
 
 .. literalinclude:: ../src/example5.12/src/example5.12.c
@@ -1409,8 +1445,8 @@ Example 5.14
 The numbers printed will not be the same. The first
 will, correctly, identify the size of arr as 6; five
 characters followed by a null. The second one will always,
-on every system, print 1. That's because the type of
-*cp is const char, which can only have a size
+on every system, print 1. That's because the type of \*cp
+is const char, which can only have a size
 of 1, whereas the type of arr is different: array
 of const char. The confusion arises because this is the
 one place that the use of an array is not
@@ -1452,7 +1488,7 @@ would be for the function, say
 
     int func(int a, float b);
 
-and simply put brackets around the name and a *
+and simply put brackets around the name and a \*
 in front of it: that declares the pointer. Because of
 precedence, if you don't parenthesize the name, you declare a
 function returning a pointer:
@@ -1502,8 +1538,8 @@ But we'll draw a veil over it at this point!
 Expressions involving pointers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Because of the introduction of qualified types and of the
-notion of incomplete types, together with the use of void
-*, there are now some complicated rules about how you
+notion of incomplete types, together with the use of void \*,
+there are now some complicated rules about how you
 can mix pointers and what arithmetic with pointers really permits
 you to do. Most people will survive quite well without
 ever learning this explicitly, because a lot of it is
@@ -1544,18 +1580,20 @@ Conversions
 
 Pointers to void can be freely converted backwards and forwards
 with pointers to any object or incomplete type. Converting a
-pointer to an object or an incomplete type to void
-* and then back gives a value which is equal to the original one:
+pointer to an object or an incomplete type to void \*
+and then back gives a value which is equal to the original one:
 
-int i;
-int *ip;
-void *vp;
+.. code-block:: C
 
-ip = &i;
-vp = ip;
-ip = vp;
-if(ip != &i)
-      printf("Compiler error\n");
+    int i;
+    int *ip;
+    void *vp;
+
+    ip = &i;
+    vp = ip;
+    ip = vp;
+    if(ip != &i)
+          printf("Compiler error\n");
 
 An unqualified pointer type may be converted to a qualified
 pointer type, but the reverse is not true. The two
@@ -1696,8 +1734,157 @@ is used with pointers has already been given in Chapter 3.
 Arrays, the & operator and function declarations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+We have already emphasized that in most cases, the name
+of an array is converted into the address of its
+first element; one notable exception being when it is the
+operand of sizeof, which is essential if the stuff to
+do with malloc is to work. Another case is when
+an array name is the operand of the & address-of
+operator. Here, it is converted into the address of the
+whole array. What's the difference? Even if you think that
+addresses would be in some way ‘the same’, the critical
+difference is that they have different types. For an array
+of n elements of type T, then the address of
+the first element has type ‘pointer to T’; the address
+of the whole array has type ‘pointer to array of
+n elements of type T’; clearly very different. Here's an
+example of it:
+
+.. code-block:: C
+
+    int ar[10];
+    int *ip;
+    int (*ar10i)[10];       /* pointer to array of 10 ints */
+
+    ip = ar;                /* address of first element */
+    ip = &ar[0];            /* address of first element */
+    ar10i = &ar;            /* address of whole array */
+
+Where do pointers to arrays matter? Not often, in truth,
+although of course we know that declarations that look like
+multidimensional arrays are really arrays of arrays. Here is an
+example which uses that fact, but you'll have to work
+out what it does for yourself. It is not common
+to do this sort of thing in practice:
+
+.. code-block:: C
+
+    int ar2d[5][4];
+    int (*ar4i)[4]; /* pointer to array of 4 ints */
+
+    for(ar4i= ar2d; ar4i < &(ar2d[5]); ar4i++)
+          (*ar4i)[2] = 0; /* ar2d[n][2] = 0 */
+
+More important than addresses of arrays is what happens when
+you declare a function that takes an array as an
+argument. Because of the ‘conversion to the address of its
+first element’ rule, even if you do try to pass
+an array to a function by giving its name as
+an argument, you actually end up passing a pointer to
+its first element. The usual rule really does apply in
+this case! But what if you declare that the function
+does have an argument whose type is ‘array of something’—like this:
+
+.. code-block:: C
+
+    void f(int ar[10]);
+
+What happens? The answer may suprise you slightly. The compiler
+looks at that and says to itself ‘Ho ho. That's
+going to be a pointer when the function is called’
+and then rewrites the parameter type to be a pointer.
+As a result, all three of these declarations are identical:
+
+.. code-block:: C
+
+    void f(int ar[10]);
+    void f(int *ar);
+    void f(int ar[]);       /* since the size of the array is irrelevant! */
+
+Having seen that, your reaction might be to look for
+a solid object to bang your head against for a
+while, but we don't recommend it. Take a grip on
+yourself instead and put in the effort to work out:
+
+    Why that is isn't really such a shock
+
+    Why, given a function declaration like that, then within the
+    function, expressions of the form ar[5] and so on work as expected anyhow
+
+Give that last one some thought. When you get to
+the bottom of it, you really will have grasped what
+arrays and pointers are about.
+
 Summary
 ^^^^^^^
+You have been introduced to arrays, pointers and the storage
+allocater. The last of the topics will prove to be
+more useful in the next chapter, but the other two
+are are central to the language.
+
+You cannot use C properly without understanding the use of
+pointers. Arrays are simple and unsurprising, except for the fact
+that when it's used in an expression, an array name
+usually converts into a pointer to its first element; that
+often takes time to sink in.
+
+The C approach to support for strings often causes raised
+eyebrows. The null-terminated array of character model is both powerful
+and flexible. The fact that string manipulation is not built
+in to the language at first glance seems to rule
+C out of serious contention for character-oriented work, yet that
+is exactly where the language scores well compared with the
+alternatives, at least when speed is important. All the same,
+it's hard work for the programmer.
+
+Pointer arithmetic is easy and extremely convenient. It's harder for
+ex-assembler programmers to learn, because of the tendency to try
+to translate it into what they ‘know’ the machine is
+doing. However, much harder for people with very low-level experience
+is the idea of the non-equivalence of pointers of different
+types. Try hard to throw away the idea that pointers
+contain addresses (in the hardware sense) and it will repay
+the effort.
+
+The facility to obtain arbitrary pieces of storage using malloc
+and the associated stuff is extremely important. You might wish
+to defer it for a while, but don't leave it
+for too long. An obvious feature of C programs written
+by inexperienced users is their dependence on fixed size arrays.
+Malloc gives you considerably more flexibility and is worth the
+effort to learn about.
+
+The examples of the use of sizeof should help to
+eliminate a few common misconceptions about what it does. You
+may not use it all that often, but when you
+do need it, there's no substitute.
 
 Exercises
 ^^^^^^^^^
+Exercise 5.1. What is the valid range of indices for
+an array of ten objects?
+
+Exercise 5.2. What happens if you take the address of
+the 11th member of that array?
+
+Exercise 5.3. When is it valid to compare the values
+of two pointers?
+
+Exercise 5.4. What is the use of a pointer to
+void?
+
+Exercise 5.5. Write functions which:
+
+    Compare two strings for equality. If they are equal, zero
+    is returned, otherwise the difference in value between the first
+    two non-matching characters.
+
+    Find the first occurrence of a specific character in a
+    given string. Return a pointer to the occurrence in the
+    string, or zero if it is not found.
+
+    Take two strings as arguments. If the first exists in
+    the second as a substring, return a pointer to the
+    first occurrence, otherwise zero.
+
+Exercise 5.6. Explain the examples using malloc to somebody else.
