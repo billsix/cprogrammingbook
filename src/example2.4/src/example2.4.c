@@ -3,10 +3,9 @@
 #include <stdlib.h>
 
 int main() {
-  int32_t this_char, comma_count, stop_count;
-
-  comma_count = stop_count = 0;
-  this_char = getchar();
+  int32_t comma_count = 0;
+  int32_t stop_count = 0;
+  int32_t this_char = getchar();
   while (this_char != EOF) {
     if (this_char == '.')
       stop_count = stop_count + 1;

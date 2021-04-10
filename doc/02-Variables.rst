@@ -80,7 +80,7 @@ It turns out that most of the commonly used computer alphabets
 contain all the symbols that are needed for C with a
 few notorious exceptions. The C alphabetic characters shown below are missing
 from the International Standards Organization ISO 646 standard 7-bit character
-set, which is as a subset of all the widely used computer alphabets. 
+set, which is as a subset of all the widely used computer alphabets.
 
     # [ \ ] ^ { | } ~
 
@@ -956,7 +956,7 @@ must always be true for an unsigned variable.
 For both the signed and unsigned integral types there are three
 subtypes: short, ordinary and long. Taking those into account, here is
 a list of all of the possible integral types in C,
-except for the character types:::
+except for the character types:
 
     unsigned short int
 
@@ -1000,9 +1000,9 @@ save more space.
 Summary of integral types
 
     The integral types are the short, long, signed, unsigned and plain ints.
-    
+
     The commonest is the ordinary int, which is signed unless declared not to be.
-    
+
     The char variables can be made signed or unsigned, as you prefer, but
     in the absence of indications to the
     contrary, they will be allocated the most efficient type.
@@ -1121,7 +1121,7 @@ into play when expressions mix pointer types with arithmetic types and
 these are discussed much later.
 
 There are various types of conversion
-in arithmetic expressions:::
+in arithmetic expressions:
 
     The integral promotions
 
@@ -1158,7 +1158,7 @@ Integral promotions
 No arithmetic is done by C at a precision shorter than
 int, so these conversions are implied almost whenever you use one
 of the objects listed below in an expression. The conversion is
-defined as follows: 
+defined as follows:
 
     Whenever a short or a char (or a bitfield or
     enumeration type which we haven't met yet) has the integral
@@ -1250,16 +1250,37 @@ A lot of expressions involve the use of subexpressions of mixed
 types together with operators such as +, \* and so on. If the
 operands in an expression have different types, then there will have
 to be a conversion applied so that a common resulting type
-can be established; these are the conversions:::
+can be established; these are the conversions:
 
-    If either operand is a long double, then the other one is converted to long double and that is the type of the result.
-    Otherwise, if either operand is a double, then the other one is converted to double, and that is the type of the result.
-    Otherwise, if either operand is a float, then the other one is converted to float, and that is the type of the result.
-    Otherwise the integral promotions are applied to both operands and the following conversions are applied:
-        If either operand is an unsigned long int, then the other one is converted to unsigned long int, and that is the type of the result.
-        Otherwise, if either operand is a long int, then the other one is converted to long int, and that is the type of the result.
-        Otherwise, if either operand is an unsigned int, then the other one is converted to unsigned int, and that is the type of the result.
-        Otherwise, both operands must be of type int, so that is the type of the result.
+    If either operand is a long double, then the other
+    one is converted to long double and that is the
+    type of the result.
+
+    Otherwise, if either operand is a double, then the other
+    one is converted to double, and that is the type
+    of the result.
+
+    Otherwise, if either operand is a float, then the other
+    one is converted to float, and that is the type
+    of the result.
+
+    Otherwise the integral promotions are applied to both operands and
+    the following conversions are applied:
+
+        If either operand is an unsigned long int, then the
+        other one is converted to unsigned long int, and that
+        is the type of the result.
+
+        Otherwise, if either operand is a long int, then the
+        other one is converted to long int, and that is
+        the type of the result.
+
+        Otherwise, if either operand is an unsigned int, then the
+        other one is converted to unsigned int, and that is
+        the type of the result.
+
+        Otherwise, both operands must be of type int, so that
+        is the type of the result.
 
 The Standard contains a strange sentence: ‘The values of floating operands
 and of the results of floating expressions may be represented in
@@ -1462,7 +1483,7 @@ Assuming that chars, ints and longs are respectively 8, 16 and
 32 bits long, and that char defaults to unsigned char on
 a given system, what is the resulting type of expressions involving
 the following combinations of variables, after the usual arithmetic conversions have
-been applied? 
+been applied?
 
     Simply signed char.
 
@@ -2058,14 +2079,14 @@ means a multiplied by something, where the something is an expression
 involving b and several unary * operators.
 
 It's not too difficult to work out which are the
-unary operators; here are the rules. 
+unary operators; here are the rules.
 
     ++ and - are always unary operators.
-    
+
     The operator immediately to the right of an operand is
     a binary operator unless (1) applies, when the operator to
     its right is binary.
-    
+
     All operators to the left of an operand are unary unless (2) applies.
 
 Because the unary operators have very high precedence, you can work
@@ -2243,21 +2264,21 @@ invented a new way of working out what type an
 integer constant is. In the old days, if the constant
 was too big for an int, it got promoted to
 a long (without warning). Now, the rule is that a
-plain decimal constant will be fitted into the first in this list 
+plain decimal constant will be fitted into the first in this list
 
     int   long   unsigned long
 
 that can hold the value.
 
-Plain octal or hexadecimal constants will use this list 
+Plain octal or hexadecimal constants will use this list
 
     int   unsigned int   long   unsigned long
 
-If the constant is suffixed by u or U: 
+If the constant is suffixed by u or U:
 
     unsigned int   unsigned long
 
-If it is suffixed by l or L: 
+If it is suffixed by l or L:
 
     long   unsigned long
 
@@ -2428,42 +2449,42 @@ integral value which can be stored in a char.
 2.9.2. Real constants
 ~~~~~~~~~~~~~~~~~~~~~
 
-These follow the usual format: 
+These follow the usual format:
 
     1.0
-    
+
     2.
-    
+
     .1
-    
+
     2.634
-    
+
     .125
-    
+
     2.e5
-    
+
     2.e+5
-    
+
     .125e-3
-    
+
     2.5e5
-    
+
     3.1E-6
-    
+
 
 and so on. For readability, even if part of the
-number is zero, it is a good idea to show it: 
+number is zero, it is a good idea to show it:
 
     1.0
-    
+
     0.1
 
 The exponent part shows the number of powers of ten
-that the rest of the number should be raised to, so 
+that the rest of the number should be raised to, so
 
     3.0e3
 
-is equivalent in value to the integer constant 
+is equivalent in value to the integer constant
 
     3000
 
@@ -2550,14 +2571,14 @@ and constants with the appropriate type names, show how the
 type of the expression is derived by replacing the highest
 precedence expressions with its resulting type.
 
-The variables are: 
+The variables are:
 
     char c;
-    
+
     int i;
-    
+
     unsigned u;
-    
+
     float f;
 
 For example: i = u+1; parenthesizes as (i = (u + 1));
