@@ -1,8 +1,26 @@
 Specialized areas
 =================
 
-Purpose
-^^^^^^^
+Government Health Warning
+-------------------------
 
-Learn how to open a window, make a black screen, and close
-the window.
+Foo
+~~~
+
+Bar
+^^^
+
+Declarations, Definitions and Accessibility
+-------------------------------------------
+
+Typedef
+-------
+
+Const and volatile
+------------------
+
+Sequence points
+---------------
+
+Summary
+-------

@@ -3,7 +3,7 @@ Control flow
 
 
 The Task ahead
-^^^^^^^^^^^^^^
+--------------
 
 In this chapter we look at the various ways that
 the control of flow statements can be used in a
@@ -80,40 +80,40 @@ result is of type int. This example shows how they work.
 
 Example 3.1
 
-Which produces this on its standard output: 
+Which produces this on its standard output:
 
     value of i is -10, i == 0 = 0, i > -5 = 0
-    
+
     value of i is -9, i == 0 = 0, i > -5 = 0
-    
+
     value of i is -8, i == 0 = 0, i > -5 = 0
-    
+
     value of i is -7, i == 0 = 0, i > -5 = 0
-    
+
     value of i is -6, i == 0 = 0, i > -5 = 0
-    
+
     value of i is -5, i == 0 = 0, i > -5 = 0
-    
+
     value of i is -4, i == 0 = 0, i > -5 = 1
-    
+
     value of i is -3, i == 0 = 0, i > -5 = 1
-    
+
     value of i is -2, i == 0 = 0, i > -5 = 1
-    
+
     value of i is -1, i == 0 = 0, i > -5 = 1
-    
+
     value of i is 0, i == 0 = 1, i > -5 = 1
-    
+
     value of i is 1, i == 0 = 0, i > -5 = 1
-    
+
     value of i is 2, i == 0 = 0, i > -5 = 1
-    
+
     value of i is 3, i == 0 = 0, i > -5 = 1
-    
+
     value of i is 4, i == 0 = 0, i > -5 = 1
-    
+
     value of i is 5, i == 0 = 0, i > -5 = 1
-    
+
 
 In this probably mistaken piece of code, what do you
 think happens?
@@ -139,7 +139,7 @@ We will look at
 each one in turn.
 
 Control of flow
-^^^^^^^^^^^^^^^
+---------------
 
 The if statement
 ~~~~~~~~~~~~~~~~
@@ -514,7 +514,7 @@ int here, and some compilers would forcibly truncate longer types,
 giving rise on rare occasions to some very obscure bugs.
 
 The major restriction
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 The biggest problem with the switch statement is that it
 doesn't allow you to select mutually exclusive courses of
@@ -536,7 +536,7 @@ Example 3.6
 The break has further uses. Its own section follows soon.
 
 Integral Constant Expression
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Although Chapter 6 deals with constant expressions, it is worth
 looking briefly at what an integral constant expression is, since
@@ -700,7 +700,7 @@ to complete the picture of flow of control in C
 is to finish off the logical operators.
 
 More logical expressions
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 This chapter has already shown how C makes no distinction
 between ‘logical’ and other values. The relational operators all give
@@ -822,7 +822,7 @@ a! Some distinctly unexpected behaviour has been caused by that
 sort of error.
 
 Strange operators
-^^^^^^^^^^^^^^^^^
+-----------------
 
 There are two operators left to mention which look
 decidedly odd. They aren't ‘essential’, but from time
@@ -867,7 +867,7 @@ contains a constant (1) of type int and another (3.5)
 of type double. Applying the arithmetic conversions gives a
 result of type double.
 
-Other combinations are also permitted. 
+Other combinations are also permitted.
 
     If both operands are of compatible structure or union types,
     then that is the type of the result.
@@ -875,22 +875,22 @@ Other combinations are also permitted.
     If both operands have void type, then that is the
     type of the result.
 
-Various pointer types can be mixed. 
+Various pointer types can be mixed.
 
     Both operands may be pointers to (possibly qualified) compatible types.
-    
+
     One operand may be a pointer and the other a null pointer constant.
-    
+
     One operand may be a pointer to an object or
     incomplete type and the other a pointer to (possibly qualified) void.
 
 The type of the result when pointers are involved is
-derived in two separate steps. 
+derived in two separate steps.
 
     If either of the operands is a pointer to a
     qualified type, the result is a pointer to a type
     that is qualified by all the qualifiers of both operands.
-    
+
     If one operand is a null pointer constant, then the
     result has the type of the other operand. If one
     operand is a pointer to void, the other operand is
@@ -952,7 +952,7 @@ points described in Chapter 8.
 
 
 Summary
-^^^^^^^
+-------
 
 This chapter has described the entire range of control of
 flow available in C. The only areas that cause even
@@ -982,7 +982,7 @@ comma operators). They are essential to the practical use of
 the language, and none of the material is hard.
 
 Exercises
-^^^^^^^^^
+---------
 
 Exercise 3.1. What is the type and value of the result of
 the relational operators?

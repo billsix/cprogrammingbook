@@ -2,7 +2,8 @@ Introduction
 ============
 
 The form of a C program
-^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
+
 If you're used to the block-structured form of, say, Pascal, then
 at the outer level the layout of a C program may surprise you.
 If your experience lies in the FORTRAN camp you will find it closer
@@ -57,7 +58,8 @@ Furthermore, the extensive use that C makes of libraries means that even trivial
 programs pass through the loader, although that might not be obvious at the first glance or to the newcomer.
 
 Functions
-^^^^^^^^^
+---------
+
 
 A C program is built up from a collection of items such as
 functions and what we could loosely call global variables. All of these things
@@ -102,7 +104,8 @@ an end. Here's a simple program containing two functions:
    :linenos:
 
 A description of Example 1.1
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
+
 
 What was in it
 ~~~~~~~~~~~~~~
@@ -330,7 +333,7 @@ Summary
 
     Declarations are used to introduce the name of a function, its return type
     and the type (if any) of its arguments.
-    
+
     A function definition is a declaration with the body of the function given
     too.
 
@@ -584,7 +587,7 @@ features, amongst them:
 although of course none of this has been covered rigorously.
 
 Some more programs
-^^^^^^^^^^^^^^^^^^
+------------------
 
 While we're still in the informal phase, let's look at two
 more examples. You will have to work out for yourself what some of
@@ -792,7 +795,8 @@ Summary
     A n-element array has members which number from 0 to n-1 only. Element n does not exist and to access it is a big mistake.
 
 Terminology
-^^^^^^^^^^^
+-----------
+
 In C programs there are two distinct types of things: things used to
 hold values and things that are functions. Instead of having to refer to
 them jointly with a clumsy phrase that maintains the distinction, we think that
@@ -811,7 +815,8 @@ to include functions and we will explicitly use the terms ‘data objects’ and
 Be prepared to find this slight difference in meaning if you do read the Standard
 
 Summary
-^^^^^^^
+-------
+
 This chapter has introduced many of the basics of the language although informally.
 Functions, in particular, form the basic building block for C. Chapter 4 provides
 a full description of these fundamental objects, but you should by now understand
@@ -832,7 +837,8 @@ Only the use of structured data types still remains to be introduced, although
 arrays have had a very brief airing.
 
 Exercises
-^^^^^^^^^
+---------
+
 Exercise 1.1. Type in and test Example 1.1 on your system.
 
 Exercise 1.2. Using Example 1.2 as a pattern, write a program

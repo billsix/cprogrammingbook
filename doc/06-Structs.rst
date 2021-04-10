@@ -2,7 +2,7 @@ Structures
 ==========
 
 History
-^^^^^^^
+-------
 
 The development of the early computer languages went either one
 way or the other. COBOL concentrated on the structure of
@@ -48,7 +48,8 @@ most users' needs over the years and remain essentially unchanged
 by the Standard.
 
 Structures
-^^^^^^^^^^
+----------
+
 Arrays allow for a named collection of identical objects. This
 is suitable for a number of tasks, but isn't really
 very flexible. Most real data objects are complicated things with
@@ -712,7 +713,7 @@ Example 6.10
 
 
 Unions
-^^^^^^
+------
 
 Unions don't take long to explain. They are the same
 as structures, except that, where you would have written struct
@@ -795,7 +796,7 @@ Anyhow, the union business gives the Standard a good excuse
 to avoid the issue by not supporting structure comparison.
 
 Bitfields
-^^^^^^^^^
+---------
 
 While we're on the subject of structures, we might as
 well look at bitfields. They can only be declared inside
@@ -840,7 +841,7 @@ Bit fields do not have addresses—you can't have pointers to
 them or arrays of them.
 
 Enums
-^^^^^
+-----
 
 These fall into the category of ‘half baked’. They aren't
 proper enumerated types, as in Pascal, and only really serve
@@ -908,7 +909,7 @@ will be an integral type whose address can be assigned
 to ep without violating the type-compatibility requirements for pointers.
 
 Qualifiers and derived types
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 Arrays, structures and unions are ‘derived from’ (contain) other types;
 none of them may be derived from incomplete types. This
@@ -930,7 +931,8 @@ it is not modifiable—so a structure that contains a const
 cannot be on the left-hand side of an assignment operator.
 
 Initialization
-^^^^^^^^^^^^^^
+--------------
+
 Now that we have seen all of the data types supported
 by C, we can look at the subject of initialization.
 C allows ordinary variables, structures, unions and arrays to be
@@ -1166,7 +1168,7 @@ Our test compiler didn't notice that one, either.
 
 
 Summary
-^^^^^^^
+-------
 
 You now understand structures and unions. Bitfields and enumeration types really
 are not very important and you could manage quite well without
@@ -1199,7 +1201,7 @@ full low-down read the Standard, which is uncharacteristically penetrable when i
 discusses the matter; verging at times on lucidity.
 
 Exercises
-^^^^^^^^^
+---------
 
 Exercise 6.1. What is the declaration of an untagged structure containing
 two ints called a and b?

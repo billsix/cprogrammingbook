@@ -3,7 +3,7 @@ Preprocessor
 
 
 Effect of the Standard
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 There's a neither-fish-nor-fowl feel to the preprocessor. It leads an uncomfortable
 existence bolted on to the side of C without the benefit
@@ -51,7 +51,7 @@ of that, we don't try too hard to give an easy
 introduction in this chapter, but concentrate on getting down to detail.
 
 How the preprocessor works
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 Although the preprocessor (Figure 7.1) is probably going to be implemented as an integral part of an Standard C compiler, it can equally well be though of as a separate program which transforms C source code containing preprocessor directives into source code with the directives removed.
 Diagram showing source code passing through a preprocessor to become 'preprocessed source', which is then fed into the rest of the compiler.
@@ -117,7 +117,7 @@ The ‘almost any character’ above means any character except ‘>’ or newli
 
 
 Directives
-^^^^^^^^^^
+----------
 
 Directives are always introduced by a line that starts with
 a #character, optionally preceded by white space characters (although it
@@ -239,7 +239,7 @@ is:
     #w-s define w-s XXX w-s abc w-s def w-s hij w-s
 
 Macro substitution
-~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^
 
 Where will occurrences of the macro name cause the replacement
 text to be substituted in its place? Practically anywhere in
@@ -338,7 +338,7 @@ as follows:
 
 
 Stringizing
-~~~~~~~~~~~
+^^^^^^^^^^^
 
 There is special treatment for places in the macro replacement
 text where one of the macro formal parameters is found
@@ -362,7 +362,7 @@ This example demonstrates the feature:
     */
 
 Token pasting
-~~~~~~~~~~~~~
+^^^^^^^^^^^^^
 
 A ##operator may occur anywhere in the replacement text for
 a macro except at the beginning or end. If a
@@ -389,7 +389,7 @@ operation, involving rescanning (which is described next).
     some replacement text
 
 Rescanning
-~~~~~~~~~~
+^^^^^^^^^^
 
 Once the processing described above has occurred, the replacement text
 plus the following tokens of the source file is rescanned,
@@ -443,7 +443,7 @@ If that doesn't make your brain hurt, then go and
 read what the Standard says about it, which will.
 
 Notes
-~~~~~
+^^^^^
 
 There is a subtle problem when using arguments to function
 macros.
@@ -898,7 +898,7 @@ compilation error and message.
 
 
 Summary
-^^^^^^^
+-------
 
 To be honest, although many of the facilities provided by
 the preprocessor undoubtedly provide extra power and flexibility, it really
@@ -931,7 +931,7 @@ when they fully understand C, techniques of software quality control.
 The world would be a better place.
 
 Exercises
-^^^^^^^^^
+---------
 
 These exercises are intended to test only a basic understanding
 of the preprocessor, suitable for a beginner. Many users will

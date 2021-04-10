@@ -2,7 +2,7 @@ Functions
 =========
 
 Changes
-^^^^^^^
+-------
 The single worst feature of Old C was that there
 was no way to declare the number and types of
 a function's arguments and to have the compiler check
@@ -37,7 +37,7 @@ Footnotes
 1. Stroustrup B. (1991). The C++ Programming Language 2nd edn. Reading, MA: Addison-Wesley
 
 The type of functions
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 All functions have a type: they return a value of
 that type whenever they are used. The reason that C
@@ -97,14 +97,14 @@ now. This is one of the times that the use
 of an appropriate technical term really does reduce the amount
 of repetitive descriptive text that would be needed. With a
 bit of luck, the result is a shorter, more accurate
-and less confusing explanation. Here are the terms. 
+and less confusing explanation. Here are the terms.
 
      declaration
-     
+
          The point at which a name has a type associated with it.
-	 
+
      definition
-     
+
          Also a declaration, but at this point some
 	 storage is reserved for the named object. The
 	 rules for what makes a declaration into a
@@ -112,18 +112,18 @@ and less confusing explanation. Here are the terms.
 	 functions: You turn a function declaration into a
 	 definition by providing a body for the function
 	 in the form of a compound statement.
-	 
+
      formal parameters
-     
+
      parameters
-     
+
          These are the names used inside a function
 	 to refer to its arguments.
-	 
+
      actual arguments
-     
+
      arguments
-     
+
          These are the values used as arguments when
 	 the function is actually called. In other words,
 	 the values that the formal parameters will have
@@ -455,10 +455,10 @@ using the ellipsis notation in the prototype that is explained
 in Chapter 9.
 
 The rules mention the default argument promotions and compatible type.
-Where they are used, the default argument promotions are: 
+Where they are used, the default argument promotions are:
 
     Apply the integral promotions (see Chapter 2) to the value of each argument
-    
+
     If the type of the argument is float it is converted to double
 
 The introduction of prototypes (amongst other things) has increased the
@@ -472,7 +472,7 @@ are indisputably compatible.
 
 The conversions are applied according to these
 rules (which are intended to be guidance on how to
-apply the Standard, not a direct quote): 
+apply the Standard, not a direct quote):
 
     At the point of calling a function, if no prototype
     is in scope, the arguments all undergo the default argument
@@ -568,7 +568,7 @@ of the definition.
 The Standard warns that support for this syntax may disappear
 in a later version. It will not be discussed further.
 
-Summary 
+Summary
 
     Functions can be called recursively.
 
@@ -581,7 +581,7 @@ Summary
 
     Undefined behaviour results if you call or define a function
     anywhere in a program unless either
-    
+
         a prototype is always in scope for every call or
 	definition, or
         you are very, very careful.
@@ -687,7 +687,7 @@ Footnotes
 1. Stroustrup B. (1991). The C++ Programming Language 2nd edn. Reading, MA: Addison-Wesley
 
 Recursion and argument passing
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
 So far, we've seen how to give functions a type
 (how to declare the return value and the type of any
@@ -860,7 +860,7 @@ Footnotes
 1. Stroustrup B. (1991). The C++ Programming Language 2nd edn. Reading, MA: Addison-Wesley
 
 Linkage
-^^^^^^^
+-------
 
 Although the simple examples have carefully avoided the topic, we now
 have to look into the effects of scope and linkage, terms
@@ -942,19 +942,19 @@ and the types of object are both described by the terms
 ‘internal’ and ‘external’; this is to some extent historical. C archaeologists
 may know that at one time the two were equivalent and
 one implied the other—for us it's unfortunate that the
-terms remain but the meanings have diverged. To summarize: 
+terms remain but the meanings have diverged. To summarize:
 
 
-  
-+--------------------+-----------------+------------------------------+  
+
++--------------------+-----------------+------------------------------+
 |    Type of linkage +  Type of object + Accessibility                |
 +====================+=================+==============================+
 |    external 	     |  external       | throughout the program       |
-+--------------------+-----------------+------------------------------+  
++--------------------+-----------------+------------------------------+
 |    internal 	     |  external       | a single file                |
-+--------------------+-----------------+------------------------------+  
++--------------------+-----------------+------------------------------+
 |    none 	     |  internal       | local to a single function   |
-+--------------------+-----------------+------------------------------+  
++--------------------+-----------------+------------------------------+
 
 Table 4.1. Linkage and accessibility
 
@@ -978,7 +978,7 @@ Example 4.9
 
 Although the full set of rules is a bit more complex,
 the basic way of working out what constitutes a definition and
-a declaration is not hard: 
+a declaration is not hard:
 
     A function declaration without a body for the function is
     just a declaration.
@@ -1144,16 +1144,16 @@ Footnotes
 1. Stroustrup B. (1991). The C++ Programming Language 2nd edn. Reading, MA: Addison-Wesley
 
 Summary
-^^^^^^^
+-------
 
 With the appropriate declarations, you can have names that are visible
 throughout the program or limited to a single file or limited
 to a single function, as appropriate.
 
 Here are the combinations of the use of the keywords, the
-types of declarations and the resulting linkage: 
+types of declarations and the resulting linkage:
 
-+--------------------+-----------------+------------------------------+--------------------------+-------------------+  
++--------------------+-----------------+------------------------------+--------------------------+-------------------+
 | Declaration        + Keyword         +  Resulting Linkage           | Accessability            | Note              |
 +====================+=================+==============================+==========================+===================+
 | external           | none            | external                     | entire program           | 2                 |
@@ -1180,7 +1180,7 @@ initialization of zero.
 Table 4.2. Summary of Linkage
 
 There are a few golden rules for the use of functions
-that are worth re-stating too. 
+that are worth re-stating too.
 
     To use a function returning other than int, a declaration
     or definition must be in scope.
@@ -1224,7 +1224,7 @@ Footnotes
 1. Stroustrup B. (1991). The C++ Programming Language 2nd edn. Reading, MA: Addison-Wesley
 
 Exercises
-^^^^^^^^^
+---------
 
 If you skipped the section on Linkage, then Exercise 4.2,
 Exercise 4.3, and Exercise 4.4 will cause you problems;

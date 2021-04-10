@@ -4,7 +4,7 @@ Preface
 
 
 About This Book
-^^^^^^^^^^^^^^^
+---------------
 
 This book was written with two groups of readers in
 mind. Whether you are new to C and want to
@@ -59,7 +59,8 @@ of C and the Standard Library to solve a number
 of small problems.
 
 The Success of C
-^^^^^^^^^^^^^^^^
+----------------
+
 C is a remarkable language. Designed originally by one man, Dennis Ritchie,
 working at AT&T Bell Laboratories in New
 Jersey, it has increased in use until now it may
@@ -165,7 +166,8 @@ usually extend it to do what you do want, or
 bypass it altogether.
 
 Standards
-^^^^^^^^^
+---------
+
 Remarkably, C achieved its success in the absence of a
 formal standard. Even more remarkable is that during this period
 of increasingly widespread use, there has never been any serious
@@ -173,7 +175,7 @@ divergence of C into the number of dialects that has
 been the bane of, for example, BASIC. In fact, this
 is not so surprising. There has always been a “language
 reference manual”, the widely-known book written by Brian Kernighan
-and Dennis Ritchie, usually referred to as simply “K&R”. 
+and Dennis Ritchie, usually referred to as simply “K&R”.
 
     The C Programming Language,
     B.W. Kernighan and D. M. Ritchie,
@@ -234,7 +236,8 @@ Standard was given on December 7th, 1989.
 
 
 Hosted and Free-Standing Environments
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------
+
 The dependency on the use of libraries to extend the
 language has an important effect on the practical use of
 C. Not only are the Standard I/O Library functions important
@@ -288,7 +291,8 @@ Chapter 9 describes the names and uses of the library
 functions.
 
 Typographical conventions
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
+
 The book tries to keep a consistent style in its
 use of special or technical terms. Words with a special
 meaning to C, such as reserved words or the names
@@ -310,7 +314,8 @@ because of surrounding context. Anything else is at the whim
 of the authors, or simply by accident.
 
 Order of topics
-^^^^^^^^^^^^^^^
+---------------
+
 The order of presentation of topics in this book loosely
 follows the order that is taught in The Instruction Set's
 introductory course. It starts with an overview of the
@@ -326,7 +331,8 @@ render Chapter 1 a bit slow, but it is still
 worth persevering with it, if only once.
 
 Example programs
-^^^^^^^^^^^^^^^^
+----------------
+
 All but the smallest of the examples shown in the
 text have been tested using a compiler that claims to
 conform to the Standard. As a result, most of them
@@ -337,7 +343,8 @@ careful checking, some errors are bound to creep in. Please
 be understanding with any errors that you may find.
 
 Deference to Higher Authority
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
+
 This book is an attempt to produce a readable and
 enlightening description of the language defined by the Standard. It
 sets out to to make interpretations of what the Standard
@@ -355,8 +362,9 @@ meant to be accurate and unambiguous; look nowhere else for
 the authoritative last word.
 
 Address for the Standard
-^^^^^^^^^^^^^^^^^^^^^^^^
-Copies of the Standard can be obtained from: 
+------------------------
+
+Copies of the Standard can be obtained from:
 
     X3 Secretariat,
     CBEMA,

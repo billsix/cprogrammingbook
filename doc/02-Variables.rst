@@ -3,7 +3,7 @@ Variables & arithmetic
 
 
 Some fundamentals
-^^^^^^^^^^^^^^^^^
+-----------------
 
 Here is where we start to look in detail at the
 bits that the last chapter chose to sweep under the carpet
@@ -28,7 +28,7 @@ indigestible lump.
 It's time to introduce some of the fundamentals.
 
 The alphabet of C
-^^^^^^^^^^^^^^^^^
+-----------------
 
 This is an interesting area; alphabets are important. All the same
 , this is the one part of this chapter that you can
@@ -252,7 +252,7 @@ Summary
 
 
 The Textual Structure of Programs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------
 
 Program Layout
 ~~~~~~~~~~~~~~
@@ -381,7 +381,7 @@ but these are the important ones):
 Each stage is completed before the next is started.
 
 Keywords and identifiers
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 After covering the underlying alphabet, we can look at more interesting
 elements of C. The most obvious of the language elements are
@@ -490,7 +490,7 @@ to less than 31 characters as obsolescent features. A later standard
 may insist that the restrictions are lifted; let's hope that it is soon.
 
 Declaration of variables
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 You may remember that in Chapter 1 we said that you
 have to declare the names of things before you can use
@@ -561,7 +561,7 @@ Exercise 2.9. What is a definition?
 Now we go on to look at the type of variables and expressions.
 
 Real types
-^^^^^^^^^^
+----------
 
 It's easier to deal with the real types first because
 there's less to say about them and they don't
@@ -738,7 +738,7 @@ Exercise 2.14. What predictions can you make about a program showing ‘undefine
 
 
 Integral types
-^^^^^^^^^^^^^^
+--------------
 
 The real types were the easy ones. The rules for the
 integral types are more complicated, but still tolerable, and these rules
@@ -1051,7 +1051,7 @@ A full description of the format codes that you can use
 with printf is given in Chapter 9.
 
 Expressions and arithmetic
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 Expressions in C can get rather complicated because of the number
 of different types and operators that can be mixed together. This
@@ -1153,7 +1153,7 @@ has happened and the intention is to produce the ‘more commonly
 required’ result.
 
 Integral promotions
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^
 
 No arithmetic is done by C at a precision shorter than
 int, so these conversions are implied almost whenever you use one
@@ -1180,7 +1180,7 @@ information has been provided as part of a function prototype, as
 explained in Chapter 4.
 
 Signed and unsigned integers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A lot of conversions between different types of integers are caused
 by mixing the various flavours of integers in expressions. Whenever these
@@ -1223,7 +1223,7 @@ assignment is specified not to involve the integral promotions, so you
 are safe.
 
 Floating and integral
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 Converting a floating to an integral type simply throws away any
 fractional part. If the integral type can't hold the value
@@ -1244,7 +1244,7 @@ be held, chosen in a way that the implementation defines. This
 means that there will be a loss of precision.
 
 The usual arithmetic conversions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A lot of expressions involve the use of subexpressions of mixed
 types together with operators such as +, \* and so on. If the
@@ -1350,7 +1350,7 @@ to use them, and to be perpetually on guard when they
 are mixed with signed numbers.
 
 Wide characters
-~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
 The Standard, as we've already said, now makes allowances for
 extended character sets. You can either use the shift-in shift-out
@@ -1504,7 +1504,7 @@ been applied?
     float, long double.
 
 Casts
-~~~~~
+^^^^^
 
 From time to time you will find that an expression turns
 out not to have the type that you wanted it to
@@ -1564,7 +1564,7 @@ Operators
 ~~~~~~~~~
 
 The multiplicative operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Or, put another way, multiplication \*, division / and the remainder operator %. Multiplication
 and division do what is expected of them for both real
@@ -1598,7 +1598,7 @@ unless b is zero.
 The usual arithmetic conversions are applied to both of the operands.
 
 Additive operators
-~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^
 
 Addition + and subtraction - also follow the rules that you expect. The
 binary operators and the unary operators both have the same symbols,
@@ -1621,7 +1621,7 @@ the binary forms of the operators. Only the integral promotions are
 performed on the operands of the unary forms of the operators.
 
 The bitwise operators
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 One of the great strengths of C is the way that
 it allows systems programmers to do what had, before the advent
@@ -1749,7 +1749,7 @@ operators, and our experience of teaching C has been that
 most people find them easy to learn. Let's move on.
 
 The assignment operators
-~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 No, that isn't a mistake, ‘operators’ was meant to be
 plural. C has several assignment operators, even though we have only
@@ -1843,7 +1843,7 @@ Reiterating: the result of an assignment operator has both the value
 and the type of the object that was assigned to.
 
 Increment and decrement operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is so common to simply add or subtract 1 in
 an expression that C has two special unary operators to do
@@ -2234,7 +2234,7 @@ order within a single expression. (The discussion of ‘sequence points’ in
 Chapter 8 will be of interest if you care about this.)
 
 Constants
-^^^^^^^^^
+---------
 
 2.9.1. Integer constants
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2520,7 +2520,7 @@ In either case followed by an optional one of f, l, F, L, where:
 
 
 Summary
-^^^^^^^
+-------
 
 This has been a lengthy, and perhaps disconcerting chapter.
 
@@ -2563,7 +2563,7 @@ of arithmetic may cause some surprises to experienced C programmers.
 Even they have some real re-learning to do.
 
 Exercises
-^^^^^^^^^
+---------
 
 Exercise 2.17. First, fully parenthesize the following expressions according
 to the precedence and associativity rules. Then, replacing the variables

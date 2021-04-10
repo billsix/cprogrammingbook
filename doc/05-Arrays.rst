@@ -3,7 +3,7 @@ Arrays & pointers
 
 
 Opening shots
-^^^^^^^^^^^^^
+-------------
 
 So why is this important?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -68,7 +68,7 @@ gradually and where appropriate.
 
 
 Arrays
-^^^^^^
+------
 
 Like other languages, C uses arrays as a way of
 describing a collection of variables with identical properties. The group
@@ -222,7 +222,7 @@ tend to replace arrays in the more advanced programs. We
 will see more of this when we look at pointers.
 
 Pointers
-^^^^^^^^
+--------
 
 Using pointers is a bit like riding a bicycle. Just
 when you think that you'll never understand them—suddenly
@@ -878,7 +878,7 @@ As always, it's possible to do things like this
 by accident, too, and to be very surprised by the results.
 
 Character handling
-^^^^^^^^^^^^^^^^^^
+------------------
 
 C is widely used for character and string handling applications.
 This is odd, in some ways, because the language doesn't
@@ -1213,7 +1213,7 @@ for.
 
 
 Sizeof and storage allocation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 The sizeof operator returns the size in bytes of its
 operand. Whether the result of sizeof is unsigned int or
@@ -1479,7 +1479,8 @@ Example 5.15
 
 
 Pointers to functions
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
+
 A useful technique is the ability to have pointers to
 functions. Their declaration is easy: write the declaration as it
 would be for the function, say
@@ -1536,7 +1537,8 @@ But we'll draw a veil over it at this point!
 
 
 Expressions involving pointers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
+
 Because of the introduction of qualified types and of the
 notion of incomplete types, together with the use of void \*,
 there are now some complicated rules about how you
@@ -1732,7 +1734,7 @@ is used with pointers has already been given in Chapter 3.
 
 
 Arrays, the & operator and function declarations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------
 
 We have already emphasized that in most cases, the name
 of an array is converted into the address of its
@@ -1816,7 +1818,8 @@ the bottom of it, you really will have grasped what
 arrays and pointers are about.
 
 Summary
-^^^^^^^
+-------
+
 You have been introduced to arrays, pointers and the storage
 allocater. The last of the topics will prove to be
 more useful in the next chapter, but the other two
@@ -1860,7 +1863,8 @@ may not use it all that often, but when you
 do need it, there's no substitute.
 
 Exercises
-^^^^^^^^^
+---------
+
 Exercise 5.1. What is the valid range of indices for
 an array of ten objects?
 
