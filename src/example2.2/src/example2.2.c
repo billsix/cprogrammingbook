@@ -5,7 +5,7 @@
 #define BOILING 212 /* degrees Fahrenheit */
 
 int main() {
-  int i = 0;
+  int32_t i = 0;
   printf("Fahrenheit to Centigrade\n");
   while (i <= BOILING) {
     long double l_d_var = 5 * (i - 32);

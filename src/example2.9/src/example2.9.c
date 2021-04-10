@@ -3,8 +3,8 @@
 #include <inttypes.h>
 
 int main() {
-  int x = 0;
-  int y = ~0;
+  int32_t x = 0;
+  int32_t y = ~0;
 
   while (x != y) {
     printf("%x & %x = %x\n", x, 0xff, x & 0xff);

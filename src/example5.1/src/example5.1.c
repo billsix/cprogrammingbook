@@ -3,9 +3,9 @@
 #include <inttypes.h>
 
 int main() {
-  int x;
+  int32_t x;
 
-  int *p = &x; /* initialise pointer */
+  int32_t *p = &x; /* initialise pointer */
   *p = 0;      /* set x to zero */
   printf("x is %d\n", x);
   printf("*p is %d\n", *p);

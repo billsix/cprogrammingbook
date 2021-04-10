@@ -18,7 +18,7 @@ int main() {
     exit(EXIT_FAILURE);
   }
 
-  int nstrings = 0; /* count of strings read */
+  int32_t nstrings = 0; /* count of strings read */
   while (nstrings < MAXSTRING && (p_array[nstrings] = next_string()) != 0) {
 
     nstrings++;
@@ -56,7 +56,7 @@ char *next_string() {
   char *destination = (char *)malloc(MAXLEN);
   if (destination != 0) {
     char *cp = destination;
-    int c;
+    int32_t c;
     while ((c = getchar()) != '\n' && c != EOF) {
       if (cp - destination < MAXLEN - 1)
         *cp++ = c;

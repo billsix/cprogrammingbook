@@ -3,17 +3,17 @@
 #include <inttypes.h>
 
 int main() {
-  void pmax(int first, int second); /*declaration*/
-  for (int i = -10; i <= 10; i++) {
-    for (int j = -10; j <= 10; j++) {
+  void pmax(int32_t first, int32_t second); /*declaration*/
+  for (int32_t i = -10; i <= 10; i++) {
+    for (int32_t j = -10; j <= 10; j++) {
       pmax(i, j);
     }
   }
   exit(EXIT_SUCCESS);
 }
 
-void pmax(int a1, int a2) { /*definition*/
-  int biggest;
+void pmax(int32_t a1, int32_t a2) { /*definition*/
+  int32_t biggest;
 
   if (a1 > a2) {
     biggest = a1;

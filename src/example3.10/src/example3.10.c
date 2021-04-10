@@ -4,7 +4,7 @@
 
 int main() {
   /* comma used - this loop has two counters */
-  for (int i = 0, j = 0; i <= 10; i++, j = i * i) {
+  for (int32_t i = 0, j = 0; i <= 10; i++, j = i * i) {
     printf("i %d j %d\n", i, j);
   }
 

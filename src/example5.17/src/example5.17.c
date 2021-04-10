@@ -1,3 +1,5 @@
+#include <inttypes.h>
+
 void (*fparr[])(int, float) = {
     /* initializers */
 };

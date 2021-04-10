@@ -7,15 +7,15 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
-int expr();
-int mul_exp();
-int unary_exp();
-int primary();
+int32_t expr();
+int32_t mul_exp();
+int32_t unary_exp();
+int32_t primary();
 
 int main() {
   for (;;) {
     printf("expression: ");
-    int val = expr();
+    int32_t val = expr();
     if (getchar() != '\n') {
       printf("error\n");
       while (getchar() != '\n')
@@ -27,10 +27,10 @@ int main() {
   exit(EXIT_SUCCESS);
 }
 
-int expr() {
-  int val = mul_exp();
+int32_t expr() {
+  int32_t val = mul_exp();
   for (;;) {
-    const int ch_in = getchar();
+    const int32_t ch_in = getchar();
     switch (ch_in) {
     default:
       ungetc(ch_in, stdin);
@@ -45,10 +45,10 @@ int expr() {
   }
 }
 
-int mul_exp() {
-  int val = unary_exp();
+int32_t mul_exp() {
+  int32_t val = unary_exp();
   for (;;) {
-    const int ch_in = getchar();
+    const int32_t ch_in = getchar();
     switch (ch_in) {
     default:
       ungetc(ch_in, stdin);
@@ -66,10 +66,10 @@ int mul_exp() {
   }
 }
 
-int unary_exp() {
-  int val;
+int32_t unary_exp() {
+  int32_t val;
 
-  const int ch_in = getchar();
+  const int32_t ch_in = getchar();
   switch (ch_in) {
   default:
     ungetc(ch_in, stdin);
@@ -85,10 +85,10 @@ int unary_exp() {
   return val;
 }
 
-int primary() {
-  int val;
+int32_t primary() {
+  int32_t val;
 
-  const int ch_in = getchar();
+  const int32_t ch_in = getchar();
   if (ch_in >= '0' && ch_in <= '9') {
     val = ch_in - '0';
     goto out;

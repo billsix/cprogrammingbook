@@ -1,10 +1,13 @@
+#include <inttypes.h>
+
+
 /* example library module */
 /* only 'callable' is visible outside */
-static int buf[100];
-static int length;
+static int32_t buf[100];
+static int32_t length;
 static void fillup();
 
-int callable() {
+int32_t callable() {
   if (length == 0) {
     fillup();
   }

@@ -1,6 +1,7 @@
+#include <inttypes.h>
 
 struct list_ele {
-  int data;
+  int32_t data;
   struct list_ele *pointer;
 } ar[3];
 

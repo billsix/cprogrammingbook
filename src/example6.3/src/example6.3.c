@@ -1,7 +1,9 @@
+#include <inttypes.h>
+
 struct s_1; /* incomplete type */
 
 struct s_2 {
-  int something;
+  int32_t something;
   struct s_1 *sp;
 };
 

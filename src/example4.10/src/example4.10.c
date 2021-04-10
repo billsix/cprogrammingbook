@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
-int callable();
+int32_t callable();
 
 int main() {
-  int callable_val = callable();
+  int32_t callable_val = callable();
   printf("%d\n", callable_val);
   exit(EXIT_SUCCESS);
 }

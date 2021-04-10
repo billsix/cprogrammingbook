@@ -6,7 +6,7 @@
 int main() {
   double sq_root(double); /* prototype */
 
-  for (int i = 1; i < 100; i++) {
+  for (int32_t i = 1; i < 100; i++) {
     printf("root of %d is %f\n", i, sq_root(i));
   }
   exit(EXIT_SUCCESS);

@@ -5,11 +5,11 @@
 /*
  * Illustrates casts.
  * For each of the numbers between 2 and 20,
- * print the percentage difference between it and the one
+ * print32_t the percentage difference between it and the one
  * before
  */
 int main() {
-  int curr_val = 2;
+  int32_t curr_val = 2;
   while (curr_val <= 20) {
     /*
      * % difference is

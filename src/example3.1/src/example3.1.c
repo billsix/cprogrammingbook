@@ -3,7 +3,7 @@
 #include <inttypes.h>
 
 int main() {
-  int i = -10;
+  int32_t i = -10;
   while (i <= 5) {
     printf("value of i is %d, ", i);
     printf("i == 0 = %d, ", i == 0);

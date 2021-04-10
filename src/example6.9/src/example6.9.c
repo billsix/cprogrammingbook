@@ -3,7 +3,7 @@
 #include <inttypes.h>
 
 struct tree_node {
-  int data;
+  int32_t data;
   struct tree_node *left_p, *right_p;
 };
 
@@ -13,7 +13,7 @@ struct tree_node {
  * returns pointer to first node found containing
  * the value otherwise 0.
  */
-struct tree_node *t_search(struct tree_node *root, int v) {
+struct tree_node *t_search(struct tree_node *root, int32_t v) {
 
   while (root) {
     printf("looking for %d, looking at %d\n", v, root->data);
@@ -33,7 +33,7 @@ struct tree_node *t_search(struct tree_node *root, int v) {
  * 1 for value already in tree,
  * 2 for malloc error
  */
-int t_insert(struct tree_node **root, int v) {
+int32_t t_insert(struct tree_node **root, int32_t v) {
 
   while (*root) {
     if ((*root)->data == v)
@@ -66,7 +66,7 @@ int main() {
   t_insert(&root_p, 7);
 
   /* try the search */
-  for (int i = 1; i < 9; i++) {
+  for (int32_t i = 1; i < 9; i++) {
     struct tree_node *tp = t_search(root_p, i);
     if (tp)
       printf("%d found\n", i);

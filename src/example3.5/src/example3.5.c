@@ -3,7 +3,7 @@
 #include <inttypes.h>
 
 int main() {
-  for (int i = 0; i <= 10; i++) {
+  for (int32_t i = 0; i <= 10; i++) {
     switch (i) {
     case 1:
     case 2:

@@ -1,6 +1,6 @@
 #include <inttypes.h>
 
-int i; /* definition */
+int32_t i; /* definition */
 int main() {
   void f_in_other_place(); /* declaration */
   i = 0;

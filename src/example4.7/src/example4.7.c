@@ -5,14 +5,14 @@
 int main() {
   void changer(int);
 
-  int i = 5;
+  int32_t i = 5;
   printf("before i=%d\n", i);
   changer(i);
   printf("after i=%d\n", i);
   exit(EXIT_SUCCESS);
 }
 
-void changer(int x) {
+void changer(int32_t x) {
   while (x) {
     printf("changer: x=%d\n", x);
     x--;

@@ -7,7 +7,7 @@
 
 int main() {
   char in_line[LINELNG];
-  int c;
+  int32_t c;
 
   char *cp = in_line;
   while ((c = getc(stdin)) != EOF) {

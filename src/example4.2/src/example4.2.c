@@ -4,8 +4,8 @@
 
 int main() {
   void pmax(); /* declaration */
-  for (int i = -10; i <= 10; i++) {
-    for (int j = -10; j <= 10; j++) {
+  for (int32_t i = -10; i <= 10; i++) {
+    for (int32_t j = -10; j <= 10; j++) {
       pmax(i, j);
     }
   }
@@ -16,8 +16,8 @@ int main() {
  * Returns:      void
  * Prints larger of its two arguments.
  */
-void pmax(int a1, int a2) { /* definition */
-  int biggest;
+void pmax(int32_t a1, int32_t a2) { /* definition */
+  int32_t biggest;
 
   if (a1 > a2) {
     biggest = a1;

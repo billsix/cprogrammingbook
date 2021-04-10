@@ -9,4 +9,4 @@ int main() {
   exit(EXIT_SUCCESS);
 }
 
-void called_func(int iarg, float farg) { float tmp = iarg * farg; }
+void called_func(int32_t iarg, float farg) { float tmp = iarg * farg; }

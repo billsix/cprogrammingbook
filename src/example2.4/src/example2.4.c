@@ -3,7 +3,7 @@
 #include <inttypes.h>
 
 int main() {
-  int this_char, comma_count, stop_count;
+  int32_t this_char, comma_count, stop_count;
 
   comma_count = stop_count = 0;
   this_char = getchar();

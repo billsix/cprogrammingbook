@@ -1,3 +1,5 @@
+#include <inttypes.h>
+
 struct list_ele *sortfun(struct list_ele *list) {
 
   struct list_ele dummy;
@@ -18,7 +20,7 @@ struct list_ele *sortfun(struct list_ele *list) {
 
   dummy.pointer = list;
   do {
-    int exchange = 0;
+    int32_t exchange = 0;
     struct list_ele *thisp;
     thisp = &dummy;
 

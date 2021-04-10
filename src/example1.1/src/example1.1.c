@@ -15,7 +15,7 @@ void show_message();
  * the function. This is a "definition".
  */
 int main() {
-  int count = 0;
+  int32_t count = 0;
   while (count < 10) {
     show_message();
     count = count + 1;

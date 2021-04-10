@@ -13,4 +13,4 @@ int main() {
   exit(EXIT_SUCCESS);
 }
 
-void func(int arg) { printf("%d\n", arg); }
+void func(int32_t arg) { printf("%d\n", arg); }

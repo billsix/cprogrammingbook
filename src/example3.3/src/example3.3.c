@@ -4,7 +4,7 @@
 
 int main() {
   /* initialise */
-  int i = 0;
+  int32_t i = 0;
   /* check */
   while (i <= 10) {
     printf("%d\n", i);

@@ -1,17 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
+
 struct tree_node {
-  int data;
+  int32_t data;
   struct tree_node *left_p, *right_p;
 } tree[7];
+
 /*
  * Tree search algorithm.
  * Searches for value 'v' in tree,
  * returns pointer to first node found containing
  * the value otherwise 0.
  */
-struct tree_node *t_search(struct tree_node *root, int v) {
+struct tree_node *t_search(struct tree_node *root, int32_t v) {
 
   while (root) {
     if (root->data == v)
@@ -26,8 +28,8 @@ struct tree_node *t_search(struct tree_node *root, int v) {
 }
 
 int main() {
-  for (int i = 0; i < 7; i++) {
-    int j;
+  for (int32_t i = 0; i < 7; i++) {
+    int32_t j;
     j = i + 1;
 
     tree[i].data = j;

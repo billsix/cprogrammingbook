@@ -48,7 +48,7 @@ int main() {
       }
     }
 
-  /* now print */
+  /* now print32_t */
   for (struct wp_char *lo_indx = ar; lo_indx < in_p; lo_indx++) {
     printf("%c %d %d\n", lo_indx->wp_cval, lo_indx->wp_font, lo_indx->wp_psize);
   }

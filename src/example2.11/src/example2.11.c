@@ -3,8 +3,8 @@
 #include <inttypes.h>
 
 int main() {
-  const int i = 5;
-  const int j = 2;
+  const int32_t i = 5;
+  const int32_t j = 2;
   float f = 3.0;
 
   f = f + j / i;

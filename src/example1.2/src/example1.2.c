@@ -7,11 +7,11 @@
 #include <inttypes.h>
 
 int main() {
-  int this_number = 3;
+  int32_t this_number = 3;
 
   while (this_number < 10000) {
-    int divisor = this_number / 2;
-    int not_prime = 0;
+    int32_t divisor = this_number / 2;
+    int32_t not_prime = 0;
     while (divisor > 1) {
       if (this_number % divisor == 0) {
         not_prime = 1;

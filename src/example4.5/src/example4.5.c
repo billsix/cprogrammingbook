@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
-int a; /* visible from here onwards */
+int32_t a; /* visible from here onwards */
 
 void func() {
   float a; /* a different 'a' */
   { char a; /* yet another 'a' */ }
   /* the float 'a' reappears */
 }
-/* the int 'a' reappears */
+/* the int32_t 'a' reappears */
 
 int main() {
   func();

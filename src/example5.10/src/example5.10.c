@@ -18,7 +18,7 @@ int main() {
   char strings[MAXSTRING][MAXLEN];
 
   /* count of strings read */
-  int nstrings = 0;
+  int32_t nstrings = 0;
   while (nstrings < MAXSTRING && next_string(strings[nstrings]) != 0) {
 
     p_array[nstrings] = strings[nstrings];
@@ -33,17 +33,17 @@ int main() {
 }
 
 void print_arr(const char *p_array[]) {
-  for (int index = 0; p_array[index] != 0; index++)
+  for (int32_t index = 0; p_array[index] != 0; index++)
     printf("%s\n", p_array[index]);
 }
 
 void sort_arr(const char *p_array[]) {
-  for (int low_index = 0;
+  for (int32_t low_index = 0;
        p_array[low_index] != 0 && p_array[low_index + 1] != 0; low_index++) {
 
-    for (int hi_index = low_index + 1; p_array[hi_index] != 0; hi_index++) {
+    for (int32_t hi_index = low_index + 1; p_array[hi_index] != 0; hi_index++) {
 
-      int comp_val = strcmp(p_array[hi_index], p_array[low_index]);
+      int32_t comp_val = strcmp(p_array[hi_index], p_array[low_index]);
       if (comp_val >= 0)
         continue;
       /* swap strings */
@@ -56,7 +56,7 @@ void sort_arr(const char *p_array[]) {
 
 char *next_string(char *destination) {
   char *cp = destination;
-  int c;
+  int32_t c;
   while ((c = getchar()) != '\n' && c != EOF) {
     if (cp - destination < MAXLEN - 1)
       *cp++ = c;

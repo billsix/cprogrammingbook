@@ -7,7 +7,7 @@ struct x *p, func(void);
 
 void f1(void) {
   struct x {
-    int i;
+    int32_t i;
   }; /* redeclaration! */
 }
 
