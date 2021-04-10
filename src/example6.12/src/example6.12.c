@@ -16,7 +16,7 @@ struct var_type {
   } vt_un;
 } var_type;
 
-void print_vt(void) {
+void print_vt() {
 
   switch (var_type.type_in_union) {
   default:

@@ -15,7 +15,7 @@ struct wp_char {
  * could equally have been declared above;
  * it returns a structure and takes no arguments.
  */
-struct wp_char infun(void);
+struct wp_char infun();
 
 int main() {
   for (int32_t icount = 0; icount < ARSIZE; icount++) {
@@ -52,7 +52,7 @@ int main() {
   exit(EXIT_SUCCESS);
 }
 
-struct wp_char infun(void) {
+struct wp_char infun() {
   struct wp_char wp_char;
 
   wp_char.wp_cval = getchar();
