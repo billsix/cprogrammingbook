@@ -11,20 +11,17 @@ Welcome to C Programming's documentation!
    :caption: Contents:
 
 
-   01
-   02
-   03
-   04
-   05
-   06
-   07
-   08
-   09
-   10
-   11
-   12
-   13
-   14
+   00-Preface
+   01-Intro
+   02-Variables
+   03-ControlFlow
+   04-Functions
+   05-Arrays
+   06-Structs
+   07-Preprocessor
+   08-Specialized
+   09-Libraries
+   10-Programs
 
 
 
