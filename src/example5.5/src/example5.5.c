@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <inttypes.h>
+#include <stdio.h>
 #define ARSZ 10
 
 int main() {

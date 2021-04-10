@@ -1,6 +1,6 @@
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <inttypes.h>
 
 void date(int32_t *, int32_t *); /* declare the function */
 

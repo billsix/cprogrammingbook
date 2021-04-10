@@ -1,6 +1,6 @@
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <inttypes.h>
 
 struct list_ele {
   int32_t data;

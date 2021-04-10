@@ -1,6 +1,6 @@
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <inttypes.h>
 int main() {
   unsigned int stop_val = 0;
   int i = -10;

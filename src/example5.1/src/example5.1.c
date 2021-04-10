@@ -1,12 +1,12 @@
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <inttypes.h>
 
 int main() {
   int32_t x;
 
   int32_t *p = &x; /* initialise pointer */
-  *p = 0;      /* set x to zero */
+  *p = 0;          /* set x to zero */
   printf("x is %d\n", x);
   printf("*p is %d\n", *p);
 

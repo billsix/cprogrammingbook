@@ -3,9 +3,9 @@
  * Very little error checking.
  */
 
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <inttypes.h>
 
 int32_t expr();
 int32_t mul_exp();

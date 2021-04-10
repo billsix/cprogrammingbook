@@ -1,7 +1,7 @@
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <inttypes.h>
 
 #define GROW_BY 10 /* string grows by 10 chars */
 

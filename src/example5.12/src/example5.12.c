@@ -1,7 +1,7 @@
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.hi>
 #include <string.h>
-#include <inttypes.h>
 
 #define MAXSTRING 50 /* max no. of strings */
 #define MAXLEN 80    /* max length. of strings */

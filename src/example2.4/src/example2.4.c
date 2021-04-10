@@ -1,6 +1,6 @@
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <inttypes.h>
 
 int main() {
   int32_t this_char, comma_count, stop_count;

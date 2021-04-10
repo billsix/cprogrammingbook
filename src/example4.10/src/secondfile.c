@@ -1,6 +1,5 @@
 #include <inttypes.h>
 
-
 /* example library module */
 /* only 'callable' is visible outside */
 static int32_t buf[100];

@@ -249,7 +249,7 @@ select the member:
 
 
 that would certainly work (the parentheses are there because .
-has a higher precedence than *). It's not an easy
+has a higher precedence than \*). It's not an easy
 notation to work with though, so C introduces a new
 operator to clean things up; it is usually known as
 the ‘pointing-to’ operator. Here it is being used:
@@ -280,25 +280,27 @@ result is also has those qualifiers associated with it. Here
 it is, illustrated with pointers; when the pointer points to
 a qualified type the result that you get is also qualified:
 
-#include <stdio.h>
-#include <stdlib.h>
+.. code-block:: C
 
-struct somestruct{
-      int i;
-};
+    #include <stdio.h>
+    #include <stdlib.h>
 
-main(){
-      struct somestruct *ssp, s_item;
-      const struct somestruct *cssp;
+    struct somestruct{
+          int i;
+    };
 
-      s_item.i = 1;   /* fine */
-      ssp = &s_item;
-      ssp->i += 2;    /* fine */
-      cssp = &s_item;
-      cssp->i = 0;    /* not permitted - cssp points to const objects */
+    main(){
+          struct somestruct *ssp, s_item;
+          const struct somestruct *cssp;
 
-      exit(EXIT_SUCCESS);
-}
+          s_item.i = 1;   /* fine */
+          ssp = &s_item;
+          ssp->i += 2;    /* fine */
+          cssp = &s_item;
+          cssp->i = 0;    /* not permitted - cssp points to const objects */
+
+          exit(EXIT_SUCCESS);
+    }
 
 
 
@@ -325,7 +327,7 @@ simple example.)
    :language: c
    :linenos:
 
-      Example 6.2
+Example 6.2
 
 The next issue is to consider what a structure looks
 like in terms of storage layout. It's best not to
@@ -365,7 +367,7 @@ and unions:
     The address of a structure is the same as the
     address of its first member, provided that the appropriate cast
     is used. Given the previous declaration of struct wp_char, if
-    item is of type struct wp_char, then (char *)item == &item.wp_cval.
+    item is of type struct wp_char, then (char \*)item == &item.wp_cval.
 
     Bit fields (see Section 6.4) don't actually have addresses, but
     are conceptually packed into units which obey the rules above.
@@ -434,7 +436,7 @@ must contain a pointer to the other, as shown in the following example.
    :language: c
    :linenos:
 
-      Example 6.3
+Example 6.3
 
 This illustrates the need for incomplete types. It also illustrates
 an important thing about the names of structure members: they
@@ -454,7 +456,7 @@ structure.
    :language: c
    :linenos:
 
-      Example 6.4
+Example 6.4
 
 
 There's one thing to watch out for: you get a
@@ -541,7 +543,7 @@ into the list, which could have been built like this:
    :language: c
    :linenos:
 
-      Example 6.5
+Example 6.5
 
 
 
@@ -557,7 +559,7 @@ following example.
    :linenos:
 
 
-      Example 6.6
+Example 6.6
 
 
 
@@ -584,7 +586,7 @@ necessarily at ar[0] any more.
    :language: c
    :linenos:
 
-      Example 6.7
+Example 6.7
 
 
 
@@ -673,7 +675,7 @@ Here it is in C:
    :language: c
    :linenos:
 
-      Example 6.8
+Example 6.8
 
 So that works fine. It is also interesting to note that,
 given a value, it can always be inserted at the appropriate
@@ -694,7 +696,7 @@ about the vast majority of C language programs.
    :language: c
    :linenos:
 
-      Example 6.9
+Example 6.9
 
 Finally, the algorithm that allows you to walk along the tree
 visiting all the nodes in order is beautiful. It is the
@@ -706,26 +708,523 @@ at it and work out what it does.
    :language: c
    :linenos:
 
-      Example 6.10
+Example 6.10
 
 
 Unions
 ^^^^^^
 
+Unions don't take long to explain. They are the same
+as structures, except that, where you would have written struct
+before, now you write union. Everything works the same way,
+but with one big exception. In a structure, the members
+are allocated separate consecutive chunks of storage. In a union,
+every member is allocated the same piece of storage. What
+would you use them for? Well, sometimes you want a
+structure to contain different values of different types at different
+times but to conserve space as much as possible. Using
+a union, it's up to you to keep track of
+whatever type you put into it and make sure that
+you retrieve the right type at the right time. Here's
+an example:
+
+.. literalinclude:: ../src/example6.11/src/example6.11.c
+   :language: c
+   :linenos:
+
+Example 6.11
+
+
+If the example had, say, put a float into the
+union and then extracted it as an int, a strange
+value would have resulted. The two types are almost certainly
+not only stored differently, but of different lengths. The int
+retrieved would probably be the low-order bits of the machine
+representation of a float, and might easily be made up
+of part of the mantissa of the float plus a
+piece of the exponent. The Standard says that if you
+do this, the behaviour is implementation defined (not undefined). The
+behaviour is defined by the Standard in one case: if
+some of the members of a union are structures with
+a ‘common initial sequence’ (the first members of each structure
+have compatible type and in the case of bitfields are
+the same length), and the union currently contains one of
+them, then the common initial part of each can be
+used interchangeably. Oh good.
+
+The C compiler does no more than work out what
+the biggest member in a union can be and allocates
+enough storage (appropriately aligned if neccessary). In particular, no checking
+is done to make sure that the right sort of
+use is made of the members. That is your task,
+and you'll soon find out if you get it wrong.
+The members of a union all start at the same
+address—there is guaranteed to be no padding in front of
+any of them.
+
+The most common way of remembering what is in a
+union is to embed it in a structure, with another
+member of the structure used to indicate the type of
+thing currently in the union. Here is how it might
+be used:
+
+.. literalinclude:: ../src/example6.12/src/example6.12.c
+   :language: c
+   :linenos:
+
+Example 6.12
+
+That also demonstrates how the dot notation is used to
+access structures or unions inside other structures or unions. Some
+current C compilers allow you to miss bits out of
+the names of embedded objects provided that they are not
+ambiguous. In the example, such an unambiguous name would be
+var_type.un_int and the compiler would work out what you meant.
+None the less this is not permitted by the Standard.
+
+
+It is because of unions that structures cannot be compared
+for equality. The possibility that a structure might contain a
+union makes it hard to compare such structures; the compiler
+can't tell what the union currently contains and so wouldn't
+know how to compare the structures. This sounds a bit
+hard to swallow and isn't 100% true—most structures don't contain
+unions—but there is also a philosophical issue at stake about
+just what is meant by ‘equality’ when applied to structures.
+Anyhow, the union business gives the Standard a good excuse
+to avoid the issue by not supporting structure comparison.
+
 Bitfields
 ^^^^^^^^^
+
+While we're on the subject of structures, we might as
+well look at bitfields. They can only be declared inside
+a structure or a union, and allow you to specify
+some very small objects of a given number of bits
+in length. Their usefulness is limited and they aren't seen
+in many programs, but we'll deal with them anyway. This
+example should help to make things clear:
+
+.. literalinclude:: ../src/example6.13/src/example6.13.c
+   :language: c
+   :linenos:
+
+Example 6.13
+
+Each field is accessed and manipulated as if it were
+an ordinary member of a structure. The keywords signed and
+unsigned mean what you would expect, except that it is
+interesting to note that a 1-bit signed field on a
+two's complement machine can only take the values 0 or
+-1. The declarations are permitted to include the const and
+volatile qualifiers.
+
+The main use of bitfields is either to allow tight
+packing of data or to be able to specify the
+fields within some externally produced data files. C gives no
+guarantee of the ordering of fields within machine words, so
+if you do use them for the latter reason, you
+program will not only be non-portable, it will be compiler-dependent
+too. The Standard says that fields are packed into ‘storage
+units’, which are typically machine words. The packing order, and
+whether or not a bitfield may cross a storage unit
+boundary, are implementation defined. To force alignment to a storage
+unit boundary, a zero width field is used before the
+one that you want to have aligned.
+
+Be careful using them. It can require a surprising amount
+of run-time code to manipulate these things and you can
+end up using more space than they save.
+
+Bit fields do not have addresses—you can't have pointers to
+them or arrays of them.
 
 Enums
 ^^^^^
 
+These fall into the category of ‘half baked’. They aren't
+proper enumerated types, as in Pascal, and only really serve
+to help you reduce the number of #define statements in
+your program. They look like this:
+
+.. code-block:: C
+
+    enum e_tag{
+          a, b, c, d=20, e, f, g=20, h
+    }var;
+
+Just as with structures and unions, the e_tag is the
+tag, and var is the definition of a variable.
+
+The names declared inside the enumeration are constants with int
+type. Their values are these:
+
+.. code-block:: C
+
+    a == 0
+    b == 1
+    c == 2
+    d == 20
+    e == 21
+    f == 22
+    g == 20
+    h == 21
+
+so you can see that, in the absence of anything
+to the contrary, the values assigned start at zero and
+increase. A specific value can be given if you want,
+when the increase will continue one at a time afterwards;
+the specific value must be an integral constant (see later)
+that is representable in an int. It is possible for
+more than one of the names to have the same value.
+
+The only use for these things is to give a
+better-scoped version of this:
+
+.. code-block:: C
+
+    #define a 0
+    #define b 1
+    /* and so on */
+
+It's better scoped because the declaration of enumerations follows the
+standard scope rules for C, whereas #define statements have file
+scope.
+
+Not that you are likely to care, but the Standard
+states that enumeration types are of a type that is
+compatible with an implementation-defined one of the integral types. So
+what? For interest's sake here is an illustration:
+
+.. code-block:: C
+
+    enum ee{a,b,c}e_var, *ep;
+
+The names a, b, and c all behave as if
+they were int constants when you use them; e_var has
+type enum ee and ep is a pointer to enum
+ee. The compatibility requirement means that (amongst other implications) there
+will be an integral type whose address can be assigned
+to ep without violating the type-compatibility requirements for pointers.
+
 Qualifiers and derived types
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Arrays, structures and unions are ‘derived from’ (contain) other types;
+none of them may be derived from incomplete types. This
+means that a structure or union cannot contain an example
+of itself, because its own type is incomplete until the
+declaration is complete. Since a pointer to an incomplete type
+is not itself an incomplete type, it can be used
+in the derivation of arrays, structures and unions.
+
+If any of the types that these things are derived
+from are qualified with const or volatile, they do not
+inherit that qualification. This means that if a structure contains
+a const object, the structure itself is not qualified with
+const and any non-const members can still be modified. This
+is what you would expect. However, the Standard does says
+that if any derived type contains a type that is
+qualified with const (or recursively any inner type does) then
+it is not modifiable—so a structure that contains a const
+cannot be on the left-hand side of an assignment operator.
+
 Initialization
 ^^^^^^^^^^^^^^
+Now that we have seen all of the data types supported
+by C, we can look at the subject of initialization.
+C allows ordinary variables, structures, unions and arrays to be
+given initial values in their definitions. Old C had some
+strange rules about this, reflecting an unwillingness by compiler writers
+to work too hard. The Standard has rationalized this, and
+now it is possible to initialize things as and when you want.
+
+There are basically two sorts of initialization: at compile time,
+and at run time. Which one you get depends on
+the storage duration of the thing being initialized.
+
+Objects with static duration are declared either outside functions, or
+inside them with the keyword extern or static as part
+of the declaration. These can only be initialized at compile
+time.
+
+Any other object has automatic duration, and can only be
+initialized at run time. The two categories are mutually exclusive.
+
+
+Although they are related, storage duration and linkage (see Chapter 4)
+are different and should not be confused.
+
+Compile-time initialization can only be done using constant expressions; run-time
+initialization can be done using any expression at all. The
+Old C restriction, that only simple variables (not arrays, structures
+or unions) could be initialized at run time, has been lifted.
+
+Constant expressions
+~~~~~~~~~~~~~~~~~~~~
+
+There are a number of places where constant expressions must
+be used. The definition of what constitutes a constant expression
+is relatively simple.
+
+A constant expression is evaluated by the compiler, not at
+run-time. It may be used anywhere that a constant may
+be used. Unless it is part of the operand of
+sizeof, it may not contain any assignment, increment or decrement
+operations, function calls or comma operators; that may seem odd,
+but it's because sizeof only needs to evaluate the type
+of an expression, not its value.
+
+If real numbers are evaluated at compile-time, then the Standard
+insists that they are evaluated with at least as much
+precision and range as will be used at run-time.
+
+A more restricted form, called the integral constant expression exists.
+This has integral type and only involves operands that are
+integer constants, enumeration constants, character constants, sizeof expressions and real
+constants that are the immediate operands of casts. Any cast
+operators are only allowed to convert arithmetic types to integral
+types. As with the previous note on sizeof expressions, since
+they don't have to be evaluated, just their type determined,
+no restrictions apply to their contents.
+
+The arithmetic constant expression is like the integral constant expression,
+but allows real constants to be used and restricts the
+use of casts to converting one arithmetic type to another.
+
+
+The address constant is a pointer to an object that
+has static storage duration or a pointer to a function.
+You can get these by using the & operator or
+through the usual conversions of array and function names into
+pointers when they are used in expressions. The operators [],
+., ->, & (address of) and * (pointer dereference) as
+well as casts of pointers can all be used in
+the expression as long as they don't involve accessing the
+value of any object.
+
+More initialization
+~~~~~~~~~~~~~~~~~~~
+
+The various types of constants are permitted in various places;
+integral constant expressions are particularly important because they are the
+only type of expression that may be used to specify
+the size of arrays and the values in case statement
+prefixes. The types of constants that are permitted in initializer
+expressions are less restricted; you are allowed to use: arithmetic
+constant expressions; null pointer or address constants; an address constant
+for an object plus or minus an integral constant expression.
+Of course it depends on the type of thing being
+initialized whether or not a particular type of constant expression
+is appropriate.
+
+Here is an example using several initialized variables:
+
+.. literalinclude:: ../src/example6.14/src/example6.14.c
+   :language: c
+   :linenos:
+
+Example 6.14
+
+Initializing ordinary variables is easy: put = expression after the
+variable name in a declaration, and the variable is initialized
+to the value of the expression. As with all objects,
+whether you can use any expression, or just a constant
+expression, depends on its storage duration.
+
+Initializing arrays is easy
+for one-dimensional arrays. Just put a list of the values
+you want, separated by commas, inside curly brackets. The example
+shows how to do it. If you don't give a
+size for the array, then the number of initializers will
+determine the size. If you do give a size, then
+there must be at most that many initializers in the
+list. Too many is an error, too few will just
+initialize the first elements of the array.
+
+You could build up a string like this:
+
+.. code-block:: C
+
+    char str[] = {'h', 'e', 'l', 'l', 'o', 0};
+
+but because it is so often necessary to do that,
+it is also permitted to use a quoted string literal
+to initialize an array of chars:
+
+.. code-block:: C
+
+    char str[] = "hello";
+
+In that case, the null at the end of the
+string will also be included if there is room, or
+if no size was specified. Here are examples:
+
+.. code-block:: C
+
+    /* no room for the null */
+    char str[5] = "hello";
+
+    /* room for the null */
+    char str[6] = "hello";
+
+The example program used string literals for a different purpose:
+there they were being used to initialize an array of
+character pointers; a very different prospect.
+
+For structures that have automatic duration, an expression of the
+right type can be used to initialize them, or else
+a bracketed list of constant expressions must be used:
+
+
+.. literalinclude:: ../src/example6.15/src/example6.15.c
+   :language: c
+   :linenos:
+
+Example 6.15
+
+Only the first member of a union can be initialized.
+
+If a structure or union contains unnamed members, whether unnamed
+bitfields or padding for alignment, they are ignored in the
+initialization process; they don't have to be counted when you
+provide the initializers for the real members of the structure.
+
+For objects that contain sub-objects within them, there are two
+ways of writing the initializer. It can be written out
+with an initializer for each member:
+
+.. literalinclude:: ../src/example6.16/src/example6.16.c
+   :language: c
+   :linenos:
+
+
+Example 6.16
+
+which will assign 1 to x[0].a, 2 to x[0].e.c, a
+to x[0].e.d and 3 to x[1].a and so on.
+
+It is much safer to use internal braces to show
+what you mean, or one missed value will cause havoc.
+
+.. literalinclude:: ../src/example6.17/src/example6.17.c
+   :language: c
+   :linenos:
+
+Example 6.17
+
+Always fully bracket initializers—that is much the safest thing to
+do.
+
+It is the same for arrays as for structures:
+
+.. literalinclude:: ../src/example6.17/src/example6.17.c
+   :language: c
+   :linenos:
+
+Example 6.18
+
+that gives full initialization to the first three rows of y.
+The fourth row, y[3], is uninitialized.
+
+Unless they have
+an explicit initializer, all objects with static duration are given
+implicit initializers—the effect is as if the constant 0 had
+been assigned to their components. This is in fact widely
+used—it is an assumption made by most C programs that
+external objects and internal static objects start with the value
+zero.
+
+Initialization of objects with automatic duration is only guaranteed if
+their compound statement is entered ‘at the top’. Jumping into
+the middle of one may result in the initialization not
+happening—this is often undesirable and should be avoided. It is
+explicitly noted by the Standard with regard to switch statements,
+where providing initializers in declarations cannot be of any use;
+this is because a declaration is not linguistically a ‘statement’
+and only statements may be labelled. As a result it
+is not possible for initializers in switch statements ever to
+be executed, because the entry to the block containing them
+must be below the declarations!
+
+A declaration inside a function (block scope) can, using various
+techniques outlined in Chapter 4 and Chapter 8, be made
+to refer to an object that has either external or
+internal linkage. If you've managed to do that, and it's
+not likely to happen by accident, then you can't initialize
+the object as part of that declaration. Here is one
+way of trying it:
+
+.. code-block:: C
+
+    int x;                        /* external linkage */
+    main(){
+          extern int x = 5;       /* forbidden */
+    }
+
+Our test compiler didn't notice that one, either.
+
 
 Summary
 ^^^^^^^
 
+You now understand structures and unions. Bitfields and enumeration types really
+are not very important and you could manage quite well without
+them.
+
+It is hard to emphasize how important is the use of
+structures, pointers and malloc in serious programs. If you aren't familiar
+with the use of structured data in the form of lists,
+trees and so on, get a good book now. Better still,
+try to enrol on a good course. Except in very specialized
+applications, it is usually the ability to structure data well, not
+the ability to write complicated algorithms, that makes it possible to
+construct clean, small and maintainable programs. Experienced software designers often say
+that once the right structure of the data has been determined,
+the rest is ‘simple’.
+
+Undoubtedly, one of the reasons for the popularity of C among
+experienced software specialists is the freedom that it gives in the
+structuring of data, without sacrificing speed.
+
+Initialization should not be overlooked. Although simple in concept, it is
+surprising how inconvenient many other languages make this. The ludicrous extreme
+is to insist on the use of assignment statements; C has
+a practical and convenient approach. If the concept of ‘fully bracketed
+initializers’ seems a bit unpleasant, don't worry. It is rare that
+you have to do it in practice; all that you need
+is to know how to do simple initialization and to know
+a book that describes the more complex initialization. To get the
+full low-down read the Standard, which is uncharacteristically penetrable when it
+discusses the matter; verging at times on lucidity.
+
 Exercises
 ^^^^^^^^^
+
+Exercise 6.1. What is the declaration of an untagged structure containing
+two ints called a and b?
+
+Exercise 6.2. Why is such a declaration of limited use?
+
+Exercise 6.3. What would the structure look like with a tag
+of int_struc and two variables called x and y of the
+structure type being defined?
+
+Exercise 6.4. How would you declare a third variable later, with
+the the same type as x and y but called z?
+
+Exercise 6.5. Assuming that p is the right type of pointer,
+how would you make it point to z and then set
+z.a to zero, using the pointer?
+
+Exercise 6.6. What are the two ways of declaring a structure
+with incomplete type?
+
+Exercise 6.7. What is unusual about a string "like this" when
+it's used to initialize a character array?
+
+Exercise 6.8. What if it initializes a char \*?
+
+Exercise 6.9. Find out what a doubly linked list is. Reimplement
+the linked list example using one. Is it any easier to
+insert and delete elements in a doubly linked list?
