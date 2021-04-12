@@ -3,6 +3,7 @@
  * Dumb program that generates prime numbers.
  */
 #include <inttypes.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,16 +12,16 @@ int main() {
 
   while (this_number < 10000) {
     int32_t divisor = this_number / 2;
-    int32_t not_prime = 0;
+    bool not_prime = false;
     while (divisor > 1) {
       if (this_number % divisor == 0) {
-        not_prime = 1;
+        not_prime = true;
         divisor = 0;
       } else
         divisor = divisor - 1;
     }
 
-    if (not_prime == 0)
+    if (not_prime == false)
       printf("%d is a prime number\n", this_number);
     this_number = this_number + 1;
   }

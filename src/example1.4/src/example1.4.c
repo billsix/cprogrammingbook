@@ -4,7 +4,7 @@
 #define ARSIZE 10
 
 int main() {
-  int32_t ch_arr[ARSIZE];
+  char ch_arr[ARSIZE];
 
   int32_t lastchar = 0;
   int32_t stop = 0;

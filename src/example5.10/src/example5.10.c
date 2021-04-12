@@ -56,7 +56,7 @@ void sort_arr(const char *p_array[]) {
 
 char *next_string(char *destination) {
   char *cp = destination;
-  int32_t c;
+  char c;
   while ((c = getchar()) != '\n' && c != EOF) {
     if (cp - destination < MAXLEN - 1)
       *cp++ = c;

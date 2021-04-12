@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 int main() {
-  int32_t input_c;
+  char input_c;
 
   /* The Classic Bit */
   while ((input_c = getchar()) != EOF) {

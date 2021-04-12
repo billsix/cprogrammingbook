@@ -54,7 +54,7 @@ char *next_string() {
   if (destination != 0) {
     char *cp = destination;
 
-    int32_t c;
+    char c;
     while ((c = getchar()) != '\n' && c != EOF) {
       if (cp - destination < MAXLEN - 1)
         *cp++ = c;

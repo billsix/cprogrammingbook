@@ -21,7 +21,7 @@ int main() {
   char *next_p = str_p;
   int32_t chars_read = 0;
 
-  int32_t ch;
+  char ch;
   while ((ch = getchar()) != EOF) {
     /*
      * Completely restart at each new line.

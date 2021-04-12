@@ -56,7 +56,7 @@ char *next_string() {
   char *destination = (char *)malloc(MAXLEN);
   if (destination != 0) {
     char *cp = destination;
-    int32_t c;
+    char c;
     while ((c = getchar()) != '\n' && c != EOF) {
       if (cp - destination < MAXLEN - 1)
         *cp++ = c;

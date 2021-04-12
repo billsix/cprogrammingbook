@@ -30,7 +30,7 @@ int main() {
 int32_t expr() {
   int32_t val = mul_exp();
   for (;;) {
-    const int32_t ch_in = getchar();
+    const char ch_in = getchar();
     switch (ch_in) {
     default:
       ungetc(ch_in, stdin);
@@ -48,7 +48,7 @@ int32_t expr() {
 int32_t mul_exp() {
   int32_t val = unary_exp();
   for (;;) {
-    const int32_t ch_in = getchar();
+    const char ch_in = getchar();
     switch (ch_in) {
     default:
       ungetc(ch_in, stdin);
@@ -69,7 +69,7 @@ int32_t mul_exp() {
 int32_t unary_exp() {
   int32_t val;
 
-  const int32_t ch_in = getchar();
+  const char ch_in = getchar();
   switch (ch_in) {
   default:
     ungetc(ch_in, stdin);
@@ -88,7 +88,7 @@ int32_t unary_exp() {
 int32_t primary() {
   int32_t val;
 
-  const int32_t ch_in = getchar();
+  const char ch_in = getchar();
   if (ch_in >= '0' && ch_in <= '9') {
     val = ch_in - '0';
     goto out;

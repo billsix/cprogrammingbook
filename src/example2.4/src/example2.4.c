@@ -5,7 +5,7 @@
 int main() {
   int32_t comma_count = 0;
   int32_t stop_count = 0;
-  int32_t this_char = getchar();
+  char this_char = getchar();
   while (this_char != EOF) {
     if (this_char == '.')
       stop_count = stop_count + 1;
