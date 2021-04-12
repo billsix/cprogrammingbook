@@ -234,9 +234,7 @@ abort function is called, which will halt the program.
 
     assert(1 == 2);
 
-/* Might result in */
-
-.. code-block:: C
+    /* Might result in */
 
     Assertion failed: 1 == 2, file silly.c, line 15
 
@@ -411,18 +409,18 @@ current locale.
 
 lconv contains at least the following members:
 
-    char *decimal_point
+    char \*decimal_point
 
         The character used for the decimal point in
         formatted non-monetary values. "." in the C locale.
 
-    char *thousands_sep
+    char \*thousands_sep
 
         The character used for separating groups of digits
         to the left of the decimal point in
         formatted non-monetary values. "" in the C locale.
 
-    char *grouping
+    char \*grouping
 
         Defines the number of digits in each group
         when formatting non-monetary values. The elements are interpreted
@@ -438,7 +436,7 @@ lconv contains at least the following members:
         in threes; the terminating null in the string
         signifies that the \3 repeats.
 
-    char *int_curr_symbol
+    char \*int_curr_symbol
 
         The first three characters are used to hold
         the alphabetic international currency symbol for the current
@@ -446,33 +444,33 @@ lconv contains at least the following members:
         the international currency symbol from the monetary quantity.
         "" in the C locale.
 
-    char *currency_symbol
+    char \*currency_symbol
 
         The currency symbol for the current locale. ""
         in the C locale.
 
-    char *mon_decimal_point
+    char \*mon_decimal_point
 
         The character used as the decimal point when
         formatting monetary values. "" in the C locale.
 
-    char *mon_thousands_sep
+    char \*mon_thousands_sep
 
         The digit group separator for formatted monetary values.
         "" in the C locale.
 
-    char *mon_grouping
+    char \*mon_grouping
 
         Defines the number of digits in each group
         when formatting monetary values. Its elements are interpreted
         as those for grouping. "" in the C locale.
 
-    char *positive_sign
+    char \*positive_sign
 
         The string used to signify a non-negative monetary
         value. "" in the C locale.
 
-    char *negative_sign
+    char \*negative_sign
 
         The string used to signify a negative monetary
         value. "" in the C locale.
@@ -842,7 +840,7 @@ functions available:
         ERANGE occurs if the magnitude
         of x is too large.
 
-    double frexp(double value, int *exp);
+    double frexp(double value, int \*exp);
 
         Break a floating point number
         into a normalized fraction and
@@ -869,7 +867,7 @@ functions available:
 
         Errors: EDOM occurs if x is negative. ERANGE may occur if x is zero.
 
-    double modf(double value, double *iptr);
+    double modf(double value, double \*iptr);
 
         Break the argument value into
         integral and fractional parts, each

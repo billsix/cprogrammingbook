@@ -478,19 +478,21 @@ which C programmers from other environments will find difficult to
 interpret if it's used to excess. The flavour of it
 is shown below:
 
-/* file 'mytype.h' */
-typedef short   SMALLINT        /* range *******30000 */
-typedef int     BIGINT          /* range ******* 2E9 */
+.. code-block:: C
 
-/* program */
-#include "mytype.h"
+    /* file 'mytype.h' */
+    typedef short   SMALLINT        /* range *******30000 */
+    typedef int     BIGINT          /* range ******* 2E9 */
 
-SMALLINT        i;
-BIGINT          loop_count;
+    /* program */
+    #include "mytype.h"
+
+    SMALLINT        i;
+    BIGINT          loop_count;
 
 On some machines, the range of an int would not
 be adequate for a BIGINT which would have to be
-re- typedef'd to be long.
+re-typedef'd to be long.
 
 To re-use a name already declared as a typedef, its
 declaration must include at least one type specifier, which removes
