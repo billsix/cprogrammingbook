@@ -139,22 +139,9 @@ used to find the offset, in bytes, of a structure
 member. The offset is the distance between the member and
 the start of the structure. It would be used like this:
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
-
-main(){
-        size_t distance;
-        struct x{
-                int a, b, c;
-        }s_tr;
-
-        distance = offsetof(s_tr, c);
-        printf("Offset of x.c is %lu bytes\n",
-                (unsigned long)distance);
-
-        exit(EXIT_SUCCESS);
-}
+.. literalinclude:: ../src/example9.1/src/example9.1.c
+   :language: c
+   :linenos:
 
 Example 9.1
 
@@ -262,16 +249,9 @@ turned off with NDEBUG, the expression is not evaluated. Thus
 the following example will behave unexpectedly when debugging is turned
 off with the #define NDEBUG.
 
-#define NDEBUG
-#include <assert.h>
-
-void
-func(void)
-{
-        int c;
-        assert((c = getchar()) != EOF);
-        putchar(c);
-}
+.. literalinclude:: ../src/example9.2/src/example9.2.c
+   :language: c
+   :linenos:
 
 Example 9.2
 
@@ -969,43 +949,11 @@ the corresponding longjmp call is made! The non-zero value is
 whatever value was supplied to the call of longjmp. This
 is best explained by way of an example:
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <setjmp.h>
+.. literalinclude:: ../src/example9.3/src/example9.3.c
+   :language: c
+   :linenos:
 
-void func(void);
-jmp_buf place;
 
-main(){
-        int retval;
-
-        /*
-         * First call returns 0,
-         * a later longjmp will return non-zero.
-         */
-        if(setjmp(place) != 0){
-                printf("Returned using longjmp\n");
-                exit(EXIT_SUCCESS);
-        }
-
-        /*
-         * This call will never return - it
-         * 'jumps' back above.
-         */
-        func();
-        printf("What! func returned!\n");
-}
-
-void
-func(void){
-      /*
-       * Return to main.
-       * Looks like a second return from setjmp,
-       * returning 4!
-       */
-      longjmp(place, 4);
-      printf("What! longjmp returned!\n");
-}
 
 Example 9.3
 
@@ -1167,42 +1115,11 @@ The following program fragment shows the use of signal
 to perform a tidy exit to a program on
 receipt of the interrupt or ‘interactive attention’ signal.
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
 
+.. literalinclude:: ../src/example9.4/src/example9.4.c
+   :language: c
+   :linenos:
 
-FILE *temp_file;
-void leave(int sig);
-
-main() {
-        (void) signal(SIGINT,leave);
-        temp_file = fopen("tmp","w");
-        for(;;) {
-                /*
-                 * Do things....
-                 */
-                printf("Ready...\n");
-                (void)getchar();
-        }
-        /* can't get here ... */
-        exit(EXIT_SUCCESS);
-}
-
-/*
- * on receipt of SIGINT, close tmp file
- * but beware - calling library functions from a
- * signal handler is not guaranteed to work in all
- * implementations.....
- * this is not a strictly conforming program
- */
-
-void
-leave(int sig) {
-        fprintf(temp_file,"\nInterrupted..\n");
-        fclose(temp_file);
-        exit(sig);
-}
 
 Example 9.4
 

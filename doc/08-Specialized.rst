@@ -153,34 +153,9 @@ is a hint that the actual parameter should be stored
 in a register if possible. This example shows how it
 might be used:
 
-#include <stdio.h>
-#include <stdlib.h>
-
-void func(register int arg1, double arg2);
-
-main(){
-      func(5, 2);
-      exit(EXIT_SUCCESS);
-}
-
-/*
-* Function illustrating that formal parameters
-* may be declared to have register storage class.
-*/
-void func(register int arg1, double arg2){
-
-      /*
-       * Illustrative only - nobody would do this
-       * in this context.
-       * Cannot take address of arg1, even if you want to
-       */
-      double *fp = &arg2;
-
-      while(arg1){
-              printf("res = %f\n", arg1 * (*fp));
-              arg1--;
-      }
-}
+.. literalinclude:: ../src/example8.1/src/example8.1.c
+   :language: c
+   :linenos:
 
 Example 8.1
 
@@ -431,92 +406,22 @@ Diagram showing the typical layout of a C source file,
 starting with external linkage declarations, which are followed by internal
 linkage declarations, and then functions at the end.
 
-Figure 8.1.
-Layout of a source file
+.. figure:: _static/8.1.png
+    :align: center
+    :alt: Layout of a source file
+    :figclass: align-center
+
+    Figure 8.1. Layout of a source file
+
 
 The external linkage declarations would be prefixed with extern, the
 internal linkage declarations with static. Here's an example.
 
-/* example of a single source file layout */
-#include <stdio.h>
 
-/* Things with external linkage:
-* accessible throughout program.
-* These are declarations, not definitions, so
-* we assume their definition is somewhere else.
-*/
+.. literalinclude:: ../src/example8.2/src/example8.2.c
+   :language: c
+   :linenos:
 
-extern int important_variable;
-extern int library_func(double, int);
-
-/*
-* Definitions with external linkage.
-*/
-extern int ext_int_def = 0;     /* explicit definition */
-int tent_ext_int_def;           /* tentative definition */
-
-/*
-* Things with internal linkage:
-* only accessible inside this file.
-* The use of static means that they are also
-* tentative definitions.
-*/
-
-static int less_important_variable;
-static struct{
-        int member_1;
-        int member_2;
-}local_struct;
-
-/*
-* Also with internal linkage, but not a tentative
-* definition because this is a function.
-*/
-static void lf(void);
-
-/*
-* Definition with internal linkage.
-*/
-static float int_link_f_def = 5.3;
-
-/*
-* Finally definitions of functions within this file
-*/
-
-/*
-* This function has external linkage and can be called
-* from anywhere in the program.
-*/
-void f1(int a){}
-
-/*
-* These two functions can only be invoked by name from
-* within this file.
-*/
-static int local_function(int a1, int a2){
-        return(a1 * a2);
-}
-
-static void lf(void){
-        /*
-         * A static variable with no linkage,
-         * so usable only within this function.
-         * Also a definition (because of no linkage)
-         */
-        static int count;
-        /*
-         * Automatic variable with no linkage but
-         * an initializer
-         */
-        int i = 1;
-
-        printf("lf called for time no %d\n", ++count);
-}
-/*
-* Actual definitions are implicitly provided for
-* all remaining tentative definitions at the end of
-* the file
-*/
 
 Example 8.2
 
@@ -765,42 +670,11 @@ the unqualified type is much more dangerous and consequently prohibited
 (although you can get around this by using a cast).
 Here is an example:
 
-#include <stdio.h>
-#include <stdlib.h>
 
-main(){
-        int i;
-        const int ci = 123;
+.. literalinclude:: ../src/example8.3/src/example8.3.c
+   :language: c
+   :linenos:
 
-        /* declare a pointer to a const.. */
-        const int *cpi;
-
-        /* ordinary pointer to a non-const */
-        int *ncpi;
-
-        cpi = &ci;
-        ncpi = &i;
-
-        /*
-         * this is allowed
-         */
-        cpi = ncpi;
-
-        /*
-         * this needs a cast
-         * because it is usually a big mistake,
-         * see what it permits below.
-         */
-        ncpi = (int *)cpi;
-
-        /*
-         * now to get undefined behaviour...
-         * modify a const through a pointer
-         */
-        *ncpi = 0;
-
-        exit(EXIT_SUCCESS);
-}
 
 Example 8.3
 
@@ -855,54 +729,10 @@ the control and status register (csr) and the second is
 a data port. The traditional way of accessing such a
 device is like this:
 
+.. literalinclude:: ../src/example8.4/src/example8.4.c
+   :language: c
+   :linenos:
 
-/* Standard C example but without const or volatile */
-/*
-* Declare the device registers
-* Whether to use int or short
-* is implementation dependent
-*/
-
-struct devregs{
-        unsigned short  csr;    /* control & status */
-        unsigned short  data;   /* data port */
-};
-
-/* bit patterns in the csr */
-#define ERROR   0x1
-#define READY   0x2
-#define RESET   0x4
-
-/* absolute address of the device */
-#define DEVADDR ((struct devregs *)0xffff0004)
-
-/* number of such devices in system */
-#define NDEVS   4
-
-/*
-* Busy-wait function to read a byte from device n.
-* check range of device number.
-* Wait until READY or ERROR
-* if no error, read byte, return it
-* otherwise reset error, return 0xffff
-*/
-unsigned int read_dev(unsigned devno){
-
-        struct devregs *dvp = DEVADDR + devno;
-
-        if(devno >= NDEVS)
-                return(0xffff);
-
-        while((dvp->csr & (READY | ERROR)) == 0)
-                ; /* NULL - wait till done */
-
-        if(dvp->csr & ERROR){
-                dvp->csr = RESET;
-                return(0xffff);
-        }
-
-        return((dvp->data) & 0xff);
-}
 
 Example 8.4
 
@@ -940,52 +770,11 @@ every reference to such an object to be a genuine reference.
 Here is how you would rewrite the example, making use
 of const and volatile to get what you want.
 
-/*
-* Declare the device registers
-* Whether to use int or short
-* is implementation dependent
-*/
 
-struct devregs{
-        unsigned short volatile csr;
-        unsigned short const volatile data;
-};
+.. literalinclude:: ../src/example8.5/src/example8.5.c
+   :language: c
+   :linenos:
 
-/* bit patterns in the csr */
-#define ERROR   0x1
-#define READY   0x2
-#define RESET   0x4
-
-/* absolute address of the device */
-#define DEVADDR ((struct devregs *)0xffff0004)
-
-/* number of such devices in system */
-#define NDEVS   4
-
-/*
-* Busy-wait function to read a byte from device n.
-* check range of device number.
-* Wait until READY or ERROR
-* if no error, read byte, return it
-* otherwise reset error, return 0xffff
-*/
-unsigned int read_dev(unsigned devno){
-
-        struct devregs * const dvp = DEVADDR + devno;
-
-        if(devno >= NDEVS)
-                return(0xffff);
-
-        while((dvp->csr & (READY | ERROR)) == 0)
-                ; /* NULL - wait till done */
-
-        if(dvp->csr & ERROR){
-                dvp->csr = RESET;
-                return(0xffff);
-        }
-
-        return((dvp->data) & 0xff);
-}
 
 Example 8.5
 
@@ -1132,24 +921,9 @@ sequence points. These are the Standard's attempt to define when certain
 sorts of optimization may and may not be permitted to be
 in effect. For example, look at this program:
 
-#include <stdio.h>
-#include <stdlib.h>
-
-int i_var;
-void func(void);
-
-main(){
-        while(i_var != 10000){
-                func();
-                i_var++;
-        }
-        exit(EXIT_SUCCESS);
-}
-
-void
-func(void){
-        printf("in func, i_var is %d\n", i_var);
-}
+.. literalinclude:: ../src/example8.6/src/example8.6.c
+   :language: c
+   :linenos:
 
 Example 8.6
 
