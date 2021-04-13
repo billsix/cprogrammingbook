@@ -570,9 +570,9 @@ can be set by providing values for category as follows:
         Modify behaviour of strftime.
 
     The values for locale can be:
-    "C" 	Select the minimal environment for C translation
-    "" 	Select the implementation-defined ‘native environment’
-    implementation defined 	Select other environments
+    "C"         Select the minimal environment for C translation
+    ""  Select the implementation-defined ‘native environment’
+    implementation defined      Select other environments
 
 When the program starts, it has an environment as if
 
@@ -609,26 +609,26 @@ For
 example, if in the current locale monetary values should be
 represented as
 
-IR£1,234.56 	positive format
-(IR£1,234.56) 	negative format
-IRP 1,234.56 	international format
+IR£1,234.56     positive format
+(IR£1,234.56)   negative format
+IRP 1,234.56    international format
 
 then the monetary members of lconv would have the values:
-int_curr_symbol 	"IRP "
-currency_symbol 	"IR£"
-mon_decimal_point 	"."
-mon_thousands_sep 	","
-mon_grouping 	"\3"
-postive_sign 	""
-negative_sign 	""
-int_frac_digits 	2
-frac_digits 	2
-p_cs_precedes 	1
-p_sep_by_space 	0
-n_cs_precedes 	1
-n_sep_by_space 	0
-p_sign_posn 	CHAR_MAX
-n_sign_posn 	0
+int_curr_symbol         "IRP "
+currency_symbol         "IR£"
+mon_decimal_point       "."
+mon_thousands_sep       ","
+mon_grouping    "\3"
+postive_sign    ""
+negative_sign   ""
+int_frac_digits         2
+frac_digits     2
+p_cs_precedes   1
+p_sep_by_space  0
+n_cs_precedes   1
+n_sep_by_space  0
+p_sign_posn     CHAR_MAX
+n_sign_posn     0
 
 Limits
 ------
@@ -647,23 +647,46 @@ variables being able to hold values more negative than −32767.
 Implementations may choose to support values which are more negative
 but must provide support for at least −32767.
 
-Name	Allowable value	Comment
-CHAR_BIT 	(≥8) 	bits in a char
-CHAR_MAX 	see note 	max value of a char
-CHAR_MIN 	see note 	min value of a char
-INT_MAX 	(≥+32767) 	max value of an int
-INT_MIN 	(≤−32767) 	min value of an int
-LONG_MAX 	(≥+2147483647) 	max value of a long
-LONG_MIN 	(≤−2147483647) 	min value of a long
-MB_LEN_MAX 	(≥1) 	max number of bytes in a multibyte character
-SCHAR_MAX 	(≥+127) 	max value of a signed char
-SCHAR_MIN 	(≤−127) 	min value of a signed char
-SHRT_MAX 	(≥+32767) 	max value of a short
-SHRT_MIN 	(≤−32767) 	min value of a short
-UCHAR MAX 	(≥255U) 	max value of an unsigned char
-UINT_MAX 	(≥65535U) 	max value of an unsigned int
-ULONG_MAX 	(≥4294967295U) 	max value of an unsigned long
-USHRT_MAX 	(≥65535U) 	max value of an unsigned short
+
++-------------------------+-------------------------+------------------------------------------------+
+| Name                    | Allowable value         | Comment                                        |
++=========================+=========================+================================================+
+| CHAR_BIT                |(≥8)                     |bits in a char                                  |
++-------------------------+-------------------------+------------------------------------------------+
+| CHAR_MAX                |see note                 |max value of a char                             |
++-------------------------+-------------------------+------------------------------------------------+
+| CHAR_MIN                |see note                 |min value of a char                             |
++-------------------------+-------------------------+------------------------------------------------+
+| INT_MAX                 |(≥+32767)                |max value of an int                             |
++-------------------------+-------------------------+------------------------------------------------+
+| INT_MIN                 |(≤−32767)                |min value of an int                             |
++-------------------------+-------------------------+------------------------------------------------+
+| LONG_MAX                |(≥+2147483647)           |max value of a long                             |
++-------------------------+-------------------------+------------------------------------------------+
+| LONG_MIN                |(≤−2147483647)           |min value of a long                             |
++-------------------------+-------------------------+------------------------------------------------+
+| MB_LEN_MAX              |(≥1)                     |max number of bytes in a multibyte character    |
++-------------------------+-------------------------+------------------------------------------------+
+| SCHAR_MAX               |(≥+127)                  |max value of a signed char                      |
++-------------------------+-------------------------+------------------------------------------------+
+| SCHAR_MIN               |(≤−127)                  |min value of a signed char                      |
++-------------------------+-------------------------+------------------------------------------------+
+| SHRT_MAX                |(≥+32767)                |max value of a short                            |
++-------------------------+-------------------------+------------------------------------------------+
+| SHRT_MIN                |(≤−32767)                |min value of a short                            |
++-------------------------+-------------------------+------------------------------------------------+
+| UCHAR MAX               |(≥255U)                  |max value of an unsigned char                   |
++-------------------------+-------------------------+------------------------------------------------+
+| UINT_MAX                |(≥65535U)                |max value of an unsigned int                    |
++-------------------------+-------------------------+------------------------------------------------+
+| ULONG_MAX               |(≥4294967295U)           |max value of an unsigned long                   |
++-------------------------+-------------------------+------------------------------------------------+
+| USHRT_MAX               |(≥65535U)                |max value of an unsigned short                  |
++-------------------------+-------------------------+------------------------------------------------+
+
+
+
+
 
 Note: if the implementation treats chars as signed, then the values of CHAR_MAX and CHAR_MIN are the same as the equivalent SCHAR versions. If not, then the value of CHAR_MIN is zero and the value of CHAR_MAX is equal to the value of UCHAR_MAX.
 
@@ -676,27 +699,27 @@ set of minimum values. (It is assumed that where no
 minimum value is specified, there is either no minimum, or
 the value depends on another value.)
 
-Name 	Allowable value 	Comment
-FLT_RADIX 	(≥2) 	the radix of exponent representation
-DBL_DIG 	(≥10) 	the number of digits of precision in a double
-DBL_EPSILON 	(≤1E−9) 	minimum positive number such that 1.0 + x ≠ 1.0
-DBL_MANT_DIG 	(—) 	the number of base FLT_RADIX digits in the mantissa part of a double
-DBL_MAX 	(≥1E+37) 	max value of a double
-DBL_MAX_10_EXP 	(≥+37) 	max value of exponent (base 10) of a double
-DBL_MAX_EXP 	(—) 	max value of exponent (base FLT_RADIX)) of a double
-DBL_MIN 	(≤1E−37) 	min value of a double
-DBL_MIN_10_EXP 	(≤37) 	minimum value of exponent (base 10) of a double
-DBL_MIN_EXP 	(—) 	min value of exponent part of a double (base FLT_RADIX)
-FLT_DIG 	(≥6) 	the number of digits of precision in a float
-FLT_EPSILON 	(≤1E−5) 	minimum positive number such that 1.0 + x ≠ 1.0
-FLT_MANT_DIG 	(—) 	the number of base FLT_RADIX digits in the mantissa of a float
-FLT_MAX 	(≥1E+37) 	max value of a float
-FLT_MAX_10_EXP 	(≥+37) 	max value (base 10) of exponent part of a float
-FLT_MAX_EXP 	(—) 	max value (base FLT_RADIX) of exponent part of a float
-FLT_MIN 	(≤1E−37) 	min value of a float
-FLT_MIN_10_EXP 	(≤−37) 	min value (base 10) of exponent part of a float
-FLT_MIN_EXP 	(—) 	min value (base FLT_RADIX) of exponent part of a float
-FLT_ROUNDS 	(0)
+Name    Allowable value         Comment
+FLT_RADIX       (≥2)    the radix of exponent representation
+DBL_DIG         (≥10)   the number of digits of precision in a double
+DBL_EPSILON     (≤1E−9)         minimum positive number such that 1.0 + x ≠ 1.0
+DBL_MANT_DIG    (—)     the number of base FLT_RADIX digits in the mantissa part of a double
+DBL_MAX         (≥1E+37)        max value of a double
+DBL_MAX_10_EXP  (≥+37)  max value of exponent (base 10) of a double
+DBL_MAX_EXP     (—)     max value of exponent (base FLT_RADIX)) of a double
+DBL_MIN         (≤1E−37)        min value of a double
+DBL_MIN_10_EXP  (≤37)   minimum value of exponent (base 10) of a double
+DBL_MIN_EXP     (—)     min value of exponent part of a double (base FLT_RADIX)
+FLT_DIG         (≥6)    the number of digits of precision in a float
+FLT_EPSILON     (≤1E−5)         minimum positive number such that 1.0 + x ≠ 1.0
+FLT_MANT_DIG    (—)     the number of base FLT_RADIX digits in the mantissa of a float
+FLT_MAX         (≥1E+37)        max value of a float
+FLT_MAX_10_EXP  (≥+37)  max value (base 10) of exponent part of a float
+FLT_MAX_EXP     (—)     max value (base FLT_RADIX) of exponent part of a float
+FLT_MIN         (≤1E−37)        min value of a float
+FLT_MIN_10_EXP  (≤−37)  min value (base 10) of exponent part of a float
+FLT_MIN_EXP     (—)     min value (base FLT_RADIX) of exponent part of a float
+FLT_ROUNDS      (0)
 
 affects rounding of floating point addition:
 
@@ -723,15 +746,15 @@ affects rounding of floating point addition:
 
 any other value is implementation defined.
 
-LDBL_DIG 	(≥10) 	the number of digits of precision in a long double
-LDBL_EPSILON 	(≤1E−9) 	minimum positive number such that 1.0 + x ≠= 1.0
-LDBL_MANT_DIG 	(—) 	the number of base FLT_RADIX digits in the mantissa part of a long double
-LDBL_MAX 	(≥1E+37) 	max value of a long double
-LDBL_MAX_10_EXP 	(≥+37) 	max value of exponent (base 10) of a long double
-LDBL_MAX_EXP 	(—) 	max value of exponent (base FLT_RADIX) of a long double
-LDBL_MIN 	(≤1E−37) 	minimum value of a long double
-LDBL_MIN_10_EXP 	(≤−37) 	min value of exponent part (base 10) of a long double
-LDBL_MIN_EXP 	(—) 	min value of exponent part of a long double (base FLT_RADIX)
+LDBL_DIG        (≥10)   the number of digits of precision in a long double
+LDBL_EPSILON    (≤1E−9)         minimum positive number such that 1.0 + x ≠= 1.0
+LDBL_MANT_DIG   (—)     the number of base FLT_RADIX digits in the mantissa part of a long double
+LDBL_MAX        (≥1E+37)        max value of a long double
+LDBL_MAX_10_EXP         (≥+37)  max value of exponent (base 10) of a long double
+LDBL_MAX_EXP    (—)     max value of exponent (base FLT_RADIX) of a long double
+LDBL_MIN        (≤1E−37)        minimum value of a long double
+LDBL_MIN_10_EXP         (≤−37)  min value of exponent part (base 10) of a long double
+LDBL_MIN_EXP    (—)     min value of exponent part of a long double (base FLT_RADIX)
 Table 9.2. <float.h>
 
 Mathematical functions

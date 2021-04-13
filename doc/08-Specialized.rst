@@ -172,25 +172,41 @@ more complicated, so use these tables only as a guide
 to the simple cases and take a look at what
 we say later about definitions.
 
-Storage Class Specifier 	Function or Data Object 	Linkage 	Duration
-static 	either 	internal 	static
-extern 	either 	probably external 	static
-none 	function 	probably external 	static
-none 	data object 	external 	static
++-------------------------+-------------------------+-------------------------+--------------------------+
+|Storage Class Specifier  | Function or Data Object |     Linkage             |   Duration               |
++=========================+=========================+=========================+==========================+
+| static                  | either 	            | internal                | static                   |
++-------------------------+-------------------------+-------------------------+--------------------------+
+| extern                  | either 	            | probably external       | static                   |
++-------------------------+-------------------------+-------------------------+--------------------------+
+| none 	                  | function                | probably external       | static                   |
++-------------------------+-------------------------+-------------------------+--------------------------+
+| none 	                  | data object             | external                | static                   |
++-------------------------+-------------------------+-------------------------+--------------------------+
+
 
 Table 8.1. External declarations (outside a function)
 
 The table above omits the register and auto storage class
 specifiers because they are not permitted in file-scope (external) declarations.
 
-Storage Class Specifier 	Function or Data Object 	Linkage 	Duration
-register 	data object only 	none 	automatic
-auto 	data object only 	none 	automatic
-static 	data object only 	none 	static
-extern 	either 	probably external 	static
-none 	data object 	none 	automatic
-none 	function 	probably external 	static
-Table 8.2. Internal declarations
++-------------------------------+-------------------------------+-------------------+-------------+
+|Storage Class Specifier 	|Function or Data Object 	|Linkage 	    |Duration     |
++===============================+===============================+===================+=============+
+|register                       |data object only               |none               |automatic    |
++-------------------------------+-------------------------------+-------------------+-------------+
+|auto                           |data object only               |none               |automatic    |
++-------------------------------+-------------------------------+-------------------+-------------+
+|static                         |data object only 	        |none               |static       |
++-------------------------------+-------------------------------+-------------------+-------------+
+|extern                         |either                         |probably external  |static       |
++-------------------------------+-------------------------------+-------------------+-------------+
+|none 	                        |data object                    |none               |automatic    |
++-------------------------------+-------------------------------+-------------------+-------------+
+|none 	                        |function                       |probably external  |static       |
++-------------------------------+-------------------------------+-------------------+-------------+
+
+Table 8.2. Internal declarations|
 
 Internal static variables retain their values between calls of the
 function that contains them, which is useful in certain circumstances
