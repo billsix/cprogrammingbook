@@ -1,7 +1,7 @@
 #define NDEBUG
 #include <assert.h>
 
-void func(void) {
+void func() {
   int c;
   assert((c = getchar()) != EOF);
   putchar(c);

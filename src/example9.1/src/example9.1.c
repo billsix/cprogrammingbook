@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-main() {
+int main() {
   size_t distance;
   struct x {
     int a, b, c;

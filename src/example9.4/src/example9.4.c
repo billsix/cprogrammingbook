@@ -5,15 +5,15 @@
 FILE *temp_file;
 void leave(int sig);
 
-main() {
-  (void)signal(SIGINT, leave);
+int main() {
+  ()signal(SIGINT, leave);
   temp_file = fopen("tmp", "w");
   for (;;) {
     /*
      * Do things....
      */
     printf("Ready...\n");
-    (void)getchar();
+    ()getchar();
   }
   /* can't get here ... */
   exit(EXIT_SUCCESS);

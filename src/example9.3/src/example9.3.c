@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void func(void);
+void func();
 jmp_buf place;
 
-main() {
+int main() {
   int retval;
 
   /*
@@ -25,7 +25,7 @@ main() {
   printf("What! func returned!\n");
 }
 
-void func(void) {
+void func() {
   /*
    * Return to main.
    * Looks like a second return from setjmp,
