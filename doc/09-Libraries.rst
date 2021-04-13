@@ -27,7 +27,8 @@ meant more for information and convenient reference than as
 a full tutorial introduction. It would take a full
 book by itself to do real justice to the libraries.
 
-9.1.1. Headers and standard types
+Headers and standard types
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A number of types and macros are used widely
 by the library functions. Where necessary, they are defined
@@ -81,7 +82,8 @@ treated as a macro:
     some function("Might be a macro\n");
     (some function)("Can't be a macro\n");
 
-9.1.2. Character set and cultural dependencies
+Character set and cultural dependencies
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Committee has introduced features that attempt to cater
 for the use of C in environments which are
@@ -104,7 +106,8 @@ and effectively provides support for the way that Old
 C worked. Other locale settings may provide different behaviour
 in implementation-defined ways.
 
-9.1.3. The <stddef.h> Header
+The <stddef.h> Header
+~~~~~~~~~~~~~~~~~~~~~
 
 There are a small number of types and macros,
 found in <stddef.h>, which are widely used in other
@@ -163,7 +166,8 @@ declared in <stddef.h> is wchar_t, an integral type large enough
 to hold a wide character from any supported extended character
 sets.
 
-9.1.4. The <errno.h> Header
+The <errno.h> Header
+~~~~~~~~~~~~~~~~~~~~
 
 This header defines errno along with the macros EDOM and
 ERANGE, which expand to nonzero integral constant expressions; their form
@@ -533,7 +537,8 @@ lconv contains at least the following members:
         As p_sign_posn for negative monetary values. CHAR_MAX in the C locale.
 
 
-9.4.1. The setlocale function
+The setlocale function
+~~~~~~~~~~~~~~~~~~~~~~
 
 #include <locale.h>
 
@@ -592,7 +597,8 @@ that part of the program's locale will be restored. If
 the selection cannot be performed, a null pointer is returned
 and the locale is not changed.
 
-9.4.2. The localeconv function
+The localeconv function
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: C
 
@@ -636,7 +642,8 @@ Limits
 Two header files <float.h> and <limits.h> define several implementation specific
 limits.
 
-9.5.1. Limits.h
+Limits.h
+~~~~~~~~
 
 Table 9.1 gives the names declared, the allowable values, and
 a comment on what they mean. For example, the description
@@ -692,7 +699,8 @@ Note: if the implementation treats chars as signed, then the values of CHAR_MAX 
 
 Table 9.1. <limits.h>
 
-9.5.2. Float.h
+Float.h
+~~~~~~~
 
 For floating point numbers, the file <float.h> contains a similar
 set of minimum values. (It is assumed that where no

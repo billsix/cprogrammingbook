@@ -57,7 +57,8 @@ and describes what they mean in a fairly readable way
 (for a standard). Scope and linkage have already been described
 in Chapter 4, although we do present a review of them below.
 
-8.2.1. Storage class specifiers
+Storage class specifiers
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are five keywords under the category of storage class
 specifiers, although one of them, typedef, is there more out
@@ -83,7 +84,8 @@ the same name, can all affect the linkage of a
 name, although fortunately not its scope or duration. We will
 investigate the easier items first.
 
-8.2.1.1. Duration
+Duration
+^^^^^^^^
 
 The duration of an object describes whether
 its storage is allocated once only, at program start-up, or
@@ -94,7 +96,7 @@ There are only two types of duration of objects: static
 duration and automatic duration. Static duration means that the object
 has its storage allocated permanently, automatic means that the storage
 is allocated and freed as necessary. It's easy to tell
-which is which: you only get automatic duration if ::
+which is which: you only get automatic duration if
 
     the declaration is inside a function
 
@@ -212,11 +214,12 @@ Internal static variables retain their values between calls of the
 function that contains them, which is useful in certain circumstances
 (see Chapter 4).
 
-8.2.2. Scope
+Scope
+~~~~~
 
 Now we must look again at the scope of the
 names of objects, which defines when and where a given
-name has a particular meaning. The different types of scope are the following: ::
+name has a particular meaning. The different types of scope are the following:
 
     function scope
 
@@ -272,7 +275,8 @@ The names declared inside the parentheses disappear outside them.
 The scope of a name is completely independent of any
 storage class specifier that may be used in its declaration.
 
-8.2.3. Linkage
+Linkage
+~~~~~~~
 
 We will briefly review the subject of linkage here, too.
 Linkage is used to determine what makes the same name
@@ -293,7 +297,7 @@ storage class specifier, the declarations must be identical. It's the
 responsibility of the programmer to get this right, though there
 will probably be tools available to help you check this out.
 
-The three different types of linkage are: ::
+The three different types of linkage are:
 
     external linkage
 
@@ -314,7 +318,8 @@ the same thing.
 Finally, names with no linkage refer to
 separate things.
 
-8.2.4. Linkage and definitions
+Linkage and definitions
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Every data object or function that is actually used in
 a program (except as the operand of a sizeof operator)
@@ -396,14 +401,15 @@ A consequence of the foregoing is that unless you also
 provide an initializer, declarations that explicitly include the extern storage
 class specifier do not result in a definition.
 
-8.2.5. Realistic use of linkage and definitions
+Realistic use of linkage and definitions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The rules that determine the linkage and definition associated with
 declarations look quite complicated. The combinations used in practice are
 nothing like as bad; so let's investigate the usual cases.
 
 The three types of accessibility that you will want of
-data objects or functions are: ::
+data objects or functions are:
 
     throughout the entire program,
 
@@ -663,7 +669,8 @@ as well! In fact, the truly spectacular
 
 is a strong possibility in some real-time operating system kernels.
 
-8.4.1. Const
+Const
+~~~~~
 
 Let's look at what is meant when const is used.
 It's really quite simple: const means that something is not
@@ -732,7 +739,8 @@ modified. So, depending on what you choose to do, both
 the pointer and the thing it points to may be
 modifiable or not; just choose the appropriate declaration.
 
-8.4.2. Volatile
+Volatile
+~~~~~~~~
 
 After const, we treat volatile. The reason for having this
 type qualifier is mainly to do with the problems that
@@ -877,7 +885,8 @@ qualifier to another type, you can use typedef to do it:
 
     const_sx = non_const_sx;        /* error - attempt to modify a const */
 
-8.4.2.1. Indivisible Operations
+Indivisible Operations
+^^^^^^^^^^^^^^^^^^^^^^
 
 Those of you who are familiar with techniques that involve hardware
 interrupts and other ‘real time’ aspects of programming will recognise the
