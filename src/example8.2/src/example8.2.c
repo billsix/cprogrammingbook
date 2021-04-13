@@ -33,7 +33,7 @@ static struct{
 * Also with internal linkage, but not a tentative
 * definition because this is a function.
 */
-static void lf(void);
+static void lf();
 
 /*
 * Definition with internal linkage.
@@ -58,7 +58,7 @@ static int local_function(int a1, int a2){
         return(a1 * a2);
 }
 
-static void lf(void){
+static void lf(){
         /*
          * A static variable with no linkage,
          * so usable only within this function.

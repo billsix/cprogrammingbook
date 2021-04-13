@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 int i_var;
-void func(void);
+void func();
 
-main(){
+int main(){
         while(i_var != 10000){
                 func();
                 i_var++;
@@ -14,6 +14,6 @@ main(){
 }
 
 void
-func(void){
+func(){
         printf("in func, i_var is %d\n", i_var);
 }
