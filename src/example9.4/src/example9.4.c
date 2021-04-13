@@ -6,14 +6,14 @@ FILE *temp_file;
 void leave(int sig);
 
 int main() {
-  ()signal(SIGINT, leave);
+  () signal(SIGINT, leave);
   temp_file = fopen("tmp", "w");
   for (;;) {
     /*
      * Do things....
      */
     printf("Ready...\n");
-    ()getchar();
+    () getchar();
   }
   /* can't get here ... */
   exit(EXIT_SUCCESS);
