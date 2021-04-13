@@ -1,23 +1,22 @@
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <signal.h>
-
 
 FILE *temp_file;
 void leave(int sig);
 
 main() {
-        (void) signal(SIGINT,leave);
-        temp_file = fopen("tmp","w");
-        for(;;) {
-                /*
-                 * Do things....
-                 */
-                printf("Ready...\n");
-                (void)getchar();
-        }
-        /* can't get here ... */
-        exit(EXIT_SUCCESS);
+  (void)signal(SIGINT, leave);
+  temp_file = fopen("tmp", "w");
+  for (;;) {
+    /*
+     * Do things....
+     */
+    printf("Ready...\n");
+    (void)getchar();
+  }
+  /* can't get here ... */
+  exit(EXIT_SUCCESS);
 }
 
 /*
@@ -28,9 +27,8 @@ main() {
  * this is not a strictly conforming program
  */
 
-void
-leave(int sig) {
-        fprintf(temp_file,"\nInterrupted..\n");
-        fclose(temp_file);
-        exit(sig);
+void leave(int sig) {
+  fprintf(temp_file, "\nInterrupted..\n");
+  fclose(temp_file);
+  exit(sig);
 }
