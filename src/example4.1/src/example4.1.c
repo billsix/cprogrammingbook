@@ -4,7 +4,7 @@
 
 double aax1();
 
-int main() {
+int main(int argc, char *argv[]) {
   double return_v, aax1();
   return_v = aax1();
   exit(EXIT_SUCCESS);

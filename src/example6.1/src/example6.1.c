@@ -17,7 +17,7 @@ struct wp_char {
  */
 struct wp_char infun();
 
-int main() {
+int main(int argc, char *argv[]) {
   for (int32_t icount = 0; icount < ARSIZE; icount++) {
     ar[icount] = infun();
     if (ar[icount].wp_cval == '\n') {

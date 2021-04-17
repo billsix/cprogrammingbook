@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
   char ch = getchar();
   while (ch != 'a') {
     if (ch != '\n')

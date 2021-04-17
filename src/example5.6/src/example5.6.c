@@ -5,7 +5,7 @@
 
 #define LINELNG 100 /* max. length of input line */
 
-int main() {
+int main(int argc, char *argv[]) {
   char in_line[LINELNG];
   int32_t c;
 

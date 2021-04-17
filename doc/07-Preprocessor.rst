@@ -1,3 +1,5 @@
+.. _preprocessor:
+
 Preprocessor
 ============
 
@@ -537,7 +539,7 @@ by saying
 It isn't an error to #undef a name which isn't
 currently defined.
 
-This occasionally comes in handy. Chapter 9 points out that
+This occasionally comes in handy. :ref:`libraries` points out that
 some library functions may actually be macros, not functions, but
 by undefing their names you are guaranteed access to a
 real function.

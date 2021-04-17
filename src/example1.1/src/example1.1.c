@@ -14,7 +14,7 @@ void show_message();
  * Another function, but this includes the body of
  * the function. This is a "definition".
  */
-int main() {
+int main(int argc, char *argv[]) {
   int32_t count = 0;
   while (count < 10) {
     show_message();

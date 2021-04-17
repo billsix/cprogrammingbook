@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
   int32_t this_number = 3;
 
   while (this_number < 10000) {

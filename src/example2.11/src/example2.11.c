@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
   const int32_t i = 5;
   const int32_t j = 2;
   float f = 3.0;

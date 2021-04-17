@@ -1,3 +1,5 @@
+.. _specialized:
+
 Specialized areas
 =================
 
@@ -28,7 +30,7 @@ encountered difficult or extraordinary material.
 Declarations, Definitions and Accessibility
 -------------------------------------------
 
-Chapter 4 introduced the concepts of scope and linkage, showing
+:ref:`functions` introduced the concepts of scope and linkage, showing
 how they can be combined to control the accessibility of
 things throughout a program. We deliberately gave a vague description
 of exactly what constitutes a definition on the grounds that
@@ -55,7 +57,7 @@ three distinct but related concepts. The Standard calls them:
 
 and describes what they mean in a fairly readable way
 (for a standard). Scope and linkage have already been described
-in Chapter 4, although we do present a review of them below.
+in :ref:`functions`, although we do present a review of them below.
 
 Storage class specifiers
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -212,7 +214,7 @@ Table 8.2. Internal declarations|
 
 Internal static variables retain their values between calls of the
 function that contains them, which is useful in certain circumstances
-(see Chapter 4).
+(see :ref:`functions`).
 
 Scope
 ~~~~~

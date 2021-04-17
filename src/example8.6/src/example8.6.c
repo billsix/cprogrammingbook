@@ -5,7 +5,7 @@
 int i_var;
 void func();
 
-int main() {
+int main(int argc, char *argv[]) {
   while (i_var != 10000) {
     func();
     i_var++;

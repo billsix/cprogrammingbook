@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
   void pmax(); /* declaration */
   for (int32_t i = -10; i <= 10; i++) {
     for (int32_t j = -10; j <= 10; j++) {

@@ -5,7 +5,7 @@
 
 #define GROW_BY 10 /* string grows by 10 chars */
 
-int main() {
+int main(int argc, char *argv[]) {
 
   if (GROW_BY < 2) {
     fprintf(stderr, "Growth constant too small\n");

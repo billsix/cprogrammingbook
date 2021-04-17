@@ -10,7 +10,7 @@ void print_arr(const char *p_array[]);
 void sort_arr(const char *p_array[]);
 char *next_string(char *destination);
 
-int main() {
+int main(int argc, char *argv[]) {
   /* leave room for null at end */
   char *p_array[MAXSTRING + 1];
 

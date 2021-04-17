@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define ARSIZE 10
 
-int main() {
+int main(int argc, char *argv[]) {
   char ch_arr[ARSIZE];
 
   int32_t lastchar = 0;

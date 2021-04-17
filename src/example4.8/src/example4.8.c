@@ -12,7 +12,7 @@ int32_t mul_exp();
 int32_t unary_exp();
 int32_t primary();
 
-int main() {
+int main(int argc, char *argv[]) {
   for (;;) {
     printf("expression: ");
     int32_t val = expr();

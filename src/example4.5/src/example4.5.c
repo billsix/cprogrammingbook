@@ -11,7 +11,7 @@ void func() {
 }
 /* the int32_t 'a' reappears */
 
-int main() {
+int main(int argc, char *argv[]) {
   func();
   exit(EXIT_SUCCESS);
 }

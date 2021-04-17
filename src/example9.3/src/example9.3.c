@@ -5,7 +5,7 @@
 void func();
 jmp_buf place;
 
-int main() {
+int main(int argc, char *argv[]) {
   int retval;
 
   /*

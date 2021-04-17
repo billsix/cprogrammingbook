@@ -5,7 +5,7 @@
 const char arr[] = "hello";
 const char *cp = arr;
 
-int main() {
+int main(int argc, char *argv[]) {
 
   printf("Size of arr %lu\n", (unsigned long)sizeof(arr));
   printf("Size of *cp %lu\n", (unsigned long)sizeof(*cp));

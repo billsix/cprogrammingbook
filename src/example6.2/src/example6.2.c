@@ -12,7 +12,7 @@ struct wp_char {
 
 void infun(struct wp_char *);
 
-int main() {
+int main(int argc, char *argv[]) {
   struct wp_char *in_p;
 
   for (in_p = ar; in_p < &ar[ARSIZE]; in_p++) {

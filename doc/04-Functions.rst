@@ -1,3 +1,5 @@
+.. _functions:
+
 Functions
 =========
 
@@ -452,19 +454,19 @@ for not having them, so the only time you will
 need to use these rules is if you are being
 adventurous and using functions with a variable number of arguments,
 using the ellipsis notation in the prototype that is explained
-in Chapter 9.
+in :ref:`libraries`.
 
 The rules mention the default argument promotions and compatible type.
 Where they are used, the default argument promotions are:
 
-    Apply the integral promotions (see Chapter 2) to the value of each argument
+    Apply the integral promotions (see :ref:`variables`) to the value of each argument
 
     If the type of the argument is float it is converted to double
 
 The introduction of prototypes (amongst other things) has increased the
 need for precision about ‘compatible types’, which was not much
 of an issue in Old C. The full list of
-rules for type compatibility is deferred until Chapter 8, because
+rules for type compatibility is deferred until :ref:`specialized`, because
 we suspect that most C programmers will never need to
 learn them. For the moment, we will simply work on
 the basis that if two types are the same, they
@@ -601,7 +603,7 @@ Summary
     int
     vfunc(int x, float y, ...);
 
-    Chapter 9 describes how to write this sort of function.
+    :ref:`libraries` describes how to write this sort of function.
 
 Compound statements and declarations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -758,7 +760,7 @@ Call by reference
 
 It is possible to write functions that take pointers as their
 arguments, giving a form of call by reference. This is described
-in Chapter 5 and does allow functions to change values in
+in :ref:`arrays` and does allow functions to change values in
 their callers.
 
 Recursion
@@ -991,7 +993,7 @@ a declaration is not hard:
     extern in front of it, when it is a declaration only.
 
 
-Chapter 8 revisits the definition and declaration criteria to a depth
+:ref:`specialized` revisits the definition and declaration criteria to a depth
 that will cause decompression sickness when you surface.
 
 In the example it's easy to see that each file
@@ -1035,7 +1037,7 @@ What introduces the complexity is the dreaded extern keyword. The nice
 regular block structure gets blown to pieces with this, which although
 at a first glance is simple and obvious, does some very
 nasty things to the fabric of the language. We'll leave
-its nasty problems to Chapter 8, since they only rear up
+its nasty problems to :ref:`specialized`, since they only rear up
 if you deliberately start to do perverse things with it and
 then say ‘what does this mean’? We've already seen it
 used to ensure that the declaration of something at the outer
@@ -1099,7 +1101,7 @@ use of it throughout the file. Of course, any half-way
 decent cross-reference listing would communicate that anyway, so the argument
 is a bit hard to maintain.
 
-Chapter 8 is the place to find out more. There's
+:ref:`specialized` is the place to find out more. There's
 a set of guidelines for how to get the results that
 are most often wanted from multi-file construction, and a good
 deal more detail on what happens when you mix extern, static

@@ -11,7 +11,7 @@ int32_t f() {
   return l_d_var;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
   printf("f() evaluates to %f, \n", f());
   exit(EXIT_SUCCESS);
 }

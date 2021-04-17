@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
   int32_t a, b;
   a = b = 5;
   printf("%d\n", ++a + 5);

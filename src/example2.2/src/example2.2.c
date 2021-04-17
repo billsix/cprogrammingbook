@@ -4,7 +4,7 @@
 
 #define BOILING 212 /* degrees Fahrenheit */
 
-int main() {
+int main(int argc, char *argv[]) {
   int32_t i = 0;
   printf("Fahrenheit to Centigrade\n");
   while (i <= BOILING) {

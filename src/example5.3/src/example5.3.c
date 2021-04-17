@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define ARSZ 20
 
-int main() {
+int main(int argc, char *argv[]) {
   int32_t ar[ARSZ];
   for (int32_t i = 0; i < ARSZ; i++) {
     ar[i] = i;

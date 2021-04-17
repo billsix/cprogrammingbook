@@ -52,7 +52,7 @@ int32_t t_insert(struct tree_node **root, int32_t v) {
   return 0;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
   /* construct tree by hand */
   struct tree_node *root_p = 0;
 

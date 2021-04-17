@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
   int32_t comma_count = 0;
   int32_t stop_count = 0;
   char this_char = getchar();

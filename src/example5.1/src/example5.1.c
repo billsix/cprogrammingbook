@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
   int32_t x;
 
   int32_t *p = &x; /* initialise pointer */

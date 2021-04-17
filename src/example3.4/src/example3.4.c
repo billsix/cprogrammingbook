@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
   int32_t i = 0;
   while (i <= 10) {
     printf("%d\n", i);

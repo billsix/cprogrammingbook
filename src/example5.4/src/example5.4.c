@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define ARSZ 10
 
-int main() {
+int main(int argc, char *argv[]) {
   float fa[ARSZ], *fp1, *fp2;
 
   fp1 = fp2 = fa; /* address of first element */

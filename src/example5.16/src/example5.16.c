@@ -4,7 +4,7 @@
 
 void func(int);
 
-int main() {
+int main(int argc, char *argv[]) {
   void (*fp)(int) = func;
 
   (*fp)(1);

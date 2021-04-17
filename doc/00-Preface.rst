@@ -287,7 +287,7 @@ There is no such restriction on the programmer working in
 a freestanding environment, although it isn't a good idea
 to go using names that are used in the standard
 library, simply because it will mislead readers of the program.
-Chapter 9 describes the names and uses of the library
+:ref:`libraries` describes the names and uses of the library
 functions.
 
 Typographical conventions
@@ -327,7 +327,7 @@ in depth. This means that in principle, if you felt
 so inclined, you could read the book as far as
 you like and stop, yet still have learnt a reasonably
 coherent subset of the language. Previous experience of C will
-render Chapter 1 a bit slow, but it is still
+render :ref:`intro` a bit slow, but it is still
 worth persevering with it, if only once.
 
 Example programs

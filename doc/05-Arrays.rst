@@ -1,3 +1,5 @@
+.. _arrays:
+
 Arrays & pointers
 =================
 
@@ -662,7 +664,7 @@ to be const.
 
 Of course, constants are not much use unless you can
 assign an initial value to them. We won't go
-into the rules about initialization here (they are in Chapter 6),
+into the rules about initialization here (they are in :ref:`structs`),
 but for the moment just note that any declaration
 can also assign the value of a constant expression to
 the thing being declared. Here are some example declarations involving
@@ -734,7 +736,7 @@ an ordinary pointer with a constant pointer, and if so,
 what does it mean? Most of those rules are ‘obvious
 ’ but they do have to be stated.
 
-Type qualifiers are given a further airing in Chapter 8.
+Type qualifiers are given a further airing in :ref:`structs`.
 
 Pointer arithmetic
 ~~~~~~~~~~~~~~~~~~
@@ -1730,7 +1732,7 @@ rules above describe what happens.
 Conditional operator
 ~~~~~~~~~~~~~~~~~~~~
 The description of the behaviour of this operator when it
-is used with pointers has already been given in Chapter 3.
+is used with pointers has already been given in :ref:`control-flow`.
 
 
 Arrays, the & operator and function declarations

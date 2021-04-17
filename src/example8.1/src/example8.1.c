@@ -3,7 +3,7 @@
 
 void func(register int arg1, double arg2);
 
-int main() {
+int main(int argc, char *argv[]) {
   func(5, 2);
   exit(EXIT_SUCCESS);
 }

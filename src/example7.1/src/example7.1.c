@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define DOUBLE(x) ((x) + (x))
 
-int main() {
+int main(int argc, char *argv[]) {
   int32_t a[20], *ip;
 
   ip = a;

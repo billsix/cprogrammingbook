@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
   int32_t i = -10;
   while (i <= 5) {
     printf("value of i is %d, ", i);

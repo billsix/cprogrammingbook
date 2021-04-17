@@ -12,7 +12,7 @@ char *mnames[] = {"January",   "February", "March",    "April",
                   "May",       "June",     "July",     "August",
                   "September", "October",  "November", "December"};
 
-int main() {
+int main(int argc, char *argv[]) {
 
   int32_t day_count = month;
 

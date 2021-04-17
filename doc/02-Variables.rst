@@ -1,3 +1,5 @@
+.. _variables:
+
 Variables & arithmetic
 ======================
 
@@ -492,7 +494,7 @@ may insist that the restrictions are lifted; let's hope that it is soon.
 Declaration of variables
 ------------------------
 
-You may remember that in Chapter 1 we said that you
+You may remember that in :ref:`intro` we said that you
 have to declare the names of things before you can use
 them (the only exceptions to this rule are the names of
 functions returning int, because they are declared by default, and the
@@ -568,15 +570,17 @@ there's less to say about them and they don't
 get as complicated as the integer types. The Standard breaks new
 ground by laying down some basic guarantees on the precision and
 range of the real numbers; these are found in the header
-file float.h which is discussed in detail in Chapter 9.
+file float.h which is discussed in detail in :ref:`libraries`.
 For some users this is extremely important information, but it is
 of a highly technical nature and is likely only to be
 fully understood by numerical analysts.
 
-The varieties of real numbers are these:::
+The varieties of real numbers are these:
 
     float
+
     double
+
     long double
 
 Each of the types gives access to a particular way of
@@ -1048,7 +1052,7 @@ the behaviour of printf is undefined if the wrong format is given.
 Table 2.5. More format codes
 
 A full description of the format codes that you can use
-with printf is given in Chapter 9.
+with printf is given in :ref:`libraries`.
 
 Expressions and arithmetic
 --------------------------
@@ -1177,7 +1181,7 @@ of the usual arithmetic conversions, and to the operands of the
 shift, unary +, -, and ~ operators. They are also applied when the expression
 in question is an argument to a function but no type
 information has been provided as part of a function prototype, as
-explained in Chapter 4.
+explained in :ref:`functions`.
 
 Signed and unsigned integers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -2231,7 +2235,7 @@ the value of an external variable that is also used in
 the expression. These are generally known as ‘side effects’. C makes
 almost no promise that side effects will occur in a predictable
 order within a single expression. (The discussion of ‘sequence points’ in
-Chapter 8 will be of interest if you care about this.)
+:ref:`specialized` will be of interest if you care about this.)
 
 Constants
 ---------

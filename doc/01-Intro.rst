@@ -1,3 +1,5 @@
+.. _intro:
+
 Introduction
 ============
 
@@ -141,7 +143,8 @@ the pair of characters \*/ is gobbled up and the whole lot is replaced
 by a single space. In Old C, this was not the case. The
 rule used to be that comment could occur anywhere that space could occur:
 the rule is now that comment is space. The significance of the change
-is minor and eventually becomes apparent in Chapter 7 where we discuss the
+is minor and eventually becomes apparent in :ref:`preprocessor`
+where we discuss the
 preprocessor. A consequence of the rule for the end of comment is that
 you can't put a piece of comment inside another piece, because the
 first \*/ pair will finish all of it. This is a minor nuisance, but
@@ -245,7 +248,7 @@ Declaration
 After the <stdio.h> file is included comes a function declaration; it tells
 the compiler that show_message is a function which takes no arguments and
 returns no values. This demonstrates one of the changes made by the Standard:
-it is an example of a function prototype, a subject which Chapter 4
+it is an example of a function prototype, a subject which :ref:`functions`
 discusses in detail. It isn't always necessary to declare functions in advance — C
 will use some (old) default rules in such cases—but it is
 now strongly recommended that you do declare them in advance. The distinction between
@@ -388,7 +391,7 @@ To support people working
 in environments that use character sets which are ‘wider’ than U.S. ASCII,
 such as the shift-JIS representation used in Japan, the Standard now allows
 multibyte characters to be present in strings and comments. The Standard defines the
-96 characters that are the alphabet of C (see Chapter 2). If your
+96 characters that are the alphabet of C (see :ref:`variables`). If your
 system supports an extended character set, the only place that you may use
 these extended characters is in strings, character constants, comment and the names of
 header files. Support for extended character sets is an implementation defined feature, so
@@ -409,7 +412,7 @@ This is a much more realistic function now, because there are several statements
 inside the function body, not just one. You might also have noticed that
 the function is not declared to be void. There is a good reason
 for this: it returns a proper value. Don't worry about its arguments
-yet; they are discussed in Chapter 10.
+yet; they are discussed in :ref:`complete`.
 
 The most important thing about main is that it is the first function
 to be called. In a hosted environment your C language system arranges, magically,
@@ -501,7 +504,7 @@ parentheses like this:
    function_name(first_arg, second_arg, third_arg);
 
 and so on. The call of printf is another example. More is explained
-in Chapter 4.
+in :ref:`functions`.
 
 The last statement in the loop is another assignment statement. It adds one
 to the variable count, so that the requirement for program to stop will eventually be met.
@@ -692,7 +695,7 @@ what you would expect, except that when it is applied to integer operands
 it gives a result that is truncated towards zero. For example, 5/2
 gives 2, 5/3 gives 1. The remainder operator is the way to
 get the truncated remainder. 5%2 gives 1, 5%3 gives 2. The
-signs of the remainder and quotient depend on the divisor and dividend in a way that is defined in the Standard and shown in Chapter 2.
+signs of the remainder and quotient depend on the divisor and dividend in a way that is defined in the Standard and shown in :ref:`variables`.
 
 An example performing input
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -818,14 +821,14 @@ Summary
 -------
 
 This chapter has introduced many of the basics of the language although informally.
-Functions, in particular, form the basic building block for C. Chapter 4 provides
+Functions, in particular, form the basic building block for C. :ref:`functions` provides
 a full description of these fundamental objects, but you should by now understand
 enough about them to follow their informal use in the intervening material.
 
 Although
 the idea of library functions has been introduced, it has not been possible
 to illustrate the extent of their importance to the C application programmer. The
-Standard Library, described in Chapter 9, is extremely important, both in the way
+Standard Library, described in :ref:`libraries`, is extremely important, both in the way
 that it helps to improve the portability of programs intended for general use
 and also in the aid to productivity that these useful functions can provide.
 

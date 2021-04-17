@@ -8,7 +8,7 @@ struct s {
   char *cp;
 } ex_s = {1, 'a', "hello"};
 
-int main() {
+int main(int argc, char *argv[]) {
   struct s first = ex_s;
   struct s second = {2, 'b', "byebye"};
 

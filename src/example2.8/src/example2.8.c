@@ -8,7 +8,7 @@
  * print32_t the percentage difference between it and the one
  * before
  */
-int main() {
+int main(int argc, char *argv[]) {
   int32_t curr_val = 2;
   while (curr_val <= 20) {
     /*

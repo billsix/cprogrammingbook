@@ -4,7 +4,7 @@
 
 void date(int32_t *, int32_t *); /* declare the function */
 
-int main() {
+int main(int argc, char *argv[]) {
   int32_t month, day;
   date(&day, &month);
   printf("day is %d, month is %d\n", day, month);

@@ -7,7 +7,7 @@ struct list_ele {
   struct list_ele *pointer;
 } ar[3];
 
-int main() {
+int main(int argc, char *argv[]) {
 
   ar[0].data = 5;
   ar[0].pointer = &ar[1];

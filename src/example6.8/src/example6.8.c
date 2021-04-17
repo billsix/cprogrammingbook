@@ -27,7 +27,7 @@ struct tree_node *t_search(struct tree_node *root, int32_t v) {
   return 0;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
   for (int32_t i = 0; i < 7; i++) {
     int32_t j;
     j = i + 1;

@@ -1,7 +1,7 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
-int main() {
+int main(int argc, char *argv[]) {
   unsigned int stop_val = 0;
   int i = -10;
 

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
   /* comma used - this loop has two counters */
   for (int32_t i = 0, j = 0; i <= 10; i++, j = i * i) {
     printf("i %d j %d\n", i, j);

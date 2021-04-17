@@ -5,7 +5,7 @@
 FILE *temp_file;
 void leave(int sig);
 
-int main() {
+int main(int argc, char *argv[]) {
   () signal(SIGINT, leave);
   temp_file = fopen("tmp", "w");
   for (;;) {

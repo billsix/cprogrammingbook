@@ -1,3 +1,6 @@
+.. _control-flow:
+
+
 Control flow
 ============
 
@@ -197,7 +200,7 @@ can also write this.
       else
         statement
 
-As Chapter 1 has said already, this is now ambiguous.
+As :ref:`intro` has said already, this is now ambiguous.
 It is not clear, except as indicated by the indentation,
 which of the ifs is responsible for the else. If
 we follow the rules that the previous example suggests, then
@@ -214,7 +217,7 @@ if.
 To prevent any unwanted association between an else and an
 if just above it, the if can be hidden away
 by using a compound statement. To repeat the example in
-Chapter 1, here it is.
+:ref:`intro`, here it is.
 
 .. code-block:: C
 
@@ -471,7 +474,7 @@ the break. It looks like this.
 The expression is evaluated and its value is compared with
 all of the const1 etc. expressions, which must all evaluate
 to different constant values (strictly they are integral constant expressions,
-see Chapter 6 and below). If any of them has
+see :ref:`structs` and below). If any of them has
 the same value as the expression then the statement following
 the case label is selected for execution. If the default
 is present, it will be selected when there is no
@@ -538,7 +541,7 @@ The break has further uses. Its own section follows soon.
 Integral Constant Expression
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Although Chapter 6 deals with constant expressions, it is worth
+Although :ref:`structs` deals with constant expressions, it is worth
 looking briefly at what an integral constant expression is, since
 that is what must follow the case labels in a
 switch statement. Loosely speaking, it is any expression that does
@@ -917,7 +920,7 @@ time that they see it most people look very uncomfortable
 for a while, then recollect an urgent appointment somewhere else.
 
 After evaluating the first operand there is one of the
-sequence points described in Chapter 8.
+sequence points described in :ref:`specialized`.
 
 The comma operator
 ~~~~~~~~~~~~~~~~~~
@@ -948,7 +951,7 @@ just as well ignored. Be prepared to see it only
 on special occasions.
 
 After evaluating each operand there is one of the sequence
-points described in Chapter 8.
+points described in :ref:`specialized`.
 
 
 Summary

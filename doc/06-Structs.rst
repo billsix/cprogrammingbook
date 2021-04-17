@@ -1,3 +1,5 @@
+.. _structs:
+
 Structures
 ==========
 
@@ -954,7 +956,7 @@ Any other object has automatic duration, and can only be
 initialized at run time. The two categories are mutually exclusive.
 
 
-Although they are related, storage duration and linkage (see Chapter 4)
+Although they are related, storage duration and linkage (see :ref:`functions`)
 are different and should not be confused.
 
 Compile-time initialization can only be done using constant expressions; run-time
@@ -1150,7 +1152,7 @@ be executed, because the entry to the block containing them
 must be below the declarations!
 
 A declaration inside a function (block scope) can, using various
-techniques outlined in Chapter 4 and Chapter 8, be made
+techniques outlined in :ref:`functions` and :ref:`specialized`, be made
 to refer to an object that has either external or
 internal linkage. If you've managed to do that, and it's
 not likely to happen by accident, then you can't initialize

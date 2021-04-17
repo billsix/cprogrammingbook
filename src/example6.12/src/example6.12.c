@@ -34,7 +34,7 @@ void print_vt() {
   }
 }
 
-int main() {
+int main(int argc, char *argv[]) {
 
   var_type.type_in_union = FLOAT_TYPE;
   var_type.vt_un.un_float = 3.5;

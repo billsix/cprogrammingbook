@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define DELTA 0.0001
 
-int main() {
+int main(int argc, char *argv[]) {
   double sq_root(double); /* prototype */
 
   for (int32_t i = 1; i < 100; i++) {
