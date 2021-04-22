@@ -127,7 +127,7 @@ isn't common practice to indent the #). Table 7.1 below
 is a list of the directives defined in the Standard.
 
 +--------------------+---------------------------------------------+
-| Directive          | Meaning                                     +
+| Directive          | Meaning                                     |
 +====================+=============================================+
 | \#include          | include a source file                       |
 +--------------------+---------------------------------------------+

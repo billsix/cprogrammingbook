@@ -756,6 +756,9 @@ affects rounding of floating point addition:
 
 any other value is implementation defined.
 
+
+
+
 LDBL_DIG        (>=10)   the number of digits of precision in a long double
 LDBL_EPSILON    (<=1E-9)         minimum positive number such that 1.0 + x != 1.0
 LDBL_MANT_DIG   (—)     the number of base FLT_RADIX digits in the mantissa part of a long double
@@ -765,6 +768,7 @@ LDBL_MAX_EXP    (—)     max value of exponent (base FLT_RADIX) of a long doubl
 LDBL_MIN        (<=1E-37)        minimum value of a long double
 LDBL_MIN_10_EXP         (<=-37)  min value of exponent part (base 10) of a long double
 LDBL_MIN_EXP    (—)     min value of exponent part of a long double (base FLT_RADIX)
+
 Table 9.2. <float.h>
 
 Mathematical functions
@@ -1192,8 +1196,694 @@ rules of the Standard.
 Variable numbers of arguments
 -----------------------------
 
+It is often desirable to implement a function where the
+number of arguments is not known, or is not constant,
+when the function is written. Such a function is printf,
+described in Section 9.11. The following example shows the declaration
+of such a function.
+
+.. literalinclude:: ../src/example9.5/src/example9.5.c
+   :language: c
+   :linenos:
+
+Example 9.5
+
+In order to access the arguments within the called function,
+the functions declared in the <stdarg.h> header file must be
+included. This introduces a new type, called a va_list, and
+three functions that operate on objects of this type, called
+va_start, va_arg, and va_end.
+
+Before any attempt can be made to access a variable
+argument list, va_start must be called. It is defined as
+
+
+.. code-block:: C
+
+    #include <stdarg.h>
+    void va_start(va_list ap, parmN);
+
+The va_start macro initializes ap for subsequent use by the
+functions va_arg and va_end. The second argument to va_start, parmN
+is the identifier naming the rightmost parameter in the variable
+parameter list in the function definition (the one just before
+the , ... ). The identifier parmN must not be
+declared with register storage class or as a function or array type.
+
+Once initialized, the arguments supplied can be accessed sequentially by
+means of the va_arg macro. This is peculiar because the
+type returned is determined by an argument to the macro.
+Note that this is impossible to implement as a true
+function, only as a macro. It is defined as
+
+.. code-block:: C
+
+    #include <stdarg.h>
+    type va_arg(va_list ap, type);
+
+Each call to this macro will extract the next argument
+from the argument list as a value of the specified
+type. The va_list argument must be the one initialized by
+va_start. If the next argument is not of the specified
+type, the behaviour is undefined. Take care here to avoid
+problems which could be caused by arithmetic conversions. Use of
+char or short as the second argument to va_arg is
+invariably an error: these types always promote up to one
+of signed int or unsigned int, and float converts to
+double. Note that it is implementation defined whether objects declared
+to have the types char, unsigned char, unsigned short and
+unsigned bitfields will promote to unsigned int, rather complicating the
+use of va_arg. This may be an area where some
+unexpected subtleties arise; only time will tell.
+
+The behaviour is also undefined if va_arg is called when
+there were no further arguments.
+
+The type argument must be a type name which can
+be converted into a pointer to such an object simply
+by appending a \* to it (this is so the
+macro can work). Simple types such as char are fine
+(because char \* is a pointer to a character) but
+array of char won't work (char [] does not turn
+into ‘pointer to array of char’ by appending a \*).
+Fortunately, arrays can easily be processed by remembering that an
+array name used as an actual argument to a function
+call is converted into a pointer. The correct type for
+an argument of type ‘array of char’ would be char \*.
+
+When all the arguments have been processed, the va_end function
+should be called. This will prevent the va_list supplied from
+being used any further. If va_end is not used, the behaviour is undefined.
+
+The entire argument list can be re-traversed by calling va_start
+again, after calling va_end. The va_end function is declared as
+
+.. code-block:: C
+
+    #include <stdarg.h>
+    void va_end(va list ap);
+
+The following example shows the use of va_start, va_arg, and
+va_end to implement a function that returns the biggest of its integer arguments.
+
+.. literalinclude:: ../src/example9.6/src/example9.6.c
+   :language: c
+   :linenos:
+
+Example 9.6
+
+
 Input and output
 ----------------
+
+
+Introduction
+~~~~~~~~~~~~
+
+One of the reasons that has prevented many programming languages
+from becoming widely used for ‘real programming’ is their poor
+support for I/O, a subject which has never seemed to
+excite language designers. C has avoided this problem, oddly enough,
+by having no I/O at all! The C language approach
+has always been to do I/O using library functions, which
+ensures that system designers can provide tailored I/O instead of
+being forced to change the language itself.
+
+As C has evolved, a library package known as the
+‘Standard I/O Library’ or stdio, has evolved with it and
+has proved to be both flexible and portable. This package
+has now become part of the Standard.
+
+The old stdio package relied heavily on the UNIX model
+of file access, in particular the assumption that there is
+no distinction between unstructured binary files and files containing readable
+text. Many operating systems do maintain a distinction between the
+two, and to ensure that C programs can be written
+portably to run on both types of file model, the
+stdio package has been modified. There are changes in this
+area which affect many existing programs, although strenuous efforts were
+taken to limit the amount of damage.
+
+Old C programs should still be able work unmodified in a UNIX environment.
+
+The I/O model
+~~~~~~~~~~~~~
+
+The I/O model does not distinguish between the types of
+physical devices supporting the I/O. Each source or sink of
+data (file) is treated in the same way, and is
+viewed as a stream of bytes. Since the smallest object
+that can be represented in C is the character, access
+to a file is permitted at any character boundary. Any
+number of characters can be read or written from a
+movable point, known as the file position indicator. The characters
+will be read, or written, in sequence from this point,
+and the position indicator moved accordingly. The position indicator is
+initially set to the beginning of a file when it
+is opened, but can also be moved by means of
+positioning requests. (Where random access is not possible, the file
+position indicator is ignored.) Opening a file in append mode
+has an implementation defined effect on the stream's file position
+indicator.
+
+The overall effect is to provide sequential reads or writes
+unless the stream was opened in append mode, or the
+file position indicator is explicitly moved.
+
+There are two types of file, text files and binary
+files, which, within a program, are manipulated as text streams
+and binary streams once they have been opened for I/O.
+The stdio package does not permit operations on the contents
+of files ‘directly’, but only by viewing them as streams.
+
+Text streams
+^^^^^^^^^^^^
+
+The Standard specifies what is meant by the term text
+stream, which essentially considers a file to contain lines of
+text. A line is a sequence of zero or more
+characters terminated by a newline character. It is quite possible
+that the actual representation of lines in the external environment
+is different from this and there may be transformations of
+the data stream on the way in and out of
+the program; a common requirement is to translate the ‘\n’
+line-terminator into the sequence ‘\r\n’ on output, and do the
+reverse on input. Other translations may also be necessary.
+
+Data read in from a text stream is guaranteed to
+compare equal to the data that was earlier written out
+to the file if the data consists only of complete
+lines of printable characters and the control characters horizontal-tab and
+newline, no newline character is immediately preceded by space characters
+and the last character is a newline.
+
+It is guaranteed that, if the last character written to
+a text file is a newline, it will read back as the same.
+
+It is implementation defined whether the last line written to
+a text file must terminate with a newline character; this
+is because on some implementations text files and binary files are the same.
+
+Some implementations may strip the leading space from lines consisting
+only of a space followed by a newline, or strip
+trailing spaces at the end of a line!
+
+An implementation must support text files with lines containing at
+least 254 characters, including the terminating newline.
+
+Opening a text
+stream in update mode may result in a binary stream
+in some implementations.
+
+Writing on a text stream may cause some implementations to
+truncate the file at that point—any data beyond the last
+byte of the current write being discarded.
+
+Binary streams
+^^^^^^^^^^^^^^
+
+A binary stream is a sequence of characters that can
+be used to record a program's internal data, such as
+the contents of structures or arrays in binary form. Data
+read in from a binary stream will always compare equal
+to data written out earlier to the same stream, under
+the same implementation. In some circumstances, an implementation-defined number of
+NUL characters may be appended to a binary stream.
+
+The
+contents of binary files are exceedingly machine specific, and not,
+in general, portable.
+
+Other streams
+^^^^^^^^^^^^^
+
+Other stream types may
+exist, but are implementation defined.
+
+The stdio.h header file
+~~~~~~~~~~~~~~~~~~~~~~~
+
+To provide support for streams of the various kinds, a
+number of functions and macros exist. The <stdio.h> header file
+contains the various declarations necessary for the functions, together with
+the following macro and type declarations:
+
+    FILE
+
+        The type of an object used to contain
+        stream control information. Users of stdio never need
+        to know the contents of these objects, but
+        simply manipulate pointers to them. It is not
+        safe to copy these objects within the program;
+        sometimes their addresses may be ‘magic’.
+
+    fpos_t
+
+        A type of object that can be used
+        to record unique values of a stream's file
+        position indicator.
+
+    _IOFBF _IOLBF _IONBF
+
+        Values used to control the buffering of a
+        stream in conjunction with the setvbuf function.
+
+    BUFSIZ
+
+        The size of the buffer used by the
+        setbuf function. An integral constant expression whose value
+        is at least 256.
+
+    EOF
+
+        A negative integral constant expression, indicating the end-of-file
+        condition on a stream i.e. that there is no more input.
+
+    FILENAME_MAX
+
+        The maximum length which a filename can have,
+        if there is a limit, or otherwise the
+        recommended size of an array intended to hold a file name.
+
+    FOPEN_MAX
+
+        The minimum number of files that the implementation
+        guarantees may be held open concurrently; at least
+        eight are guaranteed. Note that three predefined streams
+        exist and may need to be closed if
+        a program needs to open more than five files explicitly.
+
+    L_tmpnam
+
+        The maximum length of the string generated by
+        tmpnam; an integral constant expression.
+
+    SEEK_CUR SEEK_END SEEK_SET
+
+        Integral constant expressions used to control the actions
+        of fseek.
+
+    TMP_MAX
+
+        The minimum number of unique filenames generated by
+        tmpnam; an integral constant expression with a value
+        of at least 25.
+
+    stdin stdout stderr
+
+        Predefined objects of type (FILE \*) referring to
+        the standard input, output and error streams respectively.
+        These streams are automatically open when a program starts execution.
+
+Opening, closing and buffering of streams
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Opening
+^^^^^^^
+
+A stream is connected to a file by means of the
+fopen, freopen or tmpfile functions. These functions will, if successful, return
+a pointer to a FILE object.
+
+Three streams are available without any special action; they are normally
+all connected to the physical device associated with the executing program:
+usually your terminal. They are referred to by the names stdin,
+the standard input, stdout, the standard output, and stderr, the standard
+error streams. Normal keyboard input is from stdin, normal terminal output
+is to stdout, and error messages are directed to stderr. The
+separation of error messages from normal output messages allows the stdout
+stream to be connected to something other than the terminal device,
+and still to have error messages appear on the screen in
+front of you, rather than to be redirected to this file.
+These files are only fully buffered if they do not refer
+to interactive devices.
+
+As mentioned earlier, the file position indicator may or may not
+be movable, depending on the underlying device. It is not possible,
+for example, to move the file position indicator on stdin if
+that is connected to a terminal, as it usually is.
+
+All non-temporary files must have a filename, which is a string.
+The rules for what constitutes valid filenames are implementation defined. Whether
+a file can be simultaneously open multiple times is also implementation
+defined. Opening a new file may involve creating the file. Creating
+an existing file causes its previous contents to be discarded.
+
+Closing
+^^^^^^^
+
+Files are closed by explicitly calling fclose, exit or by returning
+from main. Any buffered data is flushed. If a program stops
+for some other reason, the status of files which it had open is undefined.
+
+Buffering
+^^^^^^^^^
+
+There are three types of buffering:
+
+    Unbuffered
+
+        Minimum internal storage is used by stdio in
+        an attempt to send or receive data as soon as possible.
+
+    Line buffered
+
+        Characters are processed on a line-by-line basis. This
+        is commonly used in interactive environments, and internal
+        buffers are flushed only when full or when a newline is processed.
+
+    Fully buffered
+
+        Internal buffers are only flushed when full.
+
+
+The buffering associated with a stream can always
+be flushed by using fflush explicitly. Support for
+the various types of buffering is implementation defined,
+and can be controlled within these limits using
+setbuf and setvbuf.
+
+Direct file manipulation
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+A number of functions exist to operate on files directly.
+
+.. code-block:: C
+
+    #include <stdio.h>
+
+    int remove(const char *filename);
+    int rename(const char *old, const char *new);
+    char *tmpnam(char *s);
+    FILE *tmpfile(void);
+
+Description:
+
+    remove
+
+        Causes a file to be removed. Subsequent
+        attempts to open the file will fail,
+        unless it is first created again. If
+        the file is already open, the operation
+        of remove is implementation defined. The return
+        value is zero for success, any other
+        value for failure.
+
+    rename
+
+        Changes the name of the file identified
+        by old to new. Subsequent attempts to
+        open the original name will fail, unless
+        another file is created with the old
+        name. As with remove, rename returns zero
+        for a successful operation, any other value
+        indicating a failure.
+
+        If a file with the new name
+        exists prior to calling rename, the behaviour
+        is implementation defined.
+
+        If rename fails for any reason, the
+        original file is unaffected.
+
+    tmpnam
+
+        Generates a string that may be used as
+        a filename and is guaranteed to be different
+        from any existing filename. It may be called
+        repeatedly, each time generating a new name. The
+        constant TMP_MAX is used to specify how many
+        times tmpnam may be called before it can
+        no longer find a unique name. TMP_MAX will
+        be at least 25. If tmpnam is called
+        more than this number of times, its behaviour
+        is undefined by the Standard, but many implementations
+        offer no practical limit.
+
+        If the argument s is set to NULL,
+        then tmpnam uses an internal buffer to build
+        the name, and returns a pointer to that.
+        Subsequent calls may alter the same internal buffer.
+        The argument may instead point to an array
+        of at least L_tmpnam characters, in which case
+        the name will be filled into the supplied
+        buffer. Such a filename may then be created,
+        and used as a temporary file. Since the
+        name is generated by the function, it is
+        unlikely to be very useful in any other
+        context. Temporary files of this nature are not
+        removed, except by direct calls to the remove
+        function. They are most often used to pass
+        temporary data between two separate programs.
+
+   tmpfile
+        Creates a temporary binary file, opened for update,
+        and returns a pointer to the stream of
+        that file. The file will be removed when
+        the stream is closed. If no file could
+        be opened, tmpfile returns a null pointer.
+
+Opening named files
+~~~~~~~~~~~~~~~~~~~
+
+Named files are opened by a call to
+the fopen function, whose declaration is this:
+
+.. code-block:: C
+
+    #include <stdio.h>
+    FILE *fopen(const char *pathname, const char *mode);
+
+The pathname argument is the name of the
+file to open, such as that returned from
+tmpnam, or some program-specific filename.
+
+Files can be opened in a variety of
+modes, such as read mode for reading data,
+write mode for writing data, and so on.
+
+Note that if you only want to write
+data to a file, fopen will create the
+file if it does not already exist, or
+truncate it to zero length (losing its previous
+contents) if it did exist.
+
+The Standard list of modes is shown in
+Table 9.3, although implementations may permit extra modes
+by appending extra characters at the end of
+the modes.
+
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| Mode        |Type Of File | Read            | Write           | Create          | Truncate        |
++=============+=============+=================+=================+=================+=================+
+| "r"         | text        | yes             | no              | no              | no              |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "rb"        | binary      | yes             | no              | no              | no              |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "r+"        | text        | yes             | yes             | no              | no              |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "r+b"       | binary      | yes             | yes             | no              | no              |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "rb+"       | binary      | yes             | yes             | no              | no              |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "w"         | text        | no              | yes             | yes             | yes             |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "wb"        | binary      | no              | yes             | yes             | yes             |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "w+"        | text        | yes             | yes             | yes             | yes             |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "w+b"       | binary      | yes             | yes             | yes             | yes             |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "wb+"       | binary      | yes             | yes             | yes             | yes             |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "a"         | text        | no              | yes             | yes             | no              |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "ab"        | binary      | no              | yes             | yes             | no              |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "a+"        | text        | yes             | yes             | yes             | no              |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "a+b"       | binary      | no              | yes             | yes             | no              |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+| "ab+"       | binary      | no              | yes             | yes             | no              |
++-------------+-------------+-----------------+-----------------+-----------------+-----------------+
+
+
+
+Table 9.3. File opening modes
+
+Beware that some implementations of binary files may
+pad the last record with NULL characters, so
+opening them with modes ab, ab+ or a+b
+could position the file pointer beyond the last
+data written.
+
+If a file is opened in
+append mode, all writes will occur at the
+end of the file, regardless of attempts to
+move the file position indicator with fseek. The
+initial position fo the file position indicator will
+be implementation defined.
+
+Attempts to open a file in read mode,
+indicated by an 'r' as the first character
+in the mode string, will fail if the
+file does not already exist or can't be
+read.
+
+Files opened for update (‘+’ as the second
+or third character of mode) may be both
+read and written, but a read may not
+immediately follow a write, or a write follow
+a read, without an intervening call to one
+(or more) of fflush, fseek, fsetpos or rewind.
+The only exception is that a write may
+immediately follow a read if EOF was read.
+
+It may also be possible in some implementations
+to omit the b in the binary modes,
+using the same modes for text and binary files.
+
+Streams opened by fopen are fully buffered only
+if they are not connected to an interactive
+device; this ensures that prompts and responses are
+handled properly.
+
+If fopen fails to open a file, it
+returns a null pointer; otherwise, it returns a
+pointer to the object controlling the stream. The
+stdin, stdout and stderr objects are not necessarily
+modifiable and it may not be possible to
+use the value returned from fopen for assignment
+to one of them. For this reason, freopen
+is provided.
+
+Freopen
+~~~~~~~
+
+The freopen function is used to take an
+existing stream pointer and associate it with another named file:
+
+.. code-block:: C
+
+    #include <stdio.h>
+    FILE *freopen(const char *pathname,
+                  const char *mode, FILE *stream);
+
+The mode argument is the same as for
+fopen. The stream is closed first, and any
+errors from the close are ignored. On error,
+NULL is returned, otherwise the new value for
+stream is returned.
+
+Closing files
+~~~~~~~~~~~~~
+
+An open file is closed using fclose.
+
+.. code-block:: C
+
+    #include <stdio.h>
+
+    int fclose(FILE *stream);
+
+Any unwritten data buffered for stream is flushed
+out and any unread data is thrown away.
+If a buffer had been automatically allocated for
+the stream, it is freed. The file is then closed.
+
+Zero is returned on success, EOF if any error occurs.
+
+Setbuf, setvbuf
+~~~~~~~~~~~~~~~
+
+These two functions are used to change the
+buffering strategy for an open stream:
+
+.. code-block:: C
+
+    #include <stdio.h>
+
+    int setvbuf(FILE *stream, char *buf,
+                  int type, size_t size);
+    void setbuf(FILE *stream, char *buf);
+
+They must be used before the file is
+either read from or written to. The type
+argument defines how the stream will be buffered
+(see Table 9.4).
+
++--------------------+-------------------------------------------------------------------------------------------+
+|  Value             | Effect                                                                                    |
++====================+===========================================================================================+
+| _IONBF 	     | Do not buffer I/O                                                                         |
++--------------------+-------------------------------------------------------------------------------------------+
+| _IOFBF             | Fully buffer I/O                                                                          |
++--------------------+-------------------------------------------------------------------------------------------+
+| _IOLBF 	     | Line buffer: flush buffer when full, when newline is written or when a read is requested. |
++--------------------+-------------------------------------------------------------------------------------------+
+
+
+
+
+
+
+Table 9.4. Type of buffering
+
+
+The buf argument can be a null pointer,
+in which case an array is automatically allocated
+to hold the buffered data. Otherwise, the user
+can provide a buffer, but should ensure that
+its lifetime is at least as long as
+that of the stream: a common mistake is
+to use automatic storage allocated inside a compound
+statement; in correct usage it is usual to
+obtain the storage from malloc instead. The size
+of the buffer is specified by the size
+argument.
+
+A call of setbuf is exactly the same
+as a call of setvbuf with IOFBF for
+the type argument, and BUFSIZ for the size
+argument. If buf is a null pointer, the
+value _IONBF is used for type instead.
+
+No value is returned by setbuf, setvbuf returns
+zero on success, non-zero if invalid values are
+provided for type or size, or the request
+cannot be complied with.
+
+Fflush
+~~~~~~
+
+.. code-block:: C
+
+    #include <stdio.h>
+
+    int fflush(FILE *stream);
+
+If stream refers to a file opened for
+output or update, any unwritten data is ‘written’
+out. Exactly what that means is a function
+of the host environment, and C cannot guarantee,
+for example, that data immediately reaches the surface
+of a disk which might be supporting the
+file. If the stream is associated with a
+file opened for input or update, any preceding
+ungetc operation is forgotten.
+
+The most recent operation on the stream must
+have been an output operation; if not, the
+behaviour is undefined.
+
+A call of fflush with an argument of
+zero flushes every output or update stream. Care
+is taken to avoid those streams that have
+not had an output as their last operation,
+thus avoiding the undefined behaviour mentioned above.
+
+EOF is returned if an error occurs, otherwise zero.
+
 
 Formatted I/O
 -------------
