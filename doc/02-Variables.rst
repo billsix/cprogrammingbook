@@ -235,21 +235,21 @@ of C's other types. We discuss it further in Section 2.8.
 Summary
 ~~~~~~~
 
-    C requires at least 96 characters in the source program
-    character set.
+#. C requires at least 96 characters in the source program
+   character set.
 
-    Not all character sets in common use can stretch
-    to 96 characters, trigraphs allow the basic
-    ISO 646 character set to be used (at a pinch).
+#. Not all character sets in common use can stretch
+   to 96 characters, trigraphs allow the basic
+   ISO 646 character set to be used (at a pinch).
 
-    Multibyte character support has been added by the
-    Standard, with support for
+#. Multibyte character support has been added by the
+   Standard, with support for
 
-        Shift-encoded multibyte characters, which can be squeezed
-        into ‘ordinary’ character arrays, so still have char type.
+   #. Shift-encoded multibyte characters, which can be squeezed
+      into ‘ordinary’ character arrays, so still have char type.
 
-        Wide characters, each of which may use more storage than
-        a regular character. These usually have a different type from char.
+   #. Wide characters, each of which may use more storage than
+      a regular character. These usually have a different type from char.
 
 
 
@@ -577,11 +577,11 @@ fully understood by numerical analysts.
 
 The varieties of real numbers are these:
 
-    float
+- float
 
-    double
+- double
 
-    long double
+- long double
 
 Each of the types gives access to a particular way of
 representing real numbers in the target computer. If it only has
@@ -694,9 +694,14 @@ your program from exhibiting undefined behaviour. Beware!
 Summary of real arithmatic
 
 
-    Arithmetic with any two real types is done at the highest precision of the members involved.
-    Assignment involves loss of precision if the receiving type has a lower precision than the value being assigned to it.
-    Further conversions are often implied when expressions mix other types, but they have not been described yet.
+#. Arithmetic with any two real types is done at the
+   highest precision of the members involved.
+
+#. Assignment involves loss of precision if the receiving type has
+   a lower precision than the value being assigned to it.
+
+#. Further conversions are often implied when expressions mix other types,
+   but they have not been described yet.
 
 Printing real numbers
 ~~~~~~~~~~~~~~~~~~~~~
@@ -962,17 +967,17 @@ subtypes: short, ordinary and long. Taking those into account, here is
 a list of all of the possible integral types in C,
 except for the character types:
 
-    unsigned short int
+- unsigned short int
 
-    unsigned int
+- unsigned int
 
-    unsigned long int
+- unsigned long int
 
-    signed short int
+- signed short int
 
-    signed int
+- signed int
 
-    signed long int
+- signed long int
 
 In the last three, the signed keyword is unnecessary because the
 int types are signed types anyway: you have to say unsigned
@@ -1003,13 +1008,13 @@ save more space.
 
 Summary of integral types
 
-    The integral types are the short, long, signed, unsigned and plain ints.
+#. The integral types are the short, long, signed, unsigned and plain ints.
 
-    The commonest is the ordinary int, which is signed unless declared not to be.
+#. The commonest is the ordinary int, which is signed unless declared not to be.
 
-    The char variables can be made signed or unsigned, as you prefer, but
-    in the absence of indications to the
-    contrary, they will be allocated the most efficient type.
+#. The char variables can be made signed or unsigned, as you prefer, but
+   in the absence of indications to the
+   contrary, they will be allocated the most efficient type.
 
 Printing the integral types
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1127,13 +1132,13 @@ these are discussed much later.
 There are various types of conversion
 in arithmetic expressions:
 
-    The integral promotions
+- The integral promotions
 
-    Conversions between integral types
+- Conversions between integral types
 
-    Conversions between floating types
+- Conversions between floating types
 
-    Conversions between floating and integral types
+- Conversions between floating and integral types
 
 Conversions between floating (real) types were discussed in Section 2.8;
 what we do next is to specify how the other conversions
@@ -1256,35 +1261,35 @@ operands in an expression have different types, then there will have
 to be a conversion applied so that a common resulting type
 can be established; these are the conversions:
 
-    If either operand is a long double, then the other
+#.  If either operand is a long double, then the other
     one is converted to long double and that is the
     type of the result.
 
-    Otherwise, if either operand is a double, then the other
+#.  Otherwise, if either operand is a double, then the other
     one is converted to double, and that is the type
     of the result.
 
-    Otherwise, if either operand is a float, then the other
+#.  Otherwise, if either operand is a float, then the other
     one is converted to float, and that is the type
     of the result.
 
-    Otherwise the integral promotions are applied to both operands and
+#.  Otherwise the integral promotions are applied to both operands and
     the following conversions are applied:
 
-        If either operand is an unsigned long int, then the
-        other one is converted to unsigned long int, and that
-        is the type of the result.
+    #. If either operand is an unsigned long int, then the
+    other one is converted to unsigned long int, and that
+    is the type of the result.
 
-        Otherwise, if either operand is a long int, then the
-        other one is converted to long int, and that is
-        the type of the result.
+    #. Otherwise, if either operand is a long int, then the
+    other one is converted to long int, and that is
+    the type of the result.
 
-        Otherwise, if either operand is an unsigned int, then the
-        other one is converted to unsigned int, and that is
-        the type of the result.
+    #. Otherwise, if either operand is an unsigned int, then the
+    other one is converted to unsigned int, and that is
+    the type of the result.
 
-        Otherwise, both operands must be of type int, so that
-        is the type of the result.
+    #. Otherwise, both operands must be of type int, so that
+    is the type of the result.
 
 The Standard contains a strange sentence: ‘The values of floating operands
 and of the results of floating expressions may be represented in
@@ -1395,13 +1400,13 @@ hold extended characters when you need an array of them. The
 Standard makes the following guarantees about the values in a wide
 character:
 
-    A wchar_t can hold distinct values for each member
-    of the largest character set supported by the implementation.
+- A wchar_t can hold distinct values for each member
+  of the largest character set supported by the implementation.
 
-    The null character has the value of zero.
+- The null character has the value of zero.
 
-    Each member of the basic character set (see Section 2.2.1)
-    is encoded in a wchar_t with the same value as it has in a char.
+- Each member of the basic character set (see Section 2.2.1)
+  is encoded in a wchar_t with the same value as it has in a char.
 
 There is further support for this method of encoding characters. Strings,
 which we have already seen, are implemented as arrays of char,
@@ -1489,23 +1494,23 @@ a given system, what is the resulting type of expressions involving
 the following combinations of variables, after the usual arithmetic conversions have
 been applied?
 
-    Simply signed char.
+- Simply signed char.
 
-    Simply unsigned char.
+- Simply unsigned char.
 
-    int, unsigned int.
+- int, unsigned int.
 
-    unsigned int, long.
+- unsigned int, long.
 
-    int, unsigned long.
+- int, unsigned long.
 
-    char, long.
+- char, long.
 
-    char, float.
+- char, float.
 
-    float, float.
+- float, float.
 
-    float, long double.
+- float, long double.
 
 Casts
 ^^^^^
@@ -2085,13 +2090,13 @@ involving b and several unary * operators.
 It's not too difficult to work out which are the
 unary operators; here are the rules.
 
-    ++ and - are always unary operators.
+- ++ and - are always unary operators.
 
-    The operator immediately to the right of an operand is
-    a binary operator unless (1) applies, when the operator to
-    its right is binary.
+- The operator immediately to the right of an operand is
+  a binary operator unless (1) applies, when the operator to
+  its right is binary.
 
-    All operators to the left of an operand are unary unless (2) applies.
+- All operators to the left of an operand are unary unless (2) applies.
 
 Because the unary operators have very high precedence, you can work
 out what they do before worrying about the other operators. One

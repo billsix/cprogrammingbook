@@ -178,10 +178,15 @@ reference manual”, the widely-known book written by Brian Kernighan
 and Dennis Ritchie, usually referred to as simply “K&R”.
 
     The C Programming Language,
+
     B.W. Kernighan and D. M. Ritchie,
+
     Prentice-Hall
+
     Englewood Cliffs,
+
     New Jersey,
+
     1978
 
 Further acting as a rigorous check on the expansion into
@@ -367,15 +372,24 @@ Address for the Standard
 Copies of the Standard can be obtained from:
 
     X3 Secretariat,
+
     CBEMA,
+
     311 First Street, NW,
+
     Suite 500,
+
     Washington DC 20001-2178,
+
     USA.
+
     Phone (+1) (202) 737 8888
 
 Mike Banahan
+
 Declan Brady
+
 Mark Doran
+
 
 January 1991

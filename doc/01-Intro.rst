@@ -231,13 +231,13 @@ the output from the preprocessor will be as if you had written this:
 Summary
 """""""
 
-    Preprocessor statements work on a line-by-line basis, the rest of C does not.
+#. Preprocessor statements work on a line-by-line basis, the rest of C does not.
 
-    #include statements are used to read the contents of a specified file, typically
-    to facilitate the use of library functions.
+#. #include statements are used to read the contents of a specified file, typically
+   to facilitate the use of library functions.
 
-    #define statements are typically used to give names for constants. By convention, the
-    names are in upper case (capitalized).
+#. #define statements are typically used to give names for constants. By convention, the
+   names are in upper case (capitalized).
 
 Function declaration and definition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -334,17 +334,17 @@ Summary
 """""""
 
 
-    Declarations are used to introduce the name of a function, its return type
-    and the type (if any) of its arguments.
+#. Declarations are used to introduce the name of a function, its return type
+   and the type (if any) of its arguments.
 
-    A function definition is a declaration with the body of the function given
-    too.
+#. A function definition is a declaration with the body of the function given
+   too.
 
-    A function returning no value should have its type declared as void. For
-    example, void func(/\* list of arguments \*/);
+#. A function returning no value should have its type declared as void. For
+   example, void func(/\* list of arguments \*/);
 
-    A function taking no arguments should be declared without an argument
-    list. For example, void func();
+#. A function taking no arguments should be declared without an argument
+   list. For example, void func();
 
 Strings
 ~~~~~~~
@@ -563,13 +563,13 @@ Summary
 """""""
 
 
-    The main function returns an int value.
+#. The main function returns an int value.
 
-    Returning from main is the same as calling the exit function, but exit
-    can be called from anywhere in a program.
+#. Returning from main is the same as calling the exit function, but exit
+   can be called from anywhere in a program.
 
-    Returning 0 or EXIT_SUCCESS is the way of indicating success, anything else
-    indicates failure.
+#. Returning 0 or EXIT_SUCCESS is the way of indicating success, anything else
+   indicates failure.
 
 Progress so far
 ~~~~~~~~~~~~~~~
@@ -577,15 +577,24 @@ Progress so far
 This example program, although short, has allowed us to introduce several important language
 features, amongst them:
 
-    Program structure
-    Comment
-    File inclusion
-    Function definition
-    Compound statements
-    Function calling
-    Variable declaration
-    Arithmetic
-    Looping
+#. Program structure
+
+#. Comment
+
+#. File inclusion
+
+#. Function definition
+
+#. Compound statements
+
+#. Function calling
+
+#. Variable declaration
+
+#. Arithmetic
+
+#. Looping
+
 
 although of course none of this has been covered rigorously.
 
@@ -597,11 +606,12 @@ more examples. You will have to work out for yourself what some of
 the code does, but as new or interesting features appear, they will be
 explained.
 
-1.4.1. A program to find prime numbers
 
 .. literalinclude:: ../src/example1.2/src/example1.2.c
    :language: c
    :linenos:
+
+1.4.1. A program to find prime numbers
 
 
 What was interesting in there? A few new points, perhaps. The program works
@@ -792,10 +802,11 @@ source of run-time errors in C; you have been warned.
 
 Summary
 
-    Arrays
-    always number from 0; you have no choice.
+#. Arrays always number from 0; you have no choice.
 
-    A n-element array has members which number from 0 to n-1 only. Element n does not exist and to access it is a big mistake.
+#. A n-element array has members which number from 0 to
+   n-1 only. Element n does not exist and to access it
+   is a big mistake.
 
 Terminology
 -----------
