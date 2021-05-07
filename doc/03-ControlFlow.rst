@@ -81,6 +81,10 @@ zero for false and (remember this) one for true. The
 result is of type int. This example shows how they work.
 
 
+.. literalinclude:: ../src/example3.1/src/example3.1.c
+   :language: c
+   :linenos:
+
 Example 3.1
 
 Which produces this on its standard output:
