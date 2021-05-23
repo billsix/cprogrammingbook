@@ -105,6 +105,9 @@ an end. Here's a simple program containing two functions:
    :language: c
    :linenos:
 
+Example 1.1
+
+
 A description of Example 1.1
 ----------------------------
 
@@ -611,7 +614,7 @@ explained.
    :language: c
    :linenos:
 
-1.4.1. A program to find prime numbers
+Example 1.2
 
 
 What was interesting in there? A few new points, perhaps. The program works
@@ -729,6 +732,9 @@ codes for '0' through to '9' will always be consecutive. Here is one example.
    :language: c
    :linenos:
 
+Example 1.3
+
+
 There are two interesting points in there. The first is to notice that
 at the end of each line of input read, the character represented by
 
@@ -780,6 +786,8 @@ explanation which follows.
 .. literalinclude:: ../src/example1.4/src/example1.4.c
    :language: c
    :linenos:
+
+Example 1.4
 
 
 You might note that the defined constant ARSIZE is used everywhere instead of
