@@ -22,14 +22,14 @@ int main(int argc, char *argv[]) {
 
   const int32_t sizeOfFrame =
       numberOfDisks * sizeof(struct local_variables_of_hanoi_instance);
-  struct local_variables_of_hanoi_instance *theFrames =
+  struct local_variables_of_hanoi_instance *theFrame =
       (struct local_variables_of_hanoi_instance *)malloc(sizeOfFrame);
 
   struct local_variables_of_hanoi_instance *framePointer;
   // create first frame frame
   {
     // make room for first frame frame
-    framePointer = &theFrames[sizeOfFrame - 1];
+    framePointer = &theFrame[sizeOfFrame - 1];
     // initialize first frame frame
     framePointer->numberOfDisks = numberOfDisks;
     framePointer->source = 1;
@@ -104,6 +104,6 @@ endProcedureSoRestoreCalleesLocalVarsAndContinueItWhereCalleeBlocked :
 
 endMain:
 
-  free(theFrames);
+  free(local_variables_of_hanoi_instance);
   return 0;
 }
