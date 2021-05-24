@@ -84,16 +84,16 @@ int main(int argc, char *argv[]) {
     }
   }
 
-applyHanoiProcedure :
+applyHanoiProcedure : {
 
-{
-  int32_t numberOfDisksToCompareToOne;
-  memcpy(/*dest*/ &numberOfDisksToCompareToOne,
-         /*src*/ current_stack_frame + offsetOfNumberOfDisks,
-         /*numberOfBytes*/ sizeof(int32_t));
-  if (numberOfDisksToCompareToOne != 1)
-    goto notOne;
-}
+  {
+    int32_t numberOfDisksToCompareToOne;
+    memcpy(/*dest*/ &numberOfDisksToCompareToOne,
+           /*src*/ current_stack_frame + offsetOfNumberOfDisks,
+           /*numberOfBytes*/ sizeof(int32_t));
+    if (numberOfDisksToCompareToOne != 1)
+      goto notOne;
+  }
 
   {
     int32_t source;
@@ -221,7 +221,7 @@ endProcedureSoRestoreCallersLocalVarsAndContinueItWhereCallerBlocked : {
          sizeof(MEMORY_ADDRESS));
   goto *goBackToCallee;
 }
-
+}
 endMain:
 
   free(theFrames);
