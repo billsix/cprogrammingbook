@@ -64,8 +64,7 @@ moveNMinus1FromSourceToTemp:
     framePointer = local_variables_for_nested_call_to_hanoi;
   }
   goto applyHanoiProcedure;
-move1ToTarget :
-  {
+move1ToTarget : {
   struct local_variables_of_hanoi_instance
       *local_variables_for_nested_call_to_hanoi = framePointer - 1;
   local_variables_for_nested_call_to_hanoi->numberOfDisks = 1;
@@ -77,10 +76,9 @@ move1ToTarget :
   local_variables_for_nested_call_to_hanoi
       ->local_variables_to_restore_before_returning = framePointer;
   framePointer = local_variables_for_nested_call_to_hanoi;
-  }
+}
   goto applyHanoiProcedure;
-moveNMinus1FromTempToTarget :
-  {
+moveNMinus1FromTempToTarget : {
   struct local_variables_of_hanoi_instance
       *local_variables_for_nested_call_to_hanoi = framePointer - 1;
   local_variables_for_nested_call_to_hanoi->numberOfDisks =
@@ -93,14 +91,13 @@ moveNMinus1FromTempToTarget :
   local_variables_for_nested_call_to_hanoi
       ->local_variables_to_restore_before_returning = framePointer;
   framePointer = local_variables_for_nested_call_to_hanoi;
-  }
+}
   goto applyHanoiProcedure;
-endProcedureSoRestoreCalleesLocalVarsAndContinueItWhereCalleeBlocked :
-  {
+endProcedureSoRestoreCalleesLocalVarsAndContinueItWhereCalleeBlocked : {
   void *goBackToCallee = framePointer->whatToDoAfterProcedureCall;
   framePointer = framePointer->local_variables_to_restore_before_returning;
   goto *goBackToCallee;
-  }
+}
 
 endMain:
 
