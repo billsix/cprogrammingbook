@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     struct hanoi_stack_frame *stack_frame_of_caller;
   };
 
-  const int32_t sizeOfFrame = numberOfDisks * sizeof(struct hanoi_stack_frame);
+  const size_t sizeOfFrame = numberOfDisks * sizeof(struct hanoi_stack_frame);
   struct hanoi_stack_frame *theFrames =
       (struct hanoi_stack_frame *)malloc(sizeOfFrame);
 

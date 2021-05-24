@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 
   const int32_t numberOfDisks = 4;
 
-  const int32_t sizeOfFrame = sizeRequiredForInstanceOfHanoiInvocation;
+  const size_t sizeOfFrame = sizeRequiredForInstanceOfHanoiInvocation;
   uint8_t *theFrames = (uint8_t *)malloc(numberOfDisks * sizeOfFrame);
 
   // byte of the begining of the frame
