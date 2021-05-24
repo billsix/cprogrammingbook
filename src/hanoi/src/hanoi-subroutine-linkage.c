@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     int32_t temp;
     int32_t target;
     void *whatToDoAfterProcedureCall; // i.e. return address
-    struct hanoi_stack_frame *stack_frame_of_callee;
+    struct hanoi_stack_frame *stack_frame_of_caller;
   };
 
   const int32_t sizeOfFrame = numberOfDisks * sizeof(struct hanoi_stack_frame);
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     current_stack_frame->temp = 2;
     current_stack_frame->target = 3;
     current_stack_frame->whatToDoAfterProcedureCall = &&endMain;
-    current_stack_frame->stack_frame_of_callee = NULL;
+    current_stack_frame->stack_frame_of_caller = NULL;
   }
 
 applyHanoiProcedure:
@@ -43,7 +43,7 @@ applyHanoiProcedure:
     goto notOne;
   printf("Move from %d to %d\n", current_stack_frame->source,
          current_stack_frame->target);
-  goto endProcedureSoRestoreCalleesLocalVarsAndContinueItWhereCalleeBlocked;
+  goto endProcedureSoRestoreCallersLocalVarsAndContinueItWhereCallerBlocked;
 notOne:
 moveNMinus1FromSourceToTemp:
   // prepare for function call
@@ -56,7 +56,7 @@ moveNMinus1FromSourceToTemp:
     stack_frame_of_callee->temp = current_stack_frame->target;
     stack_frame_of_callee->target = current_stack_frame->temp;
     stack_frame_of_callee->whatToDoAfterProcedureCall = &&move1ToTarget;
-    stack_frame_of_callee->stack_frame_of_callee = current_stack_frame;
+    stack_frame_of_callee->stack_frame_of_caller = current_stack_frame;
     current_stack_frame = stack_frame_of_callee;
   }
   goto applyHanoiProcedure;
@@ -68,7 +68,7 @@ move1ToTarget : {
   stack_frame_of_callee->target = current_stack_frame->target;
   stack_frame_of_callee->whatToDoAfterProcedureCall =
       &&moveNMinus1FromTempToTarget;
-  stack_frame_of_callee->stack_frame_of_callee = current_stack_frame;
+  stack_frame_of_callee->stack_frame_of_caller = current_stack_frame;
   current_stack_frame = stack_frame_of_callee;
 }
   goto applyHanoiProcedure;
@@ -79,15 +79,15 @@ moveNMinus1FromTempToTarget : {
   stack_frame_of_callee->temp = current_stack_frame->source;
   stack_frame_of_callee->target = current_stack_frame->target;
   stack_frame_of_callee->whatToDoAfterProcedureCall =
-      &&endProcedureSoRestoreCalleesLocalVarsAndContinueItWhereCalleeBlocked;
-  stack_frame_of_callee->stack_frame_of_callee = current_stack_frame;
+      &&endProcedureSoRestoreCallersLocalVarsAndContinueItWhereCallerBlocked;
+  stack_frame_of_callee->stack_frame_of_caller = current_stack_frame;
   current_stack_frame = stack_frame_of_callee;
 }
   goto applyHanoiProcedure;
-endProcedureSoRestoreCalleesLocalVarsAndContinueItWhereCalleeBlocked : {
-  void *goBackToCallee = current_stack_frame->whatToDoAfterProcedureCall;
-  current_stack_frame = current_stack_frame->stack_frame_of_callee;
-  goto *goBackToCallee;
+endProcedureSoRestoreCallersLocalVarsAndContinueItWhereCallerBlocked : {
+  void *goBackToCaller = current_stack_frame->whatToDoAfterProcedureCall;
+  current_stack_frame = current_stack_frame->stack_frame_of_caller;
+  goto *goBackToCaller;
 }
 
 endMain:

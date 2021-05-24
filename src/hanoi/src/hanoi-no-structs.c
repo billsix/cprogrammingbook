@@ -16,7 +16,7 @@ struct hanoi_stack_frame // i.e. frame frame
   int32_t temp;
   int32_t target;
   MEMORY_ADDRESS whatToDoAfterProcedureCall; // i.e. return address
-  MEMORY_ADDRESS stack_frame_of_callee;
+  MEMORY_ADDRESS stack_frame_of_caller;
 };
 
 // these are all computed at compile time, and some values (but not int32_t) may
@@ -29,7 +29,7 @@ const size_t offsetOfTemp = offsetOfSource + sizeof(int32_t);
 const size_t offsetOfTarget = offsetOfTemp + sizeof(int32_t);
 const size_t offsetOfWhatToDoAfterProcedureCall =
     offsetOfTarget + sizeof(int32_t);
-const size_t offsetOfStackFrameOfCallee =
+const size_t offsetOfStackFrameOfCaller =
     offsetOfWhatToDoAfterProcedureCall + sizeof(MEMORY_ADDRESS);
 
 int main(int argc, char *argv[]) {
@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
     }
     {
       MEMORY_ADDRESS parameter = NULL;
-      memcpy(/*dest*/ current_stack_frame + offsetOfStackFrameOfCallee,
+      memcpy(/*dest*/ current_stack_frame + offsetOfStackFrameOfCaller,
              /*src*/ &parameter,
              /*numberOfBytes*/ sizeof(MEMORY_ADDRESS));
     }
@@ -104,7 +104,7 @@ applyHanoiProcedure :
            /*numberOfBytes*/ sizeof(int32_t));
     printf("Move from %d to %d\n", source, target);
   }
-  goto endProcedureSoRestoreCalleesLocalVarsAndContinueItWhereCalleeBlocked;
+  goto endProcedureSoRestoreCallersLocalVarsAndContinueItWhereCallerBlocked;
 notOne:
 moveNMinus1FromSourceToTemp:
   // prepare for function call
@@ -139,7 +139,7 @@ moveNMinus1FromSourceToTemp:
              /*src*/ &label,
              /*numberOfBytes*/ sizeof(MEMORY_ADDRESS));
     }
-    memcpy(/*dest*/ stack_frame_of_callee + offsetOfStackFrameOfCallee,
+    memcpy(/*dest*/ stack_frame_of_callee + offsetOfStackFrameOfCaller,
            /*src*/ &current_stack_frame,
            /*numberOfBytes*/ sizeof(MEMORY_ADDRESS));
     current_stack_frame = (MEMORY_ADDRESS)stack_frame_of_callee;
@@ -170,7 +170,7 @@ move1ToTarget : {
            /*src*/ &label,
            /*numberOfBytes*/ sizeof(MEMORY_ADDRESS));
   }
-  memcpy(/*dest*/ stack_frame_of_callee + offsetOfStackFrameOfCallee,
+  memcpy(/*dest*/ stack_frame_of_callee + offsetOfStackFrameOfCaller,
          /*src*/ &current_stack_frame,
          /*numberOfBytes*/ sizeof(MEMORY_ADDRESS));
   current_stack_frame = (uint8_t *)stack_frame_of_callee;
@@ -201,23 +201,23 @@ moveNMinus1FromTempToTarget : {
          /*numberOfBytes*/ sizeof(int32_t));
   {
     MEMORY_ADDRESS label =
-        &&endProcedureSoRestoreCalleesLocalVarsAndContinueItWhereCalleeBlocked;
+        &&endProcedureSoRestoreCallersLocalVarsAndContinueItWhereCallerBlocked;
     memcpy(/*dest*/ stack_frame_of_callee + offsetOfWhatToDoAfterProcedureCall,
            /*src*/ &label,
            /*numberOfBytes*/ sizeof(MEMORY_ADDRESS));
   }
-  memcpy(/*dest*/ stack_frame_of_callee + offsetOfStackFrameOfCallee,
+  memcpy(/*dest*/ stack_frame_of_callee + offsetOfStackFrameOfCaller,
          /*src*/ &current_stack_frame,
          /*numberOfBytes*/ sizeof(MEMORY_ADDRESS));
   current_stack_frame = (MEMORY_ADDRESS)stack_frame_of_callee;
 }
   goto applyHanoiProcedure;
-endProcedureSoRestoreCalleesLocalVarsAndContinueItWhereCalleeBlocked : {
+endProcedureSoRestoreCallersLocalVarsAndContinueItWhereCallerBlocked : {
   MEMORY_ADDRESS goBackToCallee;
   memcpy(/*dest*/ &goBackToCallee,
          /*src*/ current_stack_frame + offsetOfWhatToDoAfterProcedureCall,
          /*numberOfBytes*/ sizeof(MEMORY_ADDRESS));
-  memcpy(&current_stack_frame, current_stack_frame + offsetOfStackFrameOfCallee,
+  memcpy(&current_stack_frame, current_stack_frame + offsetOfStackFrameOfCaller,
          sizeof(MEMORY_ADDRESS));
   goto *goBackToCallee;
 }
