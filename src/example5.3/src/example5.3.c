@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[]) {
   int32_t ar[ARSZ];
-  for (int32_t i = 0; i < ARSZ; i++) {
+  for (size_t i = 0; i < ARSZ; i++) {
     ar[i] = i;
     i[ar]++;
     printf("ar[%d] now = %d\n", i, ar[i]);

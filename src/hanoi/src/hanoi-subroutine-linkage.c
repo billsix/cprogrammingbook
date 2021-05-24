@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
         *local_variables_to_restore_before_returning;
   };
 
-  const int32_t sizeOfFrame =
+  const size_t sizeOfFrame =
       numberOfDisks * sizeof(struct local_variables_of_hanoi_instance);
   struct local_variables_of_hanoi_instance *theFrames =
       (struct local_variables_of_hanoi_instance *)malloc(sizeOfFrame);

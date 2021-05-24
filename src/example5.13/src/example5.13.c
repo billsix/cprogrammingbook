@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
        * to find length of
        * current string.
        */
-      int32_t need = next_p - str_p + 1;
+      size_t need = next_p - str_p + 1;
       char *tmp_p = (char *)malloc(need + GROW_BY);
       if (tmp_p == NULL) {
         fprintf(stderr, "No more store\n");

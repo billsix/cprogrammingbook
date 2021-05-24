@@ -28,8 +28,8 @@ struct tree_node *t_search(struct tree_node *root, int32_t v) {
 }
 
 int main(int argc, char *argv[]) {
-  for (int32_t i = 0; i < 7; i++) {
-    int32_t j;
+  for (size_t i = 0; i < 7; i++) {
+    size_t j;
     j = i + 1;
 
     tree[i].data = j;

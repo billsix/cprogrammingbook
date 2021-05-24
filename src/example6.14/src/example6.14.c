@@ -14,9 +14,7 @@ char *mnames[] = {"January",   "February", "March",    "April",
 
 int main(int argc, char *argv[]) {
 
-  int32_t day_count = month;
-
-  for (day_count = month; day_count < NMONTHS; day_count++) {
+  for (size_t day_count = month; day_count < NMONTHS; day_count++) {
     printf("%d days in %s\n", month_days[day_count], mnames[day_count]);
   }
   exit(EXIT_SUCCESS);

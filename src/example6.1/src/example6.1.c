@@ -18,7 +18,7 @@ struct wp_char {
 struct wp_char infun();
 
 int main(int argc, char *argv[]) {
-  for (int32_t icount = 0; icount < ARSIZE; icount++) {
+  for (size_t icount = 0; icount < ARSIZE; icount++) {
     ar[icount] = infun();
     if (ar[icount].wp_cval == '\n') {
       /*
@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
 
   /* now a simple exchange sort */
 
-  for (int32_t lo_indx = 0; lo_indx <= icount - 2; lo_indx++)
-    for (int32_t hi_indx = lo_indx + 1; hi_indx <= icount - 1; hi_indx++) {
+  for (size_t lo_indx = 0; lo_indx <= icount - 2; lo_indx++)
+    for (size_t hi_indx = lo_indx + 1; hi_indx <= icount - 1; hi_indx++) {
       if (ar[lo_indx].wp_cval > ar[hi_indx].wp_cval) {
         /*
          * Swap the two structures.
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     }
 
   /* now print32_t */
-  for (int32_t lo_indx = 0; lo_indx < icount; lo_indx++) {
+  for (size_t lo_indx = 0; lo_indx < icount; lo_indx++) {
     printf("%c %d %d\n", ar[lo_indx].wp_cval, ar[lo_indx].wp_font,
            ar[lo_indx].wp_psize);
   }

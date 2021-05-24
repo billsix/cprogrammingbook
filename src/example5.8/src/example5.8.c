@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
   }
   putchar('\n');
 
-  for (int32_t i = 0; i < 8; i++)
+  for (size_t i = 0; i < 8; i++)
     putchar("a string"[i]);
   putchar('\n');
   exit(EXIT_SUCCESS);

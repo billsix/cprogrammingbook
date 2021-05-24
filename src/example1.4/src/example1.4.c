@@ -6,7 +6,7 @@
 int main(int argc, char *argv[]) {
   char ch_arr[ARSIZE];
 
-  int32_t lastchar = 0;
+  size_t lastchar = 0;
   int32_t stop = 0;
   /*
    * Read characters into array.

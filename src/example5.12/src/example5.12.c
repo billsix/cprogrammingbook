@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   }
 
-  int32_t nstrings = 0; /* count of strings read */
+  size_t nstrings = 0; /* count of strings read */
   while (nstrings < MAXSTRING && (p_array[nstrings] = next_string()) != 0) {
 
     nstrings++;
