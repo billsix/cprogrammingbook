@@ -3,44 +3,46 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define x86_64_linux
+//#define x86_64_linux
+//#define x86_64_linux
+
+#ifdef x86_64_linux
+#define SIZE_OF_INT32_T 4
+#define SIZE_OF_BYTE_ADDRESS 8
+#endif
+
+#ifdef mips_linux
+#define SIZE_OF_INT32_T 4
+#define SIZE_OF_BYTE_ADDRESS 4
+#endif
+
+#ifdef arm32_linux
+#define SIZE_OF_INT32_T 4
+#define SIZE_OF_BYTE_ADDRESS 4
+#endif
+
+#define OFFSET_TO_NUMBER_OF_DISKS 0
+#define OFFSET_TO_SOURCE OFFSET_TO_NUMBER_OF_DISKS + SIZE_OF_INT32_T
+#define OFFSET_TO_TEMP OFFSET_TO_SOURCE + SIZE_OF_INT32_T
+#define OFFSET_TO_TARGET OFFSET_TO_TEMP + SIZE_OF_INT32_T
+#define OFFSET_TO_INSTRUCTION_OF_CALLER OFFSET_TO_TARGET + SIZE_OF_INT32_T
+#define OFFSET_TO_FRAME_POINTER_OF_CALLER                                      \
+  OFFSET_TO_INSTRUCTION_OF_CALLER + SIZE_OF_BYTE_ADDRESS
+#define SIZE_REQUIRED_FOR_INSTANCE_OF_HANOI_INVOCATION                         \
+  OFFSET_TO_FRAME_POINTER_OF_CALLER + OFFSET_TO_INSTRUCTION_OF_CALLER
+
 #define BYTE uint8_t
 #define BYTE_ADDRESS BYTE *
-
-// we will no longer use this struct directly, but have
-// it here only so that the compiler can deduce offsets
-// from the base of the struct for each variable.
-
-struct hanoi_stack_frame // i.e. frame frame
-{
-  int32_t number_of_disks;
-  int32_t source;
-  int32_t temp;
-  int32_t target;
-  BYTE_ADDRESS what_to_do_after_procedure_call; // i.e. return address
-  BYTE_ADDRESS pointer_to_frame_of_caller;
-};
-
-// these are all computed at compile time, and some values (but not int32_t) may
-// vary across different Operating Systems/CPUs
-const int32_t SIZE_REQUIRED_FOR_INSTANCE_OF_HANOI_INVOCATION =
-    sizeof(struct hanoi_stack_frame);
-const size_t OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_NUMBER_OF_DISKS = 0;
-const size_t OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_SOURCE =
-    OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_NUMBER_OF_DISKS + sizeof(int32_t);
-const size_t OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TEMP =
-    OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_SOURCE + sizeof(int32_t);
-const size_t OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TARGET =
-    OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TEMP + sizeof(int32_t);
-const size_t OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_INSTRUCTION_OF_CALLER =
-    OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TARGET + sizeof(int32_t);
-const size_t OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_FRAME_POINTER_OF_CALLER =
-    OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_INSTRUCTION_OF_CALLER +
-    sizeof(BYTE_ADDRESS);
 
 #define KILOBYTE 1024
 #define MEGABYTE (KILOBYTE * KILOBYTE)
 
-BYTE random_access_memory[10 * MEGABYTE];
+#define RAM_SIZE (10 * MEGABYTE)
+BYTE random_access_memory[RAM_SIZE];
+
+// byte of the begining of the frame
+BYTE_ADDRESS frame_pointer = (BYTE_ADDRESS)(random_access_memory + RAM_SIZE);
 
 int main(int argc, char *argv[]) {
 
@@ -50,54 +52,48 @@ int main(int argc, char *argv[]) {
 
   const int32_t number_of_disks = 4;
 
-  // byte of the begining of the frame
-  BYTE_ADDRESS frame_pointer;
   // create first frame frame
   {
     // the frame pointer is the current stack frame, aka, where the local
     // variables are
     frame_pointer =
-        random_access_memory +
-        (number_of_disks - 1) * SIZE_REQUIRED_FOR_INSTANCE_OF_HANOI_INVOCATION;
+        frame_pointer - SIZE_REQUIRED_FOR_INSTANCE_OF_HANOI_INVOCATION;
     // initialize first frame frame
-    memcpy(/*dest*/ frame_pointer +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_NUMBER_OF_DISKS,
-           /*src*/ &number_of_disks,
-           /*numberOfBytes*/ sizeof(int32_t));
+    memcpy(frame_pointer + OFFSET_TO_NUMBER_OF_DISKS, /*dest*/
+           &number_of_disks,                          /*src*/
+           SIZE_OF_INT32_T                            /*numberOfBytes*/
+    );
     {
       int32_t parameter = 1;
-      memcpy(/*dest*/ frame_pointer +
-                 OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_SOURCE,
-             /*src*/ &parameter,
-             /*numberOfBytes*/ sizeof(int32_t));
+      memcpy(frame_pointer + OFFSET_TO_SOURCE, /*dest*/
+             &parameter,                       /*src*/
+             SIZE_OF_INT32_T);                 /*numberOfBytes*/
     }
     {
       int32_t parameter = 2;
-      memcpy(/*dest*/ frame_pointer +
-                 OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TEMP,
-             /*src*/ &parameter,
-             /*numberOfBytes*/ sizeof(int32_t));
+      memcpy(frame_pointer + OFFSET_TO_TEMP, /*dest*/
+             &parameter,                     /*src*/
+             SIZE_OF_INT32_T);               /*numberOfBytes*/
     }
     {
       int32_t parameter = 3;
-      memcpy(/*dest*/ frame_pointer +
-                 OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TARGET,
-             /*src*/ &parameter,
-             /*numberOfBytes*/ sizeof(int32_t));
+      memcpy(frame_pointer + OFFSET_TO_TARGET, /*dest*/
+             &parameter,                       /*src*/
+             SIZE_OF_INT32_T);                 /*numberOfBytes*/
     }
     {
       BYTE_ADDRESS label = &&endMain;
-      memcpy(/*dest*/ frame_pointer +
-                 OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_INSTRUCTION_OF_CALLER,
-             /*src*/ &label,
-             /*numberOfBytes*/ sizeof(BYTE_ADDRESS));
+      memcpy(frame_pointer + OFFSET_TO_INSTRUCTION_OF_CALLER, /*dest*/
+             &label,                                          /*src*/
+             SIZE_OF_BYTE_ADDRESS                             /*numberOfBytes*/
+      );
     }
     {
       BYTE_ADDRESS parameter = NULL;
-      memcpy(/*dest*/ frame_pointer +
-                 OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_FRAME_POINTER_OF_CALLER,
-             /*src*/ &parameter,
-             /*numberOfBytes*/ sizeof(BYTE_ADDRESS));
+      memcpy(frame_pointer + OFFSET_TO_FRAME_POINTER_OF_CALLER, /*dest*/
+             &parameter,                                        /*src*/
+             SIZE_OF_BYTE_ADDRESS /*numberOfBytes*/
+      );
     }
   }
 
@@ -105,23 +101,25 @@ applyHanoiProcedure : {
 
   {
     int32_t number_of_disks_to_compare_to_one;
-    memcpy(/*dest*/ &number_of_disks_to_compare_to_one,
-           /*src*/ frame_pointer +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_NUMBER_OF_DISKS,
-           /*numberOfBytes*/ sizeof(int32_t));
+    memcpy(&number_of_disks_to_compare_to_one,        /*dest*/
+           frame_pointer + OFFSET_TO_NUMBER_OF_DISKS, /*src*/
+           SIZE_OF_INT32_T                            /*numberOfBytes*/
+    );
     if (number_of_disks_to_compare_to_one != 1)
       goto notOne;
   }
 
   {
     int32_t source;
-    memcpy(/*dest*/ &source,
-           /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_SOURCE,
-           /*numberOfBytes*/ sizeof(int32_t));
+    memcpy(&source,                          /*dest*/
+           frame_pointer + OFFSET_TO_SOURCE, /*src*/
+           SIZE_OF_INT32_T                   /*numberOfBytes*/
+    );
     int32_t target;
-    memcpy(/*dest*/ &target,
-           /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TARGET,
-           /*numberOfBytes*/ sizeof(int32_t));
+    memcpy(&target,                          /*dest*/
+           frame_pointer + OFFSET_TO_TARGET, /*src*/
+           SIZE_OF_INT32_T                   /*numberOfBytes*/
+    );
     printf("Move from %d to %d\n", source, target);
   }
   goto endProcedureSoRestoreCallersLocalVarsAndContinueItWhereCallerBlocked;
@@ -135,39 +133,39 @@ moveNMinus1FromSourceToTemp:
         frame_pointer - 1 * SIZE_REQUIRED_FOR_INSTANCE_OF_HANOI_INVOCATION;
     {
       int32_t number_of_disks;
-      memcpy(/*dest*/ &number_of_disks,
-             /*src*/ frame_pointer +
-                 OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_NUMBER_OF_DISKS,
-             /*numberOfBytes*/ sizeof(int32_t));
+      memcpy(&number_of_disks,                          /*dest*/
+             frame_pointer + OFFSET_TO_NUMBER_OF_DISKS, /*src*/
+             SIZE_OF_INT32_T                            /*numberOfBytes*/
+      );
       int32_t parameter = number_of_disks - 1;
-      memcpy(/*dest*/ stack_frame_of_callee +
-                 OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_NUMBER_OF_DISKS,
-             /*src*/ &parameter,
-             /*numberOfBytes*/ sizeof(int32_t));
+      memcpy(stack_frame_of_callee + OFFSET_TO_NUMBER_OF_DISKS, /*dest*/
+             &parameter,                                        /*src*/
+             SIZE_OF_INT32_T /*numberOfBytes*/
+      );
     }
-    memcpy(/*dest*/ stack_frame_of_callee +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_SOURCE,
-           /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_SOURCE,
-           /*numberOfBytes*/ sizeof(int32_t));
-    memcpy(/*dest*/ stack_frame_of_callee +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TEMP,
-           /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TARGET,
-           /*numberOfBytes*/ sizeof(int32_t));
-    memcpy(/*dest*/ stack_frame_of_callee +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TARGET,
-           /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TEMP,
-           /*numberOfBytes*/ sizeof(int32_t));
+    memcpy(stack_frame_of_callee + OFFSET_TO_SOURCE, /*dest*/
+           frame_pointer + OFFSET_TO_SOURCE,         /*src*/
+           SIZE_OF_INT32_T                           /*numberOfBytes*/
+    );
+    memcpy(stack_frame_of_callee + OFFSET_TO_TEMP, /*dest*/
+           frame_pointer + OFFSET_TO_TARGET,       /*src*/
+           SIZE_OF_INT32_T                         /*numberOfBytes*/
+    );
+    memcpy(stack_frame_of_callee + OFFSET_TO_TARGET, /*dest*/
+           frame_pointer + OFFSET_TO_TEMP,           /*src*/
+           SIZE_OF_INT32_T                           /*numberOfBytes*/
+    );
     {
       BYTE_ADDRESS label = &&move1ToTarget;
-      memcpy(/*dest*/ stack_frame_of_callee +
-                 OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_INSTRUCTION_OF_CALLER,
-             /*src*/ &label,
-             /*numberOfBytes*/ sizeof(BYTE_ADDRESS));
+      memcpy(stack_frame_of_callee + OFFSET_TO_INSTRUCTION_OF_CALLER, /*dest*/
+             &label,                                                  /*src*/
+             SIZE_OF_BYTE_ADDRESS /*numberOfBytes*/
+      );
     }
-    memcpy(/*dest*/ stack_frame_of_callee +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_FRAME_POINTER_OF_CALLER,
-           /*src*/ &frame_pointer,
-           /*numberOfBytes*/ sizeof(BYTE_ADDRESS));
+    memcpy(stack_frame_of_callee + OFFSET_TO_FRAME_POINTER_OF_CALLER, /*dest*/
+           &frame_pointer,                                            /*src*/
+           SIZE_OF_BYTE_ADDRESS /*numberOfBytes*/
+    );
     frame_pointer = (BYTE_ADDRESS)stack_frame_of_callee;
   }
   goto applyHanoiProcedure;
@@ -177,34 +175,34 @@ move1ToTarget : {
       frame_pointer - 1 * SIZE_REQUIRED_FOR_INSTANCE_OF_HANOI_INVOCATION;
   {
     int32_t parameter = 1;
-    memcpy(/*dest*/ stack_frame_of_callee +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_NUMBER_OF_DISKS,
-           /*src*/ &parameter,
-           /*numberOfBytes*/ sizeof(int32_t));
+    memcpy(stack_frame_of_callee + OFFSET_TO_NUMBER_OF_DISKS, /*dest*/
+           &parameter,                                        /*src*/
+           SIZE_OF_INT32_T                                    /*numberOfBytes*/
+    );
   }
-  memcpy(/*dest*/ stack_frame_of_callee +
-             OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_SOURCE,
-         /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_SOURCE,
-         /*numberOfBytes*/ sizeof(int32_t));
-  memcpy(/*dest*/ stack_frame_of_callee +
-             OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TEMP,
-         /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TEMP,
-         /*numberOfBytes*/ sizeof(int32_t));
-  memcpy(/*dest*/ stack_frame_of_callee +
-             OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TARGET,
-         /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TARGET,
-         /*numberOfBytes*/ sizeof(int32_t));
+  memcpy(stack_frame_of_callee + OFFSET_TO_SOURCE, /*dest*/
+         frame_pointer + OFFSET_TO_SOURCE,         /*src*/
+         SIZE_OF_INT32_T                           /*numberOfBytes*/
+  );
+  memcpy(stack_frame_of_callee + OFFSET_TO_TEMP, /*dest*/
+         frame_pointer + OFFSET_TO_TEMP,         /*src*/
+         SIZE_OF_INT32_T                         /*numberOfBytes*/
+  );
+  memcpy(stack_frame_of_callee + OFFSET_TO_TARGET, /*dest*/
+         frame_pointer + OFFSET_TO_TARGET,         /*src*/
+         SIZE_OF_INT32_T                           /*numberOfBytes*/
+  );
   {
     BYTE_ADDRESS label = &&moveNMinus1FromTempToTarget;
-    memcpy(/*dest*/ stack_frame_of_callee +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_INSTRUCTION_OF_CALLER,
-           /*src*/ &label,
-           /*numberOfBytes*/ sizeof(BYTE_ADDRESS));
+    memcpy(stack_frame_of_callee + OFFSET_TO_INSTRUCTION_OF_CALLER, /*dest*/
+           &label,                                                  /*src*/
+           SIZE_OF_BYTE_ADDRESS /*numberOfBytes*/
+    );
   }
-  memcpy(/*dest*/ stack_frame_of_callee +
-             OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_FRAME_POINTER_OF_CALLER,
-         /*src*/ &frame_pointer,
-         /*numberOfBytes*/ sizeof(BYTE_ADDRESS));
+  memcpy(stack_frame_of_callee + OFFSET_TO_FRAME_POINTER_OF_CALLER, /*dest*/
+         &frame_pointer,                                            /*src*/
+         SIZE_OF_BYTE_ADDRESS /*numberOfBytes*/
+  );
   frame_pointer = stack_frame_of_callee;
 }
   goto applyHanoiProcedure;
@@ -214,53 +212,51 @@ moveNMinus1FromTempToTarget : {
       frame_pointer - 1 * SIZE_REQUIRED_FOR_INSTANCE_OF_HANOI_INVOCATION;
   {
     int32_t number_of_disks;
-    memcpy(/*dest*/ &number_of_disks,
-           /*src*/ frame_pointer +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_NUMBER_OF_DISKS,
-           /*numberOfBytes*/ sizeof(int32_t));
+    memcpy(&number_of_disks,                          /*dest*/
+           frame_pointer + OFFSET_TO_NUMBER_OF_DISKS, /*src*/
+           SIZE_OF_INT32_T                            /*numberOfBytes*/
+    );
     int32_t parameter = number_of_disks - 1;
-    memcpy(/*dest*/ stack_frame_of_callee +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_NUMBER_OF_DISKS,
-           /*src*/ &parameter,
-           /*numberOfBytes*/ sizeof(int32_t));
+    memcpy(stack_frame_of_callee + OFFSET_TO_NUMBER_OF_DISKS, /*dest*/
+           &parameter,                                        /*src*/
+           SIZE_OF_INT32_T                                    /*numberOfBytes*/
+    );
   }
-  memcpy(/*dest*/ stack_frame_of_callee +
-             OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_SOURCE,
-         /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TEMP,
-         /*numberOfBytes*/ sizeof(int32_t));
-  memcpy(/*dest*/ stack_frame_of_callee +
-             OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TEMP,
-         /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_SOURCE,
-         /*numberOfBytes*/ sizeof(int32_t));
-  memcpy(/*dest*/ stack_frame_of_callee +
-             OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TARGET,
-         /*src*/ frame_pointer + OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_TARGET,
-         /*numberOfBytes*/ sizeof(int32_t));
+  memcpy(stack_frame_of_callee + OFFSET_TO_SOURCE, /*dest*/
+         frame_pointer + OFFSET_TO_TEMP,           /*src*/
+         SIZE_OF_INT32_T                           /*numberOfBytes*/
+  );
+  memcpy(stack_frame_of_callee + OFFSET_TO_TEMP, /*dest*/
+         frame_pointer + OFFSET_TO_SOURCE,       /*src*/
+         SIZE_OF_INT32_T                         /*numberOfBytes*/
+  );
+  memcpy(stack_frame_of_callee + OFFSET_TO_TARGET, /*dest*/
+         frame_pointer + OFFSET_TO_TARGET,         /*src*/
+         SIZE_OF_INT32_T                           /*numberOfBytes*/
+  );
   {
     BYTE_ADDRESS label =
         &&endProcedureSoRestoreCallersLocalVarsAndContinueItWhereCallerBlocked;
-    memcpy(/*dest*/ stack_frame_of_callee +
-               OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_INSTRUCTION_OF_CALLER,
-           /*src*/ &label,
-           /*numberOfBytes*/ sizeof(BYTE_ADDRESS));
+    memcpy(stack_frame_of_callee + OFFSET_TO_INSTRUCTION_OF_CALLER, /*dest*/
+           &label,                                                  /*src*/
+           SIZE_OF_BYTE_ADDRESS /*numberOfBytes*/
+    );
   }
-  memcpy(/*dest*/ stack_frame_of_callee +
-             OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_FRAME_POINTER_OF_CALLER,
-         /*src*/ &frame_pointer,
-         /*numberOfBytes*/ sizeof(BYTE_ADDRESS));
+  memcpy(stack_frame_of_callee + OFFSET_TO_FRAME_POINTER_OF_CALLER, /*dest*/
+         &frame_pointer,                                            /*src*/
+         SIZE_OF_BYTE_ADDRESS /*numberOfBytes*/
+  );
   frame_pointer = (BYTE_ADDRESS)stack_frame_of_callee;
 }
   goto applyHanoiProcedure;
 endProcedureSoRestoreCallersLocalVarsAndContinueItWhereCallerBlocked : {
   BYTE_ADDRESS goBackToCallee;
-  memcpy(/*dest*/ &goBackToCallee,
-         /*src*/ frame_pointer +
-             OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_INSTRUCTION_OF_CALLER,
-         /*numberOfBytes*/ sizeof(BYTE_ADDRESS));
-  memcpy(&frame_pointer,
-         frame_pointer +
-             OFFSET_FROM_FRAME_POINTER_IN_BYTES_TO_FRAME_POINTER_OF_CALLER,
-         sizeof(BYTE_ADDRESS));
+  memcpy(&goBackToCallee,                                 /*dest*/
+         frame_pointer + OFFSET_TO_INSTRUCTION_OF_CALLER, /*src*/
+         SIZE_OF_BYTE_ADDRESS                             /*numberOfBytes*/
+  );
+  memcpy(&frame_pointer, frame_pointer + OFFSET_TO_FRAME_POINTER_OF_CALLER,
+         SIZE_OF_BYTE_ADDRESS);
   goto *goBackToCallee;
 }
 }
