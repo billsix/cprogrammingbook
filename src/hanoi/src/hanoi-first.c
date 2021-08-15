@@ -19,6 +19,8 @@ int main(int argc, char *argv[]) {
   int32_t temp = 2;
   int32_t dest = 3;
 
+
+
   hanoi1(source, temp, dest);
   printf("completed hanoi1\n");
   hanoi2(source, temp, dest);
@@ -30,7 +32,13 @@ int main(int argc, char *argv[]) {
   // would get stuck in infinit loop
   // hanoifp(source, temp, dest, &hanoifp);
   // printf("completed hanoifp\n");
-  hanoi(4, source, temp, dest);
+
+
+  printf("Enter the number of disks\n");
+  int32_t number_of_disks;
+  scanf("%d", &number_of_disks);
+
+  hanoi(number_of_disks, source, temp, dest);
   printf("completed hanoi\n");
 
   return 0;

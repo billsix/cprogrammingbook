@@ -50,7 +50,9 @@ int main(int argc, char *argv[]) {
   int32_t temp = 2;
   int32_t dest = 3;
 
-  const int32_t number_of_disks = 4;
+  printf("Enter the number of disks\n");
+  int32_t number_of_disks;
+  scanf("%d", &number_of_disks);
 
   // create first frame frame
   {
