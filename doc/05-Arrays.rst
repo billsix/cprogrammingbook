@@ -11,8 +11,8 @@ So why is this important?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The arithmetic data types and operators of C are interesting
-but hardly rivetting. They show, collectively, a certain imagination and
-spirit that has stamped C with a special flavour, but
+but hardly riveting. They show, collectively, a certain imagination and
+spirit that has stamped C with a special flavor, but
 they form the sauce, not the meat, of this particular
 dish. For most users, it's functions and the parts
 of the language covered in this chapter that provide the
@@ -86,7 +86,7 @@ The name of the array is ar and its members
 are accessed as ar[0] through to ar[99] inclusive
 , as Figure 5.1 shows.
 
-Diagram showing an array consisting of elements labelled 'ar[0]',
+Diagram showing an array consisting of elements labeled 'ar[0]',
 'ar[1]', etc., up to 'ar[99]'.
 
 .. figure:: _static/5.1.png
@@ -147,8 +147,8 @@ of two ints. We have declared arrays of arrays, as
 Figure 5.2 shows for two dimensions.
 
 Diagram showing a two dimensional array, with the 'outer' array
-having two elements labelled 't_d[0]' and 't_d[1]',
-each with three elements within it, labelled 't_d[0][0]', etc.
+having two elements labeled 't_d[0]' and 't_d[1]',
+each with three elements within it, labeled 't_d[0][0]', etc.
 
 
 .. figure:: _static/5.2.png
@@ -256,7 +256,7 @@ array and a pointer:
 We now have an array and a pointer (see Figure
 5.3):
 
-Diagram showing an array with four elements (labelled 'ar[0]'
+Diagram showing an array with four elements (labeled 'ar[0]'
 to 'ar[4]') and a pointer called 'ip' which does
 not currently have any connection to the array.
 
@@ -304,7 +304,7 @@ is simply in what the value means. The values of
 the variables that we have now are shown in Figure
 5.4 (?? means uninitialized).
 
-Diagram showing an array with four elements (labelled 'ar[0]'
+Diagram showing an array with four elements (labeled 'ar[0]'
 to 'ar[4]') each of which has an undefined value,
 and a pointer called 'ip' which contains the address of
 'ar[3]'.
@@ -379,8 +379,8 @@ one of the few languages that allows an expression on
 the left-hand side of an assignment operator. Look back
 at the example: the expression \*p occurs twice in that
 position, and then the amazing (\*p)++; statement. That last one
-is a great puzzle to most beginners—even if you
-'ve managed to wrap your mind around the concept that
+is a great puzzle to most beginners—even if you've
+managed to wrap your mind around the concept that
 \*p = 0 writes zero into the thing pointed to by
 p, and that \*p += 1 adds one to where p
 points, it still seems a bit much to apply the ++ operator to \*p.
@@ -455,7 +455,7 @@ that the 'day' and 'month' now have the values '12' and '5' respectively.
 
 One of the great benefits introduced by the new Standard
 is that it allows the types of the arguments to
-date to be declared in advance. A great favourite (and
+date to be declared in advance. A great favorite (and
 disastrous) mistake in C is to forget that a function
 expects pointers as its arguments, and to pass something else
 instead. Imagine what would have happened if the call of
@@ -637,14 +637,14 @@ no need to make it worse by starting unprepared.
 
 The Standard introduces two things called type qualifiers, neither of
 which were in Old C. They can be applied to
-any declared type to modify its behaviour—hence the term
+any declared type to modify its behavior—hence the term
 ‘qualifier’—and although one of them can be ignored for
 the moment (the one named volatile), the other, const, cannot.
 
 If a declaration is prefixed with the keyword const, then
 the thing that is declared is announced to the world
 as being constant. You must not attempt to modify (change
-the value of) const objects, or you get undefined behaviour.
+the value of) const objects, or you get undefined behavior.
 Unless you have used some very dirty tricks, the compiler
 will know that the thing you are trying to modify
 is constant, so it can warn you.
@@ -959,7 +959,7 @@ its use.
 Be warned: in Old C, strings were stored just like
 any other character array, and were modifiable. Now, the Standard
 states that although they are are arrays of char, (not
-const char), attempting to modify them results in undefined behaviour.
+const char), attempting to modify them results in undefined behavior.
 
 
 Whenever a string in quotes is seen, it has two
@@ -1134,7 +1134,7 @@ The usual reaction to that horrible sight is to decide
 that you don't care that the parentheses can be removed;
 you will always use them in your code. That's all
 very well but the problem is that most C programmers
-have learnt the important precedence rules (or at least learnt
+have learned the important precedence rules (or at least learned
 the table above) and they very rarely put the parentheses
 in. Like them, we don't—so if you want to be
 able to read the rest of the examples, you had
@@ -1174,7 +1174,7 @@ mysterious way from a pool of free storage (the way
 that it does this is its own business). That pointer
 is then cast into the right type—for example if a
 float needs 4 bytes of free store, this is the
-flavour of what you would write:
+flavor of what you would write:
 
 .. code-block:: C
 
@@ -1286,7 +1286,7 @@ routine. The strings are terminated by a ‘\n’ character. The
 sort is done by keeping an array of pointers to
 the strings and simply exchanging the pointers until the order
 is correct. This saves having to copy the strings themselves,
-which improves the efficency somewhat.
+which improves the efficiency somewhat.
 
 The example is done first
 using fixed size arrays, then another version uses malloc and
@@ -1651,7 +1651,7 @@ Two pointers to compatible types whether or not qualified may
 be subtracted. The result has the type ptrdiff_t, which is
 defined in the header file <stddef.h>. Both pointers must point
 into the same array, or one past the end of
-the array, otherwise the behaviour is undefined. The value of
+the array, otherwise the behavior is undefined. The value of
 the result is the number of array elements that separate
 the two pointers. E.g.:
 
@@ -1731,7 +1731,7 @@ rules above describe what happens.
 
 Conditional operator
 ~~~~~~~~~~~~~~~~~~~~
-The description of the behaviour of this operator when it
+The description of the behavior of this operator when it
 is used with pointers has already been given in :ref:`control-flow`.
 
 
@@ -1793,7 +1793,7 @@ does have an argument whose type is ‘array of something’—like this:
 
     void f(int ar[10]);
 
-What happens? The answer may suprise you slightly. The compiler
+What happens? The answer may surprise you slightly. The compiler
 looks at that and says to itself ‘Ho ho. That's
 going to be a pointer when the function is called’
 and then rewrites the parameter type to be a pointer.

@@ -9,7 +9,7 @@ History
 The development of the early computer languages went either one
 way or the other. COBOL concentrated on the structure of
 data but not on arithmetic or algorithms, FORTRAN and Algol
-leant the other way. Scientific users wanted to do numeric
+leaned the other way. Scientific users wanted to do numeric
 work on relatively unstructured data (although arrays were soon found
 to be indispensable) and commercial users needed only basic arithmetic
 but knew that the key issue was the structure of
@@ -163,7 +163,7 @@ Variables can also be defined immediately following a structure declaration.
 We now have two variables, v1 and v2. If all
 the necessary objects are defined at the end of the
 structure declaration, the way that v1 was, then the tag
-becomes unneccessary (except if it is needed later for use
+becomes unnecessary (except if it is needed later for use
 with sizeof and in casts) and is often not present.
 
 The two variables are structured objects, each containing three separate
@@ -386,7 +386,7 @@ structures containing pointers to other structures, all the structures typically
 being of the same type. Figure 6.2 shows a picture
 of a linked list.
 Diagram showing a linked list of
-three items, with a pointer labelled 'list head' pointing to
+three items, with a pointer labeled 'list head' pointing to
 the first item, and each item containing a 'data' value
 and a 'pointer' value which points to the next item
 (the last pointer is null).
@@ -518,7 +518,7 @@ it's not what you wanted) like this:
 
 The type of a structure or union is completed when
 the closing } of its declaration is seen; it must
-contain at least one member or the behaviour is undefined.
+contain at least one member or the behavior is undefined.
 
 The other principal way to get incomplete types is to
 declare arrays without specifying their size—their type is incomplete until
@@ -619,9 +619,9 @@ the ‘data’ members of the nodes are replaced by values
 which will be used in the discussion that follows.
 A
 tree structure, made up of 7 items, each of which
-is labelled with a different number. Each item has two
-pointer values, labelled 'left_p' and 'right_p', which point to child
-items. One item is labelled 'root' and isn't a child
+is labeled with a different number. Each item has two
+pointer values, labeled 'left_p' and 'right_p', which point to child
+items. One item is labeled 'root' and isn't a child
 of any of the other items.
 
 
@@ -746,18 +746,18 @@ retrieved would probably be the low-order bits of the machine
 representation of a float, and might easily be made up
 of part of the mantissa of the float plus a
 piece of the exponent. The Standard says that if you
-do this, the behaviour is implementation defined (not undefined). The
-behaviour is defined by the Standard in one case: if
+do this, the behavior is implementation defined (not undefined). The
+behavior is defined by the Standard in one case: if
 some of the members of a union are structures with
 a ‘common initial sequence’ (the first members of each structure
-have compatible type and in the case of bitfields are
+have compatible type and in the case of bit-fields are
 the same length), and the union currently contains one of
 them, then the common initial part of each can be
 used interchangeably. Oh good.
 
 The C compiler does no more than work out what
 the biggest member in a union can be and allocates
-enough storage (appropriately aligned if neccessary). In particular, no checking
+enough storage (appropriately aligned if necessary). In particular, no checking
 is done to make sure that the right sort of
 use is made of the members. That is your task,
 and you'll soon find out if you get it wrong.
@@ -797,11 +797,11 @@ just what is meant by ‘equality’ when applied to structures.
 Anyhow, the union business gives the Standard a good excuse
 to avoid the issue by not supporting structure comparison.
 
-Bitfields
----------
+Bit-fields
+----------
 
 While we're on the subject of structures, we might as
-well look at bitfields. They can only be declared inside
+well look at bit-fields. They can only be declared inside
 a structure or a union, and allow you to specify
 some very small objects of a given number of bits
 in length. Their usefulness is limited and they aren't seen
@@ -822,7 +822,7 @@ two's complement machine can only take the values 0 or
 -1. The declarations are permitted to include the const and
 volatile qualifiers.
 
-The main use of bitfields is either to allow tight
+The main use of bit-fields is either to allow tight
 packing of data or to be able to specify the
 fields within some externally produced data files. C gives no
 guarantee of the ordering of fields within machine words, so
@@ -830,7 +830,7 @@ if you do use them for the latter reason, you
 program will not only be non-portable, it will be compiler-dependent
 too. The Standard says that fields are packed into ‘storage
 units’, which are typically machine words. The packing order, and
-whether or not a bitfield may cross a storage unit
+whether or not a bit-field may cross a storage unit
 boundary, are implementation defined. To force alignment to a storage
 unit boundary, a zero width field is used before the
 one that you want to have aligned.
@@ -1090,7 +1090,7 @@ Example 6.15
 Only the first member of a union can be initialized.
 
 If a structure or union contains unnamed members, whether unnamed
-bitfields or padding for alignment, they are ignored in the
+bit-fields or padding for alignment, they are ignored in the
 initialization process; they don't have to be counted when you
 provide the initializers for the real members of the structure.
 
@@ -1146,7 +1146,7 @@ happening—this is often undesirable and should be avoided. It is
 explicitly noted by the Standard with regard to switch statements,
 where providing initializers in declarations cannot be of any use;
 this is because a declaration is not linguistically a ‘statement’
-and only statements may be labelled. As a result it
+and only statements may be labeled. As a result it
 is not possible for initializers in switch statements ever to
 be executed, because the entry to the block containing them
 must be below the declarations!
@@ -1172,7 +1172,7 @@ Our test compiler didn't notice that one, either.
 Summary
 -------
 
-You now understand structures and unions. Bitfields and enumeration types really
+You now understand structures and unions. Bit-fields and enumeration types really
 are not very important and you could manage quite well without
 them.
 
@@ -1180,7 +1180,7 @@ It is hard to emphasize how important is the use of
 structures, pointers and malloc in serious programs. If you aren't familiar
 with the use of structured data in the form of lists,
 trees and so on, get a good book now. Better still,
-try to enrol on a good course. Except in very specialized
+try to enroll on a good course. Except in very specialized
 applications, it is usually the ability to structure data well, not
 the ability to write complicated algorithms, that makes it possible to
 construct clean, small and maintainable programs. Experienced software designers often say

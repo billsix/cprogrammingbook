@@ -168,7 +168,7 @@ become defined when a body is provided for them. Without
 a declaration in force, the default rules mean that aax1
 would have been assumed to be int, even though it
 really does return a double—which means that your program
-will have undefined behaviour. Undefined behaviour is disastrous!
+will have undefined behavior. Undefined behavior is disastrous!
 
 The presence
 of void in the argument list in the declaration shows
@@ -204,7 +204,7 @@ returning void should have at least one, each return showing
 what value is supposed to be returned at that point.
 Although it is possible to return from a function by
 falling through the last }, unless the function returns void an
-unknown value will be returned, resulting in undefined behaviour.
+unknown value will be returned, resulting in undefined behavior.
 
 Here
 is another example function. It uses getchar to read characters
@@ -429,12 +429,12 @@ converted to double first. The critical point is that if
 no prototype had been seen, C would assume that the
 programmer had meant to pass an int and an int
 is what would be passed. The Standard simply notes that
-this results in undefined behaviour, which is as understated as
+this results in undefined behavior, which is as understated as
 saying that catching rabies is unfortunate. This is a very
 serious error and has led to many, many problems in Old C programs.
 
 The conversion of int to double could be done because
-the compiler had seen a protoytpe for the function and
+the compiler had seen a prototype for the function and
 knew what to do about it. As you would expect,
 there are various rules used to decide which conversions are
 appropriate, so we need to look at them next.
@@ -481,19 +481,19 @@ apply the Standard, not a direct quote):
     promotions. Furthermore:
 
         If the number of arguments does not agree with the
-	number of formal parameters to the function, the behaviour is
+	number of formal parameters to the function, the behavior is
 	undefined.
 
         If the function definition was not a definition containing a
 	prototype, then the type of the actual arguments after promotion
 	must be compatible with the types of the formal parameters
 	in the definition after they too have had the promotions
-	applied. Otherwise the behaviour is undefined.
+	applied. Otherwise the behavior is undefined.
 
         If the function definition was a definition containing a prototype,
 	and the types of the actual arguments after promotion are
 	not compatible with the formal parameters in the prototype, then
-	the behaviour is undefined. The behaviour is also undefined it
+	the behavior is undefined. The behavior is also undefined it
 	the prototype included ellipsis (, ...).
 
 
@@ -581,7 +581,7 @@ Summary
 
     Always use function prototypes.
 
-    Undefined behaviour results if you call or define a function
+    Undefined behavior results if you call or define a function
     anywhere in a program unless either
 
         a prototype is always in scope for every call or
@@ -633,12 +633,12 @@ can do this for ever.
 
 The scope of a name is the range in which it
 has meaning. Scope starts from the point at which the name
-is mentioned and continues from there onwards to the end of
+is mentioned and continues from there onward to the end of
 the block in which it is declared. If it is external
 (outside of any function) then it continues to the end of
 the file. If it is internal (inside a function), then it
 disappears at the end of the block containing it. The scope
-of any name can be suspended by redeclaring the name inside
+of any name can be suspended by re-declaring the name inside
 a block.
 
 Using knowledge of the scope rules, you can play silly tricks
@@ -673,7 +673,7 @@ is what it would look like:
 
 .. code-block:: C
 
-     /* erroneous redeclaration of arguments */
+     /* erroneous re-declaration of arguments */
 
      func(a, b, c){
            int a;  /* AAAAgh! */
@@ -799,7 +799,7 @@ it's the default for internal declarations and is invalid for
 external ones. If an explicit initial value (see ‘ initialization’) isn't
 given for an automatic variable, then its value will be unknown
 when it is declared. In that state, any use of its
-value will cause undefined behaviour.
+value will cause undefined behavior.
 
 The real problem with illustrating recursion is in the selection of
 examples. Too often, simple examples are used which don't really
@@ -906,7 +906,7 @@ the default linkage for functions and anything declared outside of a
 function. All instances of a particular name with external linkage refer
 to the same object in the program. If two or more
 declarations of the same name have external linkage but incompatible types,
-then you've done something very silly and have undefined behaviour.
+then you've done something very silly and have undefined behavior.
 The most obvious example of external linkage is the printf function,
 whose declaration in <stdio.h> is
 
@@ -989,7 +989,7 @@ a declaration is not hard:
     a definition.
 
     At the external level, a declaration of an object (like
-    the variablei) is a definition unless it has the keyword
+    the variables) is a definition unless it has the keyword
     extern in front of it, when it is a declaration only.
 
 
@@ -1017,7 +1017,7 @@ declared here, length, buf, and fillup, without any danger of surprising
 effects. Only the name callable is accessible outside this module.
 
 A very useful thing to know is that any external object
-that has no other initalizer (and except for functions we haven't
+that has no other initializer (and except for functions we haven't
 seen any initializers yet) is always set to the value
 of zero before the program starts. This is widely used and
 relied on—the previous example relies on it for the initial
@@ -1156,7 +1156,7 @@ Here are the combinations of the use of the keywords, the
 types of declarations and the resulting linkage:
 
 +--------------------+-----------------+------------------------------+--------------------------+-------------------+
-| Declaration        + Keyword         +  Resulting Linkage           | Accessability            | Note              |
+| Declaration        + Keyword         +  Resulting Linkage           | Accessibility            | Note              |
 +====================+=================+==============================+==========================+===================+
 | external           | none            | external                     | entire program           | 2                 |
 +--------------------+-----------------+------------------------------+--------------------------+-------------------+

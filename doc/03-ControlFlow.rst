@@ -293,7 +293,7 @@ has shown that the use of do statements is often
 associated with poorly constructed code. Not every time, obviously, but
 as a general rule you should stop and ask yourself
 if you have made the right choice. Their use often
-indicates a hangover of thinking methods learnt with other languages,
+indicates a hangover of thinking methods learned with other languages,
 or just sloppy design. When you do convince yourself that
 nothing else will give you just what is wanted, then
 go ahead - be daring—use it.
@@ -402,14 +402,14 @@ exactly the sort of use that you will see in everyday practice.
 
 Example 3.4
 
-There isn't any difference betweeen the two, except that
+There isn't any difference between the two, except that
 in this case the for loop is more convenient and
 maintainable than the while statement. You should always use the
 for when it's appropriate; when a loop is being
 controlled by some sort of counter. The while is more
 at home when an indeterminate number of cycles of the
 loop are part of the problem. As always, it needs
-a degree of judgement on behalf of the author of
+a degree of judgment on behalf of the author of
 the program; an understanding of form, style, elegance and the
 poetry of a well written program. There is no evidence
 that the software business suffers from a surfeit of those
@@ -453,7 +453,7 @@ but it adds a lot of readability. The others, break,
 continue and goto, should be treated like the spices in
 a delicate sauce. Used carefully they can turn something commonplace
 into a treat, but a heavy hand will drown the
-flavour of everything else.
+flavor of everything else.
 
 The switch statement
 ~~~~~~~~~~~~~~~~~~~~
@@ -603,7 +603,7 @@ of continue is largely restricted to the top of loops,
 where a decision has to be made whether or not
 to execute the rest of the body of the loop.
 In this example it ensures that division by zero (which
-gives undefined behaviour) doesn't happen.
+gives undefined behavior) doesn't happen.
 
 .. literalinclude:: ../src/example3.8/src/example3.8.c
    :language: c
@@ -633,7 +633,7 @@ There is an important difference between loops written with while
 and for. In a while, a continue will go immediately
 to the test of the controlling expression. The same thing
 in a for will do two things: first the update
-expression is evaluated, then the controlling expresion is evaluated.
+expression is evaluated, then the controlling expression is evaluated.
 
 goto and labels
 ~~~~~~~~~~~~~~~
@@ -677,7 +677,7 @@ of a compound statement—like this.
     }
 
 The goto works in an obvious way, jumping to the
-labelled statements. Because the name of the label is only
+labeled statements. Because the name of the label is only
 visible inside its own function, you can't jump from
 one function to another one.
 
@@ -753,7 +753,7 @@ when both operands are zero. The ! gives 0 if its
 operand is non-zero and vice versa. Easy really. The
 results are of type int for all three.
 
-Do not confuse & and | (the bitwise operators) with their logical
+Do not confuse & and | (the bit-wise operators) with their logical
 counterparts. They are not the same.
 
 One special feature of
@@ -780,7 +780,7 @@ operators.
 
 The unary NOT is simple. It isn't all
 that common to see it in use largely because most
-expresssions can be rearranged to do without it. The examples
+expressions can be rearranged to do without it. The examples
 show how.
 
 .. code-block:: C
@@ -825,7 +825,7 @@ this is a very common mistake:
 
 What happens is that b is compared for equality with
 c, then the 1 or 0 result is anded with
-a! Some distinctly unexpected behaviour has been caused by that
+a! Some distinctly unexpected behavior has been caused by that
 sort of error.
 
 Strange operators

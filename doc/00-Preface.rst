@@ -68,7 +68,7 @@ well be one of the most widely-written computer languages
 in the world. The success of C is due to
 a number of factors, none of them key, but all
 of them important. Perhaps the most significant of all is
-that C was developed by real practioners of programming and
+that C was developed by real practitioners of programming and
 was designed for practical day-to-day use, not for
 show or for demonstration. Like any well-designed tool, it
 falls easily to the hand and feels good to use.
@@ -96,7 +96,7 @@ and drinking strong rum except your arteries and liver are
 more likely to survive it.
 
 Not only is C popular and a powerful asset in
-the armoury of the serious day-to-day programmer, there
+the armory of the serious day-to-day programmer, there
 are other reasons for the success of this language. It
 has always been associated with the UNIX operating system and
 has benefited from the increasing popularity of that system. Although
@@ -127,7 +127,7 @@ of the stuff expected in a modern high-level
 language—it also allows systems programmers to address machine words,
 manipulate bits and get close to the underlying hardware if
 they want to. That combination of features is very desirable
-in the competitive PC software markeplace and an increasing number
+in the competitive PC software marketplace and an increasing number
 of software developers have made C their primary language as
 a result.
 
@@ -194,7 +194,7 @@ numerous dialects, on UNIX systems there was only ever really
 one compiler for C; the so-called “Portable C Compiler”,
 originally written by Steve Johnson. This acted as a reference
 implementation for C—if the K&R reference was a
-bit obscure then the behaviour of the UNIX compiler was
+bit obscure then the behavior of the UNIX compiler was
 taken as the definition of the language.
 
 Despite this almost
@@ -330,7 +330,7 @@ by a detailed coverage of the material that was ignored
 before, then it goes on to discuss the standard libraries
 in depth. This means that in principle, if you felt
 so inclined, you could read the book as far as
-you like and stop, yet still have learnt a reasonably
+you like and stop, yet still have learned a reasonably
 coherent subset of the language. Previous experience of C will
 render :ref:`intro` a bit slow, but it is still
 worth persevering with it, if only once.

@@ -26,7 +26,7 @@ have been implemented in different systems. As a result, programs using
 anything other than the very basic features have proved to be
 a problem: it's hard to port them.
 
-The primary job of the Standard was to define the behaviour
+The primary job of the Standard was to define the behavior
 of the preprocessor in line with common practice; this has been
 done and will not surprise anyone who was familiar with Old C.
 The Standard has gone further, amid an element of controversy, and
@@ -259,7 +259,7 @@ and expect the second #define to be replaced by #XXX,
 causing an error.
 
 When the identifier associated with a non-function macro is seen,
-it is replaced by the macro replacement tokens, then rescanned
+it is replaced by the macro replacement tokens, then re-scanned
 (see later) for further replacements to make.
 
 Function macros can be used like real functions; white space
@@ -296,11 +296,11 @@ Note very carefully that the parentheses around the second argument
 to CALL were preserved in the replacement: they were not
 stripped from the text.
 
-If you want to use macros like printt, taking a
+If you want to use macros like printf, taking a
 variable number of arguments, the Standard is no help to
 you. They are not supported.
 
-If any argument contains no preprocessor tokens then the behaviour
+If any argument contains no preprocessor tokens then the behavior
 is undefined. The same is true if the sequence of
 preprocessor tokens that forms the argument would otherwise have been
 another preprocessor directive:
@@ -309,13 +309,13 @@ another preprocessor directive:
 
     #define CALL(a, b) a b
 
-    /* undefined behaviour in each case.... */
+    /* undefined behavior in each case.... */
     CALL(,hello)
     CALL(xyz,
     #define abc def)
 
 In our opinion, the second of the erroneous uses of
-CALL should result in defined behaviour—anyone capable of writing that
+CALL should result in defined behavior—anyone capable of writing that
 would clearly benefit from the attentions of a champion weightlifter
 wielding a heavy leather bullwhip.
 
@@ -373,11 +373,11 @@ text preceded or followed by one of these operators, the
 actual token sequence for the corresponding macro argument is used
 to replace it. Then, for both function and non-function macros,
 the tokens surrounding the ##operator are joined together. If they
-don't form a valid token, the behaviour is undefined. Then
-rescanning occurs.
+don't form a valid token, the behavior is undefined. Then
+re-scanning occurs.
 
 As an example of token pasting, here is a multi-stage
-operation, involving rescanning (which is described next).
+operation, involving re-scanning (which is described next).
 
 .. code-block:: C
 
@@ -387,14 +387,14 @@ operation, involving rescanning (which is described next).
     JOIN(REP, LACE)
     becomes, after token pasting,
     REPLACE
-    becomes, after rescanning
+    becomes, after re-scanning
     some replacement text
 
-Rescanning
-^^^^^^^^^^
+Re-scanning
+^^^^^^^^^^^
 
 Once the processing described above has occurred, the replacement text
-plus the following tokens of the source file is rescanned,
+plus the following tokens of the source file is re-scanned,
 looking for more macro names to replace. The one exception
 is that, within a macro's replacement text, the name of
 the macro itself is not expanded. Because macro replacement can
@@ -541,13 +541,13 @@ currently defined.
 
 This occasionally comes in handy. :ref:`libraries` points out that
 some library functions may actually be macros, not functions, but
-by undefing their names you are guaranteed access to a
+by undefining their names you are guaranteed access to a
 real function.
 
 #include
 ~~~~~~~~
 
-This comes in two flavours:
+This comes in two flavors:
 
 .. code-block:: C
 
@@ -611,7 +611,7 @@ to be a string, for example
 
     #include NAME
 
-There is no problem with implementation defined behaviour here, but
+There is no problem with implementation defined behavior here, but
 the paths searched are different, as explained above.
 
 For the first case, what happens is that the token
@@ -849,7 +849,7 @@ becomes very strong when you suddenly come across
     #endif
 
 with no #if or whatever immediately visible above. They should
-be treated like chilli sauce; essential at times, but more
+be treated like chili sauce; essential at times, but more
 than a tiny sprinkle is too much.
 
 #pragma
@@ -904,7 +904,7 @@ Summary
 
 To be honest, although many of the facilities provided by
 the preprocessor undoubtedly provide extra power and flexibility, it really
-is rather overcomplicated.
+is rather over-complicated.
 
 There are only a very few aspects
 that are really important.

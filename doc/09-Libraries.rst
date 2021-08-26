@@ -53,7 +53,7 @@ the library functions. Some important points should be noted here:
 
     Giving a ‘bad value’ to a function—say a null
     pointer, or a value outside the range of values
-    expected by the function—results in undefined behaviour unless otherwise
+    expected by the function—results in undefined behavior unless otherwise
     stated.
 
 The Standard isn't quite as restrictive about identifiers as
@@ -94,7 +94,7 @@ and where there are cultural dependencies such as the
 use of comma or full stop to indicate the
 decimal point. Facilities have been provided (see Section 9.4)
 for setting a program's idea of its locale, which
-is used to control the behaviour of the library
+is used to control the behavior of the library
 functions.
 
 Providing full support for different native languages and customs
@@ -105,7 +105,7 @@ step on the road to a full solution.
 In several places the ‘C locale’ is referred to.
 This is the only locale defined by the Standard
 and effectively provides support for the way that Old
-C worked. Other locale settings may provide different behaviour
+C worked. Other locale settings may provide different behavior
 in implementation-defined ways.
 
 The <stddef.h> Header
@@ -152,8 +152,8 @@ Example 9.1
 
 The expression s_tr.c must be capable of evaluation as an
 address constant (see :ref:`structs`). If the member whose offset
-you want is a bitfield, then you're out of luck;
-offsetof has undefined behaviour in that case.
+you want is a bit-field, then you're out of luck;
+offsetof has undefined behavior in that case.
 
 Note carefully the
 way that a size_t has to be cast to the
@@ -275,7 +275,7 @@ or non-zero if it was. The functions all take an
 integer argument, which should either be an int, the value
 of which should be representable as unsigned char, or the
 integer constant EOF, as returned from functions such as getchar().
-The behaviour is undefined if it is not.
+The behavior is undefined if it is not.
 
 These functions depend on the program's locale setting.
 
@@ -558,11 +558,11 @@ can be set by providing values for category as follows:
 
     LC_COLLATE
 
-        Modify behaviour of strcoll and strxfrm.
+        Modify behavior of strcoll and strxfrm.
 
     LC_CTYPE
 
-        Modify behaviour of character-handling functions.
+        Modify behavior of character-handling functions.
 
     LC_MONETARY
 
@@ -574,7 +574,7 @@ can be set by providing values for category as follows:
 
     LC_TIME
 
-        Modify behaviour of strftime.
+        Modify behavior of strftime.
 
     The values for locale can be:
     "C"         Select the minimal environment for C translation
@@ -627,7 +627,7 @@ currency_symbol         "IR£"
 mon_decimal_point       "."
 mon_thousands_sep       ","
 mon_grouping    "\3"
-postive_sign    ""
+positive_sign    ""
 negative_sign   ""
 int_frac_digits         2
 frac_digits     2
@@ -674,7 +674,7 @@ but must provide support for at least -32767.
 +-------------------------+-------------------------+-----------------------------------------------+
 | LONG_MIN                |(<=-2147483647)          |min value of a long                            |
 +-------------------------+-------------------------+-----------------------------------------------+
-| MB_LEN_MAX              |(>=1)                    |max number of bytes in a multibyte character   |
+| MB_LEN_MAX              |(>=1)                    |max number of bytes in a multi-byte character   |
 +-------------------------+-------------------------+-----------------------------------------------+
 | SCHAR_MAX               |(>=+127)                 |max value of a signed char                     |
 +-------------------------+-------------------------+-----------------------------------------------+
@@ -910,7 +910,7 @@ functions available:
         integral and fractional parts, each
         of which has the same
         sign as the argument. It
-        stores the integrbal part as
+        stores the integral part as
         a double in the object
         pointed to by iptr, and
         returns the fractional part.
@@ -977,7 +977,7 @@ make the jump. The declarations are as follows:
     int setjmp(jmp_buf env);
     void longjmp(jmp_buf env, int val);
 
-The setjmp macro is used to initialise the jmp_buf and
+The setjmp macro is used to initialize the jmp_buf and
 returns zero on its initial call. The bizarre thing is
 that it returns again, later, with a non-zero value, when
 the corresponding longjmp call is made! The non-zero value is
@@ -1013,7 +1013,7 @@ and longjmp calls, their values are indeterminate.
 The longjmp function executes correctly in the contexts of interrupts,
 signals and any of their associated functions. If longjmp is
 invoked from a function called as a result of a
-signal arriving while handling another signal, the behaviour is undefined.
+signal arriving while handling another signal, the behavior is undefined.
 
 
 It's a serious error to longjmp to a function which
@@ -1142,7 +1142,7 @@ that function returns normally, then under most circumstances the
 program will resume at the point where the event
 occurred. However, if the value of sig was SIGFPE
 (a floating point exception), or any implementation defined computational
-exception, then the behaviour is undefined. The most usual
+exception, then the behavior is undefined. The most usual
 thing to do in the handler for SIGFPE is
 to call one of the functions abort, exit, or longjmp.
 
@@ -1245,18 +1245,18 @@ Each call to this macro will extract the next argument
 from the argument list as a value of the specified
 type. The va_list argument must be the one initialized by
 va_start. If the next argument is not of the specified
-type, the behaviour is undefined. Take care here to avoid
+type, the behavior is undefined. Take care here to avoid
 problems which could be caused by arithmetic conversions. Use of
 char or short as the second argument to va_arg is
 invariably an error: these types always promote up to one
 of signed int or unsigned int, and float converts to
 double. Note that it is implementation defined whether objects declared
 to have the types char, unsigned char, unsigned short and
-unsigned bitfields will promote to unsigned int, rather complicating the
+unsigned bit-fields will promote to unsigned int, rather complicating the
 use of va_arg. This may be an area where some
 unexpected subtleties arise; only time will tell.
 
-The behaviour is also undefined if va_arg is called when
+The behavior is also undefined if va_arg is called when
 there were no further arguments.
 
 The type argument must be a type name which can
@@ -1273,7 +1273,7 @@ an argument of type ‘array of char’ would be char \*.
 
 When all the arguments have been processed, the va_end function
 should be called. This will prevent the va_list supplied from
-being used any further. If va_end is not used, the behaviour is undefined.
+being used any further. If va_end is not used, the behavior is undefined.
 
 The entire argument list can be re-traversed by calling va_start
 again, after calling va_end. The va_end function is declared as
@@ -1600,7 +1600,7 @@ Description:
         indicating a failure.
 
         If a file with the new name
-        exists prior to calling rename, the behaviour
+        exists prior to calling rename, the behavior
         is implementation defined.
 
         If rename fails for any reason, the
@@ -1616,7 +1616,7 @@ Description:
         times tmpnam may be called before it can
         no longer find a unique name. TMP_MAX will
         be at least 25. If tmpnam is called
-        more than this number of times, its behaviour
+        more than this number of times, its behavior
         is undefined by the Standard, but many implementations
         offer no practical limit.
 
@@ -1721,7 +1721,7 @@ If a file is opened in
 append mode, all writes will occur at the
 end of the file, regardless of attempts to
 move the file position indicator with fseek. The
-initial position fo the file position indicator will
+initial position of the file position indicator will
 be implementation defined.
 
 Attempts to open a file in read mode,
@@ -1874,13 +1874,13 @@ ungetc operation is forgotten.
 
 The most recent operation on the stream must
 have been an output operation; if not, the
-behaviour is undefined.
+behavior is undefined.
 
 A call of fflush with an argument of
 zero flushes every output or update stream. Care
 is taken to avoid those streams that have
 not had an output as their last operation,
-thus avoiding the undefined behaviour mentioned above.
+thus avoiding the undefined behavior mentioned above.
 
 EOF is returned if an error occurs, otherwise zero.
 

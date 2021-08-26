@@ -14,7 +14,7 @@ C has borrowed shamelessly from both kinds of language, and from a lot
 of other places too. The input from so many varied sources has spawned
 a language a bit like a cross-bred terrier: inelegant in places, but
 a tenacious brute that the family is fond of. Biologists refer to this
-phenomenon as ‘hybrid vigour’. They might also draw your attention to the ‘chimera’,
+phenomenon as ‘hybrid vigor’. They might also draw your attention to the ‘chimera’,
 an artificial crossbreed of creatures such as a sheep and a goat. If
 it gives wool and milk, fine, but it might equally well just bleat and stink!
 
@@ -49,10 +49,10 @@ to be done by the loader is not large and the approach is a sensible one. Figure
 
 .. figure:: _static/1.1.png
     :align: center
-    :alt: Seperate Compilation
+    :alt: Separate Compilation
     :figclass: align-center
 
-    Seperate Compilation
+    Separate Compilation
 
 This technique is important in C, where it is common to find all
 but the smallest of programs constructed from a number of separate source files.
@@ -96,7 +96,7 @@ In a hosted environment there is one function whose name is special; it's
 the one called main. This function is the first one entered when
 your program starts running. In a freestanding environment the way that a program
 starts up is implementation defined; a term which means that although the Standard
-doesn't specify what must happen, the actual behaviour must be consistent and
+doesn't specify what must happen, the actual behavior must be consistent and
 documented. When the program leaves the main function, the whole program comes to
 an end. Here's a simple program containing two functions:
 
@@ -286,11 +286,11 @@ return value specified when the function is defined. In the example, the functio
 show_message doesn't return a value so we specify that its type
 is void.
 
-The use of void in that way is either crashingly obvious
+The use of void in that way is either crushingly obvious
 or enormously subtle, depending on your viewpoint. We could easily get involved here
 in an entertaining (though fruitless) philosophical side-track on whether void really is
 a value or not, but we won't. Whichever side of the question
-you favour, it's clear that you can't do anything with a
+you favor, it's clear that you can't do anything with a
 void and that's what it means here—“I don't want to
 do anything with any value this function might or might not return”.
 
@@ -393,7 +393,7 @@ output will read ‘hello’, followed by a new line.
 To support people working
 in environments that use character sets which are ‘wider’ than U.S. ASCII,
 such as the shift-JIS representation used in Japan, the Standard now allows
-multibyte characters to be present in strings and comments. The Standard defines the
+multi-byte characters to be present in strings and comments. The Standard defines the
 96 characters that are the alphabet of C (see :ref:`variables`). If your
 system supports an extended character set, the only place that you may use
 these extended characters is in strings, character constants, comment and the names of
@@ -698,7 +698,7 @@ a compound statement:
 Here, at least, C adheres to the practice used by most other languages.
 In fact a lot of programmers who are used to languages where the
 problem exists have never even realized that it is there—they just thought
-that the disambiguating rule was ‘obvious’. Let's hope that everyone feels that way.
+that the disambiguation rule was ‘obvious’. Let's hope that everyone feels that way.
 
 The division operators
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -757,7 +757,7 @@ that program out, you may find that some systems do not pass characters
 one by one to a program, but make you type a whole line
 of input first. Then the whole line is made available as input, one
 character at a time. Beginners have been known to be confused: the program
-is started, they type some input, and nothing comes back. This behaviour is
+is started, they type some input, and nothing comes back. This behavior is
 nothing to do with C; it depends on the computer and operating system in use.
 
 Simple arrays
@@ -801,7 +801,7 @@ through to N-1 are available (giving N in total).
 
 Unlike some other languages it is unlikely that you will be told if
 you ‘run off’ the end of an array in C. It results in
-what is known as undefined behaviour on the part of your program, this
+what is known as undefined behavior on the part of your program, this
 generally being to produce obscure errors in the future. Most skilled programmers avoid
 this happening by rigorous testing to make sure either that it can't
 happen given the particular algorithm in use, or by putting in an explicit

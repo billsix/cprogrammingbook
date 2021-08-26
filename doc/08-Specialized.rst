@@ -140,7 +140,7 @@ entrance to a function, often a slow process, or there
 won't be enough registers remaining to be used for intermediate
 calculations. Determining when to use registers will be a machine-specific
 choice and should only be taken when detailed measurements show
-that a particular function needs to be speeded up. Then
+that a particular function needs to be sped up. Then
 you will have to experiment. In our opinion, you should
 never declare register variables during program development. Get the program
 working first, then measure it, then, maybe, judicious use of
@@ -291,7 +291,7 @@ places in a program, even if those places are not
 all in the same source file.
 
 The Standard warns that declarations which refer to the same
-thing must all have compatible type, or the behaviour of
+thing must all have compatible type, or the behavior of
 the program will be undefined. A full description of compatible
 type is given later; for the moment you can take
 it to mean that, except for the use of the
@@ -370,7 +370,7 @@ The rules are a little complicated.
 
     Any other form of declaration results in no linkage.
 
-    In any one source code file, if a given identifer
+    In any one source code file, if a given identifier
     has both internal and external linkage then the result is
     undefined.
 
@@ -499,7 +499,7 @@ there, new types will be defined for the basic variables
 of the program and appropriate typedefs used to tailor the
 program to the target machine. This can lead to code
 which C programmers from other environments will find difficult to
-interpret if it's used to excess. The flavour of it
+interpret if it's used to excess. The flavor of it
 is shown below:
 
 .. code-block:: C
@@ -557,7 +557,7 @@ type of its return value.
     func func_name(){ /*....*/ }
 
 If a typedef of a particular identifier is in scope,
-that identifer may not be used as the formal parameter
+that identifier may not be used as the formal parameter
 of a function. This is because something like the following
 declaration causes a problem:
 
@@ -708,7 +708,7 @@ Example 8.3
 As the example shows, it is possible to take the
 address of a constant object, generate a pointer to a
 non-constant, then use the new pointer. This is an error
-in your program and results in undefined behaviour.
+in your program and results in undefined behavior.
 
 The main intention of introducing const objects was to allow
 them to be put into read-only store, and to permit
@@ -812,7 +812,7 @@ assigned the address of a regular object with safety, but
 it is dangerous (and needs a cast) to take the
 address of a volatile object and put it into a
 pointer to a regular object. Using such a derived pointer
-results in undefined behaviour.
+results in undefined behavior.
 
 If an array, union or structure is declared with const
 or volatile attributes, then all of the members take on
@@ -891,7 +891,7 @@ Indivisible Operations
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Those of you who are familiar with techniques that involve hardware
-interrupts and other ‘real time’ aspects of programming will recognise the
+interrupts and other ‘real time’ aspects of programming will recognize the
 need for volatile types. Related to this area is the need
 to ensure that accesses to data objects are ‘atomic’, or uninterruptable.
 To discuss this is any depth would take us beyond the
