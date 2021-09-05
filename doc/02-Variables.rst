@@ -149,7 +149,7 @@ on its input text.
 
 
 Multi-byte Characters
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 Support for multi-byte characters is new in the Standard. Why?
 
@@ -1630,7 +1630,7 @@ the binary forms of the operators. Only the integral promotions are
 performed on the operands of the unary forms of the operators.
 
 The bit-wise operators
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 One of the great strengths of C is the way that
 it allows systems programmers to do what had, before the advent
