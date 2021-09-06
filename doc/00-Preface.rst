@@ -2,6 +2,36 @@ Preface
 =======
 
 
+2021 Update to This Book from the 1980's
+----------------------------------------
+
+Welcome to learning about programming in the C programming language!
+This is a free an open source book, originally written by Mike Banahan, Declan Brady and Mark Doran,
+in the late 1980s.  It has been ported to HTML/Sphinx by William Emerison Six, and the code
+examples  are all provided at https://github.com/billsix/cprogrammingbook .  They
+all compile and run on Windows 10, MacOS, and GNU/Linux distributions, so that you can
+study the code interactively, rather than typing it in!
+
+
++-------------------------------+-----------------------------------------------+
+| Original version of the book  | https://publications.gbdirect.co.uk//c_book   |
++-------------------------------+-----------------------------------------------+
+| This version of the book      | https://github.com/billsix/cprogrammingbook   |
++-------------------------------+-----------------------------------------------+
+
+
+
+I, Bill, have tried to keep the book in it's original form as much as
+possible.  Because it is old, there are antiquated terms..  Old C, means
+C before the C89 Standard.  Standard C means C89.
+
+If you are looking for other resources, other great books on C are
+
+- C Programming, A Beginner's Course.  By Noel Kalicharan
+- Computer Programming, An Advanced Course.  By Noel Kalicharan
+- The C Programming Language. By Brian Kernighan and Dennis Ritchie
+- C, A Reference Manual.  By Samuel Harbison and Guy Steele Jr
+
 
 About This Book
 ---------------
