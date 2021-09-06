@@ -18,3 +18,14 @@ int32_t str_eq(const char *s1, const char *s2) {
   /* Difference detected! */
   return 1;
 }
+
+int main(int argc, char *argv[]) {
+
+  char *str1 = "str1";
+  char *str2 = "str2";
+  char *str3 = "str1";
+
+  printf("str1 compared to str2 is %d\n", str_eq(str1, str2));
+  printf("str1 compared to str3 is %d\n", str_eq(str1, str3));
+  printf("str2 compared to str3 is %d\n", str_eq(str2, str3));
+}

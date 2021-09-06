@@ -1,4 +1,5 @@
 #include <inttypes.h>
+#include <stdio.h>
 
 int32_t i; /* definition */
 int main(int argc, char *argv[]) {

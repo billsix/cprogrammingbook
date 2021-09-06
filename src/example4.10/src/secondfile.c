@@ -1,4 +1,5 @@
 #include <inttypes.h>
+#include <stdlib.h>
 
 /* example library module */
 /* only 'callable' is visible outside */
