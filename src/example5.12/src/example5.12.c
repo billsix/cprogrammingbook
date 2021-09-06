@@ -1,6 +1,6 @@
 #include <inttypes.h>
 #include <stdio.h>
-#include <stdlib.hi>
+#include <stdlib.h>
 #include <string.h>
 
 #define MAXSTRING 50 /* max no. of strings */

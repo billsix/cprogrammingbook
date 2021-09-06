@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
     int a, b, c;
   } s_tr;
 
-  distance = offsetof(s_tr, c);
+  distance = offsetof(struct x, c);
   printf("Offset of x.c is %lu bytes\n", (unsigned long)distance);
 
   exit(EXIT_SUCCESS);

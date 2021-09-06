@@ -2,7 +2,7 @@ EXAMPLE_DIR=$(pwd)
 
 # build MUSL
 
-cd ../../deps/musl/
+cd deps/musl/
 mkdir build
 mkdir buildInstall
 
