@@ -12,7 +12,7 @@ char *next_string(char *destination);
 
 int main(int argc, char *argv[]) {
   /* leave room for null at end */
-  char *p_array[MAXSTRING + 1];
+  const char *p_array[MAXSTRING + 1];
 
   /* storage for strings */
   char strings[MAXSTRING][MAXLEN];
