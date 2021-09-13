@@ -5,10 +5,11 @@
 
 int main(int argc, char *argv[]) {
   char c = CHAR_MIN;
-  while (c != CHAR_MAX) {
-    printf("%d\n", c);
+  printf("%d\n", c);
+  do {
     c = c + 1;
-  }
+    printf("%d\n", c);
+  } while (c != CHAR_MAX);
 
   exit(EXIT_SUCCESS);
 }

@@ -77,7 +77,8 @@ move1ToTarget : {
   goto applyHanoiProcedure;
 moveNMinus1FromTempToTarget : {
   struct hanoi_stack_frame *stack_frame_of_callee = current_stack_frame - 1;
-  stack_frame_of_callee->number_of_disks = current_stack_frame->number_of_disks - 1;
+  stack_frame_of_callee->number_of_disks =
+      current_stack_frame->number_of_disks - 1;
   stack_frame_of_callee->source = current_stack_frame->temp;
   stack_frame_of_callee->temp = current_stack_frame->source;
   stack_frame_of_callee->target = current_stack_frame->target;

@@ -11,7 +11,7 @@ void sort_arr(const char *p_array[]);
 char *next_string();
 
 int main(int argc, char *argv[]) {
-  char *p_array[MAXSTRING + 1];
+  const char *p_array[MAXSTRING + 1];
   size_t nstrings = 0;
 
   while (nstrings < MAXSTRING && (p_array[nstrings] = next_string()) != 0) {

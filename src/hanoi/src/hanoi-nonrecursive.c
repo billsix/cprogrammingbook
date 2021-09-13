@@ -9,16 +9,14 @@ void hanoi3(int32_t source, int32_t temp, int32_t target);
 
 void hanoi4(int32_t source, int32_t temp, int32_t target);
 
-void hanoiBad(int32_t number_of_disks, int32_t source, int32_t temp, int32_t target);
-
+void hanoiBad(int32_t number_of_disks, int32_t source, int32_t temp,
+              int32_t target);
 
 int main(int argc, char *argv[]) {
 
   int32_t source = 1;
   int32_t temp = 2;
   int32_t dest = 3;
-
-
 
   hanoi1(source, temp, dest);
   printf("completed hanoi1\n");
@@ -28,7 +26,6 @@ int main(int argc, char *argv[]) {
   printf("completed hanoi3\n");
   hanoi4(source, temp, dest);
   printf("completed hanoi4\n");
-
 
   printf("Enter the number of disks\n");
   int32_t number_of_disks;
@@ -63,7 +60,8 @@ void hanoi4(int32_t source, int32_t temp, int32_t target) {
 }
 
 // gets stuck in infinite loop
-void hanoiBad(int32_t number_of_disks, int32_t source, int32_t temp, int32_t target) {
+void hanoiBad(int32_t number_of_disks, int32_t source, int32_t temp,
+              int32_t target) {
   hanoiBad(number_of_disks, source, target, temp);
   printf("Move from %d to %d\n", source, target);
   hanoiBad(number_of_disks, temp, source, target);

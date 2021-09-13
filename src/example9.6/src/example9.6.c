@@ -5,7 +5,7 @@
 int maxof(int, ...);
 void f(void);
 
-main() {
+int main() {
   f();
   exit(EXIT_SUCCESS);
 }
