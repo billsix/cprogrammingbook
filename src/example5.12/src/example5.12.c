@@ -12,7 +12,7 @@ char *next_string();
 
 int main(int argc, char *argv[]) {
 
-  const char **p_array = (char **)malloc(sizeof(char * [MAXSTRING + 1]));
+  const char **p_array = (const char **)malloc(sizeof(char * [MAXSTRING + 1]));
   if (p_array == 0) {
     printf("No memory\n");
     exit(EXIT_FAILURE);
