@@ -46,10 +46,12 @@ and debug them.
 
 Install Python, either through Cygwin, Visual Studio, brew, or apt.
 
-#### Windows
+#### Windows, using Developer Command Prompt
 
         python -m venv venv
-        source venv\bin\activate.bat
+        cd venv\Scripts
+        activate.bat
+        cd ..\..\
         python -m pip install --upgrade pip setuptools
         python -m pip install -r requirements.txt
         cd doc
@@ -64,7 +66,7 @@ Install Python, either through Cygwin, Visual Studio, brew, or apt.
         cd doc
         make html
 
-#### Linux (Ubuntu)
+#### Linux
 
 
         python -m venv venv
