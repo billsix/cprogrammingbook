@@ -6,7 +6,7 @@ Libraries
 Introduction
 ------------
 
-There is no doubt that the Standard Committee's decision
+There is no doubt that the C89 Standard Committee's decision
 to define a set of library routines will prove
 to be a huge benefit to users of C.
 Previously there were no standard, accepted, definitions of library
@@ -56,7 +56,7 @@ the library functions. Some important points should be noted here:
     expected by the function—results in undefined behavior unless otherwise
     stated.
 
-The Standard isn't quite as restrictive about identifiers as
+The C89 Standard isn't quite as restrictive about identifiers as
 the list above is, but it's a brave move
 to make use of the loopholes. Play safe instead.
 
@@ -71,7 +71,7 @@ The Standard headers are:
 A last general point is that many of the
 library routines may be implemented as macros, provided that
 there will be no problems to do with side-effects
-(as :ref:`preprocessor` describes). The Standard guarantees that, if
+(as :ref:`preprocessor` describes). The C89 Standard guarantees that, if
 a function is normally implemented as a macro, there
 will also be a true function provided to do
 the same job. To use the real function, either
@@ -103,9 +103,9 @@ provided by the C library are only a first
 step on the road to a full solution.
 
 In several places the ‘C locale’ is referred to.
-This is the only locale defined by the Standard
-and effectively provides support for the way that Old
-C worked. Other locale settings may provide different behavior
+This is the only locale defined by the C89 Standard
+and effectively provides support for the way that pre-C89
+worked. Other locale settings may provide different behavior
 in implementation-defined ways.
 
 The <stddef.h> Header
@@ -1021,7 +1021,7 @@ is no longer active (i.e. it has already returned or
 another longjump call has transferred to a setjmp occurring earlier
 in a set of nested calls).
 
-The Standard insists that,
+The C89 Standard insists that,
 apart from appearing as the only expression in an expression
 statement, setjmp may only be used as the entire controlling
 expression in an if, switch, do, while, or for statement.
@@ -1187,11 +1187,11 @@ static object of type sig_atomic_t. The type sig_atomic_t is
 declared in <signal.h>. It is the only type of
 object that can safely be modified as an atomic
 entity, even in the presence of asynchronous interrupts. This
-is a very onerous restriction imposed by the Standard,
+is a very onerous restriction imposed by the C89 Standard,
 which, for example, invalidates the leave function in the
 example program above; although the function would work correctly
 in some environments, it does not follow the strict
-rules of the Standard.
+rules of the C89 Standard.
 
 Variable numbers of arguments
 -----------------------------
@@ -1312,7 +1312,7 @@ being forced to change the language itself.
 As C has evolved, a library package known as the
 ‘Standard I/O Library’ or stdio, has evolved with it and
 has proved to be both flexible and portable. This package
-has now become part of the Standard.
+has now become part of the C89 Standard.
 
 The old stdio package relied heavily on the UNIX model
 of file access, in particular the assumption that there is
@@ -1324,7 +1324,7 @@ stdio package has been modified. There are changes in this
 area which affect many existing programs, although strenuous efforts were
 taken to limit the amount of damage.
 
-Old C programs should still be able work unmodified in a UNIX environment.
+pre-C89 programs should still be able work unmodified in a UNIX environment.
 
 The I/O model
 ~~~~~~~~~~~~~
@@ -1359,7 +1359,7 @@ of files ‘directly’, but only by viewing them as streams.
 Text streams
 ^^^^^^^^^^^^
 
-The Standard specifies what is meant by the term text
+The C89 Standard specifies what is meant by the term text
 stream, which essentially considers a file to contain lines of
 text. A line is a sequence of zero or more
 characters terminated by a newline character. It is quite possible
@@ -1617,7 +1617,7 @@ Description:
         no longer find a unique name. TMP_MAX will
         be at least 25. If tmpnam is called
         more than this number of times, its behavior
-        is undefined by the Standard, but many implementations
+        is undefined by the C89 Standard, but many implementations
         offer no practical limit.
 
         If the argument s is set to NULL,
@@ -1668,7 +1668,7 @@ file if it does not already exist, or
 truncate it to zero length (losing its previous
 contents) if it did exist.
 
-The Standard list of modes is shown in
+The C89 Standard list of modes is shown in
 Table 9.3, although implementations may permit extra modes
 by appending extra characters at the end of
 the modes.

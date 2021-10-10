@@ -516,7 +516,7 @@ of one statement and several statements can be put after
 one label.
 
 The expression controlling the switch can be of any of
-the integral types. Old C used to insist on only
+the integral types. pre-C89 used to insist on only
 int here, and some compilers would forcibly truncate longer types,
 giving rise on rare occasions to some very obscure bugs.
 
@@ -981,7 +981,7 @@ conditional operator, were it not for compatibility with existing code,
 but the comma operator does have important uses, especially for
 automatic generators of C programs.
 
-The Standard has not had
+The C89 Standard has not had
 much effect on the contents of this chapter. Prospective users
 of C should ensure that they are completely familiar with
 all of the topics discussed here (except the conditional and

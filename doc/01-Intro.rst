@@ -68,7 +68,7 @@ functions and what we could loosely call global variables. All of these things
 are given names at the point where they are defined in the program;
 the way that the names are used to access those items from a
 given place in the program is governed by rules. The rules are described
-in the Standard using the term linkage. For the moment we only need
+in the C89 Standard using the term linkage. For the moment we only need
 to concern ourselves with external linkage and no linkage. Items with external linkage
 are those that are accessible throughout the program (library functions are a good
 example); items with no linkage are also widely used but their accessibility is
@@ -95,7 +95,7 @@ effect on the rest of the program.
 In a hosted environment there is one function whose name is special; it's
 the one called main. This function is the first one entered when
 your program starts running. In a freestanding environment the way that a program
-starts up is implementation defined; a term which means that although the Standard
+starts up is implementation defined; a term which means that although the C89 Standard
 doesn't specify what must happen, the actual behavior must be consistent and
 documented. When the program leaves the main function, the whole program comes to
 an end. Here's a simple program containing two functions:
@@ -143,7 +143,7 @@ Comment is introduced
 to a C program by the pair of characters /\*, which must not have
 a space between them. From then on, everything found up to and including
 the pair of characters \*/ is gobbled up and the whole lot is replaced
-by a single space. In Old C, this was not the case. The
+by a single space. Before the C89 standard, this was not the case. The
 rule used to be that comment could occur anywhere that space could occur:
 the rule is now that comment is space. The significance of the change
 is minor and eventually becomes apparent in :ref:`preprocessor`
@@ -181,7 +181,7 @@ technique to incorporate the text of standard header files into your program wit
 having to go through the effort of typing it all yourself. The <stdio.h>
 file is an important one, containing the necessary information that allows you
 to use the standard library for input and output. If you want to
-use the I/O library you must include <stdio.h>. Old C was more relaxed on this point.
+use the I/O library you must include <stdio.h>. C before the C89 standard was more relaxed on this point.
 
 Define statements
 """""""""""""""""
@@ -250,7 +250,7 @@ Declaration
 
 After the <stdio.h> file is included comes a function declaration; it tells
 the compiler that show_message is a function which takes no arguments and
-returns no values. This demonstrates one of the changes made by the Standard:
+returns no values. This demonstrates one of the changes made by the C89 Standard:
 it is an example of a function prototype, a subject which :ref:`functions`
 discusses in detail. It isn't always necessary to declare functions in advance — C
 will use some (old) default rules in such cases—but it is
@@ -392,8 +392,8 @@ output will read ‘hello’, followed by a new line.
 
 To support people working
 in environments that use character sets which are ‘wider’ than U.S. ASCII,
-such as the shift-JIS representation used in Japan, the Standard now allows
-multi-byte characters to be present in strings and comments. The Standard defines the
+such as the shift-JIS representation used in Japan, the C89 Standard now allows
+multi-byte characters to be present in strings and comments. The C89 Standard defines the
 96 characters that are the alphabet of C (see :ref:`variables`). If your
 system supports an extended character set, the only place that you may use
 these extended characters is in strings, character constants, comment and the names of
@@ -546,10 +546,10 @@ You can't use the same feature to get a default type for
 variables because their types must be provided explicitly.
 
 What does the value returned from main mean, and where does it go?
-In Old C, the value was passed back to the operating system or
+In pre-C89, the value was passed back to the operating system or
 whatever else was used to start the program running. In a UNIX-like
 environment, the value of 0 meant ‘success’ in some way, any other value
-(often -1) meant ‘failure’. The Standard has enshrined this, stating that 0 stands
+(often -1) meant ‘failure’. The C89 Standard has enshrined this, stating that 0 stands
 for correct termination of the program. This does not mean that 0 is
 to be passed back to the host environment, but whatever is the appropriate
 ‘success’ value for that system. Because there is sometimes confusion around this, you
@@ -708,7 +708,7 @@ what you would expect, except that when it is applied to integer operands
 it gives a result that is truncated towards zero. For example, 5/2
 gives 2, 5/3 gives 1. The remainder operator is the way to
 get the truncated remainder. 5%2 gives 1, 5%3 gives 2. The
-signs of the remainder and quotient depend on the divisor and dividend in a way that is defined in the Standard and shown in :ref:`variables`.
+signs of the remainder and quotient depend on the divisor and dividend in a way that is defined in the C89 Standard and shown in :ref:`variables`.
 
 An example performing input
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -724,7 +724,7 @@ other characters that have been read, although the only test that makes sense
 is to see if both characters are the same. Comparing for greater or
 less than each other is not portable in general; there is no guarantee
 that 'a' is less than 'b', although on most common systems that would
-be the case. The only guarantee that the Standard makes is that the
+be the case. The only guarantee that the C89 Standard makes is that the
 codes for '0' through to '9' will always be consecutive. Here is one example.
 
 
@@ -825,16 +825,16 @@ them jointly with a clumsy phrase that maintains the distinction, we think that
 it's useful to call them both loosely ‘objects’. We do quite a
 lot of that later, because it's often the case that they follow
 more or less the same rules. Beware though, that this isn't quite
-what the Standard uses the term to mean. In the Standard, an ‘object’
+what the C89 Standard uses the term to mean. In the Standard, an ‘object’
 is explicitly a region of allocated storage that is used to represent a
-value and a function is something different; this leads to the Standard often
+value and a function is something different; this leads to the C89 Standard often
 having to say ‘… functions and objects …’. Because we don't think that it
 leads to too much confusion and does improve the readability of the text
 in most cases, we will continue to use our looser interpretation of object
 to include functions and we will explicitly use the terms ‘data objects’ and
 ‘functions’ when the distinction is appropriate.
 
-Be prepared to find this slight difference in meaning if you do read the Standard
+Be prepared to find this slight difference in meaning if you do read the C89 Standard.
 
 Summary
 -------
@@ -872,7 +872,7 @@ Exercise 1.3. Write a function that returns an integer: the decimal value
 of a string of digits that it reads using getchar. For example, if
 it reads 1 followed by 4 followed by 6, it will return the
 number 146. You may make the assumption that the digits 0–9 are
-consecutive in the computer's representation (the Standard says so) and that the
+consecutive in the computer's representation (the C89 Standard says so) and that the
 function will only have to deal with valid digits and newline, so error
 checking is not needed.
 

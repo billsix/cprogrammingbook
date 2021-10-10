@@ -51,7 +51,7 @@ from this sort of problem, but try sending C programs by
 Telex or restrictive e-mail links and you'll understand the
 difficulty.
 
-The Standard talks about two different character sets: the one
+The C89 Standard talks about two different character sets: the one
 that programs are written in and the one that programs execute
 with. This is basically to allow for different systems for compiling
 and execution, which might use different ways of encoding their characters.
@@ -60,7 +60,7 @@ using character constants in the preprocessor, where they may not have
 the same value as they do at execution time. This behavior
 is implementation-defined, so it must be documented. Don't worry about it yet.
 
-The Standard requires that an alphabet of 96 symbols is available for C as follows:::
+The C89 Standard requires that an alphabet of 96 symbols is available for C as follows:::
 
      a b c d e f g h i j k l m n o p q r s t u v w x y z
 
@@ -87,7 +87,7 @@ set, which is as a subset of all the widely used computer alphabets.
     # [ \ ] ^ { | } ~
 
 To cater for systems that can't provide the full 96
-characters needed by C, the Standard specifies a method of using
+characters needed by C, the C89 Standard specifies a method of using
 the ISO 646 characters to represent the missing few; the technique
 is the use of trigraphs.
 
@@ -97,7 +97,7 @@ Trigraphs are a sequence of three ISO 646 characters that get
 treated as if they were one character in the C alphabet;
 all of the trigraphs start with two question marks ?? which helps
 to indicate that ‘something funny’ is going on. Table 2.1
-below shows the trigraphs defined in the Standard.::
+below shows the trigraphs defined in the C89 Standard.::
 
     C character 	Trigraph
     # 	??=
@@ -141,7 +141,7 @@ system can handle all 96 characters in the C alphabet, then
 that is what you should be using. Trigraphs will only be
 seen in restricted environments, and it is extremely simple to write
 a character-by-character translator between the two representations. However, all
-compilers that conform to the Standard will recognize trigraphs when they
+compilers that conform to the C89 Standard will recognize trigraphs when they
 are seen.
 
 Trigraph substitution is the very first operation that a compiler performs
@@ -151,7 +151,7 @@ on its input text.
 Multi-byte Characters
 ~~~~~~~~~~~~~~~~~~~~~
 
-Support for multi-byte characters is new in the Standard. Why?
+Support for multi-byte characters is new in the C89 Standard. Why?
 
 A very large proportion of day-to-day computing involves data
 that represents text of one form or another. Until recently, the
@@ -202,12 +202,12 @@ been seen, pairs of characters together are used as the code
 for a single Japanese character. Alternative schemes exist which use more
 than one shift-in character, but they are less common.
 
-The Standard now allows explicitly for the use of extended character
+The C89 Standard now allows explicitly for the use of extended character
 sets. Only the 96 characters defined earlier are used for the
 C part of a program, but in comments, strings, character constants
 and header names (these are really data, not part of the
 program as such) extended characters are permitted if your environment supports
-them. The Standard lays down a number of pretty obvious rules
+them. The C89 Standard lays down a number of pretty obvious rules
 about how you are allowed to use them which we will
 not repeat here. The most significant one is that a byte
 whose value is zero is interpreted as a null character irrespective
@@ -217,7 +217,7 @@ functions rely on it. An additional requirement is that multi-byte sequences
 must start and end in the initial shift state.
 
 The char
-type is specified by the Standard as suitable to hold the
+type is specified by the C89 Standard as suitable to hold the
 value of all of the characters in the ‘execution character set’,
 which will be defined in your system's documentation. This means
 that (in the example above) it could hold the value of
@@ -227,7 +227,7 @@ no difference between the value stored in a char that was
 intended to represent ‘a’ or the Greek ‘alpha’ character. To do
 that would mean using a different representation - probably needing more than
 8 bits, which on many systems would be too big for
-a char. That is why the Standard introduces the wchar_ttype.
+a char. That is why the C89 Standard introduces the wchar_ttype.
 To use this, you must include the <stddef.h> header, because
 wchar_t is simply defined as an alternative name for one
 of C's other types. We discuss it further in Section 2.8.
@@ -243,7 +243,7 @@ Summary
    ISO 646 character set to be used (at a pinch).
 
 #. Multi-byte character support has been added by the
-   Standard, with support for
+   C89 Standard, with support for
 
    #. Shift-encoded multi-byte characters, which can be squeezed
       into ‘ordinary’ character arrays, so still have char type.
@@ -315,11 +315,11 @@ constants, so you might think that the following is a good idea.
     long string\n");
 
 That will certainly work, but for strings it is preferable to
-make use of the string-joining feature introduced by the Standard:
+make use of the string-joining feature introduced by the C89 Standard:
 
 .. code-block:: C
 
-    /* This string joining will not work in Old C */
+    /* This string joining will not work in pre-C89 */
     printf("This is a very very very"
            "long string\n");
 
@@ -338,7 +338,7 @@ Comment, as has been said already, is introduced by the character
 pair /\* and terminated by \*/. It is translated into a single space
 wherever it occurs and so it follows exactly the same rules
 that spaces do. It's important to realize that it doesn't
-simply disappear, which it used to do in Old C,
+simply disappear, which it used to do in pre-C89,
 and that it is not possible to put comment into strings
 or character constants. Comment in such a place becomes part of
 the string or constant:
@@ -348,7 +348,7 @@ the string or constant:
     /*"This is comment"*/
     "/*The quotes mean that this is a string*/"
 
-Old C was a bit hazy about what the deletion of
+pre-C89 was a bit hazy about what the deletion of
 comment implied. You could argue that
 
 .. code-block:: C
@@ -357,7 +357,7 @@ comment implied. You could argue that
 
 should have the comment deleted and so be taken by the
 compiler to be a call of a function named integral. The
-Standard C rule is that comment is to be read as
+C89 Standard C rule is that comment is to be read as
 if were a space, so the example must be equivalent to
 
 .. code-block:: C
@@ -371,7 +371,7 @@ Translation phases
 
 The various character translation, line joining, comment recognition and other early
 phases of translation must be specified to occur in a certain
-order. The Standard says that the translation is to proceed as
+order. The C89 Standard says that the translation is to proceed as
 if the phases occurred in this order (there are more phases,
 but these are the important ones):
 
@@ -395,13 +395,13 @@ Keywords
 
 C keeps a small set of keywords for its own use.
 These keywords cannot be used as identifiers in the program — a
-common restriction with modern languages. Where users of Old C may
+common restriction with modern languages. Where users of pre-C89 may
 be surprised is in the introduction of some new keywords; if
 those names were used as identifiers in previous programs, then the
 programs will have to be changed. It will be easy to
 spot, because it will provoke your compiler into telling you about
 invalid names for things. Here is the list of keywords used
-in Standard C; you will notice that none of them use upper-case letters.
+in C89 Standard C; you will notice that none of them use upper-case letters.
 
 
 +--------------+-----------+--------------+--------------+
@@ -429,7 +429,7 @@ The new keywords that are likely to surprise old programmers are:
 const, signed, void and volatile (although void has been around for
 a while). Eagle eyed readers may have noticed that some implementations
 of C used to use the keywords entry, asm, and fortran.
-These are not part of the Standard, and few will mourn them.
+These are not part of the C89 Standard, and few will mourn them.
 
 Identifiers
 ~~~~~~~~~~~
@@ -449,30 +449,30 @@ restriction is the usual one; identifiers must start with an alphabetic
 character.
 
 Although there is no restriction on the length of identifiers
-in the Standard, this is a point that needs a bit
-of explanation. In Old C, as in Standard C, there has
+in the C89 Standard, this is a point that needs a bit
+of explanation. In pre-C89, as in C89, there has
 never been any restriction on the length of identifiers. The problem
 is that there was never any guarantee that more than a
 certain number of characters would be checked when names were compared
-for equality—in Old C this was eight characters, in Standard
+for equality—in pre-C89 this was eight characters, in C89 Standard
 C this has changed to 31.
 
 So, practically speaking, the new
 limit is 31 characters—although identifiers may be longer, they must
 differ in the first 31 characters if you want to be
-sure that your programs are portable. The Standard allows for implementations
+sure that your programs are portable. The C89 Standard allows for implementations
 to support longer names if they wish to, so if you
 do use longer names, make sure that you don't rely
 on the checking stopping at 31.
 
 One of the most controversial
-parts of the Standard is the length of external identifiers. External
+parts of the C89 Standard is the length of external identifiers. External
 identifiers are the ones that have to be visible outside the
 current source code file. Typical examples of these would be library
 routines or functions which have to be called from several different
 source files.
 
-The Standard chose to stay with the old restrictions
+The C89 Standard chose to stay with the old restrictions
 on these external names: they are not guaranteed to be different
 unless they differ from each other in the first six characters.
 Worse than that, upper and lower case letters may be treated
@@ -482,11 +482,11 @@ The reason for this is a pragmatic one: the
 way that most C compilation systems work is to use operating
 system specific tools to bind library functions into a C program.
 These tools are outside the control of the C compiler writer,
-so the Standard has to impose realistic limits that are likely
+so the C89 Standard has to impose realistic limits that are likely
 to be possible to meet. There is nothing to prevent any
 specific implementation from giving better limits than these, but for maximum
 portability the six monocase characters must be all that you expect.
-The Standard warns that it views both the use of only
+The C89 Standard warns that it views both the use of only
 one case and any restriction on the length of external names
 to less than 31 characters as obsolescent features. A later standard
 may insist that the restrictions are lifted; let's hope that it is soon.
@@ -567,7 +567,7 @@ Real types
 
 It's easier to deal with the real types first because
 there's less to say about them and they don't
-get as complicated as the integer types. The Standard breaks new
+get as complicated as the integer types. The C89 Standard breaks new
 ground by laying down some basic guarantees on the precision and
 range of the real numbers; these are found in the header
 file float.h which is discussed in detail in :ref:`libraries`.
@@ -675,14 +675,14 @@ those cases it may be necessary to lose precision, in a
 way specified by the implementation. Basically, the implementation must specify whether
 and in what way it rounds or truncates. Even worse, the
 destination may be unable to hold the value at all. The
-Standard says that in these cases loss of precision may occur;
+C89 Standard says that in these cases loss of precision may occur;
 if the destination is unable to hold the necessary value—say
 by attempting to add the largest representable number to itself—then
 the behavior is undefined, your program is faulty and you can
 make no predictions whatsoever about any subsequent behavior.
 
 It is no
-mistake to re-emphasize that last statement. What the Standard means
+mistake to re-emphasize that last statement. What the C89 Standard means
 by undefined behavior is exactly what it says. Once a program's
 behavior has entered the undefined region, absolutely anything can happen.
 The program might be stopped by the operating system with an
@@ -777,7 +777,7 @@ that it will always be 16 or more. The standard header
 file <limits.h> details the actual number of bits available in
 a given implementation.
 
-Curiously, Old C had no guarantee whatsoever about
+Curiously, pre-C89 had no guarantee whatsoever about
 the length of an int, but consensus and common practice has
 always assumed at least 16 bits.
 
@@ -789,7 +789,7 @@ twos complement arithmetic is used. Of course there is nothing to
 stop a given implementation from providing a greater range in either
 direction.
 
-The range specified in the Standard for an unsigned int
+The range specified in the C89 Standard for an unsigned int
 is 0 to at least 65535, meaning that it cannot be
 negative. More about these shortly.
 
@@ -1115,10 +1115,10 @@ Conversions
 
 C allows types to be mixed in expressions, and permits operations
 that result in type conversions happening implicitly. This section describes the
-way that the conversions must occur. Old C programmers should read
+way that the conversions must occur. pre-C89 programmers should read
 this carefully, because the rules have changed — in particular, the promotion
 of float to double, the promotions of short integral types and
-the introduction of value preserving rules are genuinely different in Standard
+the introduction of value preserving rules are genuinely different in C89 Standard
 C.
 
 Although it isn't directly relevant at the moment, we
@@ -1146,7 +1146,7 @@ are to be performed, then look at when they are required.
 You will need to learn them by heart if you ever
 intend to program seriously in C.
 
-The Standard has, among some
+The C89 Standard has, among some
 controversy, introduced what are known as value preserving rules, where a
 knowledge of the target computer is required to work out what
 the type of an expression will be. Previously, whenever an unsigned
@@ -1291,11 +1291,11 @@ can be established; these are the conversions:
     #. Otherwise, both operands must be of type int, so that
     is the type of the result.
 
-The Standard contains a strange sentence: ‘The values of floating operands
+The C89 Standard contains a strange sentence: ‘The values of floating operands
 and of the results of floating expressions may be represented in
 greater precision and range than that required by the type; the
 types are not changed thereby’. This is in fact to allow
-the Old C treatment of floats. In Old C, float variables
+the pre-C89 treatment of floats. In Old C, float variables
 were automatically promoted to double, the way that the integral promotions
 promote char to int. So, an expression involving purely float variables
 may be done as if they were double, but the type
@@ -1320,7 +1320,7 @@ an unsigned type, the result always has a defined value. Taking
 a 16-bit int for an example, the unsigned version has
 a range of 0–65535. Converting a signed value of -7
 to this type involves adding 65536, resulting in 65529. What is
-happening is that the Standard is enshrining previous practice, where the
+happening is that the C89 Standard is enshrining previous practice, where the
 bit pattern in the signed number is simply assigned to the
 unsigned number; the description in the standard is exactly what would
 happen if you did perform the bit pattern assignment on a
@@ -1361,7 +1361,7 @@ are mixed with signed numbers.
 Wide characters
 ^^^^^^^^^^^^^^^
 
-The Standard, as we've already said, now makes allowances for
+The C89 Standard, as we've already said, now makes allowances for
 extended character sets. You can either use the shift-in shift-out
 encoding method which allows the multi-byte characters to be stored
 in ordinary C strings (which are really arrays of chars, as
@@ -1397,7 +1397,7 @@ is always a synonym for one of the other integral types,
 wchar_t (whose definition is found in <stddef.h>) is defined
 to be the implementation-dependent type that should be used to
 hold extended characters when you need an array of them. The
-Standard makes the following guarantees about the values in a wide
+C89 Standard makes the following guarantees about the values in a wide
 character:
 
 - A wchar_t can hold distinct values for each member
@@ -1622,7 +1622,7 @@ what does the unary plus do? In fact the answer is
 almost nothing. The unary plus is a new addition to the
 language, which balances the presence of the unary minus, but doesn't
 have any effect on the value of the expression. Very
-few Old C users even noticed that it was missing.
+few pre-C89 users even noticed that it was missing.
 
 The
 usual arithmetic conversions are applied to both of the operands of
@@ -2190,7 +2190,7 @@ Parentheses
 
 C allows you to override the normal effects of precedence and
 associativity by the use of parentheses as the examples have illustrated.
-In Old C, the parentheses had no further meaning, and in
+In pre-C89, the parentheses had no further meaning, and in
 particular did not guarantee anything about the order of evaluation in
 expressions like these:
 
@@ -2207,7 +2207,7 @@ that there are risks of overflow in a particular expression, but
 by forcing the evaluation to be in a certain order you
 can avoid it.
 
-Standard C says that evaluation must be done
+C89 Standard C says that evaluation must be done
 in the order indicated by the precedence and grouping of the
 expression, unless the compiler can tell that the result will not
 be affected by any regrouping it might do for optimization reasons.
@@ -2268,7 +2268,7 @@ habit, and not to realize that it is not in
 decimal. The mistake is most common with beginners, because experienced
 C programmers already carry the scars.
 
-The Standard has now
+The C89 Standard has now
 invented a new way of working out what type an
 integer constant is. In the old days, if the constant
 was too big for an int, it got promoted to
@@ -2358,7 +2358,7 @@ would otherwise be hard to get into a character constant
 (or hard to read; does ' ' contain a space or a
 tab?), there is what is called an escape sequence which
 can be used instead. Table 2.10 shows the escape
-sequences defined in the Standard.
+sequences defined in the C89 Standard.
 
 +--------------------+-------------------+
 | Sequence           | Represents        |
@@ -2447,7 +2447,7 @@ the motions of a printing device when they are sent to it, as follows: ::
         Go to the start of the line at the next vertical tab position.
 
 For \b, \t, \v, if there is no such position,
-the behavior is unspecified. The Standard carefully avoids mentioning the
+the behavior is unspecified. The C89 Standard carefully avoids mentioning the
 physical directions of movement of the output device which are
 not necessarily the top to bottom, left to right movements
 common in Western cultural environments.
@@ -2565,7 +2565,7 @@ the different precedence of operators, except for a few important
 cases. A precedence table pinned above your desk, for easy
 reference, is a valuable tool.
 
-The Standard has substantially affected parts of the language described
+The C89 Standard has substantially affected parts of the language described
 in this chapter. In particular, the changes to the conversions
 and the change from ‘unsignedness preserving’ to ‘value preserving’ rules
 of arithmetic may cause some surprises to experienced C programmers.

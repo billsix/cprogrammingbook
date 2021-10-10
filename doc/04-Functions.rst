@@ -5,7 +5,7 @@ Functions
 
 Changes
 -------
-The single worst feature of Old C was that there
+The single worst feature of pre-C89 was that there
 was no way to declare the number and types of
 a function's arguments and to have the compiler check
 that the use of the function was consistent with its
@@ -13,7 +13,7 @@ declaration. Although it didn't do a lot of damage
 to the success of C, it did result in portability
 and maintainability problems that we all could have done without.
 
-The Standard has changed that state of affairs. You can
+The C89 Standard has changed that state of affairs. You can
 now declare functions in a way that allows their use
 to be checked, and which is also largely compatible with
 the old style (so old programs still work, provided they
@@ -23,16 +23,16 @@ like printf, which used to be non-portable; the only
 way to implement it relied upon intimate knowledge of the
 hardware involved.
 
-The Standard's way of fixing this problem
+The C89 Standard's way of fixing this problem
 was in large measure to plagiarize from C++, which had
 already tried out the new ideas in practice. This model
 has been so successful that lots of ‘Old’ C compilers
-adopted it on their way to conforming to the Standard.
+adopted it on their way to conforming to the C89 Standard.
 
-The Standard still retains compatibility with Old C function declarations,
+The C89 Standard still retains compatibility with pre-C89 function declarations,
 but that is purely for the benefit of existing programs.
 Any new programs should make full use of the much
-tighter checking that the Standard permits and strenuously avoid the
+tighter checking that the C89 Standard permits and strenuously avoid the
 old syntax (which may disappear one day).
 Footnotes
 
@@ -139,7 +139,7 @@ in the text below.
 If you use a function before
 you declare it, it is implicitly declared to be ‘function
 returning int’. Although this will work, and was widely used
-in Old C, in Standard C it is bad practice —
+in pre-C89, in C89 Standard C it is bad practice —
 the use of undeclared functions leads to nasty problems to
 do with the number and type of arguments that are
 expected for them. All functions should be fully declared before
@@ -175,7 +175,7 @@ of void in the argument list in the declaration shows
 that the function really takes no arguments. If it had
 been missing, the declaration would have been taken to give
 no information about the function's arguments. That way, compatibility
-with Old C is maintained at the price of the
+with pre-C89 is maintained at the price of the
 ability of the compiler to check.
 
 To define a function
@@ -258,7 +258,7 @@ permitted if the function returns void.
 Arguments to functions
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Before the Standard, it was not possible to give any
+Before the C89 Standard, it was not possible to give any
 information about a function's arguments except in the definition
 of the function itself. The information was only used in
 the body of the function and was forgotten at the
@@ -291,12 +291,12 @@ of a line.
 The function declaration (in main) gave no
 indication of any arguments to the function, yet the use
 of the function a couple of lines later involved two
-arguments. That is permitted by both the old and Standard
+arguments. That is permitted by both the old and C89 Standard
 versions of C, but must nowadays be considered to be
 bad practice. It is much better to include information about
 the arguments in the declaration too, as we will see.
 The old style is now an ‘obsolescent feature’ and may
-disappear in a later version of the Standard.
+disappear in a later version of the C89 Standard.
 
 Now on
 to the function definition, where the body is supplied. The
@@ -330,7 +330,7 @@ Function prototypes
 ~~~~~~~~~~~~~~~~~~~
 
 The introduction of function prototypes is the biggest change of
-all in the Standard.
+all in the C89 Standard.
 
 A function prototype is a function
 declaration or definition which includes information about the number and
@@ -339,7 +339,7 @@ types of the arguments that the function takes.
 Although you
 are allowed not to specify any information about a function's
 arguments in a declaration, it is purely because of
-backwards compatibility with Old C and should be avoided.
+backwards compatibility with pre-C89 and should be avoided.
 
 A
 declaration without any information about the arguments is not a
@@ -428,10 +428,10 @@ main function is an int, so it has to be
 converted to double first. The critical point is that if
 no prototype had been seen, C would assume that the
 programmer had meant to pass an int and an int
-is what would be passed. The Standard simply notes that
+is what would be passed. The C89 Standard simply notes that
 this results in undefined behavior, which is as understated as
 saying that catching rabies is unfortunate. This is a very
-serious error and has led to many, many problems in Old C programs.
+serious error and has led to many, many problems in pre-C89 programs.
 
 The conversion of int to double could be done because
 the compiler had seen a prototype for the function and
@@ -465,7 +465,7 @@ Where they are used, the default argument promotions are:
 
 The introduction of prototypes (amongst other things) has increased the
 need for precision about ‘compatible types’, which was not much
-of an issue in Old C. The full list of
+of an issue in pre-C89. The full list of
 rules for type compatibility is deferred until :ref:`specialized`, because
 we suspect that most C programmers will never need to
 learn them. For the moment, we will simply work on
@@ -474,7 +474,7 @@ are indisputably compatible.
 
 The conversions are applied according to these
 rules (which are intended to be guidance on how to
-apply the Standard, not a direct quote):
+apply the C89 Standard, not a direct quote):
 
     At the point of calling a function, if no prototype
     is in scope, the arguments all undergo the default argument
@@ -513,7 +513,7 @@ apply the Standard, not a direct quote):
     at the point of the call.
 
 The order of evaluation of the arguments in the function
-call is explicitly not defined by the Standard.
+call is explicitly not defined by the C89 Standard.
 
 Function definitions
 ~~~~~~~~~~~~~~~~~~~~
@@ -542,8 +542,8 @@ with a compound statement.
 In either a definition or a declaration of a function,
 it serves as a prototype if the parameter types are specified; both of the examples above are prototypes.
 
-The Old C syntax for the declaration of a function's
-formal arguments is still supported by the Standard, although
+The pre-C89 syntax for the declaration of a function's
+formal arguments is still supported by the C89 Standard, although
 it should not be used by new programs. It looks
 like this, for the example above:
 
@@ -567,7 +567,7 @@ return type of the function; nothing is remembered by the
 compiler about the types of the arguments at the end
 of the definition.
 
-The Standard warns that support for this syntax may disappear
+The C89 Standard warns that support for this syntax may disappear
 in a later version. It will not be discussed further.
 
 Summary
@@ -659,15 +659,15 @@ It is a source of confusion for anyone reading the file
 (external declarations are generally expected to precede any function definitions in
 a file) and should be avoided.
 
-The Standard has changed things slightly with respect to a function
-'s formal parameters. They are now considered to have been declared
+The C89 Standard has changed things slightly with respect to a function's
+formal parameters. They are now considered to have been declared
 inside the first compound statement, even though textually they aren't:
 this goes for both the new and old ways of function
 definition. So, if a function has a formal parameter with the
 same name as something declared in the outermost compound statement, this
 causes an error which will be detected by the compiler.
 
-In Old C, accidental redefinition of a function's formal parameter
+In pre-C89, accidental redefinition of a function's formal parameter
 was a horrible and particularly difficult mistake to track down. Here
 is what it would look like:
 
@@ -889,7 +889,7 @@ of external objects.
 Only external objects participate in this cross-file
 and library communication.
 
-The term used by the Standard to describe
+The term used by the C89 Standard to describe
 the accessibility of objects from one file to another, or even
 within the same file, is linkage. There are three types of
 linkage: external linkage, internal linkage and no linkage. Anything internal to
@@ -1199,7 +1199,7 @@ use the methods described in Section 9.9.
 
 Functions are the
 cornerstone of C. Of all the changes to the language, the
-Standard has had by far its most obvious effect by introducing
+C89 Standard has had by far its most obvious effect by introducing
 function prototypes. This change has won widespread approval throughout the user
 community and should help to produce a substantial improvement in reliability
 of C programs, as well as opening the possibility of optimization
@@ -1211,7 +1211,7 @@ languages that prefer a different mechanism, but at least the C
 approach is the ‘safest’ most of the time.
 
 The attempts by
-the Standard to remove ambiguity in the scope and meaning of
+the C89 Standard to remove ambiguity in the scope and meaning of
 declarations are interesting, but frankly have explored an obscure region which
 rarely caused any difficulties in practice.
 

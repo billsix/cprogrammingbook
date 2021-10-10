@@ -21,10 +21,6 @@ study the code interactively, rather than typing it in!
 
 
 
-I, Bill, have tried to keep the book in it's original form as much as
-possible.  Because it is old, there are antiquated terms..  Old C, means
-C before the C89 Standard.  Standard C means C89.
-
 If you are looking for other resources, other great books on C are
 
 - C Programming, A Beginner's Course.  By Noel Kalicharan
@@ -58,19 +54,19 @@ things that are special to C. In particular, it's
 the way that C is used which is emphasized.
 
 Those
-who already know C will be interested in the new
-Standard and how it affects existing C programs. The effect
+who already know C will be interested in the C89 Standard
+and how it affects existing C programs. The effect
 on existing programs might not at first seem to be
 important to newcomers, but in fact the ‘old’ and new
 versions of the language are an issue for the beginner
-too. For some years after the approval of the Standard,
+too. For some years after the approval of the C89 Standard,
 programmers will have to live in a world where they
 can easily encounter a mixture of both the new and
 the old language, depending on the age of the programs
 that they are working with. For that reason, the book
 highlights where the old and new features differ significantly. Some
 of the old features are no ornament to the language
-and are well worth avoiding; the Standard goes so far
+and are well worth avoiding; the C89 Standard goes so far
 as to consider them obsolescent and recommends that they should
 not be used. For that reason they are not described
 in detail, but only far enough to allow a reader
@@ -80,12 +76,12 @@ different book.
 
 This is the second edition of the book,
 which has been revised to refer to the final, approved
-version of the Standard. The first edition of the book
-was based on a draft of the Standard which did
+version of the C89 Standard. The first edition of the book
+was based on a draft of the C89 Standard which did
 contain some differences from the draft that was eventually approved.
 During the revision we have taken the opportunity to include
 more summary material and an extra chapter illustrating the use
-of C and the Standard Library to solve a number
+of C and the C89 Standard Library to solve a number
 of small problems.
 
 The Success of C
@@ -180,7 +176,7 @@ the language in many ways to provide features that the
 designers didn't think of. There's proof of this
 in the so-called Standard I/O Library (stdio), which
 matured more slowly than the language, but had become a
-sort of standard all of its own before the Standard
+sort of standard all of its own before the C89 Standard
 Committee give it official blessing. It proved that it is
 possible to develop a model of file I/O and
 associated features that is portable to many more systems than
@@ -248,7 +244,7 @@ were represented on the committee, which in itself acted as
 a strong force for convergence right from the beginning.
 
 Development
-of the Standard took a long time, as standards often
+of the C89 Standard took a long time, as standards often
 do. Much of the work is not just technical, although
 that is a very time-consuming part of the job,
 but also procedural. It's easy to underrate the procedural
@@ -262,7 +258,7 @@ of a practical standard, even if at times it means
 compromising on technical “perfection”, whatever that might be. It is
 a democratic process, open to all, which occasionally results in
 aberrations just as much as can excessive indulgence by technical
-purists, and unfortunately the delivery date of the Standard was
+purists, and unfortunately the delivery date of the C89 Standard was
 affected at the last moment by procedural, rather than technical
 issues. The technical work was completed by December 1988, but
 it took a further year to resolve procedural objections. Finally,
@@ -284,7 +280,7 @@ the most specialized of applications areas.
 
 Because of this unusually
 heavy dependency on libraries to do real work, it was
-most important that the Standard provided comprehensive definitions for the
+most important that the C89 Standard provided comprehensive definitions for the
 supporting functions too. The situation with the library functions was
 much more complicated than the relatively simple job of providing
 a tight definition for the language itself, because the library
@@ -296,7 +292,7 @@ work of the Committee was to reach a good definition
 of the library support that should be provided. In terms
 of benefit to the final user of C, it is
 this work that will prove to be by far and
-away the most valuable part of the Standard.
+away the most valuable part of the C89 Standard.
 
 However, not
 all C programs are used for the same type of
@@ -306,8 +302,8 @@ oriented data are widely used. There is an equally important
 application area for C—the ‘embedded system’ area—which includes
 such things as process control, real-time and similar applications.
 
-The Standard knows this and provides for it. A large
-part of the Standard is the definition of the library
+The C89 Standard knows this and provides for it. A large
+part of the C89 Standard is the definition of the library
 functions that must be supplied for hosted environments. A hosted
 environment is one that provides the standard libraries. The standard
 permits both hosted and freestanding environments. and goes to some
@@ -333,7 +329,7 @@ use of special or technical terms. Words with a special
 meaning to C, such as reserved words or the names
 of library functions, are printed in a different typeface. Examples
 are int and printf. Terms used by the book that
-have a meaning not to C but in the Standard
+have a meaning not to C but in the C89 Standard
 or the text of the book, are bold if they
 have not been introduced recently. They are not bold everywhere,
 because that rapidly annoys the reader. As you have noticed,
@@ -370,9 +366,9 @@ Example programs
 
 All but the smallest of the examples shown in the
 text have been tested using a compiler that claims to
-conform to the Standard. As a result, most of them
+conform to the C89 Standard. As a result, most of them
 stand a good chance of being correct, unless our interpretation
-of the Standard was wrong and the compiler developer made
+of the C89 Standard was wrong and the compiler developer made
 the same mistake. None the less, experience warns that despite
 careful checking, some errors are bound to creep in. Please
 be understanding with any errors that you may find.
@@ -381,25 +377,25 @@ Deference to Higher Authority
 -----------------------------
 
 This book is an attempt to produce a readable and
-enlightening description of the language defined by the Standard. It
-sets out to to make interpretations of what the Standard
+enlightening description of the language defined by the C89 Standard. It
+sets out to to make interpretations of what the C89 Standard
 actually means but to express them in ‘simpler’ English. We've
 done our best to get it right, but you
 must never forget that the only place that the language
-is fully defined is in the Standard itself. It is
-entirely possible that what we interpret the Standard to mean
-is at times not what the Standard Committee sought to
+is fully defined is in the C89 Standard itself. It is
+entirely possible that what we interpret the C89 Standard to mean
+is at times not what the C89 Standard Committee sought to
 specify, or that the way we explain it is looser
-and less precise than it is in the Standard. If
+and less precise than it is in the C89 Standard. If
 you are in any doubt: READ THE STANDARD! It's
 not meant to be read for pleasure, but it is
 meant to be accurate and unambiguous; look nowhere else for
 the authoritative last word.
 
-Address for the Standard
-------------------------
+Address for the C89 Standard
+----------------------------
 
-Copies of the Standard can be obtained from:
+Copies of the C89 Standard can be obtained from:
 
     X3 Secretariat,
 

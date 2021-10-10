@@ -47,7 +47,7 @@ to do something; it must actively help as well.
 C offers arrays, structures and unions as its contribution to
 data structuring. They have proved to be entirely adequate for
 most users' needs over the years and remain essentially unchanged
-by the Standard.
+by the C89 Standard.
 
 Structures
 ----------
@@ -358,7 +358,7 @@ an unnamed 1-byte member inserted by the compiler for architectural
 reasons. Such addressing restrictions are quite common and can often
 result in structures containing ‘holes’.
 
-The Standard makes some guarantees about the layout of structures
+The C89 Standard makes some guarantees about the layout of structures
 and unions:
 
     Members of a structure are allocated within the structure in
@@ -745,9 +745,9 @@ not only stored differently, but of different lengths. The int
 retrieved would probably be the low-order bits of the machine
 representation of a float, and might easily be made up
 of part of the mantissa of the float plus a
-piece of the exponent. The Standard says that if you
+piece of the exponent. The C89 Standard says that if you
 do this, the behavior is implementation defined (not undefined). The
-behavior is defined by the Standard in one case: if
+behavior is defined by the C89 Standard in one case: if
 some of the members of a union are structures with
 a ‘common initial sequence’ (the first members of each structure
 have compatible type and in the case of bit-fields are
@@ -783,7 +783,7 @@ current C compilers allow you to miss bits out of
 the names of embedded objects provided that they are not
 ambiguous. In the example, such an unambiguous name would be
 var_type.un_int and the compiler would work out what you meant.
-None the less this is not permitted by the Standard.
+None the less this is not permitted by the C89 Standard.
 
 
 It is because of unions that structures cannot be compared
@@ -794,7 +794,7 @@ know how to compare the structures. This sounds a bit
 hard to swallow and isn't 100% true—most structures don't contain
 unions—but there is also a philosophical issue at stake about
 just what is meant by ‘equality’ when applied to structures.
-Anyhow, the union business gives the Standard a good excuse
+Anyhow, the union business gives the C89 Standard a good excuse
 to avoid the issue by not supporting structure comparison.
 
 Bit-fields
@@ -828,7 +828,7 @@ fields within some externally produced data files. C gives no
 guarantee of the ordering of fields within machine words, so
 if you do use them for the latter reason, you
 program will not only be non-portable, it will be compiler-dependent
-too. The Standard says that fields are packed into ‘storage
+too. The C89 Standard says that fields are packed into ‘storage
 units’, which are typically machine words. The packing order, and
 whether or not a bit-field may cross a storage unit
 boundary, are implementation defined. To force alignment to a storage
@@ -894,7 +894,7 @@ It's better scoped because the declaration of enumerations follows the
 standard scope rules for C, whereas #define statements have file
 scope.
 
-Not that you are likely to care, but the Standard
+Not that you are likely to care, but the C89 Standard
 states that enumeration types are of a type that is
 compatible with an implementation-defined one of the integral types. So
 what? For interest's sake here is an illustration:
@@ -926,7 +926,7 @@ from are qualified with const or volatile, they do not
 inherit that qualification. This means that if a structure contains
 a const object, the structure itself is not qualified with
 const and any non-const members can still be modified. This
-is what you would expect. However, the Standard does says
+is what you would expect. However, the C89 Standard does says
 that if any derived type contains a type that is
 qualified with const (or recursively any inner type does) then
 it is not modifiable—so a structure that contains a const
@@ -938,9 +938,9 @@ Initialization
 Now that we have seen all of the data types supported
 by C, we can look at the subject of initialization.
 C allows ordinary variables, structures, unions and arrays to be
-given initial values in their definitions. Old C had some
+given initial values in their definitions. pre-C89 had some
 strange rules about this, reflecting an unwillingness by compiler writers
-to work too hard. The Standard has rationalized this, and
+to work too hard. The C89 Standard has rationalized this, and
 now it is possible to initialize things as and when you want.
 
 There are basically two sorts of initialization: at compile time,
@@ -961,7 +961,7 @@ are different and should not be confused.
 
 Compile-time initialization can only be done using constant expressions; run-time
 initialization can be done using any expression at all. The
-Old C restriction, that only simple variables (not arrays, structures
+pre-C89 restriction, that only simple variables (not arrays, structures
 or unions) could be initialized at run time, has been lifted.
 
 Constant expressions
@@ -979,7 +979,7 @@ operations, function calls or comma operators; that may seem odd,
 but it's because sizeof only needs to evaluate the type
 of an expression, not its value.
 
-If real numbers are evaluated at compile-time, then the Standard
+If real numbers are evaluated at compile-time, then the C89 Standard
 insists that they are evaluated with at least as much
 precision and range as will be used at run-time.
 
@@ -1143,7 +1143,7 @@ Initialization of objects with automatic duration is only guaranteed if
 their compound statement is entered ‘at the top’. Jumping into
 the middle of one may result in the initialization not
 happening—this is often undesirable and should be avoided. It is
-explicitly noted by the Standard with regard to switch statements,
+explicitly noted by the C89 Standard with regard to switch statements,
 where providing initializers in declarations cannot be of any use;
 this is because a declaration is not linguistically a ‘statement’
 and only statements may be labeled. As a result it
@@ -1199,7 +1199,7 @@ initializers’ seems a bit unpleasant, don't worry. It is rare that
 you have to do it in practice; all that you need
 is to know how to do simple initialization and to know
 a book that describes the more complex initialization. To get the
-full low-down read the Standard, which is uncharacteristically penetrable when it
+full low-down read the C89 Standard, which is uncharacteristically penetrable when it
 discusses the matter; verging at times on lucidity.
 
 Exercises

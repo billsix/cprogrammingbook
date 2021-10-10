@@ -8,7 +8,7 @@ Government Health Warning
 
 The previous chapters have introduced the fundamentals of the language
 and have covered nearly all of the language that the
-Standard defines. There are a number of murky and convoluted
+C89 Standard defines. There are a number of murky and convoluted
 backwaters left unexplored on grounds of sympathy and compassion for
 the sufferer, and some without any better home. This chapter
 gathers them together—it's the toxic waste dump for the nasty
@@ -47,7 +47,7 @@ them, you still need to read the stuff in between
 at least once.
 
 For a full understanding, you need a good grasp of
-three distinct but related concepts. The Standard calls them:
+three distinct but related concepts. The C89 Standard calls them:
 
     duration
 
@@ -290,7 +290,7 @@ wish to be able to call printf from several different
 places in a program, even if those places are not
 all in the same source file.
 
-The Standard warns that declarations which refer to the same
+The C89 Standard warns that declarations which refer to the same
 thing must all have compatible type, or the behavior of
 the program will be undefined. A full description of compatible
 type is given later; for the moment you can take
@@ -352,7 +352,10 @@ How
 do you get the appropriate linkage for a particular name?
 The rules are a little complicated.
 
-    A declaration outside a function (file scope) which contains the static storage class specifier results in internal linkage for that name. (The Standard requires that function declarations which contain static must be at file scope, outside any block)
+    A declaration outside a function (file scope) which contains the
+    static storage class specifier results in internal linkage for
+    that name. (The C89 Standard requires that function declarations
+    which contain static must be at file scope, outside any block)
 
     If a declaration contains the extern storage class specifier, or
     is the declaration of a function with no storage class
@@ -610,7 +613,7 @@ Try it out!
 Const and volatile
 ------------------
 
-These are new in Standard C, although the idea of
+These are new in C89 Standard C, although the idea of
 const has been borrowed from C++. Let us get one
 thing straight: the concepts of const and volatile are completely
 independent. A common misconception is to imagine that somehow const
@@ -931,7 +934,7 @@ value, 0x00010000.
 
 This whole class of problem is what is known as a
 critical region, and is well understood by those who regularly work
-in asynchronous environments. It should be understood that Standard C takes
+in asynchronous environments. It should be understood that C89 Standard C takes
 no special precautions to avoid these problems, and that the usual
 techniques should be employed.
 
@@ -946,7 +949,7 @@ Sequence points
 ---------------
 
 Associated with, but distinct from, the problems of real-time programming are
-sequence points. These are the Standard's attempt to define when certain
+sequence points. These are the C89 Standard's attempt to define when certain
 sorts of optimization may and may not be permitted to be
 in effect. For example, look at this program:
 
@@ -962,7 +965,7 @@ function needs to have access to the correct value of i_var
 so that it can print the right value. This means that
 the register must be stored back into i_var at each function
 call (at least). When and where these conditions must occur are
-described by the Standard. At each sequence point, the side effects
+described by the C89 Standard. At each sequence point, the side effects
 of all previous expressions will be completed. This is why you
 cannot rely on expressions such as:
 
@@ -974,7 +977,7 @@ because there is no sequence point specified for the assignment, increment
 or index operators, you don't know when the effect of the
 increment on i occurs.
 
-The sequence points laid down in the Standard are the following:
+The sequence points laid down in the C89 Standard are the following:
 
     The point of calling a function, after evaluating its arguments.
 
@@ -1007,7 +1010,7 @@ This is a chapter describing specialized areas of the language.
 Undoubtedly,
 the issues of scope, linkage and duration are important. If you
 find the whole topic too much to digest, just learn the
-simple rules. The problem is that the Standard tries to be
+simple rules. The problem is that the C89 Standard tries to be
 complete and unambiguous, so it has to lay down lots of
 rules. It's much easier if you just stick to the easy
 way of doing things and don't try to get too clever.

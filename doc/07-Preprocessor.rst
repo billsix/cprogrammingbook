@@ -4,8 +4,8 @@ Preprocessor
 ============
 
 
-Effect of the Standard
-----------------------
+Effect of the C89 Standard
+--------------------------
 
 There's a neither-fish-nor-fowl feel to the preprocessor. It leads an uncomfortable
 existence bolted on to the side of C without the benefit
@@ -26,15 +26,15 @@ have been implemented in different systems. As a result, programs using
 anything other than the very basic features have proved to be
 a problem: it's hard to port them.
 
-The primary job of the Standard was to define the behavior
+The primary job of the C89 Standard was to define the behavior
 of the preprocessor in line with common practice; this has been
-done and will not surprise anyone who was familiar with Old C.
-The Standard has gone further, amid an element of controversy, and
+done and will not surprise anyone who was familiar with pre-C89.
+The C89 Standard has gone further, amid an element of controversy, and
 specifies a number of additional features that were pioneered in some
 of the preprocessor's more popular dialects. The controversy results from the
 fact that although these features may be useful, there has never
 been much agreement on how to implement them. On the grounds
-that programs using these techniques were clearly non-portable already, the Standard
+that programs using these techniques were clearly non-portable already, the C89 Standard
 has not worried too much about backwards compatibility in these areas.
 The fact that there is now a standard for these advanced
 features should improve the overall portability of C programs in the
@@ -55,8 +55,12 @@ introduction in this chapter, but concentrate on getting down to detail.
 How the preprocessor works
 --------------------------
 
-Although the preprocessor (Figure 7.1) is probably going to be implemented as an integral part of an Standard C compiler, it can equally well be though of as a separate program which transforms C source code containing preprocessor directives into source code with the directives removed.
-Diagram showing source code passing through a preprocessor to become 'preprocessed source', which is then fed into the rest of the compiler.
+Although the preprocessor (Figure 7.1) is probably going to be implemented as an integral part
+of an C89 Standard C compiler, it can equally well be though of as a
+separate program which transforms C source code containing preprocessor
+directives into source code with the directives removed.
+Diagram showing source code passing through a preprocessor to become
+'preprocessed source', which is then fed into the rest of the compiler.
 
 .. figure:: _static/7.1.png
     :align: center
@@ -83,7 +87,7 @@ are to make mistakes. This is mainly what gives rise to
 our comments about the poor level of integration between the preprocessor
 and the rest of C.
 
-The Standard gives some complicated rules for the syntax of the
+The C89 Standard gives some complicated rules for the syntax of the
 preprocessor, especially with respect to tokens. To understand the operation of
 the preprocessor you need to know a little about them. The
 text that is being processed is not considered to be a
@@ -91,7 +95,7 @@ uniform stream of characters, but is separated into tokens then processed
 piecemeal.
 
 For a full definition of the process, it is best to
-refer to the Standard, but an informal description follows. Each of
+refer to the C89 Standard, but an informal description follows. Each of
 the terms used to head the list below is used later in descriptions of the rules.
 
     header-name
@@ -124,7 +128,7 @@ Directives
 Directives are always introduced by a line that starts with
 a #character, optionally preceded by white space characters (although it
 isn't common practice to indent the #). Table 7.1 below
-is a list of the directives defined in the Standard.
+is a list of the directives defined in the C89 Standard.
 
 +--------------------+---------------------------------------------+
 | Directive          | Meaning                                     |
@@ -218,7 +222,7 @@ of the (, then it isn't the definition of a
 function macro, but a simple replacement macro instead. When you
 use function-like macros, there's no equivalent restriction.
 
-The Standard allows
+The C89 Standard allows
 either type of macro to be redefined at any time,
 using another #define, provided that there isn't any attempt to
 change the type of the macro and that the tokens
@@ -297,7 +301,7 @@ to CALL were preserved in the replacement: they were not
 stripped from the text.
 
 If you want to use macros like printf, taking a
-variable number of arguments, the Standard is no help to
+variable number of arguments, the C89 Standard is no help to
 you. They are not supported.
 
 If any argument contains no preprocessor tokens then the behavior
@@ -442,7 +446,7 @@ text of the program. Here is what we mean:
     m((m((abc+1))+1);
 
 If that doesn't make your brain hurt, then go and
-read what the Standard says about it, which will.
+read what the C89 Standard says about it, which will.
 
 Notes
 ^^^^^
@@ -560,7 +564,7 @@ single line containing the directive is replaced by the contents
 of the specified file. If that file contains erroneous statements,
 you can reasonably expect that the errors will be reported
 with a correct file name and line number. It's the
-compiler writer's job to get that right. The Standard specifies
+compiler writer's job to get that right. The C89 Standard specifies
 that at least eight nested levels of #include must be
 supported.
 
@@ -577,7 +581,7 @@ In general, brackets are used when you specify standard library
 header files, quotes are used for private header files—often specific
 to one program only.
 
-Although the Standard doesn't define what constitutes a valid file
+Although the C89 Standard doesn't define what constitutes a valid file
 name, it does specify that there must be an implementation-defined
 unique way of translating file names of the form xxx.x
 (where x represents a ‘letter’), into source file names. Distinctions
@@ -673,9 +677,9 @@ The following names are predefined within the preprocessor:
     __STDC__
 
         The integer constant 1. This is used to test if the
-        compiler is Standard-conforming, the intention being
+        compiler is C89 Standard-conforming, the intention being
         that it will have different values for different
-        releases of the Standard.
+        releases of the C89 Standard.
 
         A common way of using these predefined names is the following:
 
@@ -711,7 +715,7 @@ of flow statement compound anyway; then the problem goes away.
 None of the names __LINE__, __FILE__, __DATE__, __TIME__, __STDC__ or
 defined may be used in #define or #undef directives.
 
-The Standard specifies that any other reserved names will either
+The C89 Standard specifies that any other reserved names will either
 start with an underscore followed by an upper case letter
 or another underscore, so you know that you are free
 to use any other names for your own purposes (but
@@ -769,7 +773,7 @@ the #else can be used with #ifdef (and #if or
 #elif) too. There is no ambiguity about what a given
 #else binds to, because the use of #endif to delimit
 the scope of these directives eliminates any possible ambiguity. The
-Standard specifies that at least eight levels of nesting of
+C89 Standard specifies that at least eight levels of nesting of
 conditional directives must be supported, but in practice there is
 not likely to be any real limit.
 
@@ -855,7 +859,7 @@ than a tiny sprinkle is too much.
 #pragma
 ~~~~~~~
 
-This was the Standard Committee's way of ‘opening the back
+This was the C89 Standard Committee's way of ‘opening the back
 door’. It allows implementation-defined things to take place. If the
 implementation was not expecting what you wrote (i.e. doesn't recognize
 it), it is ignored. Here is a possible example:
@@ -885,7 +889,7 @@ that this gets used for.
 This directive is followed by one or more tokens at
 the end of the line. A diagnostic message is produced
 by the compiler, which includes those tokens, but no further
-detail is given in the Standard. It might be used
+detail is given in the C89 Standard. It might be used
 like this to abort a compilation on unsuitable hardware:
 
 .. code-block:: C

@@ -45,13 +45,13 @@ arrays, their treatment will be brief and aimed at using
 them to illustrate the use of pointers when they are
 seen later.
 
-Effect of the Standard
-~~~~~~~~~~~~~~~~~~~~~~
+Effect of the C89 Standard
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The new Standard has left very little mark on the
+The C89 Standard has left very little mark on the
 contents of this chapter; a lot of it would be
 nearly word for word the same even if it only
-talked about Old C. The inference to be drawn is
+talked about pre-C89. The inference to be drawn is
 that nothing was wrong with the old version of the
 language, and that there was nothing to be gained by
 fixing what wasn't broken. This may be received with
@@ -59,7 +59,7 @@ some relief by those readers who already knew this part
 of the old language and who, like the Committee, felt
 that it was good enough to leave alone.
 
-Even so, the introduction of qualified types by the Standard
+Even so, the introduction of qualified types by the C89 Standard
 does add some complexity to this chapter. The rules about
 exactly how the various arithmetic and relational operators work when
 they are applied to pointers have been clarified, which adds
@@ -122,8 +122,8 @@ when the program is compiled; it's a run-time,
 not a compile-time, value.
 
 To tell the truth, it would be easy to support
-arrays whose first dimension is variable, but neither Old C
-nor the Standard permits it, although we do know of
+arrays whose first dimension is variable, but neither pre-C89
+nor the C89 Standard permits it, although we do know of
 one Very Old C compiler that used to do it.
 
 Multidimensional arrays
@@ -453,7 +453,7 @@ that the 'day' and 'month' now have the values '12' and '5' respectively.
 
 
 
-One of the great benefits introduced by the new Standard
+One of the great benefits introduced by the C89 Standard
 is that it allows the types of the arguments to
 date to be declared in advance. A great favorite (and
 disastrous) mistake in C is to forget that a function
@@ -529,7 +529,7 @@ That example is a classic fragment of C. A pointer
 is set to point to the start of an array,
 then, while it still points inside the array, array elements
 are accessed one by one, the pointer incrementing between each
-one. The Standard endorses existing practice by guaranteeing that it's
+one. The C89 Standard endorses existing practice by guaranteeing that it's
 permissible to use the address of ar[20] even
 though no such element exists. This allows you to use
 it for checks in loops like the one above. The
@@ -617,7 +617,7 @@ Summary
     Incrementing or adding something to a pointer can be used
     to step along arrays.
 
-    To facilitate array access by incrementing pointers, the Standard guarantees
+    To facilitate array access by incrementing pointers, the C89 Standard guarantees
     that in an n element array, although element n does
     not exist, use of its address is not an error—the
     valid range of addresses for an array declared as int
@@ -635,8 +635,8 @@ nothing in it that you still find obscure; although what
 comes next looks more complicated than it really is, there's
 no need to make it worse by starting unprepared.
 
-The Standard introduces two things called type qualifiers, neither of
-which were in Old C. They can be applied to
+The C89 Standard introduces two things called type qualifiers, neither of
+which were in pre-C89. They can be applied to
 any declared type to modify its behavior—hence the term
 ‘qualifier’—and although one of them can be ignored for
 the moment (the one named volatile), the other, const, cannot.
@@ -814,7 +814,7 @@ can you do?
 
 The solution is to use the special type, introduced for
 this purpose, of ‘pointer to void’. This is one of
-the Standard's invented features: before, it was tacitly assumed
+the C89 Standard's invented features: before, it was tacitly assumed
 that ‘pointer to char’ was adequate for the task. This
 has been a reasonably successful assumption, but was a rather
 untidy thing to do; the new solution is both safer
@@ -956,8 +956,8 @@ is really a character array. It's the only example in
 C where you can declare something at the point of
 its use.
 
-Be warned: in Old C, strings were stored just like
-any other character array, and were modifiable. Now, the Standard
+Be warned: in pre-C89, strings were stored just like
+any other character array, and were modifiable. Now, the C89 Standard
 states that although they are are arrays of char, (not
 const char), attempting to modify them results in undefined behavior.
 
@@ -1516,7 +1516,7 @@ call the function using one of two forms:
     /* or */
     func(1,2);
 
-The second form has been newly blessed by the Standard.
+The second form has been newly blessed by the C89 Standard.
 Here's a simple example.
 
 .. literalinclude:: ../src/example5.16/src/example5.16.c
@@ -1549,11 +1549,11 @@ you to do. Most people will survive quite well without
 ever learning this explicitly, because a lot of it is
 ‘obvious’, but we will include it here in case you
 do want to know. For the final word in accuracy,
-obviously you will want to see what the Standard says.
+obviously you will want to see what the C89 Standard says.
 What follows is our interpretation in (hopefully) plainer English.
 
 You
-don't yet know the Standard means when it talks about
+don't yet know the C89 Standard means when it talks about
 objects or incomplete types. So far we have tended to
 use the term loosely, but properly speaking an object is
 a piece of data storage whose contents is to be
@@ -1637,7 +1637,7 @@ overflow or underflow and the result is undefined.
 
 The last-plus-one element of an array has always been assumed
 to be a valid address for a pointer and the
-Standard confirms this. You mustn't actually access that element, but
+C89 Standard confirms this. You mustn't actually access that element, but
 the address is guaranteed to exist rather than being an
 overflow condition.
 
